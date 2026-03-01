@@ -1,0 +1,2918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUR168 Unit 1 - Nursing Roles Study Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        /* Progress Tracker */
+        .progress-container {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            height: 25px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00f260, #0575e6);
+            border-radius: 15px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .nav-tab {
+            padding: 15px 25px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid transparent;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1em;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .nav-tab:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-color: #fff;
+        }
+
+        .nav-tab.ch8 { border-left: 4px solid #00d4ff; }
+        .nav-tab.ch9 { border-left: 4px solid #ff6b6b; }
+        .nav-tab.ch10 { border-left: 4px solid #ffd93d; }
+        .nav-tab.vocab { border-left: 4px solid #a855f7; }
+        .nav-tab.quiz { border-left: 4px solid #6bcb77; }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Chapter Cards */
+        .chapter-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 5px solid;
+        }
+
+        .ch8-card { border-left-color: #00d4ff; }
+        .ch9-card { border-left-color: #ff6b6b; }
+        .ch10-card { border-left-color: #ffd93d; }
+
+        .chapter-card h2 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Topic Boxes */
+        .topic-box {
+            background: rgba(255,255,255,0.08);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .topic-box:hover {
+            background: rgba(255,255,255,0.12);
+            transform: translateX(5px);
+        }
+
+        .topic-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .topic-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            margin-top: 0;
+        }
+
+        .topic-box.expanded .topic-content {
+            max-height: 2000px;
+            margin-top: 15px;
+        }
+
+        .expand-icon {
+            font-size: 1.5em;
+            transition: transform 0.3s ease;
+        }
+
+        .topic-box.expanded .expand-icon {
+            transform: rotate(45deg);
+        }
+
+        /* Key Points */
+        .key-point {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 3px solid;
+        }
+
+        .key-point.important { border-left-color: #ff6b6b; background: rgba(255,107,107,0.1); }
+        .key-point.remember { border-left-color: #ffd93d; background: rgba(255,217,61,0.1); }
+        .key-point.tip { border-left-color: #6bcb77; background: rgba(107,203,119,0.1); }
+        .key-point.definition { border-left-color: #00d4ff; background: rgba(0,212,255,0.1); }
+
+        .key-point-label {
+            font-weight: bold;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        /* Lists */
+        .content-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .content-list li {
+            padding: 8px 0 8px 25px;
+            position: relative;
+        }
+
+        .content-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #00d4ff;
+        }
+
+        /* Mnemonics */
+        .mnemonic-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .mnemonic-box h4 {
+            color: #f093fb;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .mnemonic-letters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .mnemonic-letter {
+            background: rgba(255,255,255,0.15);
+            padding: 10px 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .mnemonic-letter span {
+            display: block;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #ffd93d;
+        }
+
+        /* Comparison Tables */
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 15px 0;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 12px 15px;
+            background: rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Flashcard Mode */
+        .flashcard-container {
+            perspective: 1000px;
+            margin: 20px 0;
+        }
+
+        .flashcard {
+            width: 100%;
+            min-height: 200px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-face {
+            position: absolute;
+            width: 100%;
+            min-height: 200px;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .flashcard-front {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .flashcard-back {
+            background: linear-gradient(135deg, #00c9ff 0%, #92fe9d 100%);
+            transform: rotateY(180deg);
+            color: #1a1a2e;
+        }
+
+        .flashcard-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .flashcard-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .flashcard-btn.prev { background: #ff6b6b; color: #fff; }
+        .flashcard-btn.next { background: #6bcb77; color: #fff; }
+        .flashcard-btn:hover { transform: scale(1.05); }
+
+        .flashcard-counter {
+            text-align: center;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+
+        /* Quiz Section */
+        .quiz-question {
+            background: rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .quiz-question h3 {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            padding: 15px 20px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .quiz-option.selected {
+            border-color: #00d4ff;
+            background: rgba(0,212,255,0.2);
+        }
+
+        .quiz-option.correct {
+            border-color: #6bcb77;
+            background: rgba(107,203,119,0.3);
+        }
+
+        .quiz-option.incorrect {
+            border-color: #ff6b6b;
+            background: rgba(255,107,107,0.3);
+        }
+
+        .quiz-feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .quiz-feedback.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .quiz-feedback.correct {
+            background: rgba(107,203,119,0.2);
+            border-left: 4px solid #6bcb77;
+        }
+
+        .quiz-feedback.incorrect {
+            background: rgba(255,107,107,0.2);
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .check-answer-btn {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 25px;
+            color: #fff;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .check-answer-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Quick Reference Cards */
+        .quick-ref-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .quick-ref-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 15px;
+            padding: 20px;
+            border-top: 4px solid;
+        }
+
+        .quick-ref-card.blue { border-top-color: #00d4ff; }
+        .quick-ref-card.pink { border-top-color: #f093fb; }
+        .quick-ref-card.yellow { border-top-color: #ffd93d; }
+        .quick-ref-card.green { border-top-color: #6bcb77; }
+
+        .quick-ref-card h4 {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        /* Checkbox Tracker */
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .checklist label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .checklist input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #6bcb77;
+        }
+
+        .checklist .completed {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
+        /* Sticky Note */
+        .sticky-note {
+            background: #ffd93d;
+            color: #1a1a2e;
+            padding: 20px;
+            border-radius: 5px;
+            transform: rotate(-1deg);
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+            margin: 20px 0;
+        }
+
+        .sticky-note h4 {
+            border-bottom: 2px dashed rgba(0,0,0,0.2);
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* Reset Progress Button */
+        .reset-btn {
+            padding: 10px 20px;
+            background: rgba(255,107,107,0.2);
+            border: 2px solid #ff6b6b;
+            border-radius: 10px;
+            color: #ff6b6b;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .reset-btn:hover {
+            background: #ff6b6b;
+            color: #fff;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .nav-tabs {
+                flex-direction: column;
+            }
+
+            .nav-tab {
+                width: 100%;
+                text-align: center;
+            }
+
+            .mnemonic-letters {
+                flex-direction: column;
+            }
+
+            .comparison-table {
+                font-size: 0.9em;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+
+            .nav-tabs, .reset-btn, .flashcard-nav, .check-answer-btn {
+                display: none;
+            }
+        }
+
+        /* ==================== VOCABULARY STYLES ==================== */
+        .vocab-mode-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .vocab-mode-btn {
+            padding: 12px 25px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid transparent;
+            border-radius: 25px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .vocab-mode-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .vocab-mode-btn.active {
+            background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
+            border-color: #fff;
+        }
+
+        .vocab-search {
+            margin-bottom: 20px;
+        }
+
+        .vocab-search input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 15px;
+            border: 2px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            font-size: 1em;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .vocab-search input:focus {
+            border-color: #a855f7;
+            background: rgba(255,255,255,0.15);
+        }
+
+        .vocab-search input::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .chapter-filter {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid transparent;
+            border-radius: 20px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .filter-btn.active {
+            background: rgba(255,255,255,0.2);
+            border-color: #fff;
+        }
+
+        .filter-btn.ch8-filter.active { border-color: #00d4ff; }
+        .filter-btn.ch9-filter.active { border-color: #ff6b6b; }
+        .filter-btn.ch10-filter.active { border-color: #ffd93d; }
+
+        .vocab-mode {
+            display: none;
+        }
+
+        .vocab-mode.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* Flashcard Styles */
+        .flashcard-progress {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .flashcard-progress-bar {
+            height: 8px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .flashcard-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #a855f7, #6366f1);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .flashcard-chapter-tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+
+        .flashcard-chapter-tag.ch8 { background: rgba(0,212,255,0.3); color: #00d4ff; }
+        .flashcard-chapter-tag.ch9 { background: rgba(255,107,107,0.3); color: #ff6b6b; }
+        .flashcard-chapter-tag.ch10 { background: rgba(255,217,61,0.3); color: #ffd93d; }
+
+        .flashcard-term {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .flashcard-hint {
+            font-size: 0.9em;
+            opacity: 0.7;
+        }
+
+        .flashcard-definition {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .flashcard-btn.shuffle {
+            background: #a855f7;
+            color: #fff;
+        }
+
+        .flashcard-know-btns {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .know-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .know-btn.dont-know {
+            background: rgba(255,107,107,0.2);
+            color: #ff6b6b;
+            border: 2px solid #ff6b6b;
+        }
+
+        .know-btn.know {
+            background: rgba(107,203,119,0.2);
+            color: #6bcb77;
+            border: 2px solid #6bcb77;
+        }
+
+        .know-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Glossary Styles */
+        .glossary-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .glossary-item {
+            background: rgba(255,255,255,0.08);
+            border-radius: 15px;
+            padding: 20px;
+            border-left: 4px solid;
+            transition: all 0.3s ease;
+        }
+
+        .glossary-item:hover {
+            background: rgba(255,255,255,0.12);
+            transform: translateX(5px);
+        }
+
+        .glossary-item.ch8 { border-left-color: #00d4ff; }
+        .glossary-item.ch9 { border-left-color: #ff6b6b; }
+        .glossary-item.ch10 { border-left-color: #ffd93d; }
+
+        .glossary-term {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .glossary-chapter-badge {
+            font-size: 0.7em;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-weight: normal;
+        }
+
+        .glossary-chapter-badge.ch8 { background: rgba(0,212,255,0.2); color: #00d4ff; }
+        .glossary-chapter-badge.ch9 { background: rgba(255,107,107,0.2); color: #ff6b6b; }
+        .glossary-chapter-badge.ch10 { background: rgba(255,217,61,0.2); color: #ffd93d; }
+
+        .glossary-definition {
+            color: rgba(255,255,255,0.9);
+            line-height: 1.5;
+        }
+
+        .glossary-item.hidden {
+            display: none;
+        }
+
+        /* Matching Game Styles */
+        .matching-instructions {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .matching-instructions p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .matching-score {
+            text-align: center;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: #a855f7;
+            font-weight: bold;
+        }
+
+        .matching-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .matching-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .matching-column {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .matching-item {
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+        }
+
+        .matching-item:hover:not(.matched):not(.selected) {
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .matching-item.selected {
+            border-color: #a855f7;
+            background: rgba(168,85,247,0.2);
+        }
+
+        .matching-item.matched {
+            border-color: #6bcb77;
+            background: rgba(107,203,119,0.2);
+            cursor: default;
+            opacity: 0.7;
+        }
+
+        .matching-item.wrong {
+            animation: shake 0.5s ease;
+            border-color: #ff6b6b;
+            background: rgba(255,107,107,0.2);
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📚 NUR168 Unit 1</h1>
+            <p class="subtitle">Nursing Roles: Communicator, Teacher, Counselor, Leader & Manager</p>
+        </div>
+
+        <!-- Progress Tracker -->
+        <div class="progress-container">
+            <div class="progress-header">
+                <span><strong>📊 Study Progress</strong></span>
+                <button class="reset-btn" onclick="resetProgress()">🔄 Reset</button>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%">0%</div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <button class="nav-tab ch8 active" onclick="showSection('ch8')">💬 Ch 8: Communication</button>
+            <button class="nav-tab ch9" onclick="showSection('ch9')">📖 Ch 9: Teaching & Counseling</button>
+            <button class="nav-tab ch10" onclick="showSection('ch10')">👔 Ch 10: Leadership</button>
+            <button class="nav-tab vocab" onclick="showSection('vocab')">📖 Vocabulary</button>
+            <button class="nav-tab quiz" onclick="showSection('quiz')">✏️ Practice Quiz</button>
+        </div>
+
+        <!-- ==================== CHAPTER 8: COMMUNICATION ==================== -->
+        <div id="ch8" class="content-section active">
+            <div class="chapter-card ch8-card">
+                <h2>💬 Chapter 8: Communication</h2>
+                <p>Master the art of therapeutic communication in nursing practice</p>
+            </div>
+
+            <!-- Communication Process -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>🔄 The Communication Process (Berlo's Model)</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Remember This</div>
+                        Communication is a dynamic, circular process - not just one-way!
+                    </div>
+
+                    <div class="mnemonic-box">
+                        <h4>🧠 MNEMONIC: "SMCRF" - Some Messages Create Real Feedback</h4>
+                        <div class="mnemonic-letters">
+                            <div class="mnemonic-letter"><span>S</span>Stimulus</div>
+                            <div class="mnemonic-letter"><span>M</span>Message</div>
+                            <div class="mnemonic-letter"><span>C</span>Channel</div>
+                            <div class="mnemonic-letter"><span>R</span>Receiver</div>
+                            <div class="mnemonic-letter"><span>F</span>Feedback</div>
+                        </div>
+                    </div>
+
+                    <ul class="content-list">
+                        <li><strong>Stimulus:</strong> Initiates the communication</li>
+                        <li><strong>Sender/Encoder:</strong> Person who begins the message</li>
+                        <li><strong>Message:</strong> The communication product</li>
+                        <li><strong>Channel:</strong> Auditory, visual, or kinesthetic pathway</li>
+                        <li><strong>Receiver/Decoder:</strong> Translates and interprets the message</li>
+                        <li><strong>Feedback:</strong> Confirms the message was received</li>
+                    </ul>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Forms of Communication -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>🗣️ Forms of Communication</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card blue">
+                            <h4>💬 Verbal Communication</h4>
+                            <p>Depends on understanding of language between sender and receiver</p>
+                        </div>
+                        <div class="quick-ref-card pink">
+                            <h4>🤫 Nonverbal Communication</h4>
+                            <ul class="content-list">
+                                <li>Facial expressions & eye contact</li>
+                                <li>Gestures & touch</li>
+                                <li>Body movements, posture, gait</li>
+                                <li>Space & territoriality</li>
+                                <li>Physical appearance & dress</li>
+                                <li>Sounds (moaning, crying, sighing)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ Test Alert</div>
+                        Touch is a personal behavior that means <strong>different things to different people</strong> - it's NOT universal!
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Four Levels of Communication -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>📊 Four Levels of Communication</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Level</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Intrapersonal</strong></td>
+                            <td>Self-talk; communication within a person</td>
+                            <td>"I've got this" before a presentation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Interpersonal</strong></td>
+                            <td>Between two or more people to exchange messages</td>
+                            <td>Nurse talking with patient</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Small Group</strong></td>
+                            <td>Communication within a small team</td>
+                            <td>Nursing team huddle</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Organizational</strong></td>
+                            <td>Communication across an organization</td>
+                            <td>Hospital-wide memos</td>
+                        </tr>
+                    </table>
+
+                    <div class="sticky-note">
+                        <h4>💡 Quick Tip</h4>
+                        <p><strong>Intra</strong>personal = <strong>Inside</strong> yourself (think: intra-venous goes INSIDE the vein)</p>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Factors Influencing Communication -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>🌡️ Factors Influencing Communication</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="mnemonic-box">
+                        <h4>🧠 MNEMONIC: "DIVERSE" factors affect communication</h4>
+                        <div class="mnemonic-letters">
+                            <div class="mnemonic-letter"><span>D</span>Developmental level</div>
+                            <div class="mnemonic-letter"><span>I</span>Individual values</div>
+                            <div class="mnemonic-letter"><span>V</span>Various emotions/states</div>
+                            <div class="mnemonic-letter"><span>E</span>Environment</div>
+                            <div class="mnemonic-letter"><span>R</span>Roles & responsibilities</div>
+                            <div class="mnemonic-letter"><span>S</span>Sociocultural differences</div>
+                            <div class="mnemonic-letter"><span>E</span>Exclusion zones (space/territory)</div>
+                        </div>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- SBAR -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>📋 SBAR Communication Technique</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Definition</div>
+                        <strong>SBAR</strong> is a standardized hand-off communication technique used to relay patient information clearly and concisely.
+                    </div>
+
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card blue">
+                            <h4>S - Situation</h4>
+                            <p>What is happening with the patient RIGHT NOW?</p>
+                        </div>
+                        <div class="quick-ref-card pink">
+                            <h4>B - Background</h4>
+                            <p>What is the clinical background/context?</p>
+                        </div>
+                        <div class="quick-ref-card yellow">
+                            <h4>A - Assessment</h4>
+                            <p>What do I think the problem is?</p>
+                        </div>
+                        <div class="quick-ref-card green">
+                            <h4>R - Recommendation</h4>
+                            <p>What do I think should be done?</p>
+                        </div>
+                    </div>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">✅ Patient Safety Goal</div>
+                        SBAR supports Joint Commission National Patient Safety Goals for improving communication!
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Therapeutic Relationship -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>🤝 Therapeutic Nurse-Patient Relationship</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Key Characteristics</div>
+                        <ul class="content-list">
+                            <li>Does NOT occur spontaneously - requires intention</li>
+                            <li>Characterized by unequal sharing (patient shares more)</li>
+                            <li>Built on the PATIENT'S needs</li>
+                            <li>Nurse is professionally accountable</li>
+                            <li>Purposeful and TIME-LIMITED</li>
+                        </ul>
+                    </div>
+
+                    <h4 style="margin: 20px 0 10px;">Three Phases of the Therapeutic Relationship:</h4>
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Phase</th>
+                            <th>What Happens</th>
+                            <th>Key Activity</th>
+                        </tr>
+                        <tr>
+                            <td><strong>1. Orientation</strong></td>
+                            <td>Establishing the relationship</td>
+                            <td>Contract/agreement made about goals, frequency, duration</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2. Working</strong></td>
+                            <td>Achieving goals</td>
+                            <td>Nurse provides assistance, counseling, teaching</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3. Termination</strong></td>
+                            <td>Ending the relationship</td>
+                            <td>Examine goals for attainment</td>
+                        </tr>
+                    </table>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Dispositional Traits & Rapport Builders -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>⭐ Promoting Effective Communication</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card blue">
+                            <h4>😊 Dispositional Traits</h4>
+                            <ul class="content-list">
+                                <li>Warmth & friendliness</li>
+                                <li>Openness & respect</li>
+                                <li>Empathy</li>
+                                <li>Honesty & authenticity</li>
+                                <li>Trust & caring</li>
+                                <li>Competence</li>
+                            </ul>
+                        </div>
+                        <div class="quick-ref-card green">
+                            <h4>🔨 Rapport Builders</h4>
+                            <ul class="content-list">
+                                <li>Specific objectives</li>
+                                <li>Comfortable environment</li>
+                                <li>Privacy</li>
+                                <li>Confidentiality</li>
+                                <li>Patient (not task) focus</li>
+                                <li>Optimal pacing</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Interviewing Techniques -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>❓ Interviewing Techniques</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Technique</th>
+                            <th>Purpose</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Open-ended</strong></td>
+                            <td>Allows patient to express freely; cannot be answered yes/no</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Closed</strong></td>
+                            <td>Specific, limited response expected</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Validating</strong></td>
+                            <td>Confirms what nurse heard or observed</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Clarifying</strong></td>
+                            <td>Makes unclear statements more understandable</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Reflective</strong></td>
+                            <td>Encourages deeper exploration</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sequencing</strong></td>
+                            <td>Establishes order of events</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Directing</strong></td>
+                            <td>Focuses conversation on specific topic</td>
+                        </tr>
+                    </table>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ Test Tip</div>
+                        <strong>Validating</strong> questions confirm what nurse heard - NOT open-ended questions!
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Assertive vs Aggressive -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>💪 Assertive vs Aggressive Behavior</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card green">
+                            <h4>✅ Assertive (GOOD)</h4>
+                            <ul class="content-list">
+                                <li>Confident, open body posture</li>
+                                <li>Clear, concise "I" statements</li>
+                                <li>Shares thoughts effectively</li>
+                                <li>Works with or without supervision</li>
+                                <li>Remains calm under supervision</li>
+                                <li>Asks for help when needed</li>
+                                <li>Admits mistakes, takes responsibility</li>
+                            </ul>
+                        </div>
+                        <div class="quick-ref-card pink">
+                            <h4>❌ Aggressive (BAD)</h4>
+                            <ul class="content-list">
+                                <li>Violates rights of others</li>
+                                <li>Can be verbal or physical</li>
+                                <li>Marked by tension and anger</li>
+                                <li>Angry tone, condescending</li>
+                                <li>Threatening behavior</li>
+                                <li>Focus on "winning at all costs"</li>
+                                <li>Inhibits collaboration</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Blocks to Communication -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>🚫 Blocks to Communication</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ Avoid These!</div>
+                        <ul class="content-list">
+                            <li>Failure to perceive patient as human being</li>
+                            <li>Failure to listen</li>
+                            <li>Using clichés</li>
+                            <li>Using "why" and "how" questions (can feel accusatory)</li>
+                            <li>Probing for information</li>
+                            <li>Using leading questions</li>
+                            <li>Giving advice</li>
+                            <li>Making judgmental comments</li>
+                            <li>Changing the subject</li>
+                            <li>Giving false assurance</li>
+                            <li>Using gossip and rumors</li>
+                        </ul>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Disruptive Behaviors -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>⚡ Disruptive Interpersonal Behavior</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Types of Disruptive Behavior</div>
+                        <ul class="content-list">
+                            <li><strong>Incivility:</strong> Rude, disrespectful behavior</li>
+                            <li><strong>Horizontal Violence:</strong> Between nurses at same level</li>
+                            <li><strong>Lateral Violence:</strong> Similar to horizontal</li>
+                            <li><strong>Nurse Bullying:</strong> Repeated aggressive behavior</li>
+                            <li><strong>Professional Incivility:</strong> Unprofessional conduct</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">✅ Nursing Response</div>
+                        <ul class="content-list">
+                            <li>Maintain professional demeanor</li>
+                            <li>Respond assertively</li>
+                            <li>Address issues directly with those involved</li>
+                            <li>Seek guidance through nurse-managers</li>
+                        </ul>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Electronic Communication -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>📱 Electronic Communication & Social Media</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ Critical Reminders</div>
+                        <ul class="content-list">
+                            <li>ANA and NCSBN have guidelines for RNs using social media</li>
+                            <li>Risk for HIPAA violations exists with ANY electronic message</li>
+                            <li>Agencies have security measures in place</li>
+                            <li>Includes: Social media, email, text messages, telehealth</li>
+                        </ul>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== CHAPTER 9: TEACHING & COUNSELING ==================== -->
+        <div id="ch9" class="content-section">
+            <div class="chapter-card ch9-card">
+                <h2>📖 Chapter 9: Teaching and Counseling</h2>
+                <p>Become an effective educator and counselor for your patients</p>
+            </div>
+
+            <!-- Aims of Teaching -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>🎯 Aims of Teaching and Counseling</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="mnemonic-box">
+                        <h4>🧠 MNEMONIC: "MRFCP" - Most Remarkable Facilitators Create Progress</h4>
+                        <div class="mnemonic-letters">
+                            <div class="mnemonic-letter"><span>M</span>Maintaining health</div>
+                            <div class="mnemonic-letter"><span>R</span>Restoring health</div>
+                            <div class="mnemonic-letter"><span>F</span>Facilitating coping</div>
+                            <div class="mnemonic-letter"><span>C</span>Creating outcomes</div>
+                            <div class="mnemonic-letter"><span>P</span>Preventing illness</div>
+                        </div>
+                    </div>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">✅ Teaching Outcomes</div>
+                        <ul class="content-list">
+                            <li>Optimal wellness & self-care practices</li>
+                            <li>Disease prevention/early detection</li>
+                            <li>Quick recovery with minimal complications</li>
+                            <li>Enhanced ability to adjust to life changes</li>
+                        </ul>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Key Teaching Concepts -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>📚 Key Teaching Concepts</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card blue">
+                            <h4>👂 Listen First</h4>
+                            <p>Listen to patients AND their families</p>
+                        </div>
+                        <div class="quick-ref-card pink">
+                            <h4>⏰ Every Moment Counts</h4>
+                            <p>Every interaction is an opportunity to teach</p>
+                        </div>
+                        <div class="quick-ref-card yellow">
+                            <h4>🎯 Patient-Centered</h4>
+                            <p>Keep education focused on the patient</p>
+                        </div>
+                        <div class="quick-ref-card green">
+                            <h4>🚀 Start Early</h4>
+                            <p>Begin teaching at the FIRST patient encounter</p>
+                        </div>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Factors Affecting Learning -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>🎭 Factors Affecting Patient Learning</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="mnemonic-box">
+                        <h4>🧠 MNEMONIC: "A FCCH" - A Few Caring Concepts Help</h4>
+                        <div class="mnemonic-letters">
+                            <div class="mnemonic-letter"><span>A</span>Age & developmental level</div>
+                            <div class="mnemonic-letter"><span>F</span>Family/caregiver support</div>
+                            <div class="mnemonic-letter"><span>C</span>Cultural influences & Language</div>
+                            <div class="mnemonic-letter"><span>C</span>Cash (Financial resources)</div>
+                            <div class="mnemonic-letter"><span>H</span>Health literacy</div>
+                        </div>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Knowles Adult Learning -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>🎓 Knowles' Adult Learning Assumptions</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Four Key Assumptions</div>
+                        <ol style="padding-left: 20px;">
+                            <li style="margin: 10px 0;">As people mature, self-concept moves from <strong>dependence → independence</strong></li>
+                            <li style="margin: 10px 0;">Previous experience is a <strong>rich resource</strong> for learning</li>
+                            <li style="margin: 10px 0;">Readiness to learn relates to <strong>developmental tasks</strong> or <strong>social roles</strong></li>
+                            <li style="margin: 10px 0;">Adults want material to be <strong>useful IMMEDIATELY</strong> (not in the future)</li>
+                        </ol>
+                    </div>
+
+                    <div class="sticky-note">
+                        <h4>💡 Test Tip!</h4>
+                        <p>Adults want to use what they learn RIGHT NOW - not "someday." This is a common test question!</p>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Teaching Older Adults -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>👴 Teaching Plans for Older Adults</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <ul class="content-list">
+                        <li><strong>Identify</strong> learning barriers first</li>
+                        <li><strong>Allow extra time</strong> - don't rush!</li>
+                        <li><strong>Plan SHORT sessions</strong> - attention span</li>
+                        <li><strong>Accommodate sensory deficits</strong> (vision, hearing)</li>
+                        <li><strong>Reduce distractions</strong> in environment</li>
+                        <li><strong>Relate new info to familiar</strong> activities/information</li>
+                    </ul>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Learning Domains -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>🧠 Three Learning Domains</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ High-Yield for Exams!</div>
+                        Know these domains AND the teaching strategies for each!
+                    </div>
+
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Domain</th>
+                            <th>Focus</th>
+                            <th>Example</th>
+                            <th>Best Strategies</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Cognitive</strong></td>
+                            <td>Knowledge & recall</td>
+                            <td>Patient describes calorie counting</td>
+                            <td>Lecture, panel, discovery, written materials</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Psychomotor</strong></td>
+                            <td>Physical skills</td>
+                            <td>Patient demonstrates wound care</td>
+                            <td>Demonstration, discovery, printed materials</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Affective</strong></td>
+                            <td>Attitudes, values, feelings</td>
+                            <td>Patient expresses renewed confidence</td>
+                            <td>Role modeling, discussion, audiovisual</td>
+                        </tr>
+                    </table>
+
+                    <div class="sticky-note">
+                        <h4>💡 Remember!</h4>
+                        <ul style="margin-left: 15px;">
+                            <li><strong>Cognitive</strong> = thinking (brain knowledge)</li>
+                            <li><strong>Psychomotor</strong> = doing (physical skills)</li>
+                            <li><strong>Affective</strong> = feeling (emotions/attitudes)</li>
+                        </ul>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Assessment of Learner -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>📋 Assessment of the Learner</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="mnemonic-box">
+                        <h4>🧠 MNEMONIC: "NRSMS" - Nurses Really Should Motivate Students</h4>
+                        <div class="mnemonic-letters">
+                            <div class="mnemonic-letter"><span>N</span>Needs (learning)</div>
+                            <div class="mnemonic-letter"><span>R</span>Readiness</div>
+                            <div class="mnemonic-letter"><span>S</span>Style (learning)</div>
+                            <div class="mnemonic-letter"><span>M</span>Motivation</div>
+                            <div class="mnemonic-letter"><span>S</span>Strengths</div>
+                        </div>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Adherence -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>✅ Promoting Patient Adherence</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Adherence vs Compliance</div>
+                        <p><strong>Adherence</strong> is the preferred term over "compliance" because it:</p>
+                        <ul class="content-list">
+                            <li>Uses a TEAM approach</li>
+                            <li>Reflects patient's RIGHT to choose</li>
+                            <li>Supports active patient participation</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">✅ How to Promote Adherence</div>
+                        <ul class="content-list">
+                            <li>Clear instructions that support patient goals</li>
+                            <li>Include patient/caregivers as PARTNERS</li>
+                            <li>Use interactive teaching strategies</li>
+                            <li>Develop strong interpersonal relationships</li>
+                        </ul>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Teaching Strategies -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>📝 Teaching Strategies & Methods</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card blue">
+                            <h4>📚 Materials</h4>
+                            <ul class="content-list">
+                                <li>Audiovisual materials</li>
+                                <li>Printed materials</li>
+                                <li>Programmed instruction</li>
+                                <li>Web-based/technology</li>
+                            </ul>
+                        </div>
+                        <div class="quick-ref-card pink">
+                            <h4>🎯 Methods</h4>
+                            <ul class="content-list">
+                                <li>Lecture</li>
+                                <li>Discussion</li>
+                                <li>Panel discussion</li>
+                                <li>Demonstration</li>
+                                <li>Discovery</li>
+                                <li>Role playing</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ Test Alert</div>
+                        <strong>Demonstration</strong> is the best strategy for psychomotor learning (like catheter care!)
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Nurse as Coach -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>🏆 Role of the Nurse as Coach</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <ol style="padding-left: 20px;">
+                        <li style="margin: 10px 0;">Establish relationships & identify readiness for change</li>
+                        <li style="margin: 10px 0;">Identify opportunities, issues, concerns</li>
+                        <li style="margin: 10px 0;">Establish patient-centered goals</li>
+                        <li style="margin: 10px 0;">Create structure of coaching interaction</li>
+                        <li style="margin: 10px 0;">Empower and motivate patients to reach goals</li>
+                        <li style="margin: 10px 0;">Assist patient to determine progress toward goals</li>
+                    </ol>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Documentation -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>📄 Documentation of Teaching-Learning</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 What to Document</div>
+                        <ul class="content-list">
+                            <li><strong>Summary</strong> of the learning need</li>
+                            <li><strong>The plan</strong> developed</li>
+                            <li><strong>Implementation</strong> of the plan</li>
+                            <li><strong>Evaluation</strong> results</li>
+                        </ul>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Nurse as Counselor -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>💭 Nurse as Counselor</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Counseling Focus Areas</div>
+                        <ul class="content-list">
+                            <li>Improving coping abilities</li>
+                            <li>Reinforcing healthy behaviors</li>
+                            <li>Fostering positive interactions</li>
+                            <li>Preventing illness and disability</li>
+                        </ul>
+                    </div>
+
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card yellow">
+                            <h4>⏱️ Short-term Counseling</h4>
+                            <p>For <strong>situational crisis</strong> (acute events)</p>
+                        </div>
+                        <div class="quick-ref-card green">
+                            <h4>📅 Long-term Counseling</h4>
+                            <p>For <strong>developmental crisis</strong> (life stage transitions)</p>
+                        </div>
+                    </div>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">✅ Key Skills</div>
+                        <p>Warmth, friendliness, openness, empathy - CARING is fundamental!</p>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Cultural Competence -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>🌍 Culturally Competent Patient Education</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <ul class="content-list">
+                        <li>Develop understanding of patient's culture</li>
+                        <li>Work with multicultural team</li>
+                        <li>Be aware of personal assumptions, biases, prejudices</li>
+                        <li>Understand core cultural values of patient/group</li>
+                        <li>Develop written material in patient's preferred language</li>
+                    </ul>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== CHAPTER 10: LEADING, MANAGING, DELEGATING ==================== -->
+        <div id="ch10" class="content-section">
+            <div class="chapter-card ch10-card">
+                <h2>👔 Chapter 10: Leading, Managing, and Delegating</h2>
+                <p>Develop leadership skills essential for nursing practice</p>
+            </div>
+
+            <!-- Leadership vs Management -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>⚖️ Leadership vs Management</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Covey/Drucker Quote</div>
+                        <p style="font-size: 1.2em; text-align: center; padding: 15px;">
+                            "<strong>Management</strong> is doing things <em>right</em>;<br>
+                            <strong>Leadership</strong> is doing the <em>right things</em>."
+                        </p>
+                    </div>
+
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card blue">
+                            <h4>👔 Leadership</h4>
+                            <p>Ability to direct or motivate a person/group to achieve goals</p>
+                        </div>
+                        <div class="quick-ref-card yellow">
+                            <h4>📋 Management</h4>
+                            <p>Planning, organizing, staffing, directing, controlling</p>
+                        </div>
+                    </div>
+
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Type of Power</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Explicit Power</strong></td>
+                            <td>Power by virtue of POSITION</td>
+                            <td>Charge nurse, manager</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Implied Power</strong></td>
+                            <td>Power due to OTHER factors (personality)</td>
+                            <td>Class bully, charismatic colleague</td>
+                        </tr>
+                    </table>
+
+                    <div class="sticky-note">
+                        <h4>💡 Test Tip!</h4>
+                        <p>A class bully is an example of <strong>IMPLIED</strong> power (personality), not explicit (they don't have an official position)!</p>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Leadership Qualities & Skills -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>⭐ Leadership Qualities & Skills</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card blue">
+                            <h4>✨ Qualities</h4>
+                            <ul class="content-list">
+                                <li>Charismatic</li>
+                                <li>Dynamic</li>
+                                <li>Enthusiastic</li>
+                                <li>Poised & confident</li>
+                                <li>Self-directed</li>
+                                <li>Flexible</li>
+                                <li>Knowledgeable</li>
+                                <li>Politically aware</li>
+                            </ul>
+                        </div>
+                        <div class="quick-ref-card green">
+                            <h4>🛠️ Skills</h4>
+                            <ul class="content-list">
+                                <li>Commitment to excellence</li>
+                                <li>Problem-solving</li>
+                                <li>Passion for work</li>
+                                <li>Trustworthiness & integrity</li>
+                                <li>Respectfulness</li>
+                                <li>Accessibility</li>
+                                <li>Empathy & caring</li>
+                                <li>Promotes staff growth</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Leadership Styles -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>🎭 Leadership Styles</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Style</th>
+                            <th>Characteristics</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Autocratic</strong></td>
+                            <td>Leader assumes CONTROL; firm, self-assured; center of attention</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Democratic</strong></td>
+                            <td>Sense of EQUALITY among leader and participants</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Laissez-faire</strong></td>
+                            <td>Leader RELINQUISHES power to the group; hands-off</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Servant</strong></td>
+                            <td>Leader serves the team; focuses on others' growth</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Transactional</strong></td>
+                            <td>Focus on exchanges/transactions; rewards/consequences</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Transformational</strong></td>
+                            <td>Creates REVOLUTIONARY change; charismatic; inspires vision</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Quantum</strong></td>
+                            <td>Emphasizes interconnectedness and relationships</td>
+                        </tr>
+                    </table>
+
+                    <div class="mnemonic-box">
+                        <h4>🧠 Five Key Practices for Servant Leaders</h4>
+                        <div class="mnemonic-letters">
+                            <div class="mnemonic-letter"><span>D</span>Develop vision</div>
+                            <div class="mnemonic-letter"><span>L</span>Listen & learn first</div>
+                            <div class="mnemonic-letter"><span>E</span>Envision others' greatness</div>
+                            <div class="mnemonic-letter"><span>G</span>Give away power</div>
+                            <div class="mnemonic-letter"><span>B</span>Build community</div>
+                        </div>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Magnet Status -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>🧲 Magnet Status Recognition</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Five Model Components</div>
+                        <ol style="padding-left: 20px;">
+                            <li style="margin: 10px 0;"><strong>Transformational Leadership</strong></li>
+                            <li style="margin: 10px 0;"><strong>Structural Empowerment</strong></li>
+                            <li style="margin: 10px 0;"><strong>Exemplary Professional Practice</strong></li>
+                            <li style="margin: 10px 0;"><strong>New Knowledge, Innovation & Improvements</strong></li>
+                            <li style="margin: 10px 0;"><strong>Empirical Quality Results</strong></li>
+                        </ol>
+                    </div>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">✅ Benefits of Magnet Recognition</div>
+                        <ul class="content-list">
+                            <li>Attract and retain top talent</li>
+                            <li>Improve care, safety, satisfaction</li>
+                            <li>Foster collaborative culture</li>
+                            <li>Advance nursing standards</li>
+                            <li>Grow business success</li>
+                        </ul>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Management Structures -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>🏢 Management Structures</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card pink">
+                            <h4>🔝 Centralized</h4>
+                            <p>Senior managers make decisions with LITTLE input from the group</p>
+                        </div>
+                        <div class="quick-ref-card green">
+                            <h4>🌐 Decentralized</h4>
+                            <p>Decisions made by those MOST KNOWLEDGEABLE about the issues</p>
+                            <p><em>Nurses are intimately involved in patient care decisions</em></p>
+                        </div>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Conflict Management -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>⚡ Conflict Management</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Conflict Management vs Engagement</div>
+                        <ul class="content-list">
+                            <li><strong>Conflict Management:</strong> Process to work through conflicts; minimizes negative effects</li>
+                            <li><strong>Conflict Engagement:</strong> Teaches skills to perform WELL in face of conflict (not avoid it)</li>
+                        </ul>
+                    </div>
+
+                    <h4 style="margin: 20px 0 10px;">Conflict Resolution Strategies:</h4>
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Strategy</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Avoiding</strong></td>
+                            <td>Ignoring or withdrawing from conflict</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Collaborating</strong></td>
+                            <td>Working together for win-win solution</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Competing</strong></td>
+                            <td>Win-lose approach; one party "wins"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Compromising</strong></td>
+                            <td>Both parties give up something</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Accommodating</strong></td>
+                            <td>Giving in to other party's wishes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Smoothing</strong></td>
+                            <td>Complimenting all parties to prevent outbursts; focus on agreement</td>
+                        </tr>
+                    </table>
+
+                    <div class="sticky-note">
+                        <h4>💡 Test Tip!</h4>
+                        <p><strong>Smoothing</strong> = Complimenting nurses in conflict to prevent emotional outbursts</p>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Lewin's Theory of Change -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>🔄 Lewin's Theory of Change</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="mnemonic-box">
+                        <h4>🧠 MNEMONIC: "UMR" - Unfreeze, Move, Refreeze (like ice cream!)</h4>
+                        <div class="mnemonic-letters">
+                            <div class="mnemonic-letter"><span>U</span>Unfreezing<br><small>Need for change recognized</small></div>
+                            <div class="mnemonic-letter"><span>M</span>Moving<br><small>Change initiated after planning</small></div>
+                            <div class="mnemonic-letter"><span>R</span>Refreezing<br><small>Change becomes operational</small></div>
+                        </div>
+                    </div>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">✅ Eight-Step Process for Planned Change</div>
+                        <ol style="padding-left: 20px; font-size: 0.95em;">
+                            <li>Recognize symptoms, collect data</li>
+                            <li>Identify the problem</li>
+                            <li>Analyze alternative solutions</li>
+                            <li>Select a course of action</li>
+                            <li>Plan for the change</li>
+                            <li>Implement the change</li>
+                            <li>Evaluate effects</li>
+                            <li>Stabilize the change</li>
+                        </ol>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Resistance to Change -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>🛑 Resistance to Change</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card pink">
+                            <h4>❓ Why People Resist</h4>
+                            <ul class="content-list">
+                                <li>Threat to self</li>
+                                <li>Lack of understanding</li>
+                                <li>Limited tolerance for change</li>
+                                <li>Disagreement about benefits</li>
+                                <li>Fear of increased responsibility</li>
+                            </ul>
+                        </div>
+                        <div class="quick-ref-card green">
+                            <h4>✅ Overcoming Resistance</h4>
+                            <ul class="content-list">
+                                <li>Explain change in simple language</li>
+                                <li>List advantages</li>
+                                <li>Relate to existing beliefs/values</li>
+                                <li>Provide open communication</li>
+                                <li>Indicate how change will be evaluated</li>
+                                <li>Introduce change GRADUALLY</li>
+                                <li>Provide incentives</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- SWOT vs SOAR -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>📊 SWOT vs SOAR Analysis</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card blue">
+                            <h4>📈 SWOT Analysis</h4>
+                            <p><strong>S</strong>trengths<br>
+                            <strong>W</strong>eaknesses<br>
+                            <strong>O</strong>pportunities<br>
+                            <strong>T</strong>hreats</p>
+                            <p><em>Determines a plan of action</em></p>
+                        </div>
+                        <div class="quick-ref-card yellow">
+                            <h4>🚀 SOAR Analysis</h4>
+                            <p><strong>S</strong>trengths<br>
+                            <strong>O</strong>pportunities<br>
+                            <strong>A</strong>spirations<br>
+                            <strong>R</strong>esults</p>
+                            <p><em>Creates shared vision for the future</em></p>
+                        </div>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Delegation -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>📋 ANA Principles for Delegation</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ RN Cannot Delegate These:</div>
+                        <ul class="content-list">
+                            <li>Initial patient assessment</li>
+                            <li>Discharge planning</li>
+                            <li>Health education</li>
+                            <li>Care planning</li>
+                            <li>Triage</li>
+                            <li>Interpretation of patient data</li>
+                            <li>Care of invasive lines</li>
+                            <li>Administering parenteral medications</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">✅ RN CAN Delegate:</div>
+                        <ul class="content-list">
+                            <li>Assistance with basic care activities</li>
+                            <li>Collecting vital signs</li>
+                            <li>Simple dressing changes</li>
+                            <li>Transfers</li>
+                            <li>Postmortem care</li>
+                        </ul>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        <h4>🧠 5 Considerations When Delegating</h4>
+                        <div class="mnemonic-letters">
+                            <div class="mnemonic-letter"><span>S</span>Stability of condition</div>
+                            <div class="mnemonic-letter"><span>C</span>Complexity of activity</div>
+                            <div class="mnemonic-letter"><span>P</span>Potential for harm</div>
+                            <div class="mnemonic-letter"><span>P</span>Predictability of outcome</div>
+                            <div class="mnemonic-letter"><span>O</span>Overall patient needs</div>
+                        </div>
+                    </div>
+
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Remember!</div>
+                        RN is RESPONSIBLE and ACCOUNTABLE for nursing practice and supervises ANY AP providing direct patient care.
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Clinical Nurse Leader -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>🩺 Clinical Nurse Leader (CNL) Role</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 CNL Overview</div>
+                        <ul class="content-list">
+                            <li>Created by AACN as a leadership role</li>
+                            <li>Works collaboratively with health care team</li>
+                            <li>Facilitates, coordinates, oversees patient care</li>
+                            <li>Communicates clearly with professionals</li>
+                            <li>Integrates evidence-based practices</li>
+                            <li>Evaluates patient risks and outcomes</li>
+                            <li>Functions as patient advocate, educator, provider</li>
+                        </ul>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Resilience & Burnout -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>💪 Resilience & Preventing Burnout</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card green">
+                            <h4>🌟 Developing Resilience</h4>
+                            <ul class="content-list">
+                                <li>Begin/end day with gratitude</li>
+                                <li>Practice mindfulness</li>
+                                <li>Appreciate human limitations</li>
+                                <li>Value connectedness & presence</li>
+                                <li>Stretch and deep breathe</li>
+                                <li>Reflect on what brings joy</li>
+                                <li>Keep positive, hopeful outlook</li>
+                            </ul>
+                        </div>
+                        <div class="quick-ref-card pink">
+                            <h4>⚠️ Clinician Burnout</h4>
+                            <ul class="content-list">
+                                <li>Chronic job stress</li>
+                                <li>Emotional exhaustion</li>
+                                <li>Depersonalization</li>
+                                <li>Loss of professional efficacy</li>
+                                <li>Threatens quality goals</li>
+                                <li>High personal & economic costs</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Developing Leadership -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>📈 Developing Leadership Responsibilities</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <ul class="content-list">
+                        <li><strong>Knowledge of administrative structure</strong></li>
+                        <li><strong>Mentorship:</strong> Experienced nurse guides less experienced</li>
+                        <li><strong>Preceptorship:</strong> Clinical teaching role</li>
+                        <li><strong>Professional organizations:</strong> Participate actively</li>
+                        <li><strong>Continuing education:</strong> Never stop learning</li>
+                    </ul>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== VOCABULARY SECTION ==================== -->
+        <div id="vocab" class="content-section">
+            <div class="chapter-card" style="border-left-color: #a855f7;">
+                <h2>📖 Unit 1 Vocabulary</h2>
+                <p>Master key terms with flashcards and searchable glossary</p>
+            </div>
+
+            <!-- Vocab Mode Toggle -->
+            <div class="vocab-mode-toggle">
+                <button class="vocab-mode-btn active" onclick="showVocabMode('flashcards')">🎴 Flashcards</button>
+                <button class="vocab-mode-btn" onclick="showVocabMode('glossary')">📚 Glossary</button>
+                <button class="vocab-mode-btn" onclick="showVocabMode('matching')">🔗 Matching Game</button>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="vocab-search">
+                <input type="text" id="vocabSearch" placeholder="🔍 Search vocabulary..." onkeyup="filterVocab()">
+            </div>
+
+            <!-- Chapter Filter -->
+            <div class="chapter-filter">
+                <button class="filter-btn active" onclick="filterByChapter('all')">All</button>
+                <button class="filter-btn ch8-filter" onclick="filterByChapter('ch8')">Ch 8</button>
+                <button class="filter-btn ch9-filter" onclick="filterByChapter('ch9')">Ch 9</button>
+                <button class="filter-btn ch10-filter" onclick="filterByChapter('ch10')">Ch 10</button>
+            </div>
+
+            <!-- Flashcard Mode -->
+            <div id="flashcardsMode" class="vocab-mode active">
+                <div class="flashcard-progress">
+                    <span id="flashcardCounter">1 / 50</span>
+                    <div class="flashcard-progress-bar">
+                        <div class="flashcard-progress-fill" id="flashcardProgressFill"></div>
+                    </div>
+                </div>
+
+                <div class="flashcard-container">
+                    <div class="flashcard" id="vocabFlashcard" onclick="flipVocabCard()">
+                        <div class="flashcard-face flashcard-front">
+                            <div class="flashcard-chapter-tag" id="flashcardChapter">Chapter 8</div>
+                            <div class="flashcard-term" id="flashcardTerm">Loading...</div>
+                            <div class="flashcard-hint">Click to reveal definition</div>
+                        </div>
+                        <div class="flashcard-face flashcard-back">
+                            <div class="flashcard-definition" id="flashcardDefinition">Definition here</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard-nav">
+                    <button class="flashcard-btn prev" onclick="prevVocabCard()">← Previous</button>
+                    <button class="flashcard-btn shuffle" onclick="shuffleVocabCards()">🔀 Shuffle</button>
+                    <button class="flashcard-btn next" onclick="nextVocabCard()">Next →</button>
+                </div>
+
+                <div class="flashcard-know-btns">
+                    <button class="know-btn dont-know" onclick="markCard('dont-know')">❌ Still Learning</button>
+                    <button class="know-btn know" onclick="markCard('know')">✅ Got It!</button>
+                </div>
+            </div>
+
+            <!-- Glossary Mode -->
+            <div id="glossaryMode" class="vocab-mode">
+                <div id="glossaryList" class="glossary-list">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Matching Game Mode -->
+            <div id="matchingMode" class="vocab-mode">
+                <div class="matching-instructions">
+                    <p>🎯 Click a term, then click its matching definition!</p>
+                    <button class="check-answer-btn" onclick="startMatchingGame()">🔄 New Game</button>
+                </div>
+                <div class="matching-score">
+                    Score: <span id="matchingScore">0</span> / <span id="matchingTotal">8</span>
+                </div>
+                <div class="matching-container">
+                    <div class="matching-column" id="matchingTerms">
+                        <!-- Terms go here -->
+                    </div>
+                    <div class="matching-column" id="matchingDefinitions">
+                        <!-- Definitions go here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== QUIZ SECTION ==================== -->
+        <div id="quiz" class="content-section">
+            <div class="chapter-card" style="border-left-color: #6bcb77;">
+                <h2>✏️ Practice Quiz - Unit 1</h2>
+                <p>Test your knowledge with NCLEX-style questions</p>
+            </div>
+
+            <div id="quizContainer">
+                <!-- Questions will be loaded here by JavaScript -->
+            </div>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <button onclick="loadNewQuiz()" class="check-answer-btn">🔄 Load New Questions</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Quiz Questions Database
+        const quizQuestions = [
+            {
+                question: "A nurse reassuring oneself of being prepared to speak in front of a peer group is using which type of communication?",
+                options: ["Intrapersonal", "Interpersonal", "Group", "Organizational"],
+                correct: 0,
+                rationale: "Intrapersonal communication is self-talk that happens within the individual. The nurse is talking to themselves internally."
+            },
+            {
+                question: "Touch is a personal behavior that means the same thing to all persons.",
+                options: ["True", "False"],
+                correct: 1,
+                rationale: "Touch is a personal behavior that means DIFFERENT things to different people. Cultural backgrounds, personal experiences, and individual preferences all affect how touch is perceived."
+            },
+            {
+                question: "Which activity occurs during the ORIENTATION phase of the helping relationship?",
+                options: [
+                    "An agreement or contract about the relationship is established",
+                    "The nurse provides assistance needed to achieve patient goals",
+                    "The nurse provides patient counseling and teaching",
+                    "Goals are examined for indications of attainment"
+                ],
+                correct: 0,
+                rationale: "In the orientation phase, a contract is made defining goals, frequency, location, length of contacts, and duration. Assistance, counseling, and teaching occur in the working phase. Examining goals occurs in termination."
+            },
+            {
+                question: "An open-ended question serves to validate what the nurse believes is heard or observed.",
+                options: ["True", "False"],
+                correct: 1,
+                rationale: "A VALIDATING question (not open-ended) serves to validate what the nurse believes is heard or observed. Open-ended questions allow free expression."
+            },
+            {
+                question: "Which action is an example of COGNITIVE learning?",
+                options: [
+                    "A patient demonstrates how to change their wound dressing",
+                    "A new mother follows instructions for umbilical cord care",
+                    "A patient describes how to portion food for calorie counting",
+                    "A patient expresses renewed confidence after teaching"
+                ],
+                correct: 2,
+                rationale: "Cognitive learning involves storing and recalling new knowledge (describing food portions). Demonstrating is psychomotor. Following instructions is psychomotor. Expressing confidence is affective."
+            },
+            {
+                question: "Most adults' orientation to learning is that material should be useful immediately, rather than in the future.",
+                options: ["True", "False"],
+                correct: 0,
+                rationale: "According to Knowles' Adult Learning Theory, adults want to use what they learn RIGHT NOW, not at some future time. This is a key assumption about adult learners."
+            },
+            {
+                question: "What is the BEST teaching strategy to teach a patient how to care for an indwelling catheter?",
+                options: ["Lecture", "Role modeling", "Discovery", "Demonstration"],
+                correct: 3,
+                rationale: "Demonstration of techniques, procedures, and equipment, combined with practice, is the most effective strategy for psychomotor learning like catheter care."
+            },
+            {
+                question: "Long-term counseling is often appropriate for a person experiencing a developmental crisis.",
+                options: ["True", "False"],
+                correct: 0,
+                rationale: "Long-term counseling is appropriate for DEVELOPMENTAL crises (life stage transitions). Short-term counseling is for SITUATIONAL crises (acute events)."
+            },
+            {
+                question: "A class bully who gets their way by intimidating classmates is an example of explicit power.",
+                options: ["True", "False"],
+                correct: 1,
+                rationale: "A class bully is an example of IMPLIED power (due to personality/intimidation), not explicit power. Explicit power comes from an official position."
+            },
+            {
+                question: "Which leadership style describes a nurse leader who assumes control over decisions and activities of the group?",
+                options: ["Autocratic", "Democratic", "Laissez-faire", "Transformational"],
+                correct: 0,
+                rationale: "Autocratic leadership involves the leader assuming control and making decisions. Democratic involves equality. Laissez-faire is hands-off. Transformational creates revolutionary change."
+            },
+            {
+                question: "A nurse manager complimenting nurses who are in conflict is using which approach to conflict resolution?",
+                options: ["Avoiding", "Competing", "Smoothing", "Compromising"],
+                correct: 2,
+                rationale: "Smoothing involves complimenting all parties to prevent emotional outbursts and focus on agreement rather than differences."
+            },
+            {
+                question: "In Lewin's Theory of Change, which phase involves recognizing the need for change?",
+                options: ["Moving", "Refreezing", "Unfreezing", "Planning"],
+                correct: 2,
+                rationale: "UNFREEZING is when the need for change is recognized. MOVING is when change is initiated after planning. REFREEZING is when change becomes operational."
+            },
+            {
+                question: "The RN can delegate initial patient assessment to assistive personnel.",
+                options: ["True", "False"],
+                correct: 1,
+                rationale: "According to ANA Principles, RNs CANNOT delegate: initial assessment, discharge planning, health education, care planning, triage, interpretation of data, care of invasive lines, or parenteral medications."
+            },
+            {
+                question: "Which is a component of Magnet Status recognition?",
+                options: [
+                    "Autocratic leadership",
+                    "Centralized decision making",
+                    "Transformational leadership",
+                    "Minimal staff involvement"
+                ],
+                correct: 2,
+                rationale: "The five Magnet components are: Transformational Leadership, Structural Empowerment, Exemplary Professional Practice, New Knowledge/Innovation, and Empirical Quality Results."
+            },
+            {
+                question: "What does the 'S' in SBAR stand for?",
+                options: ["Summary", "Situation", "Status", "System"],
+                correct: 1,
+                rationale: "SBAR = Situation (what's happening now), Background (clinical context), Assessment (what you think the problem is), Recommendation (what should be done)."
+            },
+            {
+                question: "The therapeutic nurse-patient relationship occurs spontaneously.",
+                options: ["True", "False"],
+                correct: 1,
+                rationale: "The therapeutic relationship does NOT occur spontaneously - it requires intention and effort to develop. It is purposeful and time-limited."
+            },
+            {
+                question: "Which factor affects patient learning?",
+                options: [
+                    "Nurse's personal beliefs",
+                    "Health literacy",
+                    "Hospital budget",
+                    "Nursing shift schedule"
+                ],
+                correct: 1,
+                rationale: "Factors affecting patient learning include: age/developmental level, family support, financial resources, cultural influences/language, and HEALTH LITERACY."
+            },
+            {
+                question: "In decentralized management, decisions are made by those most knowledgeable about the issues.",
+                options: ["True", "False"],
+                correct: 0,
+                rationale: "In DECENTRALIZED management, decisions are made by those most knowledgeable (nurses involved in patient care). In CENTRALIZED management, senior managers make decisions with little input."
+            },
+            {
+                question: "Which is a characteristic of aggressive (NOT assertive) behavior?",
+                options: [
+                    "Using clear 'I' statements",
+                    "Asking for help when necessary",
+                    "Focus on 'winning at all costs'",
+                    "Admitting mistakes"
+                ],
+                correct: 2,
+                rationale: "Aggressive behavior focuses on 'winning at all costs,' violates others' rights, uses angry tone, is condescending, and threatening. Assertive behavior uses 'I' statements and admits mistakes."
+            },
+            {
+                question: "What is the nurse's role as a counselor focused on?",
+                options: [
+                    "Prescribing medications",
+                    "Improving coping abilities",
+                    "Performing procedures",
+                    "Administrative duties"
+                ],
+                correct: 1,
+                rationale: "The nurse counselor focuses on: improving coping abilities, reinforcing healthy behaviors, fostering positive interactions, and preventing illness/disability."
+            }
+        ];
+
+        // Shuffle function
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        // Load quiz questions
+        function loadNewQuiz() {
+            const container = document.getElementById('quizContainer');
+            const shuffled = shuffleArray(quizQuestions);
+            const selected = shuffled.slice(0, 10);
+            
+            container.innerHTML = '';
+            
+            selected.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'quiz-question';
+                questionDiv.innerHTML = `
+                    <h3>Question ${index + 1}: ${q.question}</h3>
+                    <div class="quiz-options">
+                        ${q.options.map((opt, i) => `
+                            <div class="quiz-option" data-index="${i}" onclick="selectOption(this, ${index})">
+                                ${String.fromCharCode(65 + i)}. ${opt}
+                            </div>
+                        `).join('')}
+                    </div>
+                    <button class="check-answer-btn" onclick="checkAnswer(${index}, ${q.correct})">Check Answer</button>
+                    <div class="quiz-feedback" id="feedback-${index}">
+                        <strong>Rationale:</strong> ${q.rationale}
+                    </div>
+                `;
+                container.appendChild(questionDiv);
+            });
+        }
+
+        function selectOption(element, questionIndex) {
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        function checkAnswer(questionIndex, correctIndex) {
+            const questionDiv = document.querySelectorAll('.quiz-question')[questionIndex];
+            const options = questionDiv.querySelectorAll('.quiz-option');
+            const feedback = document.getElementById(`feedback-${questionIndex}`);
+            const selected = questionDiv.querySelector('.quiz-option.selected');
+            
+            if (!selected) {
+                alert('Please select an answer first!');
+                return;
+            }
+            
+            const selectedIndex = parseInt(selected.getAttribute('data-index'));
+            
+            options.forEach((opt, i) => {
+                opt.classList.remove('selected');
+                if (i === correctIndex) {
+                    opt.classList.add('correct');
+                } else if (i === selectedIndex && selectedIndex !== correctIndex) {
+                    opt.classList.add('incorrect');
+                }
+            });
+            
+            feedback.classList.add('show');
+            feedback.classList.add(selectedIndex === correctIndex ? 'correct' : 'incorrect');
+        }
+
+        // Navigation functions
+        function showSection(sectionId) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+            
+            if (sectionId === 'quiz') {
+                loadNewQuiz();
+            }
+        }
+
+        // Topic toggle
+        function toggleTopic(element) {
+            if (event.target.type === 'checkbox' || event.target.tagName === 'LABEL') {
+                return;
+            }
+            element.classList.toggle('expanded');
+        }
+
+        // Progress tracking
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.topic-check');
+            const checked = document.querySelectorAll('.topic-check:checked').length;
+            const total = checkboxes.length;
+            const percent = Math.round((checked / total) * 100);
+            
+            const progressFill = document.getElementById('progressFill');
+            progressFill.style.width = percent + '%';
+            progressFill.textContent = percent + '%';
+            
+            // Save to localStorage
+            localStorage.setItem('nur168-unit1-progress', JSON.stringify({
+                checked: checked,
+                total: total,
+                percent: percent
+            }));
+            
+            // Save individual checkbox states
+            const states = [];
+            checkboxes.forEach((cb, i) => {
+                states.push(cb.checked);
+            });
+            localStorage.setItem('nur168-unit1-checkboxes', JSON.stringify(states));
+        }
+
+        function loadProgress() {
+            const states = JSON.parse(localStorage.getItem('nur168-unit1-checkboxes') || '[]');
+            const checkboxes = document.querySelectorAll('.topic-check');
+            
+            states.forEach((state, i) => {
+                if (checkboxes[i]) {
+                    checkboxes[i].checked = state;
+                }
+            });
+            
+            updateProgress();
+        }
+
+        function resetProgress() {
+            if (confirm('Are you sure you want to reset all progress?')) {
+                document.querySelectorAll('.topic-check').forEach(cb => {
+                    cb.checked = false;
+                });
+                localStorage.removeItem('nur168-unit1-progress');
+                localStorage.removeItem('nur168-unit1-checkboxes');
+                updateProgress();
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProgress();
+            initVocabulary();
+        });
+
+        // ==================== VOCABULARY SYSTEM ====================
+        const vocabularyData = [
+            // Chapter 8 - Communication
+            { term: "Communication", definition: "The exchange of information, thoughts, and feelings between individuals using verbal and nonverbal methods.", chapter: "ch8" },
+            { term: "Sender/Encoder", definition: "The person who initiates and begins the communication process by creating and transmitting a message.", chapter: "ch8" },
+            { term: "Receiver/Decoder", definition: "The person who translates and interprets the message being received from the sender.", chapter: "ch8" },
+            { term: "Feedback", definition: "The response from the receiver that confirms the message was received and understood.", chapter: "ch8" },
+            { term: "Channel", definition: "The pathway through which a message travels: auditory (hearing), visual (seeing), or kinesthetic (touch/movement).", chapter: "ch8" },
+            { term: "Verbal Communication", definition: "Communication that depends on the understanding of language between sender and receiver, including spoken and written words.", chapter: "ch8" },
+            { term: "Nonverbal Communication", definition: "Communication without words, including facial expressions, gestures, eye contact, touch, body movements, posture, and appearance.", chapter: "ch8" },
+            { term: "Intrapersonal Communication", definition: "Self-talk; communication that occurs within a person's own mind.", chapter: "ch8" },
+            { term: "Interpersonal Communication", definition: "Communication that occurs between two or more people with a goal to exchange messages.", chapter: "ch8" },
+            { term: "Group Communication", definition: "Communication that occurs within small groups or organizational settings, involving group dynamics.", chapter: "ch8" },
+            { term: "SBAR", definition: "Situation, Background, Assessment, Recommendation - a standardized hand-off communication technique for relaying patient information.", chapter: "ch8" },
+            { term: "Therapeutic Relationship", definition: "A purposeful, time-limited, caring relationship built on the patient's needs where the nurse is professionally accountable for outcomes.", chapter: "ch8" },
+            { term: "Orientation Phase", definition: "First phase of therapeutic relationship where an agreement/contract is established about goals, frequency, and duration.", chapter: "ch8" },
+            { term: "Working Phase", definition: "Second phase of therapeutic relationship where the nurse provides assistance, counseling, and teaching to achieve patient goals.", chapter: "ch8" },
+            { term: "Termination Phase", definition: "Final phase of therapeutic relationship where goals are examined for attainment and the relationship ends.", chapter: "ch8" },
+            { term: "Empathy", definition: "The ability to understand and share the feelings of another person; a key dispositional trait for effective communication.", chapter: "ch8" },
+            { term: "Rapport", definition: "A harmonious relationship characterized by trust, understanding, and mutual respect between nurse and patient.", chapter: "ch8" },
+            { term: "Open-ended Questions", definition: "Questions that allow patients to express themselves freely and cannot be answered with a simple yes or no.", chapter: "ch8" },
+            { term: "Closed Questions", definition: "Questions that elicit a specific, limited response, often answered with yes/no or brief answers.", chapter: "ch8" },
+            { term: "Validating Questions", definition: "Questions or comments that confirm what the nurse believes they heard or observed.", chapter: "ch8" },
+            { term: "Clarifying Questions", definition: "Questions used to make unclear statements more understandable.", chapter: "ch8" },
+            { term: "Reflective Questions", definition: "Questions that encourage deeper exploration of thoughts and feelings.", chapter: "ch8" },
+            { term: "Assertive Behavior", definition: "Confident, respectful communication using 'I' statements while respecting others' rights and taking responsibility.", chapter: "ch8" },
+            { term: "Aggressive Behavior", definition: "Communication that violates others' rights, marked by tension, anger, threatening behavior, and focus on 'winning at all costs.'", chapter: "ch8" },
+            { term: "Incivility", definition: "Rude, disrespectful behavior in the workplace that disrupts professional communication.", chapter: "ch8" },
+            { term: "Horizontal Violence", definition: "Hostile behavior between nurses at the same level or hierarchy in an organization.", chapter: "ch8" },
+            { term: "Lateral Violence", definition: "Similar to horizontal violence; aggressive behavior directed at peers or colleagues.", chapter: "ch8" },
+            { term: "Nurse Bullying", definition: "Repeated aggressive behavior directed at a nurse by another nurse or healthcare worker.", chapter: "ch8" },
+            { term: "Telehealth", definition: "The use of electronic communication technologies to provide healthcare services remotely.", chapter: "ch8" },
+            { term: "Confidentiality", definition: "The ethical and legal obligation to protect patient information from unauthorized disclosure.", chapter: "ch8" },
+
+            // Chapter 9 - Teaching and Counseling
+            { term: "Health Literacy", definition: "The ability to obtain, process, and understand basic health information needed to make appropriate health decisions.", chapter: "ch9" },
+            { term: "Cognitive Domain", definition: "Learning domain involving storing and recalling new knowledge in the brain; intellectual learning.", chapter: "ch9" },
+            { term: "Psychomotor Domain", definition: "Learning domain involving physical skills that integrate mental and muscular activity; hands-on learning.", chapter: "ch9" },
+            { term: "Affective Domain", definition: "Learning domain involving changes in attitudes, values, and feelings; emotional learning.", chapter: "ch9" },
+            { term: "Learning Readiness", definition: "The learner's willingness and ability to learn at a given time, influenced by physical, emotional, and cognitive factors.", chapter: "ch9" },
+            { term: "Learning Style", definition: "The preferred method by which a person learns best (visual, auditory, kinesthetic, etc.).", chapter: "ch9" },
+            { term: "Adherence", definition: "The preferred term for the extent to which a patient's behavior corresponds with agreed-upon healthcare recommendations; emphasizes partnership.", chapter: "ch9" },
+            { term: "Compliance", definition: "An older term referring to following healthcare recommendations; now replaced by 'adherence' to emphasize patient autonomy.", chapter: "ch9" },
+            { term: "Teaching Plan", definition: "A systematic approach to patient education that includes assessment, learning outcomes, content, methods, and evaluation.", chapter: "ch9" },
+            { term: "Demonstration", definition: "A teaching method where the nurse shows the patient how to perform a skill; best for psychomotor learning.", chapter: "ch9" },
+            { term: "Return Demonstration", definition: "When the patient performs a skill back to the nurse to verify understanding and competency.", chapter: "ch9" },
+            { term: "Knowles' Adult Learning Theory", definition: "Theory stating adults are self-directed, bring experience to learning, learn what's relevant to their roles, and want immediate application.", chapter: "ch9" },
+            { term: "Andragogy", definition: "The art and science of helping adults learn; the foundation of Knowles' theory.", chapter: "ch9" },
+            { term: "Counseling", definition: "Nursing role focused on improving coping abilities, reinforcing healthy behaviors, and fostering positive interactions.", chapter: "ch9" },
+            { term: "Short-term Counseling", definition: "Counseling appropriate for situational crises (acute, sudden events).", chapter: "ch9" },
+            { term: "Long-term Counseling", definition: "Counseling appropriate for developmental crises (life stage transitions).", chapter: "ch9" },
+            { term: "Motivational Interviewing", definition: "A counseling technique that helps patients explore and resolve ambivalence about behavior change.", chapter: "ch9" },
+            { term: "Nurse as Coach", definition: "Role where the nurse empowers and motivates patients to establish and reach their own health goals.", chapter: "ch9" },
+            { term: "Cultural Competence", definition: "The ability to provide care that respects and responds to patients' cultural backgrounds, beliefs, and values.", chapter: "ch9" },
+            { term: "Developmental Crisis", definition: "A crisis related to life stage transitions (adolescence, parenthood, aging) requiring long-term counseling.", chapter: "ch9" },
+            { term: "Situational Crisis", definition: "An acute, sudden crisis event (accident, loss, trauma) requiring short-term counseling.", chapter: "ch9" },
+
+            // Chapter 10 - Leading, Managing, and Delegating
+            { term: "Leadership", definition: "The ability to direct or motivate a person or group to achieve set goals.", chapter: "ch10" },
+            { term: "Management", definition: "The process of planning, organizing, staffing, directing, and controlling to achieve organizational goals.", chapter: "ch10" },
+            { term: "Explicit Power", definition: "Power derived from one's official position or title in an organization.", chapter: "ch10" },
+            { term: "Implied Power", definition: "Power derived from factors other than position, such as personality, expertise, or charisma.", chapter: "ch10" },
+            { term: "Autocratic Leadership", definition: "Leadership style where the leader assumes control over decisions and activities, firm and self-assured.", chapter: "ch10" },
+            { term: "Democratic Leadership", definition: "Leadership style characterized by a sense of equality among leader and participants; shared decision-making.", chapter: "ch10" },
+            { term: "Laissez-faire Leadership", definition: "Leadership style where the leader relinquishes power to the group; hands-off approach.", chapter: "ch10" },
+            { term: "Servant Leadership", definition: "Leadership style focused on serving and developing team members; putting others' needs first.", chapter: "ch10" },
+            { term: "Transformational Leadership", definition: "Leadership style that creates revolutionary change through vision and inspiration; charismatic leaders.", chapter: "ch10" },
+            { term: "Transactional Leadership", definition: "Leadership style focused on exchanges and transactions; uses rewards and consequences.", chapter: "ch10" },
+            { term: "Quantum Leadership", definition: "Leadership style emphasizing interconnectedness and relationships in complex systems.", chapter: "ch10" },
+            { term: "Magnet Status", definition: "Recognition program by ANCC for healthcare organizations demonstrating nursing excellence and quality patient outcomes.", chapter: "ch10" },
+            { term: "Centralized Management", definition: "Management structure where senior managers make decisions with little input from staff.", chapter: "ch10" },
+            { term: "Decentralized Management", definition: "Management structure where decisions are made by those most knowledgeable about the issues.", chapter: "ch10" },
+            { term: "Conflict Management", definition: "Process of working through conflicts to minimize negative effects and promote positive outcomes.", chapter: "ch10" },
+            { term: "Conflict Engagement", definition: "Teaching skills to help nurses perform well in the face of conflict rather than avoid it.", chapter: "ch10" },
+            { term: "Smoothing", definition: "Conflict resolution strategy involving complimenting all parties to prevent emotional outbursts and focus on agreement.", chapter: "ch10" },
+            { term: "Compromising", definition: "Conflict resolution strategy where both parties give up something to reach an agreement.", chapter: "ch10" },
+            { term: "Collaborating", definition: "Conflict resolution strategy involving working together to find a win-win solution.", chapter: "ch10" },
+            { term: "Lewin's Theory of Change", definition: "Three-phase change theory: Unfreezing (recognize need), Moving (implement change), Refreezing (stabilize change).", chapter: "ch10" },
+            { term: "Unfreezing", definition: "First phase in Lewin's theory where the need for change is recognized.", chapter: "ch10" },
+            { term: "Moving", definition: "Second phase in Lewin's theory where change is initiated after careful planning.", chapter: "ch10" },
+            { term: "Refreezing", definition: "Third phase in Lewin's theory where change becomes operational and stabilized.", chapter: "ch10" },
+            { term: "SWOT Analysis", definition: "Strategic planning tool identifying Strengths, Weaknesses, Opportunities, and Threats.", chapter: "ch10" },
+            { term: "SOAR Analysis", definition: "Strategic planning tool identifying Strengths, Opportunities, Aspirations, and Results; focuses on positive vision.", chapter: "ch10" },
+            { term: "Delegation", definition: "The transfer of responsibility for performing a task while retaining accountability for the outcome.", chapter: "ch10" },
+            { term: "Assistive Personnel (AP)", definition: "Unlicensed staff who work in supportive roles to the RN providing direct patient care.", chapter: "ch10" },
+            { term: "Accountability", definition: "Being answerable for one's actions and decisions; RNs remain accountable even when delegating.", chapter: "ch10" },
+            { term: "Clinical Nurse Leader (CNL)", definition: "Leadership role created by AACN to facilitate, coordinate, and oversee patient care; integrates evidence-based practice.", chapter: "ch10" },
+            { term: "Mentorship", definition: "Relationship where an experienced nurse guides and supports a less experienced nurse's professional development.", chapter: "ch10" },
+            { term: "Preceptorship", definition: "A clinical teaching role where an experienced nurse provides one-on-one guidance to a new nurse.", chapter: "ch10" },
+            { term: "Burnout", definition: "Workplace syndrome from chronic stress characterized by emotional exhaustion, depersonalization, and reduced professional efficacy.", chapter: "ch10" },
+            { term: "Resilience", definition: "The ability to recover from difficulties and adapt to challenges; essential for preventing burnout.", chapter: "ch10" }
+        ];
+
+        let currentVocabIndex = 0;
+        let filteredVocab = [...vocabularyData];
+        let knownCards = new Set();
+        let currentChapterFilter = 'all';
+
+        function initVocabulary() {
+            renderGlossary();
+            updateFlashcard();
+        }
+
+        function showVocabMode(mode) {
+            document.querySelectorAll('.vocab-mode').forEach(m => m.classList.remove('active'));
+            document.querySelectorAll('.vocab-mode-btn').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById(mode + 'Mode').classList.add('active');
+            event.target.classList.add('active');
+
+            if (mode === 'matching') {
+                startMatchingGame();
+            }
+        }
+
+        function filterByChapter(chapter) {
+            currentChapterFilter = chapter;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (chapter === 'all') {
+                filteredVocab = [...vocabularyData];
+            } else {
+                filteredVocab = vocabularyData.filter(v => v.chapter === chapter);
+            }
+
+            currentVocabIndex = 0;
+            updateFlashcard();
+            renderGlossary();
+            filterVocab(); // Apply search filter too
+        }
+
+        function filterVocab() {
+            const searchTerm = document.getElementById('vocabSearch').value.toLowerCase();
+            const items = document.querySelectorAll('.glossary-item');
+
+            items.forEach(item => {
+                const term = item.querySelector('.glossary-term').textContent.toLowerCase();
+                const def = item.querySelector('.glossary-definition').textContent.toLowerCase();
+                const chapterMatch = currentChapterFilter === 'all' || item.classList.contains(currentChapterFilter);
+                const searchMatch = term.includes(searchTerm) || def.includes(searchTerm);
+
+                if (chapterMatch && searchMatch) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        }
+
+        function renderGlossary() {
+            const container = document.getElementById('glossaryList');
+            container.innerHTML = '';
+
+            const sortedVocab = [...vocabularyData].sort((a, b) => a.term.localeCompare(b.term));
+
+            sortedVocab.forEach(item => {
+                const chapterLabel = item.chapter === 'ch8' ? 'Ch 8' : item.chapter === 'ch9' ? 'Ch 9' : 'Ch 10';
+                const div = document.createElement('div');
+                div.className = `glossary-item ${item.chapter}`;
+                div.innerHTML = `
+                    <div class="glossary-term">
+                        ${item.term}
+                        <span class="glossary-chapter-badge ${item.chapter}">${chapterLabel}</span>
+                    </div>
+                    <div class="glossary-definition">${item.definition}</div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function updateFlashcard() {
+            if (filteredVocab.length === 0) return;
+
+            const card = filteredVocab[currentVocabIndex];
+            const chapterLabel = card.chapter === 'ch8' ? 'Chapter 8' : card.chapter === 'ch9' ? 'Chapter 9' : 'Chapter 10';
+
+            document.getElementById('flashcardTerm').textContent = card.term;
+            document.getElementById('flashcardDefinition').textContent = card.definition;
+            
+            const chapterTag = document.getElementById('flashcardChapter');
+            chapterTag.textContent = chapterLabel;
+            chapterTag.className = 'flashcard-chapter-tag ' + card.chapter;
+
+            document.getElementById('flashcardCounter').textContent = `${currentVocabIndex + 1} / ${filteredVocab.length}`;
+            
+            const progress = ((currentVocabIndex + 1) / filteredVocab.length) * 100;
+            document.getElementById('flashcardProgressFill').style.width = progress + '%';
+
+            // Reset flip state
+            document.getElementById('vocabFlashcard').classList.remove('flipped');
+        }
+
+        function flipVocabCard() {
+            document.getElementById('vocabFlashcard').classList.toggle('flipped');
+        }
+
+        function nextVocabCard() {
+            currentVocabIndex = (currentVocabIndex + 1) % filteredVocab.length;
+            updateFlashcard();
+        }
+
+        function prevVocabCard() {
+            currentVocabIndex = (currentVocabIndex - 1 + filteredVocab.length) % filteredVocab.length;
+            updateFlashcard();
+        }
+
+        function shuffleVocabCards() {
+            filteredVocab = shuffleArray(filteredVocab);
+            currentVocabIndex = 0;
+            updateFlashcard();
+        }
+
+        function markCard(status) {
+            const card = filteredVocab[currentVocabIndex];
+            if (status === 'know') {
+                knownCards.add(card.term);
+            } else {
+                knownCards.delete(card.term);
+            }
+            nextVocabCard();
+        }
+
+        // Matching Game
+        let selectedTerm = null;
+        let matchingPairs = [];
+        let matchedCount = 0;
+
+        function startMatchingGame() {
+            matchedCount = 0;
+            selectedTerm = null;
+            document.getElementById('matchingScore').textContent = '0';
+
+            // Get 8 random terms based on current filter
+            const sourceVocab = currentChapterFilter === 'all' ? vocabularyData : vocabularyData.filter(v => v.chapter === currentChapterFilter);
+            const shuffled = shuffleArray([...sourceVocab]).slice(0, 8);
+            matchingPairs = shuffled;
+            document.getElementById('matchingTotal').textContent = shuffled.length;
+
+            const termsColumn = document.getElementById('matchingTerms');
+            const defsColumn = document.getElementById('matchingDefinitions');
+
+            // Shuffle terms and definitions separately
+            const shuffledTerms = shuffleArray([...shuffled]);
+            const shuffledDefs = shuffleArray([...shuffled]);
+
+            termsColumn.innerHTML = shuffledTerms.map((item, i) => `
+                <div class="matching-item matching-term" data-term="${item.term}" onclick="selectMatchingTerm(this)">
+                    ${item.term}
+                </div>
+            `).join('');
+
+            defsColumn.innerHTML = shuffledDefs.map((item, i) => `
+                <div class="matching-item matching-def" data-term="${item.term}" onclick="selectMatchingDef(this)">
+                    ${item.definition.length > 80 ? item.definition.substring(0, 80) + '...' : item.definition}
+                </div>
+            `).join('');
+        }
+
+        function selectMatchingTerm(element) {
+            if (element.classList.contains('matched')) return;
+
+            document.querySelectorAll('.matching-term').forEach(t => t.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedTerm = element.getAttribute('data-term');
+        }
+
+        function selectMatchingDef(element) {
+            if (element.classList.contains('matched') || !selectedTerm) return;
+
+            const defTerm = element.getAttribute('data-term');
+
+            if (selectedTerm === defTerm) {
+                // Correct match!
+                element.classList.add('matched');
+                document.querySelector(`.matching-term[data-term="${selectedTerm}"]`).classList.add('matched');
+                matchedCount++;
+                document.getElementById('matchingScore').textContent = matchedCount;
+                selectedTerm = null;
+
+                if (matchedCount === matchingPairs.length) {
+                    setTimeout(() => {
+                        alert('🎉 Congratulations! You matched all terms!');
+                    }, 300);
+                }
+            } else {
+                // Wrong match
+                element.classList.add('wrong');
+                setTimeout(() => {
+                    element.classList.remove('wrong');
+                }, 500);
+            }
+
+            document.querySelectorAll('.matching-term').forEach(t => t.classList.remove('selected'));
+        }
+    </script>
+</body>
+</html>
