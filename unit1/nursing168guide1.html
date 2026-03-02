@@ -192,8 +192,9 @@
         }
 
         .topic-box.expanded .topic-content {
-            max-height: 2000px;
+            max-height: none;
             margin-top: 15px;
+            overflow: visible;
         }
 
         .expand-icon {
@@ -254,6 +255,8 @@
             margin: 15px 0;
             text-align: center;
             border: 2px solid rgba(102, 126, 234, 0.3);
+            overflow: visible;
+            position: relative;
         }
 
         .mnemonic-box h4 {
@@ -268,6 +271,8 @@
             flex-wrap: wrap;
             gap: 10px;
             margin-top: 15px;
+            overflow: visible;
+            position: relative;
         }
 
         .mnemonic-letter {
@@ -283,6 +288,152 @@
             font-size: 1.5em;
             font-weight: bold;
             color: #7c3aed;
+        }
+
+        /* Tooltip Mnemonic Letters */
+        .mnemonic-letter-hover {
+            background: rgba(255,255,255,0.8);
+            padding: 12px 16px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 140px;
+        }
+
+        .mnemonic-letter-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(124,58,237,0.3);
+            background: rgba(255,255,255,0.95);
+            z-index: 10;
+        }
+
+        .mnemonic-letter-hover span {
+            display: block;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #7c3aed;
+        }
+
+        .mnemonic-letter-hover .letter-title {
+            font-weight: 600;
+            color: #2d2d3a;
+            margin-top: 5px;
+        }
+
+        .mnemonic-tooltip {
+            position: absolute;
+            bottom: calc(100% + 15px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 15px 18px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            line-height: 1.5;
+            width: 280px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            text-align: left;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        /* Adjust tooltip position for edge items */
+        .mnemonic-letter-hover:first-child .mnemonic-tooltip,
+        .mnemonic-letter-hover:nth-child(2) .mnemonic-tooltip {
+            left: 0;
+            transform: translateX(0);
+        }
+
+        .mnemonic-letter-hover:first-child .mnemonic-tooltip::after,
+        .mnemonic-letter-hover:nth-child(2) .mnemonic-tooltip::after {
+            left: 30px;
+            transform: none;
+        }
+
+        .mnemonic-letter-hover:last-child .mnemonic-tooltip,
+        .mnemonic-letter-hover:nth-last-child(2) .mnemonic-tooltip {
+            left: auto;
+            right: 0;
+            transform: translateX(0);
+        }
+
+        .mnemonic-letter-hover:last-child .mnemonic-tooltip::after,
+        .mnemonic-letter-hover:nth-last-child(2) .mnemonic-tooltip::after {
+            left: auto;
+            right: 30px;
+            transform: none;
+        }
+
+        .mnemonic-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 10px solid transparent;
+            border-top-color: #764ba2;
+        }
+
+        .mnemonic-letter-hover:hover .mnemonic-tooltip {
+            opacity: 1;
+            visibility: visible;
+            bottom: calc(100% + 10px);
+            pointer-events: auto;
+        }
+
+        .tooltip-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            color: #ffd93d;
+        }
+
+        .tooltip-example {
+            background: rgba(255,255,255,0.15);
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .tooltip-example::before {
+            content: '💡 Example: ';
+            font-style: normal;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .mnemonic-tooltip {
+                width: 220px;
+                font-size: 0.8em;
+                padding: 12px 14px;
+                position: fixed;
+                bottom: auto;
+                top: 50%;
+                left: 50% !important;
+                right: auto !important;
+                transform: translate(-50%, -50%) !important;
+            }
+            
+            .mnemonic-tooltip::after {
+                display: none;
+            }
+            
+            .mnemonic-letter-hover {
+                min-width: 90px;
+            }
+            
+            .mnemonic-letter-hover:hover .mnemonic-tooltip {
+                bottom: auto;
+                top: 50%;
+            }
         }
 
         /* Comparison Tables */
@@ -1232,6 +1383,116 @@
             color: #dc2626;
         }
 
+        /* ==================== CHAPTER WRAP-UP STYLES ==================== */
+        .chapter-wrapup {
+            background: linear-gradient(135deg, rgba(107,203,119,0.15), rgba(34,197,94,0.15));
+            border: 2px solid rgba(107,203,119,0.4);
+            border-radius: 20px;
+            padding: 25px;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        .wrapup-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .wrapup-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #6bcb77 0%, #22c55e 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+        }
+
+        .wrapup-header h3 {
+            color: #16a34a;
+            font-size: 1.3em;
+            margin: 0;
+        }
+
+        .wrapup-content {
+            display: grid;
+            gap: 20px;
+        }
+
+        .wrapup-box {
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            padding: 18px;
+        }
+
+        .wrapup-box h4 {
+            color: #15803d;
+            margin-bottom: 12px;
+            font-size: 1.05em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .wrapup-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .wrapup-box li {
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+            color: #2d2d3a;
+        }
+
+        .wrapup-box li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #22c55e;
+            font-weight: bold;
+        }
+
+        .wrapup-keyterms {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .wrapup-term {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+
+        .wrapup-remember {
+            background: linear-gradient(135deg, rgba(255,217,61,0.2), rgba(251,191,36,0.2));
+            border: 2px solid rgba(255,217,61,0.5);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .wrapup-remember h4 {
+            color: #b45309;
+            margin-bottom: 10px;
+        }
+
+        .wrapup-remember p {
+            color: #2d2d3a;
+            margin: 0;
+            line-height: 1.6;
+        }
+
         /* Scenario Mode Toggle */
         .scenario-mode-toggle {
             display: flex;
@@ -1559,6 +1820,19 @@
                         <li><strong>Receiver/Decoder:</strong> Translates and interprets the message</li>
                         <li><strong>Feedback:</strong> Confirms the message was received</li>
                     </ul>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">💡 Clinical Example</div>
+                        <p><strong>Scenario:</strong> A nurse needs to teach a patient about their new medication.</p>
+                        <ul class="content-list">
+                            <li><strong>Stimulus:</strong> Patient received a new prescription</li>
+                            <li><strong>Sender:</strong> The nurse explaining the medication</li>
+                            <li><strong>Message:</strong> "Take this pill once daily with food"</li>
+                            <li><strong>Channel:</strong> Verbal (auditory) + written handout (visual)</li>
+                            <li><strong>Receiver:</strong> The patient listening and reading</li>
+                            <li><strong>Feedback:</strong> Patient says, "So I take it with breakfast each morning?"</li>
+                        </ul>
+                    </div>
                     <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
                 </div>
             </div>
@@ -1574,6 +1848,9 @@
                         <div class="quick-ref-card blue">
                             <h4>💬 Verbal Communication</h4>
                             <p>Depends on understanding of language between sender and receiver</p>
+                            <div class="tooltip-example" style="margin-top: 10px; background: rgba(0,212,255,0.1); padding: 10px; border-radius: 8px; font-size: 0.9em;">
+                                "I'm going to listen to your heart now" or written discharge instructions
+                            </div>
                         </div>
                         <div class="quick-ref-card pink">
                             <h4>🤫 Nonverbal Communication</h4>
@@ -1588,9 +1865,24 @@
                         </div>
                     </div>
 
+                    <div class="key-point tip">
+                        <div class="key-point-label">💡 Nonverbal Examples in Practice</div>
+                        <ul class="content-list">
+                            <li><strong>Facial expression:</strong> Patient grimacing = possible pain, even if they say "I'm fine"</li>
+                            <li><strong>Eye contact:</strong> Avoiding eye contact may indicate fear, shame, or cultural norm</li>
+                            <li><strong>Touch:</strong> Holding a patient's hand to provide comfort during bad news</li>
+                            <li><strong>Posture:</strong> Slumped shoulders and slow gait may indicate depression</li>
+                            <li><strong>Sounds:</strong> Sighing repeatedly may indicate frustration or anxiety</li>
+                            <li><strong>Appearance:</strong> Unkempt appearance in usually well-groomed patient = red flag</li>
+                        </ul>
+                    </div>
+
                     <div class="key-point important">
                         <div class="key-point-label">⚠️ Test Alert</div>
                         Touch is a personal behavior that means <strong>different things to different people</strong> - it's NOT universal!
+                        <div style="margin-top: 10px; font-size: 0.9em;">
+                            <strong>Example:</strong> A comforting hand on the shoulder may be welcome to one patient but feel invasive to another, especially across cultures.
+                        </div>
                     </div>
                     <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
                 </div>
@@ -1607,33 +1899,44 @@
                         <tr>
                             <th>Level</th>
                             <th>Description</th>
-                            <th>Example</th>
+                            <th>Clinical Example</th>
                         </tr>
                         <tr>
                             <td><strong>Intrapersonal</strong></td>
                             <td>Self-talk; communication within a person</td>
-                            <td>"I've got this" before a presentation</td>
+                            <td>"Okay, I need to stay calm and focused during this code"</td>
                         </tr>
                         <tr>
                             <td><strong>Interpersonal</strong></td>
                             <td>Between two or more people to exchange messages</td>
-                            <td>Nurse talking with patient</td>
+                            <td>Nurse explaining medications to a patient one-on-one</td>
                         </tr>
                         <tr>
                             <td><strong>Small Group</strong></td>
                             <td>Communication within a small team</td>
-                            <td>Nursing team huddle</td>
+                            <td>Nursing team huddle at shift change; care conference</td>
                         </tr>
                         <tr>
                             <td><strong>Organizational</strong></td>
                             <td>Communication across an organization</td>
-                            <td>Hospital-wide memos</td>
+                            <td>Hospital-wide policy memo; CEO announcement to all staff</td>
                         </tr>
                     </table>
 
                     <div class="sticky-note">
                         <h4>💡 Quick Tip</h4>
                         <p><strong>Intra</strong>personal = <strong>Inside</strong> yourself (think: intra-venous goes INSIDE the vein)</p>
+                        <p style="margin-top: 8px;"><strong>Inter</strong>personal = <strong>Between</strong> people (think: inter-state highway goes BETWEEN states)</p>
+                    </div>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">💡 More Examples</div>
+                        <ul class="content-list">
+                            <li><strong>Intrapersonal:</strong> A nurse reassuring herself before speaking to a difficult family member</li>
+                            <li><strong>Interpersonal:</strong> Therapeutic conversation between nurse and grieving patient</li>
+                            <li><strong>Small Group:</strong> Interdisciplinary rounds with MD, RN, PT, and social worker</li>
+                            <li><strong>Organizational:</strong> New hand hygiene protocol announced hospital-wide</li>
+                        </ul>
                     </div>
                     <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
                 </div>
@@ -1646,17 +1949,106 @@
                     <span class="expand-icon">+</span>
                 </div>
                 <div class="topic-content">
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Hover over each letter to see examples!</div>
+                        These factors can enhance OR hinder effective communication between nurse and patient.
+                    </div>
+
                     <div class="mnemonic-box">
-                        <h4>🧠 MNEMONIC: "DIVERSE" factors affect communication</h4>
-                        <div class="mnemonic-letters">
-                            <div class="mnemonic-letter"><span>D</span>Developmental level</div>
-                            <div class="mnemonic-letter"><span>I</span>Individual values</div>
-                            <div class="mnemonic-letter"><span>V</span>Various emotions/states</div>
-                            <div class="mnemonic-letter"><span>E</span>Environment</div>
-                            <div class="mnemonic-letter"><span>R</span>Roles & responsibilities</div>
-                            <div class="mnemonic-letter"><span>S</span>Sociocultural differences</div>
-                            <div class="mnemonic-letter"><span>E</span>Exclusion zones (space/territory)</div>
+                        <h4>🧠 MNEMONIC: "DEVS RPM" - Factors Affecting Communication</h4>
+                        <div class="mnemonic-letters" style="gap: 15px;">
+                            
+                            <div class="mnemonic-letter-hover">
+                                <span>D</span>
+                                <div class="letter-title">Developmental Level</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Developmental Level</div>
+                                    Age and cognitive development affect how a person understands and processes information. Communication must be adapted accordingly.
+                                    <div class="tooltip-example">Speaking slowly and using simple words with a child vs. using medical terminology with an adult healthcare professional.</div>
+                                </div>
+                            </div>
+
+                            <div class="mnemonic-letter-hover">
+                                <span>E</span>
+                                <div class="letter-title">Environment</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Environment</div>
+                                    Physical surroundings can promote or hinder communication. Noise, lighting, privacy, and comfort all play a role.
+                                    <div class="tooltip-example">A patient may not discuss sensitive health issues in a shared room with the curtain open, but will open up in a private space.</div>
+                                </div>
+                            </div>
+
+                            <div class="mnemonic-letter-hover">
+                                <span>V</span>
+                                <div class="letter-title">Values</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Values</div>
+                                    Personal beliefs and what individuals consider important influence how messages are sent and received. Values shape perspectives on health and illness.
+                                    <div class="tooltip-example">A patient who values autonomy may resist advice, while one who values family input may want relatives involved in all decisions.</div>
+                                </div>
+                            </div>
+
+                            <div class="mnemonic-letter-hover">
+                                <span>S</span>
+                                <div class="letter-title">Sociocultural</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Sociocultural Differences</div>
+                                    Culture, ethnicity, language, and social background influence communication styles, including eye contact, touch, personal space, and health beliefs.
+                                    <div class="tooltip-example">In some cultures, direct eye contact is disrespectful. Some patients may nod "yes" out of politeness even when they don't understand.</div>
+                                </div>
+                            </div>
+
+                            <div class="mnemonic-letter-hover">
+                                <span>R</span>
+                                <div class="letter-title">Roles & Responsibilities</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Roles & Responsibilities</div>
+                                    The role a person occupies (nurse, patient, family member, supervisor) affects communication dynamics, power balance, and expectations.
+                                    <div class="tooltip-example">A nurse may communicate differently with a physician (colleague role) vs. a patient (caregiver role) vs. a student (educator role).</div>
+                                </div>
+                            </div>
+
+                            <div class="mnemonic-letter-hover">
+                                <span>P</span>
+                                <div class="letter-title">Physical State</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Physical State</div>
+                                    Pain, fatigue, illness, hunger, sensory impairments (hearing/vision loss), and medication effects can significantly impact ability to communicate.
+                                    <div class="tooltip-example">A patient in severe pain (8/10) cannot focus on discharge teaching. A patient with hearing loss needs face-to-face communication and may lip-read.</div>
+                                </div>
+                            </div>
+
+                            <div class="mnemonic-letter-hover">
+                                <span>M</span>
+                                <div class="letter-title">Mental/Emotional State</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Mental & Emotional State</div>
+                                    Anxiety, fear, depression, anger, grief, and cognitive impairments affect how messages are processed and expressed.
+                                    <div class="tooltip-example">An anxious pre-op patient may not retain information. A grieving family member may become angry when receiving bad news. A confused patient may be unable to follow instructions.</div>
+                                </div>
+                            </div>
+
+                            <div class="mnemonic-letter-hover">
+                                <span>T</span>
+                                <div class="letter-title">Territory/Space</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Space & Territoriality</div>
+                                    Personal space needs vary by individual and culture. Intimate, personal, social, and public zones affect comfort during communication.
+                                    <div class="tooltip-example">Standing too close may make a patient uncomfortable. Sitting at eye level feels less intimidating than standing over a patient in bed.</div>
+                                </div>
+                            </div>
+
                         </div>
+                    </div>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">✅ Nursing Implications</div>
+                        <ul class="content-list">
+                            <li><strong>Assess</strong> each patient's unique communication needs</li>
+                            <li><strong>Adapt</strong> your communication style accordingly</li>
+                            <li><strong>Address</strong> barriers before important teaching or conversations</li>
+                            <li><strong>Ask</strong> if the patient understood (use teach-back method)</li>
+                        </ul>
                     </div>
                     <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
                 </div>
@@ -1694,6 +2086,17 @@
                     </div>
 
                     <div class="key-point tip">
+                        <div class="key-point-label">💡 SBAR Example: Calling the Physician</div>
+                        <p style="margin-bottom: 10px;"><strong>Patient:</strong> Mrs. Smith, 68 y/o, post-op day 2 hip replacement</p>
+                        <ul class="content-list">
+                            <li><strong>S - Situation:</strong> "I'm calling about Mrs. Smith in room 412. She's developed new onset confusion and her oxygen sat dropped to 88%."</li>
+                            <li><strong>B - Background:</strong> "She's post-op day 2 from a right hip replacement. She was alert and oriented this morning. History of DVT 5 years ago. Current vitals: BP 142/90, HR 108, RR 24."</li>
+                            <li><strong>A - Assessment:</strong> "I'm concerned she may have a pulmonary embolism given her recent surgery, history of DVT, and sudden respiratory changes."</li>
+                            <li><strong>R - Recommendation:</strong> "I think she needs to be evaluated urgently. Can you come assess her? Should I order a stat D-dimer and prepare for a CT angiogram?"</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point tip">
                         <div class="key-point-label">✅ Patient Safety Goal</div>
                         SBAR supports Joint Commission National Patient Safety Goals for improving communication!
                     </div>
@@ -1724,24 +2127,34 @@
                         <tr>
                             <th>Phase</th>
                             <th>What Happens</th>
-                            <th>Key Activity</th>
+                            <th>Clinical Example</th>
                         </tr>
                         <tr>
                             <td><strong>1. Orientation</strong></td>
-                            <td>Establishing the relationship</td>
-                            <td>Contract/agreement made about goals, frequency, duration</td>
+                            <td>Establishing the relationship; contract made about goals, frequency, duration</td>
+                            <td>"Hi Mr. Jones, I'm Sarah, your nurse today. I'll be caring for you until 7pm. Let's talk about your goals for today."</td>
                         </tr>
                         <tr>
                             <td><strong>2. Working</strong></td>
-                            <td>Achieving goals</td>
-                            <td>Nurse provides assistance, counseling, teaching</td>
+                            <td>Achieving goals; nurse provides assistance, counseling, teaching</td>
+                            <td>Teaching patient how to self-administer insulin; working through anxiety about diagnosis; making progress on discharge goals</td>
                         </tr>
                         <tr>
                             <td><strong>3. Termination</strong></td>
-                            <td>Ending the relationship</td>
-                            <td>Examine goals for attainment</td>
+                            <td>Ending the relationship; examine goals for attainment</td>
+                            <td>"Mr. Jones, you've done great learning to manage your diabetes. You're being discharged tomorrow. Let's review everything you've learned."</td>
                         </tr>
                     </table>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">💡 Example Scenario Through All Phases</div>
+                        <p><strong>Patient:</strong> Mrs. Adams, newly diagnosed with heart failure</p>
+                        <ul class="content-list">
+                            <li><strong>Orientation:</strong> Nurse introduces self, explains role, assesses patient's understanding of diagnosis, establishes trust</li>
+                            <li><strong>Working:</strong> Teaches low-sodium diet, daily weights, medication management; patient asks questions; nurse provides emotional support</li>
+                            <li><strong>Termination:</strong> Reviews all teaching, confirms patient can demonstrate skills, provides written materials, arranges follow-up care</li>
+                        </ul>
+                    </div>
                     <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
                 </div>
             </div>
@@ -1792,40 +2205,51 @@
                         <tr>
                             <th>Technique</th>
                             <th>Purpose</th>
+                            <th>Example</th>
                         </tr>
                         <tr>
                             <td><strong>Open-ended</strong></td>
                             <td>Allows patient to express freely; cannot be answered yes/no</td>
+                            <td>"Tell me about your pain" or "How are you feeling about the surgery?"</td>
                         </tr>
                         <tr>
                             <td><strong>Closed</strong></td>
                             <td>Specific, limited response expected</td>
+                            <td>"Do you have any allergies?" or "Is your pain sharp or dull?"</td>
                         </tr>
                         <tr>
                             <td><strong>Validating</strong></td>
                             <td>Confirms what nurse heard or observed</td>
+                            <td>"So you're saying the pain started after eating? Did I understand correctly?"</td>
                         </tr>
                         <tr>
                             <td><strong>Clarifying</strong></td>
                             <td>Makes unclear statements more understandable</td>
+                            <td>"When you say you feel 'funny,' can you describe what that feels like?"</td>
                         </tr>
                         <tr>
                             <td><strong>Reflective</strong></td>
                             <td>Encourages deeper exploration</td>
+                            <td>"You mentioned feeling scared. Tell me more about that fear."</td>
                         </tr>
                         <tr>
                             <td><strong>Sequencing</strong></td>
                             <td>Establishes order of events</td>
+                            <td>"What happened first? And then what did you notice next?"</td>
                         </tr>
                         <tr>
                             <td><strong>Directing</strong></td>
                             <td>Focuses conversation on specific topic</td>
+                            <td>"Let's talk more about the dizziness you mentioned earlier."</td>
                         </tr>
                     </table>
 
                     <div class="key-point important">
                         <div class="key-point-label">⚠️ Test Tip</div>
                         <strong>Validating</strong> questions confirm what nurse heard - NOT open-ended questions!
+                        <div style="margin-top: 8px; font-size: 0.9em;">
+                            <strong>Example:</strong> "I want to make sure I understand - you're saying the numbness in your left arm started about an hour ago?" (This VALIDATES understanding)
+                        </div>
                     </div>
                     <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
                 </div>
@@ -1877,18 +2301,56 @@
                 <div class="topic-content">
                     <div class="key-point important">
                         <div class="key-point-label">⚠️ Avoid These!</div>
+                        <table class="comparison-table">
+                            <tr>
+                                <th>Block</th>
+                                <th>Example of What NOT to Say</th>
+                            </tr>
+                            <tr>
+                                <td>Failure to perceive patient as human</td>
+                                <td>Referring to patient as "the gallbladder in room 4"</td>
+                            </tr>
+                            <tr>
+                                <td>Failure to listen</td>
+                                <td>Typing on computer while patient talks; interrupting</td>
+                            </tr>
+                            <tr>
+                                <td>Using clichés</td>
+                                <td>"Everything happens for a reason" or "Time heals all wounds"</td>
+                            </tr>
+                            <tr>
+                                <td>Using "why" questions</td>
+                                <td>"Why didn't you take your medication?" (sounds accusatory)</td>
+                            </tr>
+                            <tr>
+                                <td>Giving advice</td>
+                                <td>"If I were you, I would definitely have the surgery"</td>
+                            </tr>
+                            <tr>
+                                <td>Making judgmental comments</td>
+                                <td>"You really should have quit smoking years ago"</td>
+                            </tr>
+                            <tr>
+                                <td>Changing the subject</td>
+                                <td>Patient: "I'm scared about dying." Nurse: "Let's check your blood pressure!"</td>
+                            </tr>
+                            <tr>
+                                <td>False reassurance</td>
+                                <td>"Don't worry, I'm sure everything will be fine!"</td>
+                            </tr>
+                            <tr>
+                                <td>Using gossip</td>
+                                <td>Discussing other patients or staff members</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">💡 Better Alternatives</div>
                         <ul class="content-list">
-                            <li>Failure to perceive patient as human being</li>
-                            <li>Failure to listen</li>
-                            <li>Using clichés</li>
-                            <li>Using "why" and "how" questions (can feel accusatory)</li>
-                            <li>Probing for information</li>
-                            <li>Using leading questions</li>
-                            <li>Giving advice</li>
-                            <li>Making judgmental comments</li>
-                            <li>Changing the subject</li>
-                            <li>Giving false assurance</li>
-                            <li>Using gossip and rumors</li>
+                            <li><strong>Instead of "Why didn't you take your meds?"</strong> → "Tell me about any challenges you've had with taking your medications"</li>
+                            <li><strong>Instead of "Don't worry, you'll be fine"</strong> → "It's understandable to feel worried. What concerns you most?"</li>
+                            <li><strong>Instead of giving advice</strong> → "What options are you considering? Let's talk through them together"</li>
                         </ul>
                     </div>
                     <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
@@ -1926,6 +2388,97 @@
                 </div>
             </div>
 
+            <!-- Verbally and Physically Aggressive Patients -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>🚨 Verbally & Physically Aggressive Patients</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ Workplace Violence Definition</div>
+                        <p><strong>Workplace violence:</strong> Violent acts, including physical assaults and threats of assault, directed toward persons at work or on duty.</p>
+                    </div>
+
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card pink">
+                            <h4>🗣️ Verbal Aggression</h4>
+                            <ul class="content-list">
+                                <li>Harassing</li>
+                                <li>Threatening</li>
+                                <li>Yelling</li>
+                                <li>Bullying</li>
+                                <li>Hostile sarcasm</li>
+                                <li>Name-calling</li>
+                                <li>Profanity</li>
+                            </ul>
+                        </div>
+                        <div class="quick-ref-card yellow">
+                            <h4>👊 Physical Aggression</h4>
+                            <ul class="content-list">
+                                <li>Hitting or slapping</li>
+                                <li>Kicking</li>
+                                <li>Biting</li>
+                                <li>Pushing</li>
+                                <li>Throwing objects</li>
+                                <li>Grabbing</li>
+                                <li>Spitting</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">✅ Nursing Response to Aggressive Patients</div>
+                        <ul class="content-list">
+                            <li><strong>Maintain professional demeanor</strong> - stay calm, don't take it personally</li>
+                            <li><strong>Respond assertively</strong> - set clear boundaries without being aggressive</li>
+                            <li><strong>Address the issue directly</strong> - "I understand you're frustrated, but I can't allow you to speak to me that way"</li>
+                            <li><strong>Seek guidance and support</strong> through nurse-managers or appropriate channels</li>
+                            <li><strong>Ensure your safety</strong> - maintain distance, have an exit path, call for help if needed</li>
+                            <li><strong>Document the incident</strong> thoroughly</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point definition">
+                        <div class="key-point-label">💡 De-escalation Techniques</div>
+                        <ul class="content-list">
+                            <li><strong>Use a calm, low voice</strong> - don't match their volume or intensity</li>
+                            <li><strong>Maintain safe distance</strong> - stay at least arm's length away</li>
+                            <li><strong>Use open body language</strong> - don't cross arms or point fingers</li>
+                            <li><strong>Listen actively</strong> - sometimes patients just want to be heard</li>
+                            <li><strong>Acknowledge their feelings</strong> - "I can see you're very upset"</li>
+                            <li><strong>Offer choices</strong> - gives patient sense of control</li>
+                            <li><strong>Set limits clearly</strong> - "I want to help you, but I need you to lower your voice"</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">💡 Clinical Example</div>
+                        <p><strong>Scenario:</strong> Mr. Brown has been waiting 2 hours in the ED. He stands up, slams his fist on the counter, and yells, "This is ridiculous! I demand to see a doctor NOW or I'm going to sue everyone here!"</p>
+                        <p style="margin-top: 10px;"><strong>Therapeutic Response:</strong></p>
+                        <ul class="content-list">
+                            <li>Remain calm, speak slowly and softly</li>
+                            <li>"Mr. Brown, I can see you're very frustrated with the wait time." (acknowledge feelings)</li>
+                            <li>"I understand this is difficult. Let me check on your status right now." (offer action)</li>
+                            <li>"I want to help you, and I can do that better if we can talk calmly." (set limit kindly)</li>
+                            <li>If he continues: "I'm going to step away and give you a moment. I'll be back in 5 minutes to check on you."</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ When to Get Help Immediately</div>
+                        <ul class="content-list">
+                            <li>Patient has a weapon or is threatening with an object</li>
+                            <li>Patient is physically attacking staff or other patients</li>
+                            <li>Patient is destroying property</li>
+                            <li>De-escalation is not working and situation is escalating</li>
+                            <li>You feel unsafe at any point - trust your instincts!</li>
+                        </ul>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
             <!-- Electronic Communication -->
             <div class="topic-box" onclick="toggleTopic(this)">
                 <div class="topic-header">
@@ -1943,6 +2496,46 @@
                         </ul>
                     </div>
                     <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Chapter 8 Wrap-Up -->
+            <div class="chapter-wrapup">
+                <div class="wrapup-header">
+                    <div class="wrapup-icon">🎯</div>
+                    <h3>Chapter 8 Wrap-Up: Communication</h3>
+                </div>
+                <div class="wrapup-content">
+                    <div class="wrapup-box">
+                        <h4>📚 Key Takeaways</h4>
+                        <ul>
+                            <li>Communication is a circular process: Sender → Message → Channel → Receiver → Feedback</li>
+                            <li>Nonverbal communication (body language, facial expressions, touch) often speaks louder than words</li>
+                            <li>The therapeutic relationship has 3 phases: Orientation, Working, Termination</li>
+                            <li>SBAR provides a standardized way to communicate patient information clearly</li>
+                            <li>Assertive communication respects both yourself AND others</li>
+                            <li>Blocks to communication include false reassurance, giving advice, and changing the subject</li>
+                        </ul>
+                    </div>
+                    <div class="wrapup-box">
+                        <h4>🔑 Key Terms to Know</h4>
+                        <div class="wrapup-keyterms">
+                            <span class="wrapup-term">SBAR</span>
+                            <span class="wrapup-term">Therapeutic Relationship</span>
+                            <span class="wrapup-term">Intrapersonal</span>
+                            <span class="wrapup-term">Interpersonal</span>
+                            <span class="wrapup-term">Empathy</span>
+                            <span class="wrapup-term">Assertive vs Aggressive</span>
+                            <span class="wrapup-term">Open-ended Questions</span>
+                            <span class="wrapup-term">Validating Questions</span>
+                            <span class="wrapup-term">False Reassurance</span>
+                            <span class="wrapup-term">Horizontal Violence</span>
+                        </div>
+                    </div>
+                    <div class="wrapup-remember">
+                        <h4>💡 Remember for the Exam</h4>
+                        <p><strong>Touch means different things to different people</strong> - it's NOT universal! The <strong>primary source</strong> of patient information is the <strong>PATIENT</strong>. <strong>Intrapersonal</strong> = self-talk (inside yourself). The therapeutic relationship is <strong>purposeful and time-limited</strong>, built on the patient's needs. Always respond to aggressive patients by maintaining professionalism and using de-escalation techniques.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2044,17 +2637,44 @@
                 <div class="topic-content">
                     <div class="key-point definition">
                         <div class="key-point-label">📌 Four Key Assumptions</div>
-                        <ol style="padding-left: 20px;">
-                            <li style="margin: 10px 0;">As people mature, self-concept moves from <strong>dependence → independence</strong></li>
-                            <li style="margin: 10px 0;">Previous experience is a <strong>rich resource</strong> for learning</li>
-                            <li style="margin: 10px 0;">Readiness to learn relates to <strong>developmental tasks</strong> or <strong>social roles</strong></li>
-                            <li style="margin: 10px 0;">Adults want material to be <strong>useful IMMEDIATELY</strong> (not in the future)</li>
-                        </ol>
+                        <table class="comparison-table">
+                            <tr>
+                                <th>Assumption</th>
+                                <th>Clinical Application</th>
+                            </tr>
+                            <tr>
+                                <td>As people mature, self-concept moves from <strong>dependence → independence</strong></td>
+                                <td>Let patient make choices: "Would you prefer to do your injection before or after breakfast?"</td>
+                            </tr>
+                            <tr>
+                                <td>Previous experience is a <strong>rich resource</strong> for learning</td>
+                                <td>"Have you cared for anyone with diabetes before? What did you learn from that experience?"</td>
+                            </tr>
+                            <tr>
+                                <td>Readiness to learn relates to <strong>developmental tasks</strong> or <strong>social roles</strong></td>
+                                <td>New mom is ready to learn breastfeeding; newly retired patient ready to learn about managing chronic illness</td>
+                            </tr>
+                            <tr>
+                                <td>Adults want material to be <strong>useful IMMEDIATELY</strong></td>
+                                <td>Focus on "Here's what you need to know before going home TODAY" not "Someday you might need this"</td>
+                            </tr>
+                        </table>
                     </div>
 
                     <div class="sticky-note">
                         <h4>💡 Test Tip!</h4>
                         <p>Adults want to use what they learn RIGHT NOW - not "someday." This is a common test question!</p>
+                        <p style="margin-top: 8px;"><strong>Example:</strong> A patient just diagnosed with hypertension wants to know what to do NOW (take medication, reduce salt), not a detailed lecture on the pathophysiology of blood pressure.</p>
+                    </div>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">💡 Applying Knowles in Practice</div>
+                        <ul class="content-list">
+                            <li><strong>Involve</strong> the patient in planning their education</li>
+                            <li><strong>Build on</strong> what they already know</li>
+                            <li><strong>Make it relevant</strong> to their life right now</li>
+                            <li><strong>Respect</strong> their autonomy and experience</li>
+                        </ul>
                     </div>
                     <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
                 </div>
@@ -2095,35 +2715,44 @@
                         <tr>
                             <th>Domain</th>
                             <th>Focus</th>
-                            <th>Example</th>
+                            <th>Patient Example</th>
                             <th>Best Strategies</th>
                         </tr>
                         <tr>
                             <td><strong>Cognitive</strong></td>
                             <td>Knowledge & recall</td>
-                            <td>Patient describes calorie counting</td>
-                            <td>Lecture, panel, discovery, written materials</td>
+                            <td>Patient <em>explains</em> why they need to limit sodium intake</td>
+                            <td>Lecture, written materials, discussion</td>
                         </tr>
                         <tr>
                             <td><strong>Psychomotor</strong></td>
                             <td>Physical skills</td>
-                            <td>Patient demonstrates wound care</td>
-                            <td>Demonstration, discovery, printed materials</td>
+                            <td>Patient <em>demonstrates</em> how to give themselves an insulin injection</td>
+                            <td>Demonstration, return demonstration, practice</td>
                         </tr>
                         <tr>
                             <td><strong>Affective</strong></td>
                             <td>Attitudes, values, feelings</td>
-                            <td>Patient expresses renewed confidence</td>
-                            <td>Role modeling, discussion, audiovisual</td>
+                            <td>Patient <em>expresses willingness</em> to quit smoking</td>
+                            <td>Role modeling, discussion, support groups</td>
                         </tr>
                     </table>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">💡 More Clinical Examples</div>
+                        <ul class="content-list">
+                            <li><strong>Cognitive:</strong> Patient correctly lists 3 warning signs of hypoglycemia; patient states when to call the doctor after surgery</li>
+                            <li><strong>Psychomotor:</strong> Patient correctly performs wound care; patient uses an inhaler with proper technique; patient walks with crutches safely</li>
+                            <li><strong>Affective:</strong> Patient verbalizes acceptance of diabetes diagnosis; patient shows motivation to attend cardiac rehab; patient expresses reduced anxiety about procedure</li>
+                        </ul>
+                    </div>
 
                     <div class="sticky-note">
                         <h4>💡 Remember!</h4>
                         <ul style="margin-left: 15px;">
-                            <li><strong>Cognitive</strong> = thinking (brain knowledge)</li>
-                            <li><strong>Psychomotor</strong> = doing (physical skills)</li>
-                            <li><strong>Affective</strong> = feeling (emotions/attitudes)</li>
+                            <li><strong>Cognitive</strong> = THINKING (brain knowledge) - they can EXPLAIN it</li>
+                            <li><strong>Psychomotor</strong> = DOING (physical skills) - they can DEMONSTRATE it</li>
+                            <li><strong>Affective</strong> = FEELING (emotions/attitudes) - they EXPRESS willingness/acceptance</li>
                         </ul>
                     </div>
                     <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
@@ -2279,14 +2908,44 @@
                         <div class="quick-ref-card yellow">
                             <h4>⏱️ Short-term Counseling</h4>
                             <p>For <strong>situational crisis</strong> (acute events)</p>
+                            <div style="margin-top: 10px; font-size: 0.9em; background: rgba(255,217,61,0.2); padding: 10px; border-radius: 8px;">
+                                <strong>Examples:</strong>
+                                <ul style="margin: 5px 0 0 15px;">
+                                    <li>Patient just received cancer diagnosis</li>
+                                    <li>Family member died unexpectedly</li>
+                                    <li>Patient experienced a car accident</li>
+                                    <li>New amputation patient</li>
+                                </ul>
+                            </div>
                         </div>
                         <div class="quick-ref-card green">
                             <h4>📅 Long-term Counseling</h4>
                             <p>For <strong>developmental crisis</strong> (life stage transitions)</p>
+                            <div style="margin-top: 10px; font-size: 0.9em; background: rgba(107,203,119,0.2); padding: 10px; border-radius: 8px;">
+                                <strong>Examples:</strong>
+                                <ul style="margin: 5px 0 0 15px;">
+                                    <li>Adolescent struggling with identity</li>
+                                    <li>New parent adjusting to role</li>
+                                    <li>Empty nester depression</li>
+                                    <li>Retirement adjustment difficulties</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
                     <div class="key-point tip">
+                        <div class="key-point-label">💡 Counseling Example in Practice</div>
+                        <p><strong>Scenario:</strong> Mr. Peters, 45, just learned he needs a colostomy. He's tearful and says, "My life is over. I'll never be normal again."</p>
+                        <p style="margin-top: 10px;"><strong>Nurse's counseling response:</strong></p>
+                        <ul class="content-list">
+                            <li>"This is a lot to process. It's completely normal to feel overwhelmed right now." (validates feelings)</li>
+                            <li>"Tell me more about what concerns you most." (explores feelings)</li>
+                            <li>"Would you like to speak with someone who has been living with a colostomy?" (offers resources)</li>
+                            <li>Arrange follow-up with ostomy nurse and support group (long-term support)</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point definition">
                         <div class="key-point-label">✅ Key Skills</div>
                         <p>Warmth, friendliness, openness, empathy - CARING is fundamental!</p>
                     </div>
@@ -2309,6 +2968,46 @@
                         <li>Develop written material in patient's preferred language</li>
                     </ul>
                     <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Chapter 9 Wrap-Up -->
+            <div class="chapter-wrapup">
+                <div class="wrapup-header">
+                    <div class="wrapup-icon">🎯</div>
+                    <h3>Chapter 9 Wrap-Up: Teaching & Counseling</h3>
+                </div>
+                <div class="wrapup-content">
+                    <div class="wrapup-box">
+                        <h4>📚 Key Takeaways</h4>
+                        <ul>
+                            <li>Teaching aims: Maintaining health, Restoring health, Facilitating coping, Creating outcomes, Preventing illness</li>
+                            <li>Three learning domains: Cognitive (thinking), Psychomotor (doing), Affective (feeling)</li>
+                            <li>Adults want information that is useful IMMEDIATELY - not "someday" (Knowles' theory)</li>
+                            <li>Psychomotor skills are best taught through demonstration + return demonstration</li>
+                            <li>Adherence = patient actively participates in care decisions; Compliance = simply following orders</li>
+                            <li>Short-term counseling for situational crises; Long-term counseling for developmental crises</li>
+                        </ul>
+                    </div>
+                    <div class="wrapup-box">
+                        <h4>🔑 Key Terms to Know</h4>
+                        <div class="wrapup-keyterms">
+                            <span class="wrapup-term">Cognitive Domain</span>
+                            <span class="wrapup-term">Psychomotor Domain</span>
+                            <span class="wrapup-term">Affective Domain</span>
+                            <span class="wrapup-term">Knowles' Theory</span>
+                            <span class="wrapup-term">Adherence vs Compliance</span>
+                            <span class="wrapup-term">Situational Crisis</span>
+                            <span class="wrapup-term">Developmental Crisis</span>
+                            <span class="wrapup-term">Health Literacy</span>
+                            <span class="wrapup-term">Teach-Back Method</span>
+                            <span class="wrapup-term">Cultural Competence</span>
+                        </div>
+                    </div>
+                    <div class="wrapup-remember">
+                        <h4>💡 Remember for the Exam</h4>
+                        <p><strong>Demonstration + Return Demonstration</strong> is the BEST strategy for teaching psychomotor skills (like insulin injection or wound care). <strong>Adults want to use information NOW</strong> - they're not interested in learning things "just in case." <strong>Developmental crises</strong> (adolescence, retirement, empty nest) need long-term counseling, while <strong>situational crises</strong> (accident, diagnosis, death) need short-term support. Always assess <strong>health literacy</strong> before teaching!</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2373,27 +3072,27 @@
                         <tr>
                             <th>Type</th>
                             <th>When Used</th>
-                            <th>Scope</th>
+                            <th>Clinical Example</th>
                         </tr>
                         <tr>
                             <td><strong>Comprehensive</strong></td>
                             <td>Upon admission to facility</td>
-                            <td>Complete head-to-toe</td>
+                            <td>Full head-to-toe assessment when patient admitted for surgery; includes complete health history</td>
                         </tr>
                         <tr>
                             <td><strong>Ongoing/Partial</strong></td>
                             <td>At regular intervals</td>
-                            <td>Focused on systems of concern</td>
+                            <td>Beginning of each shift assessment; checking on patient every 4 hours post-op</td>
                         </tr>
                         <tr>
                             <td><strong>Focused</strong></td>
                             <td>To assess specific problem</td>
-                            <td>One body system or concern</td>
+                            <td>Patient complains of abdominal pain → focused GI assessment; diabetic foot check</td>
                         </tr>
                         <tr>
                             <td><strong>Emergency</strong></td>
                             <td>Life-threatening situations</td>
-                            <td>ABCs and vital functions</td>
+                            <td>Patient found unresponsive → assess ABCs (airway, breathing, circulation) immediately</td>
                         </tr>
                     </table>
 
@@ -2405,6 +3104,16 @@
                             <div class="mnemonic-letter"><span>F</span>Focused</div>
                             <div class="mnemonic-letter"><span>E</span>Emergency</div>
                         </div>
+                    </div>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">💡 Quick Decision Guide</div>
+                        <ul class="content-list">
+                            <li><strong>New admission?</strong> → Comprehensive</li>
+                            <li><strong>Start of shift or routine check?</strong> → Ongoing/Partial</li>
+                            <li><strong>New complaint or symptom?</strong> → Focused</li>
+                            <li><strong>Code blue / unresponsive / severe distress?</strong> → Emergency</li>
+                        </ul>
                     </div>
                     <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
                 </div>
@@ -2503,26 +3212,31 @@
                             <th>Technique</th>
                             <th>Method</th>
                             <th>What It Assesses</th>
+                            <th>Clinical Example</th>
                         </tr>
                         <tr>
                             <td><strong>Inspection</strong></td>
                             <td>Deliberate, purposeful observation</td>
                             <td>Size, color, shape, position, symmetry</td>
+                            <td>Observing skin for rashes, watching chest rise and fall, noting facial expressions</td>
                         </tr>
                         <tr>
                             <td><strong>Palpation</strong></td>
                             <td>Using sense of TOUCH</td>
                             <td>Temperature, turgor, texture, moisture, vibrations, shape</td>
+                            <td>Feeling for lymph nodes, checking skin turgor, palpating pulses, assessing for tenderness</td>
                         </tr>
                         <tr>
                             <td><strong>Percussion</strong></td>
                             <td>Striking one object against another</td>
                             <td>Location, shape, size, density of tissues</td>
+                            <td>Tapping over lungs (resonance vs. dullness), percussing abdomen for fluid</td>
                         </tr>
                         <tr>
                             <td><strong>Auscultation</strong></td>
                             <td>Listening with stethoscope</td>
                             <td>Pitch, loudness, quality, duration of sounds</td>
+                            <td>Listening to heart sounds, bowel sounds, lung sounds, blood pressure</td>
                         </tr>
                     </table>
 
@@ -2530,11 +3244,17 @@
                         <div class="key-point-label">⚠️ EXCEPTION for Abdomen!</div>
                         <p>For abdominal assessment, the order is: <strong>Inspection → Auscultation → Percussion → Palpation</strong></p>
                         <p><em>(Auscultate BEFORE percussion/palpation to avoid altering bowel sounds!)</em></p>
+                        <p style="margin-top: 10px;"><strong>Why?</strong> Touching, pressing, or tapping the abdomen can stimulate or slow bowel activity, giving you inaccurate bowel sound assessment.</p>
                     </div>
 
                     <div class="sticky-note">
-                        <h4>💡 Test Tip!</h4>
-                        <p><strong>Palpation</strong> assesses TURGOR (skin elasticity) - this is commonly tested!</p>
+                        <h4>💡 Palpation Examples</h4>
+                        <ul style="margin-left: 15px;">
+                            <li><strong>Skin turgor:</strong> Pinch skin on forearm - does it snap back quickly (good) or stay tented (dehydration)?</li>
+                            <li><strong>Temperature:</strong> Use back of hand to feel if skin is warm, hot, or cool</li>
+                            <li><strong>Vibrations:</strong> Feel for fremitus (vibrations when patient says "99")</li>
+                            <li><strong>Masses:</strong> Palpate abdomen for any lumps or tenderness</li>
+                        </ul>
                     </div>
                     <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
                 </div>
@@ -2550,45 +3270,68 @@
                     <table class="comparison-table">
                         <tr>
                             <th>Position</th>
+                            <th>Description</th>
                             <th>Used to Assess</th>
                         </tr>
                         <tr>
                             <td><strong>Standing</strong></td>
-                            <td>Posture, balance, gait</td>
+                            <td>Patient upright on feet</td>
+                            <td>Posture, balance, gait, spinal curvature</td>
                         </tr>
                         <tr>
                             <td><strong>Sitting</strong></td>
-                            <td>Upper body visualization</td>
+                            <td>Upright, legs over side of bed/table</td>
+                            <td>Head, neck, chest, heart, lungs, breasts, upper extremities</td>
                         </tr>
                         <tr>
                             <td><strong>Supine</strong></td>
-                            <td>Relaxation of abdominal muscles; head, neck, thorax, heart, breasts, abdomen, extremities</td>
+                            <td>Flat on back, legs extended</td>
+                            <td>Head, neck, thorax, heart, breasts, abdomen, extremities, pulses</td>
                         </tr>
                         <tr>
                             <td><strong>Dorsal Recumbent</strong></td>
-                            <td>Same as supine; for patients having difficulty maintaining supine</td>
+                            <td>On back, knees bent, feet flat</td>
+                            <td>Same as supine; for patients who can't maintain supine (more comfortable)</td>
                         </tr>
                         <tr>
                             <td><strong>Sims' (Side-lying)</strong></td>
-                            <td>Rectum or vagina</td>
+                            <td>Left side, right knee flexed toward chest</td>
+                            <td>Rectum, vagina, rectal temp</td>
                         </tr>
                         <tr>
                             <td><strong>Prone</strong></td>
-                            <td>Hip joint and posterior thorax</td>
+                            <td>Face down on abdomen</td>
+                            <td>Hip joint, posterior thorax, back</td>
                         </tr>
                         <tr>
                             <td><strong>Lithotomy</strong></td>
-                            <td>Female genitalia and rectum</td>
+                            <td>On back, feet in stirrups</td>
+                            <td>Female genitalia, rectum, pelvic exam</td>
                         </tr>
                         <tr>
                             <td><strong>Knee-Chest</strong></td>
-                            <td>Anus and rectum</td>
+                            <td>On knees, chest to table, head turned</td>
+                            <td>Anus, rectum, sigmoidoscopy</td>
                         </tr>
                     </table>
 
                     <div class="key-point important">
                         <div class="key-point-label">⚠️ High-Yield!</div>
                         <strong>Sims' position</strong> is used for rectal and vaginal assessment - commonly tested!
+                        <div style="margin-top: 8px; font-size: 0.9em;">
+                            <strong>Memory tip:</strong> "Sims' = Side" - both start with S!
+                        </div>
+                    </div>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">💡 Clinical Scenarios</div>
+                        <ul class="content-list">
+                            <li><strong>Digital rectal exam?</strong> → Sims' position</li>
+                            <li><strong>Pelvic exam/Pap smear?</strong> → Lithotomy position</li>
+                            <li><strong>Assessing a bedsore on sacrum?</strong> → Prone or side-lying</li>
+                            <li><strong>Listening to lung sounds posteriorly?</strong> → Sitting (preferred) or prone</li>
+                            <li><strong>Abdominal assessment?</strong> → Supine with knees slightly bent</li>
+                        </ul>
                     </div>
                     <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
                 </div>
@@ -2612,47 +3355,57 @@
                         </ul>
                     </div>
 
-                    <h4 style="margin: 20px 0 10px; color: #ffd93d;">📚 Key Terminology:</h4>
+                    <h4 style="margin: 20px 0 10px; color: #7c3aed;">📚 Key Terminology with Examples:</h4>
                     <table class="comparison-table">
                         <tr>
                             <th>Term</th>
                             <th>Definition</th>
+                            <th>Clinical Example</th>
                         </tr>
                         <tr>
                             <td><strong>Erythema</strong></td>
                             <td>Redness</td>
+                            <td>Red, warm skin around a wound site (possible infection); sunburn</td>
                         </tr>
                         <tr>
                             <td><strong>Ecchymosis</strong></td>
                             <td>Collection of blood in subcutaneous tissue (bruise)</td>
+                            <td>Purple discoloration on arm after IV attempt; bruising after fall</td>
                         </tr>
                         <tr>
                             <td><strong>Petechiae</strong></td>
                             <td>Hemorrhagic spots / capillary bleeding (tiny red dots)</td>
+                            <td>Tiny red dots that don't blanch; seen in low platelet count or severe coughing</td>
                         </tr>
                         <tr>
                             <td><strong>Cyanosis</strong></td>
                             <td>Bluish or grayish color</td>
+                            <td>Blue lips and nail beds in patient with low oxygen saturation</td>
                         </tr>
                         <tr>
                             <td><strong>Jaundice</strong></td>
                             <td>Yellow color</td>
+                            <td>Yellow sclera (eyes) and skin in patient with liver disease</td>
                         </tr>
                         <tr>
                             <td><strong>Pallor</strong></td>
                             <td>Paleness</td>
+                            <td>Pale skin and mucous membranes in anemic patient</td>
                         </tr>
                         <tr>
                             <td><strong>Diaphoresis</strong></td>
                             <td>Excessive perspiration (sweating)</td>
+                            <td>Profuse sweating in patient having chest pain or hypoglycemia</td>
                         </tr>
                         <tr>
                             <td><strong>Turgor</strong></td>
                             <td>Elasticity of skin</td>
+                            <td>Skin stays "tented" when pinched = poor turgor = dehydration</td>
                         </tr>
                         <tr>
                             <td><strong>Edema</strong></td>
                             <td>Excess fluid in tissues (swelling)</td>
+                            <td>Swollen ankles at end of day; pitting edema in CHF patient</td>
                         </tr>
                     </table>
                     <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
@@ -2868,7 +3621,7 @@
                         </ul>
                     </div>
 
-                    <h4 style="margin: 20px 0 10px; color: #ffd93d;">🔍 Components of Neuro Assessment:</h4>
+                    <h4 style="margin: 20px 0 10px; color: #7c3aed;">🔍 Components of Neuro Assessment:</h4>
                     <ul class="content-list">
                         <li>Mental status</li>
                         <li>Memory</li>
@@ -2885,34 +3638,51 @@
                         <tr>
                             <th>Level</th>
                             <th>Description</th>
+                            <th>Example</th>
                         </tr>
                         <tr>
                             <td><strong>Awake/Alert</strong></td>
                             <td>Fully conscious, responsive</td>
+                            <td>Patient answers questions appropriately, follows commands</td>
                         </tr>
                         <tr>
                             <td><strong>Lethargic</strong></td>
                             <td>Drowsy, easily aroused</td>
+                            <td>Patient drifts off but wakes when you call their name</td>
                         </tr>
                         <tr>
                             <td><strong>Stuporous</strong></td>
                             <td>Difficult to arouse, confused when awakened</td>
+                            <td>Patient only responds to painful stimuli; confused when aroused</td>
                         </tr>
                         <tr>
                             <td><strong>Comatose</strong></td>
                             <td>Cannot be aroused, unresponsive</td>
+                            <td>No response to verbal or painful stimuli</td>
                         </tr>
                     </table>
 
                     <div class="key-point tip">
-                        <div class="key-point-label">✅ Level of Awareness</div>
-                        <p>Orientation to: <strong>Time, Place, Person</strong></p>
+                        <div class="key-point-label">💡 Orientation Assessment</div>
+                        <p><strong>Level of Awareness:</strong> Orientation to <strong>Time, Place, Person</strong></p>
+                        <ul class="content-list">
+                            <li><strong>Person:</strong> "What is your name?" "Do you know who I am?"</li>
+                            <li><strong>Place:</strong> "Where are you right now?" "What hospital is this?"</li>
+                            <li><strong>Time:</strong> "What day is it?" "What month/year is it?"</li>
+                        </ul>
+                        <p style="margin-top: 10px;"><strong>Documentation example:</strong> "Patient is A&O x3" (alert and oriented to person, place, and time)</p>
                     </div>
 
                     <div class="key-point definition">
                         <div class="key-point-label">📌 Glasgow Coma Scale (GCS)</div>
                         <p>Standardized tool measuring: Eye opening, Verbal response, Motor response</p>
                         <p>Score range: 3-15 (lower = more severe impairment)</p>
+                        <ul class="content-list">
+                            <li><strong>15:</strong> Fully alert and oriented</li>
+                            <li><strong>13-14:</strong> Minor impairment</li>
+                            <li><strong>9-12:</strong> Moderate impairment</li>
+                            <li><strong>3-8:</strong> Severe impairment / coma</li>
+                        </ul>
                     </div>
                     <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
                 </div>
@@ -3018,6 +3788,63 @@
                         </ul>
                     </div>
                     <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Chapter 27 Wrap-Up -->
+            <div class="chapter-wrapup">
+                <div class="wrapup-header">
+                    <div class="wrapup-icon">🎯</div>
+                    <h3>Chapter 27 Wrap-Up: Health Assessment</h3>
+                </div>
+                <div class="wrapup-content">
+                    <div class="wrapup-box">
+                        <h4>📚 Key Takeaways</h4>
+                        <ul>
+                            <li>Subjective data = what the patient SAYS (symptoms); Objective data = what you can MEASURE (signs)</li>
+                            <li>Four types of assessment: Comprehensive, Ongoing, Focused, Emergency (COFE)</li>
+                            <li>Assessment techniques in order: Inspection → Palpation → Percussion → Auscultation (IPPA)</li>
+                            <li>EXCEPTION: Abdominal assessment = Inspection → Auscultation → Percussion → Palpation</li>
+                            <li>Sims' position is used for rectal and vaginal exams</li>
+                            <li>Palpation assesses turgor (skin elasticity) - important for dehydration assessment</li>
+                            <li>Wheezes are high-pitched, musical sounds indicating narrowed airways</li>
+                        </ul>
+                    </div>
+                    <div class="wrapup-box">
+                        <h4>🔑 Key Terms to Know</h4>
+                        <div class="wrapup-keyterms">
+                            <span class="wrapup-term">Subjective vs Objective</span>
+                            <span class="wrapup-term">IPPA</span>
+                            <span class="wrapup-term">Inspection</span>
+                            <span class="wrapup-term">Palpation</span>
+                            <span class="wrapup-term">Percussion</span>
+                            <span class="wrapup-term">Auscultation</span>
+                            <span class="wrapup-term">Sims' Position</span>
+                            <span class="wrapup-term">Turgor</span>
+                            <span class="wrapup-term">Erythema</span>
+                            <span class="wrapup-term">Cyanosis</span>
+                            <span class="wrapup-term">Wheezes</span>
+                            <span class="wrapup-term">Crackles</span>
+                            <span class="wrapup-term">Glasgow Coma Scale</span>
+                        </div>
+                    </div>
+                    <div class="wrapup-box">
+                        <h4>🩺 Integumentary Terms Quick Review</h4>
+                        <ul>
+                            <li><strong>Erythema</strong> = Redness</li>
+                            <li><strong>Cyanosis</strong> = Blue/gray color (low oxygen)</li>
+                            <li><strong>Jaundice</strong> = Yellow color (liver issues)</li>
+                            <li><strong>Pallor</strong> = Paleness (anemia)</li>
+                            <li><strong>Ecchymosis</strong> = Bruise</li>
+                            <li><strong>Petechiae</strong> = Tiny red dots (capillary bleeding)</li>
+                            <li><strong>Diaphoresis</strong> = Excessive sweating</li>
+                            <li><strong>Edema</strong> = Swelling from fluid</li>
+                        </ul>
+                    </div>
+                    <div class="wrapup-remember">
+                        <h4>💡 Remember for the Exam</h4>
+                        <p>For <strong>abdominal assessment</strong>, ALWAYS auscultate BEFORE palpating or percussing - touching can alter bowel sounds! The <strong>primary source</strong> of health history data is the <strong>PATIENT</strong>, not family. <strong>Sims' position</strong> (side-lying) = rectal/vaginal exams. <strong>Wheezes</strong> are musical and high-pitched; <strong>Rhonchi</strong> are low-pitched and snoring. <strong>GCS scores</strong> range from 3-15 (lower = worse).</p>
+                    </div>
                 </div>
             </div>
         </div>
