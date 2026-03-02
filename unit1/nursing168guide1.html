@@ -113,7 +113,7 @@
 
         .nav-tab.ch8 { border-left: 4px solid #00d4ff; }
         .nav-tab.ch9 { border-left: 4px solid #ff6b6b; }
-        .nav-tab.ch10 { border-left: 4px solid #ffd93d; }
+        .nav-tab.ch27 { border-left: 4px solid #ffd93d; }
         .nav-tab.vocab { border-left: 4px solid #a855f7; }
         .nav-tab.quiz { border-left: 4px solid #6bcb77; }
 
@@ -143,7 +143,7 @@
 
         .ch8-card { border-left-color: #00d4ff; }
         .ch9-card { border-left-color: #ff6b6b; }
-        .ch10-card { border-left-color: #ffd93d; }
+        .ch27-card { border-left-color: #ffd93d; }
 
         .chapter-card h2 {
             font-size: 1.5em;
@@ -666,7 +666,7 @@
 
         .filter-btn.ch8-filter.active { border-color: #00d4ff; }
         .filter-btn.ch9-filter.active { border-color: #ff6b6b; }
-        .filter-btn.ch10-filter.active { border-color: #ffd93d; }
+        .filter-btn.ch27-filter.active { border-color: #ffd93d; }
 
         .vocab-mode {
             display: none;
@@ -901,7 +901,7 @@
         <!-- Header -->
         <div class="header">
             <h1>📚 NUR168 Unit 1</h1>
-            <p class="subtitle">Nursing Roles: Communicator, Teacher, Counselor, Leader & Manager</p>
+            <p class="subtitle">Chapters 8, 9 & 27: Communication, Teaching & Counseling, Health Assessment</p>
         </div>
 
         <!-- Progress Tracker -->
@@ -919,7 +919,7 @@
         <div class="nav-tabs">
             <button class="nav-tab ch8 active" onclick="showSection('ch8')">💬 Ch 8: Communication</button>
             <button class="nav-tab ch9" onclick="showSection('ch9')">📖 Ch 9: Teaching & Counseling</button>
-            <button class="nav-tab ch10" onclick="showSection('ch10')">👔 Ch 10: Leadership</button>
+            <button class="nav-tab ch27" onclick="showSection('ch27')">🩺 Ch 27: Health Assessment</button>
             <button class="nav-tab vocab" onclick="showSection('vocab')">📖 Vocabulary</button>
             <button class="nav-tab quiz" onclick="showSection('quiz')">✏️ Practice Quiz</button>
         </div>
@@ -1716,469 +1716,466 @@
             </div>
         </div>
 
-        <!-- ==================== CHAPTER 10: LEADING, MANAGING, DELEGATING ==================== -->
-        <div id="ch10" class="content-section">
-            <div class="chapter-card ch10-card">
-                <h2>👔 Chapter 10: Leading, Managing, and Delegating</h2>
-                <p>Develop leadership skills essential for nursing practice</p>
+        <!-- ==================== CHAPTER 27: HEALTH ASSESSMENT ==================== -->
+        <div id="ch27" class="content-section">
+            <div class="chapter-card ch27-card">
+                <h2>🩺 Chapter 27: Health Assessment</h2>
+                <p>Master physical assessment techniques and health history collection</p>
             </div>
 
-            <!-- Leadership vs Management -->
+            <!-- Health Assessment Overview -->
             <div class="topic-box" onclick="toggleTopic(this)">
                 <div class="topic-header">
-                    <span>⚖️ Leadership vs Management</span>
+                    <span>📋 Health Assessment Overview</span>
                     <span class="expand-icon">+</span>
                 </div>
                 <div class="topic-content">
                     <div class="key-point definition">
-                        <div class="key-point-label">📌 Covey/Drucker Quote</div>
-                        <p style="font-size: 1.2em; text-align: center; padding: 15px;">
-                            "<strong>Management</strong> is doing things <em>right</em>;<br>
-                            <strong>Leadership</strong> is doing the <em>right things</em>."
-                        </p>
+                        <div class="key-point-label">📌 Definition</div>
+                        Health assessment involves <strong>collecting, validating, and analyzing data</strong> about a patient's health status.
                     </div>
 
                     <div class="quick-ref-grid">
                         <div class="quick-ref-card blue">
-                            <h4>👔 Leadership</h4>
-                            <p>Ability to direct or motivate a person/group to achieve goals</p>
+                            <h4>💭 Subjective Data</h4>
+                            <p>Based on patient experiences and perceptions</p>
+                            <p><em>Example: "I feel dizzy"</em></p>
                         </div>
                         <div class="quick-ref-card yellow">
-                            <h4>📋 Management</h4>
-                            <p>Planning, organizing, staffing, directing, controlling</p>
-                        </div>
-                    </div>
-
-                    <table class="comparison-table">
-                        <tr>
-                            <th>Type of Power</th>
-                            <th>Description</th>
-                            <th>Example</th>
-                        </tr>
-                        <tr>
-                            <td><strong>Explicit Power</strong></td>
-                            <td>Power by virtue of POSITION</td>
-                            <td>Charge nurse, manager</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Implied Power</strong></td>
-                            <td>Power due to OTHER factors (personality)</td>
-                            <td>Class bully, charismatic colleague</td>
-                        </tr>
-                    </table>
-
-                    <div class="sticky-note">
-                        <h4>💡 Test Tip!</h4>
-                        <p>A class bully is an example of <strong>IMPLIED</strong> power (personality), not explicit (they don't have an official position)!</p>
-                    </div>
-                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
-                </div>
-            </div>
-
-            <!-- Leadership Qualities & Skills -->
-            <div class="topic-box" onclick="toggleTopic(this)">
-                <div class="topic-header">
-                    <span>⭐ Leadership Qualities & Skills</span>
-                    <span class="expand-icon">+</span>
-                </div>
-                <div class="topic-content">
-                    <div class="quick-ref-grid">
-                        <div class="quick-ref-card blue">
-                            <h4>✨ Qualities</h4>
-                            <ul class="content-list">
-                                <li>Charismatic</li>
-                                <li>Dynamic</li>
-                                <li>Enthusiastic</li>
-                                <li>Poised & confident</li>
-                                <li>Self-directed</li>
-                                <li>Flexible</li>
-                                <li>Knowledgeable</li>
-                                <li>Politically aware</li>
-                            </ul>
-                        </div>
-                        <div class="quick-ref-card green">
-                            <h4>🛠️ Skills</h4>
-                            <ul class="content-list">
-                                <li>Commitment to excellence</li>
-                                <li>Problem-solving</li>
-                                <li>Passion for work</li>
-                                <li>Trustworthiness & integrity</li>
-                                <li>Respectfulness</li>
-                                <li>Accessibility</li>
-                                <li>Empathy & caring</li>
-                                <li>Promotes staff growth</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
-                </div>
-            </div>
-
-            <!-- Leadership Styles -->
-            <div class="topic-box" onclick="toggleTopic(this)">
-                <div class="topic-header">
-                    <span>🎭 Leadership Styles</span>
-                    <span class="expand-icon">+</span>
-                </div>
-                <div class="topic-content">
-                    <table class="comparison-table">
-                        <tr>
-                            <th>Style</th>
-                            <th>Characteristics</th>
-                        </tr>
-                        <tr>
-                            <td><strong>Autocratic</strong></td>
-                            <td>Leader assumes CONTROL; firm, self-assured; center of attention</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Democratic</strong></td>
-                            <td>Sense of EQUALITY among leader and participants</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Laissez-faire</strong></td>
-                            <td>Leader RELINQUISHES power to the group; hands-off</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Servant</strong></td>
-                            <td>Leader serves the team; focuses on others' growth</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Transactional</strong></td>
-                            <td>Focus on exchanges/transactions; rewards/consequences</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Transformational</strong></td>
-                            <td>Creates REVOLUTIONARY change; charismatic; inspires vision</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Quantum</strong></td>
-                            <td>Emphasizes interconnectedness and relationships</td>
-                        </tr>
-                    </table>
-
-                    <div class="mnemonic-box">
-                        <h4>🧠 Five Key Practices for Servant Leaders</h4>
-                        <div class="mnemonic-letters">
-                            <div class="mnemonic-letter"><span>D</span>Develop vision</div>
-                            <div class="mnemonic-letter"><span>L</span>Listen & learn first</div>
-                            <div class="mnemonic-letter"><span>E</span>Envision others' greatness</div>
-                            <div class="mnemonic-letter"><span>G</span>Give away power</div>
-                            <div class="mnemonic-letter"><span>B</span>Build community</div>
-                        </div>
-                    </div>
-                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
-                </div>
-            </div>
-
-            <!-- Magnet Status -->
-            <div class="topic-box" onclick="toggleTopic(this)">
-                <div class="topic-header">
-                    <span>🧲 Magnet Status Recognition</span>
-                    <span class="expand-icon">+</span>
-                </div>
-                <div class="topic-content">
-                    <div class="key-point definition">
-                        <div class="key-point-label">📌 Five Model Components</div>
-                        <ol style="padding-left: 20px;">
-                            <li style="margin: 10px 0;"><strong>Transformational Leadership</strong></li>
-                            <li style="margin: 10px 0;"><strong>Structural Empowerment</strong></li>
-                            <li style="margin: 10px 0;"><strong>Exemplary Professional Practice</strong></li>
-                            <li style="margin: 10px 0;"><strong>New Knowledge, Innovation & Improvements</strong></li>
-                            <li style="margin: 10px 0;"><strong>Empirical Quality Results</strong></li>
-                        </ol>
-                    </div>
-
-                    <div class="key-point tip">
-                        <div class="key-point-label">✅ Benefits of Magnet Recognition</div>
-                        <ul class="content-list">
-                            <li>Attract and retain top talent</li>
-                            <li>Improve care, safety, satisfaction</li>
-                            <li>Foster collaborative culture</li>
-                            <li>Advance nursing standards</li>
-                            <li>Grow business success</li>
-                        </ul>
-                    </div>
-                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
-                </div>
-            </div>
-
-            <!-- Management Structures -->
-            <div class="topic-box" onclick="toggleTopic(this)">
-                <div class="topic-header">
-                    <span>🏢 Management Structures</span>
-                    <span class="expand-icon">+</span>
-                </div>
-                <div class="topic-content">
-                    <div class="quick-ref-grid">
-                        <div class="quick-ref-card pink">
-                            <h4>🔝 Centralized</h4>
-                            <p>Senior managers make decisions with LITTLE input from the group</p>
-                        </div>
-                        <div class="quick-ref-card green">
-                            <h4>🌐 Decentralized</h4>
-                            <p>Decisions made by those MOST KNOWLEDGEABLE about the issues</p>
-                            <p><em>Nurses are intimately involved in patient care decisions</em></p>
-                        </div>
-                    </div>
-                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
-                </div>
-            </div>
-
-            <!-- Conflict Management -->
-            <div class="topic-box" onclick="toggleTopic(this)">
-                <div class="topic-header">
-                    <span>⚡ Conflict Management</span>
-                    <span class="expand-icon">+</span>
-                </div>
-                <div class="topic-content">
-                    <div class="key-point definition">
-                        <div class="key-point-label">📌 Conflict Management vs Engagement</div>
-                        <ul class="content-list">
-                            <li><strong>Conflict Management:</strong> Process to work through conflicts; minimizes negative effects</li>
-                            <li><strong>Conflict Engagement:</strong> Teaches skills to perform WELL in face of conflict (not avoid it)</li>
-                        </ul>
-                    </div>
-
-                    <h4 style="margin: 20px 0 10px;">Conflict Resolution Strategies:</h4>
-                    <table class="comparison-table">
-                        <tr>
-                            <th>Strategy</th>
-                            <th>Description</th>
-                        </tr>
-                        <tr>
-                            <td><strong>Avoiding</strong></td>
-                            <td>Ignoring or withdrawing from conflict</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Collaborating</strong></td>
-                            <td>Working together for win-win solution</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Competing</strong></td>
-                            <td>Win-lose approach; one party "wins"</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Compromising</strong></td>
-                            <td>Both parties give up something</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Accommodating</strong></td>
-                            <td>Giving in to other party's wishes</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Smoothing</strong></td>
-                            <td>Complimenting all parties to prevent outbursts; focus on agreement</td>
-                        </tr>
-                    </table>
-
-                    <div class="sticky-note">
-                        <h4>💡 Test Tip!</h4>
-                        <p><strong>Smoothing</strong> = Complimenting nurses in conflict to prevent emotional outbursts</p>
-                    </div>
-                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
-                </div>
-            </div>
-
-            <!-- Lewin's Theory of Change -->
-            <div class="topic-box" onclick="toggleTopic(this)">
-                <div class="topic-header">
-                    <span>🔄 Lewin's Theory of Change</span>
-                    <span class="expand-icon">+</span>
-                </div>
-                <div class="topic-content">
-                    <div class="mnemonic-box">
-                        <h4>🧠 MNEMONIC: "UMR" - Unfreeze, Move, Refreeze (like ice cream!)</h4>
-                        <div class="mnemonic-letters">
-                            <div class="mnemonic-letter"><span>U</span>Unfreezing<br><small>Need for change recognized</small></div>
-                            <div class="mnemonic-letter"><span>M</span>Moving<br><small>Change initiated after planning</small></div>
-                            <div class="mnemonic-letter"><span>R</span>Refreezing<br><small>Change becomes operational</small></div>
+                            <h4>📏 Objective Data</h4>
+                            <p>Measurable and directly observed</p>
+                            <p><em>Example: BP 140/90, Temp 101°F</em></p>
                         </div>
                     </div>
 
                     <div class="key-point tip">
-                        <div class="key-point-label">✅ Eight-Step Process for Planned Change</div>
-                        <ol style="padding-left: 20px; font-size: 0.95em;">
-                            <li>Recognize symptoms, collect data</li>
-                            <li>Identify the problem</li>
-                            <li>Analyze alternative solutions</li>
-                            <li>Select a course of action</li>
-                            <li>Plan for the change</li>
-                            <li>Implement the change</li>
-                            <li>Evaluate effects</li>
-                            <li>Stabilize the change</li>
-                        </ol>
+                        <div class="key-point-label">✅ Two Main Components</div>
+                        <ul class="content-list">
+                            <li><strong>Health History:</strong> Collection of SUBJECTIVE information</li>
+                            <li><strong>Physical Assessment:</strong> Collection of OBJECTIVE data</li>
+                        </ul>
+                    </div>
+
+                    <div class="sticky-note">
+                        <h4>💡 Test Tip!</h4>
+                        <p><strong>Subjective</strong> = what the patient SAYS (symptoms)<br>
+                        <strong>Objective</strong> = what you can SEE/MEASURE (signs)</p>
                     </div>
                     <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
                 </div>
             </div>
 
-            <!-- Resistance to Change -->
+            <!-- Types of Health Assessments -->
             <div class="topic-box" onclick="toggleTopic(this)">
                 <div class="topic-header">
-                    <span>🛑 Resistance to Change</span>
+                    <span>📊 Types of Health Assessments</span>
                     <span class="expand-icon">+</span>
                 </div>
                 <div class="topic-content">
-                    <div class="quick-ref-grid">
-                        <div class="quick-ref-card pink">
-                            <h4>❓ Why People Resist</h4>
-                            <ul class="content-list">
-                                <li>Threat to self</li>
-                                <li>Lack of understanding</li>
-                                <li>Limited tolerance for change</li>
-                                <li>Disagreement about benefits</li>
-                                <li>Fear of increased responsibility</li>
-                            </ul>
-                        </div>
-                        <div class="quick-ref-card green">
-                            <h4>✅ Overcoming Resistance</h4>
-                            <ul class="content-list">
-                                <li>Explain change in simple language</li>
-                                <li>List advantages</li>
-                                <li>Relate to existing beliefs/values</li>
-                                <li>Provide open communication</li>
-                                <li>Indicate how change will be evaluated</li>
-                                <li>Introduce change GRADUALLY</li>
-                                <li>Provide incentives</li>
-                            </ul>
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Type</th>
+                            <th>When Used</th>
+                            <th>Scope</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Comprehensive</strong></td>
+                            <td>Upon admission to facility</td>
+                            <td>Complete head-to-toe</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ongoing/Partial</strong></td>
+                            <td>At regular intervals</td>
+                            <td>Focused on systems of concern</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Focused</strong></td>
+                            <td>To assess specific problem</td>
+                            <td>One body system or concern</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Emergency</strong></td>
+                            <td>Life-threatening situations</td>
+                            <td>ABCs and vital functions</td>
+                        </tr>
+                    </table>
+
+                    <div class="mnemonic-box">
+                        <h4>🧠 MNEMONIC: "COFE" - Types of Assessment</h4>
+                        <div class="mnemonic-letters">
+                            <div class="mnemonic-letter"><span>C</span>Comprehensive</div>
+                            <div class="mnemonic-letter"><span>O</span>Ongoing</div>
+                            <div class="mnemonic-letter"><span>F</span>Focused</div>
+                            <div class="mnemonic-letter"><span>E</span>Emergency</div>
                         </div>
                     </div>
                     <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
                 </div>
             </div>
 
-            <!-- SWOT vs SOAR -->
+            <!-- Health History Factors -->
             <div class="topic-box" onclick="toggleTopic(this)">
                 <div class="topic-header">
-                    <span>📊 SWOT vs SOAR Analysis</span>
-                    <span class="expand-icon">+</span>
-                </div>
-                <div class="topic-content">
-                    <div class="quick-ref-grid">
-                        <div class="quick-ref-card blue">
-                            <h4>📈 SWOT Analysis</h4>
-                            <p><strong>S</strong>trengths<br>
-                            <strong>W</strong>eaknesses<br>
-                            <strong>O</strong>pportunities<br>
-                            <strong>T</strong>hreats</p>
-                            <p><em>Determines a plan of action</em></p>
-                        </div>
-                        <div class="quick-ref-card yellow">
-                            <h4>🚀 SOAR Analysis</h4>
-                            <p><strong>S</strong>trengths<br>
-                            <strong>O</strong>pportunities<br>
-                            <strong>A</strong>spirations<br>
-                            <strong>R</strong>esults</p>
-                            <p><em>Creates shared vision for the future</em></p>
-                        </div>
-                    </div>
-                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
-                </div>
-            </div>
-
-            <!-- Delegation -->
-            <div class="topic-box" onclick="toggleTopic(this)">
-                <div class="topic-header">
-                    <span>📋 ANA Principles for Delegation</span>
+                    <span>📝 Health History Components</span>
                     <span class="expand-icon">+</span>
                 </div>
                 <div class="topic-content">
                     <div class="key-point important">
-                        <div class="key-point-label">⚠️ RN Cannot Delegate These:</div>
-                        <ul class="content-list">
-                            <li>Initial patient assessment</li>
-                            <li>Discharge planning</li>
-                            <li>Health education</li>
-                            <li>Care planning</li>
-                            <li>Triage</li>
-                            <li>Interpretation of patient data</li>
-                            <li>Care of invasive lines</li>
-                            <li>Administering parenteral medications</li>
-                        </ul>
-                    </div>
-
-                    <div class="key-point tip">
-                        <div class="key-point-label">✅ RN CAN Delegate:</div>
-                        <ul class="content-list">
-                            <li>Assistance with basic care activities</li>
-                            <li>Collecting vital signs</li>
-                            <li>Simple dressing changes</li>
-                            <li>Transfers</li>
-                            <li>Postmortem care</li>
-                        </ul>
+                        <div class="key-point-label">⚠️ Remember!</div>
+                        The <strong>PRIMARY source</strong> of data for health history is the <strong>PATIENT</strong> - not family members!
                     </div>
 
                     <div class="mnemonic-box">
-                        <h4>🧠 5 Considerations When Delegating</h4>
+                        <h4>🧠 MNEMONIC: "BRHPFF" - Health History Factors</h4>
                         <div class="mnemonic-letters">
-                            <div class="mnemonic-letter"><span>S</span>Stability of condition</div>
-                            <div class="mnemonic-letter"><span>C</span>Complexity of activity</div>
-                            <div class="mnemonic-letter"><span>P</span>Potential for harm</div>
-                            <div class="mnemonic-letter"><span>P</span>Predictability of outcome</div>
-                            <div class="mnemonic-letter"><span>O</span>Overall patient needs</div>
+                            <div class="mnemonic-letter"><span>B</span>Biographical data</div>
+                            <div class="mnemonic-letter"><span>R</span>Reason for seeking care</div>
+                            <div class="mnemonic-letter"><span>H</span>History of present concern</div>
+                            <div class="mnemonic-letter"><span>P</span>Past health history</div>
+                            <div class="mnemonic-letter"><span>F</span>Family health history</div>
+                            <div class="mnemonic-letter"><span>F</span>Functional health</div>
                         </div>
                     </div>
-
-                    <div class="key-point definition">
-                        <div class="key-point-label">📌 Remember!</div>
-                        RN is RESPONSIBLE and ACCOUNTABLE for nursing practice and supervises ANY AP providing direct patient care.
-                    </div>
                     <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
                 </div>
             </div>
 
-            <!-- Clinical Nurse Leader -->
+            <!-- Preparing Patient & Environment -->
             <div class="topic-box" onclick="toggleTopic(this)">
                 <div class="topic-header">
-                    <span>🩺 Clinical Nurse Leader (CNL) Role</span>
-                    <span class="expand-icon">+</span>
-                </div>
-                <div class="topic-content">
-                    <div class="key-point definition">
-                        <div class="key-point-label">📌 CNL Overview</div>
-                        <ul class="content-list">
-                            <li>Created by AACN as a leadership role</li>
-                            <li>Works collaboratively with health care team</li>
-                            <li>Facilitates, coordinates, oversees patient care</li>
-                            <li>Communicates clearly with professionals</li>
-                            <li>Integrates evidence-based practices</li>
-                            <li>Evaluates patient risks and outcomes</li>
-                            <li>Functions as patient advocate, educator, provider</li>
-                        </ul>
-                    </div>
-                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
-                </div>
-            </div>
-
-            <!-- Resilience & Burnout -->
-            <div class="topic-box" onclick="toggleTopic(this)">
-                <div class="topic-header">
-                    <span>💪 Resilience & Preventing Burnout</span>
+                    <span>🏥 Preparing Patient & Environment</span>
                     <span class="expand-icon">+</span>
                 </div>
                 <div class="topic-content">
                     <div class="quick-ref-grid">
-                        <div class="quick-ref-card green">
-                            <h4>🌟 Developing Resilience</h4>
+                        <div class="quick-ref-card blue">
+                            <h4>👤 Patient Preparation</h4>
                             <ul class="content-list">
-                                <li>Begin/end day with gratitude</li>
-                                <li>Practice mindfulness</li>
-                                <li>Appreciate human limitations</li>
-                                <li>Value connectedness & presence</li>
-                                <li>Stretch and deep breathe</li>
-                                <li>Reflect on what brings joy</li>
-                                <li>Keep positive, hopeful outlook</li>
+                                <li>Consider physiologic & psychological needs</li>
+                                <li>Explain the process thoroughly</li>
+                                <li>Explain it should NOT be painful</li>
+                                <li>Maintain privacy with drapes</li>
+                                <li>Answer questions honestly</li>
+                            </ul>
+                        </div>
+                        <div class="quick-ref-card yellow">
+                            <h4>🏠 Environment Preparation</h4>
+                            <ul class="content-list">
+                                <li>Ensure patient is pain-free as possible</li>
+                                <li>Prepare examination table</li>
+                                <li>Provide gown and drape</li>
+                                <li>Gather supplies/instruments</li>
+                                <li>Comfortable room temperature</li>
+                                <li>Curtain/screen for privacy</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">✅ Assessment Considerations</div>
+                        <ul class="content-list">
+                            <li>Lifespan considerations</li>
+                            <li>Cultural considerations and sensitivity</li>
+                            <li>Patient preparation</li>
+                            <li>Environmental preparations</li>
+                        </ul>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Four Assessment Techniques -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>🔍 Four Assessment Techniques (IPPA)</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="mnemonic-box">
+                        <h4>🧠 MNEMONIC: "IPPA" - Assessment Techniques in Order</h4>
+                        <div class="mnemonic-letters">
+                            <div class="mnemonic-letter"><span>I</span>Inspection</div>
+                            <div class="mnemonic-letter"><span>P</span>Palpation</div>
+                            <div class="mnemonic-letter"><span>P</span>Percussion</div>
+                            <div class="mnemonic-letter"><span>A</span>Auscultation</div>
+                        </div>
+                    </div>
+
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Technique</th>
+                            <th>Method</th>
+                            <th>What It Assesses</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Inspection</strong></td>
+                            <td>Deliberate, purposeful observation</td>
+                            <td>Size, color, shape, position, symmetry</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Palpation</strong></td>
+                            <td>Using sense of TOUCH</td>
+                            <td>Temperature, turgor, texture, moisture, vibrations, shape</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Percussion</strong></td>
+                            <td>Striking one object against another</td>
+                            <td>Location, shape, size, density of tissues</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Auscultation</strong></td>
+                            <td>Listening with stethoscope</td>
+                            <td>Pitch, loudness, quality, duration of sounds</td>
+                        </tr>
+                    </table>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ EXCEPTION for Abdomen!</div>
+                        <p>For abdominal assessment, the order is: <strong>Inspection → Auscultation → Percussion → Palpation</strong></p>
+                        <p><em>(Auscultate BEFORE percussion/palpation to avoid altering bowel sounds!)</em></p>
+                    </div>
+
+                    <div class="sticky-note">
+                        <h4>💡 Test Tip!</h4>
+                        <p><strong>Palpation</strong> assesses TURGOR (skin elasticity) - this is commonly tested!</p>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Patient Positions -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>🛏️ Patient Positions for Assessment</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Position</th>
+                            <th>Used to Assess</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Standing</strong></td>
+                            <td>Posture, balance, gait</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sitting</strong></td>
+                            <td>Upper body visualization</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Supine</strong></td>
+                            <td>Relaxation of abdominal muscles; head, neck, thorax, heart, breasts, abdomen, extremities</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dorsal Recumbent</strong></td>
+                            <td>Same as supine; for patients having difficulty maintaining supine</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sims' (Side-lying)</strong></td>
+                            <td>Rectum or vagina</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Prone</strong></td>
+                            <td>Hip joint and posterior thorax</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lithotomy</strong></td>
+                            <td>Female genitalia and rectum</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Knee-Chest</strong></td>
+                            <td>Anus and rectum</td>
+                        </tr>
+                    </table>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ High-Yield!</div>
+                        <strong>Sims' position</strong> is used for rectal and vaginal assessment - commonly tested!
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Integumentary Assessment -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>🧴 Integumentary Assessment (Skin)</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Risk Factors to Identify</div>
+                        <ul class="content-list">
+                            <li>History of rashes, lesions, bruising, allergies</li>
+                            <li>Exposure to sun, chemicals</li>
+                            <li>Piercings or tattoos</li>
+                            <li>Degree of mobility</li>
+                            <li>Nutritional status</li>
+                        </ul>
+                    </div>
+
+                    <h4 style="margin: 20px 0 10px; color: #ffd93d;">📚 Key Terminology:</h4>
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Term</th>
+                            <th>Definition</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Erythema</strong></td>
+                            <td>Redness</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ecchymosis</strong></td>
+                            <td>Collection of blood in subcutaneous tissue (bruise)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Petechiae</strong></td>
+                            <td>Hemorrhagic spots / capillary bleeding (tiny red dots)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cyanosis</strong></td>
+                            <td>Bluish or grayish color</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Jaundice</strong></td>
+                            <td>Yellow color</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pallor</strong></td>
+                            <td>Paleness</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Diaphoresis</strong></td>
+                            <td>Excessive perspiration (sweating)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Turgor</strong></td>
+                            <td>Elasticity of skin</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Edema</strong></td>
+                            <td>Excess fluid in tissues (swelling)</td>
+                        </tr>
+                    </table>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Thorax and Lungs -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>🫁 Thorax and Lung Assessment</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Risk Factors to Identify</div>
+                        <ul class="content-list">
+                            <li>History of trauma or lung surgery</li>
+                            <li>Number of pillows used when sleeping (orthopnea)</li>
+                            <li>Cough, chest pain, allergies</li>
+                            <li>Exposure to chemicals or smoke</li>
+                        </ul>
+                    </div>
+
+                    <h4 style="margin: 20px 0 10px; color: #ffd93d;">🔊 Lung Sounds:</h4>
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card green">
+                            <h4>✅ Normal Sounds</h4>
+                            <ul class="content-list">
+                                <li><strong>Bronchial/Tubular:</strong> Over trachea</li>
+                                <li><strong>Bronchovesicular:</strong> Over main bronchi</li>
+                                <li><strong>Vesicular:</strong> Over lung periphery</li>
                             </ul>
                         </div>
                         <div class="quick-ref-card pink">
-                            <h4>⚠️ Clinician Burnout</h4>
+                            <h4>⚠️ Adventitious (Abnormal)</h4>
                             <ul class="content-list">
-                                <li>Chronic job stress</li>
-                                <li>Emotional exhaustion</li>
-                                <li>Depersonalization</li>
-                                <li>Loss of professional efficacy</li>
-                                <li>Threatens quality goals</li>
-                                <li>High personal & economic costs</li>
+                                <li><strong>Wheezes:</strong> Musical, high-pitched, squeaking</li>
+                                <li><strong>Rhonchi:</strong> Low-pitched, snoring, rumbling</li>
+                                <li><strong>Crackles:</strong> Popping, bubbling (like hair rubbing)</li>
+                                <li><strong>Stridor:</strong> High-pitched, crowing (airway obstruction)</li>
+                                <li><strong>Friction Rub:</strong> Grating sound</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ Test Alert!</div>
+                        <strong>Wheezes</strong> = musical, squeaking, HIGH-PITCHED sound (narrowed airways)
+                    </div>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">✅ Older Adult Variations</div>
+                        <ul class="content-list">
+                            <li>Increased anteroposterior chest diameter</li>
+                            <li>Increased dorsal spinal curve (kyphosis)</li>
+                            <li>Decreased thoracic expansion</li>
+                            <li>Use of accessory muscles to exhale</li>
+                        </ul>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Cardiovascular Assessment -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>❤️ Cardiovascular & Peripheral Vascular Assessment</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Risk Factors to Identify</div>
+                        <ul class="content-list">
+                            <li>History of chest pain, palpitations, dizziness</li>
+                            <li>Swelling in ankles or feet</li>
+                            <li>Medications</li>
+                            <li>Personal or family history of heart disease</li>
+                            <li>Type and amount of exercise</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">✅ What to Assess</div>
+                        <ul class="content-list">
+                            <li>Carotid arteries</li>
+                            <li>Heart sounds</li>
+                            <li>Peripheral pulses</li>
+                            <li>Neurovascular status</li>
+                        </ul>
+                    </div>
+
+                    <h4 style="margin: 20px 0 10px; color: #00d4ff;">🔊 Sound Characteristics (Auscultation):</h4>
+                    <div class="mnemonic-box">
+                        <h4>🧠 "PLQD" - Sound Characteristics</h4>
+                        <div class="mnemonic-letters">
+                            <div class="mnemonic-letter"><span>P</span>Pitch<br><small>High to low</small></div>
+                            <div class="mnemonic-letter"><span>L</span>Loudness<br><small>Soft to loud</small></div>
+                            <div class="mnemonic-letter"><span>Q</span>Quality<br><small>Gurgling, swishing</small></div>
+                            <div class="mnemonic-letter"><span>D</span>Duration<br><small>Short, medium, long</small></div>
+                        </div>
+                    </div>
+
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card blue">
+                            <h4>👶 Infant/Children Variations</h4>
+                            <ul class="content-list">
+                                <li>Visible cardiac pulsation (thin chest)</li>
+                                <li>Sinus dysrhythmia (normal!)</li>
+                                <li>S3 present in 1/3 of children</li>
+                                <li>More rapid heart rate until age 8</li>
+                            </ul>
+                        </div>
+                        <div class="quick-ref-card yellow">
+                            <h4>👴 Older Adult Variations</h4>
+                            <ul class="content-list">
+                                <li>Difficult-to-palpate apical pulse</li>
+                                <li>Difficult-to-palpate distal arteries</li>
+                                <li>Prominent, tortuous vessels</li>
+                                <li>Increased BP</li>
+                                <li>Widening pulse pressure</li>
                             </ul>
                         </div>
                     </div>
@@ -2186,20 +2183,243 @@
                 </div>
             </div>
 
-            <!-- Developing Leadership -->
+            <!-- Abdominal Assessment -->
             <div class="topic-box" onclick="toggleTopic(this)">
                 <div class="topic-header">
-                    <span>📈 Developing Leadership Responsibilities</span>
+                    <span>🔴 Abdominal Assessment</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ Critical Order!</div>
+                        <p style="font-size: 1.2em; text-align: center;">
+                            <strong>Inspection → Auscultation → Percussion → Palpation</strong>
+                        </p>
+                        <p style="text-align: center;"><em>Auscultate BEFORE touching to avoid altering bowel sounds!</em></p>
+                    </div>
+
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Risk Factors to Identify</div>
+                        <ul class="content-list">
+                            <li>Abdominal pain, indigestion, nausea</li>
+                            <li>Changes in bowel habits</li>
+                            <li>Appetite changes</li>
+                            <li>Alcohol ingestion</li>
+                            <li>Menstrual history</li>
+                        </ul>
+                    </div>
+
+                    <h4 style="margin: 20px 0 10px; color: #ffd93d;">📍 Four Quadrants:</h4>
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card blue">
+                            <h4>RUQ (Right Upper)</h4>
+                            <p>Liver, gallbladder, duodenum, right kidney</p>
+                        </div>
+                        <div class="quick-ref-card pink">
+                            <h4>LUQ (Left Upper)</h4>
+                            <p>Stomach, spleen, left kidney, pancreas</p>
+                        </div>
+                        <div class="quick-ref-card yellow">
+                            <h4>RLQ (Right Lower)</h4>
+                            <p>Appendix, right ovary, ascending colon</p>
+                        </div>
+                        <div class="quick-ref-card green">
+                            <h4>LLQ (Left Lower)</h4>
+                            <p>Left ovary, descending colon, sigmoid</p>
+                        </div>
+                    </div>
+
+                    <h4 style="margin: 20px 0 10px; color: #ffd93d;">🔍 Characteristics of Masses (Palpation):</h4>
+                    <ul class="content-list">
+                        <li>Shape</li>
+                        <li>Size</li>
+                        <li>Consistency</li>
+                        <li>Surface</li>
+                        <li>Mobility</li>
+                        <li>Tenderness</li>
+                    </ul>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">✅ Age Variations</div>
+                        <ul class="content-list">
+                            <li><strong>Newborns:</strong> Umbilical cord present; dries and falls off in first few weeks</li>
+                            <li><strong>Children < 5:</strong> "Pot-belly" is normal; visible peristaltic waves</li>
+                            <li><strong>Older Adults:</strong> Decreased bowel sounds, decreased tone, fat accumulation</li>
+                        </ul>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Neurological Assessment -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>🧠 Neurological Assessment</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Risk Factors to Identify</div>
+                        <ul class="content-list">
+                            <li>History of numbness, tingling, seizures, trembling</li>
+                            <li>Headaches or dizziness</li>
+                            <li>Trauma to head or spine</li>
+                            <li>History of HTN or stroke</li>
+                            <li>Changes in vision, hearing, taste, smell</li>
+                            <li>History of diabetes or cardiovascular disease</li>
+                            <li>Alcohol and medication use</li>
+                        </ul>
+                    </div>
+
+                    <h4 style="margin: 20px 0 10px; color: #ffd93d;">🔍 Components of Neuro Assessment:</h4>
+                    <ul class="content-list">
+                        <li>Mental status</li>
+                        <li>Memory</li>
+                        <li>Emotional status</li>
+                        <li>Cognitive abilities and behavior</li>
+                        <li>Cerebellar function (motor, coordination, balance)</li>
+                        <li>Cranial nerve function</li>
+                        <li>Motor and sensory function</li>
+                        <li>Reflexes</li>
+                    </ul>
+
+                    <h4 style="margin: 20px 0 10px; color: #00d4ff;">🧠 Level of Consciousness:</h4>
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Level</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Awake/Alert</strong></td>
+                            <td>Fully conscious, responsive</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lethargic</strong></td>
+                            <td>Drowsy, easily aroused</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Stuporous</strong></td>
+                            <td>Difficult to arouse, confused when awakened</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Comatose</strong></td>
+                            <td>Cannot be aroused, unresponsive</td>
+                        </tr>
+                    </table>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">✅ Level of Awareness</div>
+                        <p>Orientation to: <strong>Time, Place, Person</strong></p>
+                    </div>
+
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Glasgow Coma Scale (GCS)</div>
+                        <p>Standardized tool measuring: Eye opening, Verbal response, Motor response</p>
+                        <p>Score range: 3-15 (lower = more severe impairment)</p>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Musculoskeletal Assessment -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>💪 Musculoskeletal Assessment</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Risk Factors to Identify</div>
+                        <ul class="content-list">
+                            <li>Trauma, arthritis, neurologic disorders</li>
+                            <li>History of pain or swelling in muscles/joints</li>
+                            <li>Frequency and type of exercise</li>
+                            <li>Dietary intake of calcium</li>
+                            <li>Smoking history</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">✅ Assessment Methods</div>
+                        <p>Use <strong>Inspection</strong> and <strong>Palpation</strong> for musculoskeletal assessment</p>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Equipment & General Survey -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>🔧 Equipment & General Survey</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card blue">
+                            <h4>🔧 Equipment Needed</h4>
+                            <ul class="content-list">
+                                <li>Thermometer</li>
+                                <li>Sphygmomanometer (BP cuff)</li>
+                                <li>Scale</li>
+                                <li>Flashlight/penlight</li>
+                                <li>Stethoscope</li>
+                                <li>Metric tape measure & ruler</li>
+                                <li>Eye chart</li>
+                                <li>Watch with second hand</li>
+                            </ul>
+                        </div>
+                        <div class="quick-ref-card green">
+                            <h4>📊 General Survey Includes</h4>
+                            <ul class="content-list">
+                                <li>General appearance</li>
+                                <li>Vital signs</li>
+                                <li>Height</li>
+                                <li>Weight</li>
+                                <li>Waist circumference</li>
+                                <li>BMI calculation</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Nurse's Role in Diagnostics -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>👩‍⚕️ Nurse's Role in Diagnostic Procedures</span>
                     <span class="expand-icon">+</span>
                 </div>
                 <div class="topic-content">
                     <ul class="content-list">
-                        <li><strong>Knowledge of administrative structure</strong></li>
-                        <li><strong>Mentorship:</strong> Experienced nurse guides less experienced</li>
-                        <li><strong>Preceptorship:</strong> Clinical teaching role</li>
-                        <li><strong>Professional organizations:</strong> Participate actively</li>
-                        <li><strong>Continuing education:</strong> Never stop learning</li>
+                        <li>Assist before, during, and after diagnostic tests</li>
+                        <li>Complete testing as prescribed</li>
+                        <li>Witness the patient's consent</li>
+                        <li>Schedule the test</li>
+                        <li>Prepare the patient physically and emotionally</li>
+                        <li>Provide care and teaching after the test</li>
+                        <li>Dispose of used equipment</li>
+                        <li>Transport specimens</li>
                     </ul>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Documentation -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>📝 Documentation Purposes</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Purposes of Documentation</div>
+                        <ul class="content-list">
+                            <li>Identify actual and potential health problems</li>
+                            <li>Plan appropriate care</li>
+                            <li>Evaluate patient's responses to treatment</li>
+                        </ul>
+                    </div>
                     <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
                 </div>
             </div>
@@ -2229,7 +2449,7 @@
                 <button class="filter-btn active" onclick="filterByChapter('all')">All</button>
                 <button class="filter-btn ch8-filter" onclick="filterByChapter('ch8')">Ch 8</button>
                 <button class="filter-btn ch9-filter" onclick="filterByChapter('ch9')">Ch 9</button>
-                <button class="filter-btn ch10-filter" onclick="filterByChapter('ch10')">Ch 10</button>
+                <button class="filter-btn ch27-filter" onclick="filterByChapter('ch27')">Ch 27</button>
             </div>
 
             <!-- Flashcard Mode -->
@@ -2373,45 +2593,51 @@
                 rationale: "Long-term counseling is appropriate for DEVELOPMENTAL crises (life stage transitions). Short-term counseling is for SITUATIONAL crises (acute events)."
             },
             {
-                question: "A class bully who gets their way by intimidating classmates is an example of explicit power.",
+                question: "A patient's report of dizziness would be an example of subjective data.",
                 options: ["True", "False"],
-                correct: 1,
-                rationale: "A class bully is an example of IMPLIED power (due to personality/intimidation), not explicit power. Explicit power comes from an official position."
-            },
-            {
-                question: "Which leadership style describes a nurse leader who assumes control over decisions and activities of the group?",
-                options: ["Autocratic", "Democratic", "Laissez-faire", "Transformational"],
                 correct: 0,
-                rationale: "Autocratic leadership involves the leader assuming control and making decisions. Democratic involves equality. Laissez-faire is hands-off. Transformational creates revolutionary change."
+                rationale: "Subjective data is known only by the patient, based on patient experiences or perceptions, and reported by the patient in their own words."
             },
             {
-                question: "A nurse manager complimenting nurses who are in conflict is using which approach to conflict resolution?",
-                options: ["Avoiding", "Competing", "Smoothing", "Compromising"],
-                correct: 2,
-                rationale: "Smoothing involves complimenting all parties to prevent emotional outbursts and focus on agreement rather than differences."
-            },
-            {
-                question: "In Lewin's Theory of Change, which phase involves recognizing the need for change?",
-                options: ["Moving", "Refreezing", "Unfreezing", "Planning"],
-                correct: 2,
-                rationale: "UNFREEZING is when the need for change is recognized. MOVING is when change is initiated after planning. REFREEZING is when change becomes operational."
-            },
-            {
-                question: "The RN can delegate initial patient assessment to assistive personnel.",
+                question: "The primary source of data for the health history is the patient's significant others.",
                 options: ["True", "False"],
                 correct: 1,
-                rationale: "According to ANA Principles, RNs CANNOT delegate: initial assessment, discharge planning, health education, care planning, triage, interpretation of data, care of invasive lines, or parenteral medications."
+                rationale: "The PRIMARY source of data for the health history is the PATIENT, not family members or significant others."
             },
             {
-                question: "Which is a component of Magnet Status recognition?",
-                options: [
-                    "Autocratic leadership",
-                    "Centralized decision making",
-                    "Transformational leadership",
-                    "Minimal staff involvement"
-                ],
+                question: "Which position is used to assess the rectum of a patient?",
+                options: ["Supine", "Sims'", "Prone", "Dorsal recumbent"],
+                correct: 1,
+                rationale: "Sims' position (side-lying) is used to assess the rectum and vagina. Supine and dorsal recumbent assess head, neck, thorax. Prone assesses hip joint and posterior thorax."
+            },
+            {
+                question: "Which physical assessment technique uses the sense of touch to assess temperature, turgor, and texture?",
+                options: ["Inspection", "Percussion", "Palpation", "Auscultation"],
                 correct: 2,
-                rationale: "The five Magnet components are: Transformational Leadership, Structural Empowerment, Exemplary Professional Practice, New Knowledge/Innovation, and Empirical Quality Results."
+                rationale: "Palpation uses touch to assess temperature, turgor, texture, moisture, vibrations, and shape. Inspection is observation. Percussion is striking to produce sound. Auscultation is listening."
+            },
+            {
+                question: "What is the correct order for abdominal assessment?",
+                options: [
+                    "Inspection, Palpation, Percussion, Auscultation",
+                    "Inspection, Auscultation, Percussion, Palpation",
+                    "Auscultation, Inspection, Percussion, Palpation",
+                    "Palpation, Percussion, Auscultation, Inspection"
+                ],
+                correct: 1,
+                rationale: "For abdominal assessment: Inspection → Auscultation → Percussion → Palpation. Auscultate BEFORE touching to avoid altering bowel sounds!"
+            },
+            {
+                question: "Which term describes a musical, squeaking, high-pitched sound heard in the lungs?",
+                options: ["Crackles", "Stridor", "Rhonchi", "Wheeze"],
+                correct: 3,
+                rationale: "Wheezes are musical, squeaking, high-pitched continuous sounds heard as air passes through narrowed airways."
+            },
+            {
+                question: "Which type of assessment is conducted upon admission to a health care facility?",
+                options: ["Focused", "Emergency", "Comprehensive", "Ongoing"],
+                correct: 2,
+                rationale: "Comprehensive assessment is a complete head-to-toe assessment conducted upon admission. Focused assesses specific problems. Emergency assesses life-threatening conditions. Ongoing is at regular intervals."
             },
             {
                 question: "What does the 'S' in SBAR stand for?",
@@ -2437,10 +2663,15 @@
                 rationale: "Factors affecting patient learning include: age/developmental level, family support, financial resources, cultural influences/language, and HEALTH LITERACY."
             },
             {
-                question: "In decentralized management, decisions are made by those most knowledgeable about the issues.",
-                options: ["True", "False"],
-                correct: 0,
-                rationale: "In DECENTRALIZED management, decisions are made by those most knowledgeable (nurses involved in patient care). In CENTRALIZED management, senior managers make decisions with little input."
+                question: "Ecchymosis refers to which skin finding?",
+                options: [
+                    "Redness of the skin",
+                    "Collection of blood in subcutaneous tissue (bruise)",
+                    "Yellow discoloration",
+                    "Excessive sweating"
+                ],
+                correct: 1,
+                rationale: "Ecchymosis is a collection of blood in subcutaneous tissue (bruise). Erythema is redness. Jaundice is yellow. Diaphoresis is excessive sweating."
             },
             {
                 question: "Which is a characteristic of aggressive (NOT assertive) behavior?",
@@ -2675,40 +2906,52 @@
             { term: "Developmental Crisis", definition: "A crisis related to life stage transitions (adolescence, parenthood, aging) requiring long-term counseling.", chapter: "ch9" },
             { term: "Situational Crisis", definition: "An acute, sudden crisis event (accident, loss, trauma) requiring short-term counseling.", chapter: "ch9" },
 
-            // Chapter 10 - Leading, Managing, and Delegating
-            { term: "Leadership", definition: "The ability to direct or motivate a person or group to achieve set goals.", chapter: "ch10" },
-            { term: "Management", definition: "The process of planning, organizing, staffing, directing, and controlling to achieve organizational goals.", chapter: "ch10" },
-            { term: "Explicit Power", definition: "Power derived from one's official position or title in an organization.", chapter: "ch10" },
-            { term: "Implied Power", definition: "Power derived from factors other than position, such as personality, expertise, or charisma.", chapter: "ch10" },
-            { term: "Autocratic Leadership", definition: "Leadership style where the leader assumes control over decisions and activities, firm and self-assured.", chapter: "ch10" },
-            { term: "Democratic Leadership", definition: "Leadership style characterized by a sense of equality among leader and participants; shared decision-making.", chapter: "ch10" },
-            { term: "Laissez-faire Leadership", definition: "Leadership style where the leader relinquishes power to the group; hands-off approach.", chapter: "ch10" },
-            { term: "Servant Leadership", definition: "Leadership style focused on serving and developing team members; putting others' needs first.", chapter: "ch10" },
-            { term: "Transformational Leadership", definition: "Leadership style that creates revolutionary change through vision and inspiration; charismatic leaders.", chapter: "ch10" },
-            { term: "Transactional Leadership", definition: "Leadership style focused on exchanges and transactions; uses rewards and consequences.", chapter: "ch10" },
-            { term: "Quantum Leadership", definition: "Leadership style emphasizing interconnectedness and relationships in complex systems.", chapter: "ch10" },
-            { term: "Magnet Status", definition: "Recognition program by ANCC for healthcare organizations demonstrating nursing excellence and quality patient outcomes.", chapter: "ch10" },
-            { term: "Centralized Management", definition: "Management structure where senior managers make decisions with little input from staff.", chapter: "ch10" },
-            { term: "Decentralized Management", definition: "Management structure where decisions are made by those most knowledgeable about the issues.", chapter: "ch10" },
-            { term: "Conflict Management", definition: "Process of working through conflicts to minimize negative effects and promote positive outcomes.", chapter: "ch10" },
-            { term: "Conflict Engagement", definition: "Teaching skills to help nurses perform well in the face of conflict rather than avoid it.", chapter: "ch10" },
-            { term: "Smoothing", definition: "Conflict resolution strategy involving complimenting all parties to prevent emotional outbursts and focus on agreement.", chapter: "ch10" },
-            { term: "Compromising", definition: "Conflict resolution strategy where both parties give up something to reach an agreement.", chapter: "ch10" },
-            { term: "Collaborating", definition: "Conflict resolution strategy involving working together to find a win-win solution.", chapter: "ch10" },
-            { term: "Lewin's Theory of Change", definition: "Three-phase change theory: Unfreezing (recognize need), Moving (implement change), Refreezing (stabilize change).", chapter: "ch10" },
-            { term: "Unfreezing", definition: "First phase in Lewin's theory where the need for change is recognized.", chapter: "ch10" },
-            { term: "Moving", definition: "Second phase in Lewin's theory where change is initiated after careful planning.", chapter: "ch10" },
-            { term: "Refreezing", definition: "Third phase in Lewin's theory where change becomes operational and stabilized.", chapter: "ch10" },
-            { term: "SWOT Analysis", definition: "Strategic planning tool identifying Strengths, Weaknesses, Opportunities, and Threats.", chapter: "ch10" },
-            { term: "SOAR Analysis", definition: "Strategic planning tool identifying Strengths, Opportunities, Aspirations, and Results; focuses on positive vision.", chapter: "ch10" },
-            { term: "Delegation", definition: "The transfer of responsibility for performing a task while retaining accountability for the outcome.", chapter: "ch10" },
-            { term: "Assistive Personnel (AP)", definition: "Unlicensed staff who work in supportive roles to the RN providing direct patient care.", chapter: "ch10" },
-            { term: "Accountability", definition: "Being answerable for one's actions and decisions; RNs remain accountable even when delegating.", chapter: "ch10" },
-            { term: "Clinical Nurse Leader (CNL)", definition: "Leadership role created by AACN to facilitate, coordinate, and oversee patient care; integrates evidence-based practice.", chapter: "ch10" },
-            { term: "Mentorship", definition: "Relationship where an experienced nurse guides and supports a less experienced nurse's professional development.", chapter: "ch10" },
-            { term: "Preceptorship", definition: "A clinical teaching role where an experienced nurse provides one-on-one guidance to a new nurse.", chapter: "ch10" },
-            { term: "Burnout", definition: "Workplace syndrome from chronic stress characterized by emotional exhaustion, depersonalization, and reduced professional efficacy.", chapter: "ch10" },
-            { term: "Resilience", definition: "The ability to recover from difficulties and adapt to challenges; essential for preventing burnout.", chapter: "ch10" }
+            // Chapter 27 - Health Assessment
+            { term: "Health Assessment", definition: "The process of collecting, validating, and analyzing data about a patient's health status.", chapter: "ch27" },
+            { term: "Subjective Data", definition: "Data based on patient experiences and perceptions; reported by the patient in their own words (symptoms).", chapter: "ch27" },
+            { term: "Objective Data", definition: "Data that is measurable and directly observed by the nurse (signs).", chapter: "ch27" },
+            { term: "Health History", definition: "Collection of subjective information about the patient's health status.", chapter: "ch27" },
+            { term: "Physical Assessment", definition: "Collection of objective data about changes in the patient's body systems.", chapter: "ch27" },
+            { term: "Comprehensive Assessment", definition: "A complete head-to-toe assessment conducted upon admission to a health care facility.", chapter: "ch27" },
+            { term: "Ongoing/Partial Assessment", definition: "Assessment conducted at regular intervals to monitor patient status.", chapter: "ch27" },
+            { term: "Focused Assessment", definition: "Assessment conducted to evaluate a specific problem or body system.", chapter: "ch27" },
+            { term: "Emergency Assessment", definition: "Assessment conducted to determine life-threatening or unstable conditions.", chapter: "ch27" },
+            { term: "Inspection", definition: "Assessment technique involving deliberate, purposeful observation to assess size, color, shape, position, and symmetry.", chapter: "ch27" },
+            { term: "Palpation", definition: "Assessment technique using touch to assess temperature, turgor, texture, moisture, vibrations, and shape.", chapter: "ch27" },
+            { term: "Percussion", definition: "Assessment technique of striking one object against another to assess location, shape, size, and density of tissues.", chapter: "ch27" },
+            { term: "Auscultation", definition: "Assessment technique of listening with a stethoscope to assess pitch, loudness, quality, and duration of sounds.", chapter: "ch27" },
+            { term: "Erythema", definition: "Redness of the skin.", chapter: "ch27" },
+            { term: "Ecchymosis", definition: "Collection of blood in subcutaneous tissue; a bruise.", chapter: "ch27" },
+            { term: "Petechiae", definition: "Small hemorrhagic spots caused by capillary bleeding; tiny red dots.", chapter: "ch27" },
+            { term: "Cyanosis", definition: "Bluish or grayish discoloration of the skin indicating decreased oxygenation.", chapter: "ch27" },
+            { term: "Jaundice", definition: "Yellow discoloration of the skin often indicating liver dysfunction.", chapter: "ch27" },
+            { term: "Pallor", definition: "Paleness of the skin.", chapter: "ch27" },
+            { term: "Diaphoresis", definition: "Excessive perspiration or sweating.", chapter: "ch27" },
+            { term: "Turgor", definition: "Elasticity of the skin; assessed by palpation.", chapter: "ch27" },
+            { term: "Edema", definition: "Excess fluid accumulation in tissues causing swelling.", chapter: "ch27" },
+            { term: "Supine Position", definition: "Patient lying flat on back; used to assess head, neck, thorax, heart, breasts, abdomen, extremities.", chapter: "ch27" },
+            { term: "Dorsal Recumbent Position", definition: "Similar to supine; used for patients having difficulty maintaining supine position.", chapter: "ch27" },
+            { term: "Sims' Position", definition: "Side-lying position used to assess the rectum or vagina.", chapter: "ch27" },
+            { term: "Prone Position", definition: "Patient lying face down; used to assess hip joint and posterior thorax.", chapter: "ch27" },
+            { term: "Lithotomy Position", definition: "Patient on back with feet in stirrups; used to assess female genitalia and rectum.", chapter: "ch27" },
+            { term: "Knee-Chest Position", definition: "Patient on knees with chest lowered; used to assess anus and rectum.", chapter: "ch27" },
+            { term: "Wheezes", definition: "Musical, squeaking, high-pitched continuous lung sounds heard during inspiration and expiration through narrowed airways.", chapter: "ch27" },
+            { term: "Rhonchi", definition: "Low-pitched, snoring, rumbling lung sounds caused by secretions in large airways.", chapter: "ch27" },
+            { term: "Crackles", definition: "Popping, bubbling lung sounds (like hair rubbing) often indicating fluid in alveoli.", chapter: "ch27" },
+            { term: "Stridor", definition: "High-pitched, crowing sound indicating upper airway obstruction.", chapter: "ch27" },
+            { term: "Friction Rub", definition: "Grating sound heard when inflamed pleural surfaces rub together.", chapter: "ch27" },
+            { term: "Vesicular Sounds", definition: "Normal soft, low-pitched lung sounds heard over lung periphery.", chapter: "ch27" },
+            { term: "Bronchial Sounds", definition: "Normal loud, high-pitched lung sounds heard over the trachea.", chapter: "ch27" },
+            { term: "Bronchovesicular Sounds", definition: "Normal moderate-pitched lung sounds heard over main bronchi.", chapter: "ch27" },
+            { term: "Adventitious Sounds", definition: "Abnormal lung sounds including wheezes, rhonchi, crackles, stridor, and friction rubs.", chapter: "ch27" },
+            { term: "General Survey", definition: "Initial assessment including general appearance, vital signs, height, weight, waist circumference, and BMI.", chapter: "ch27" },
+            { term: "Glasgow Coma Scale (GCS)", definition: "Standardized tool measuring level of consciousness through eye opening, verbal response, and motor response (score 3-15).", chapter: "ch27" },
+            { term: "Level of Consciousness", definition: "Assessment of patient's alertness: awake/alert, lethargic, stuporous, or comatose.", chapter: "ch27" },
+            { term: "Lethargic", definition: "State of drowsiness where patient is easily aroused.", chapter: "ch27" },
+            { term: "Stuporous", definition: "State where patient is difficult to arouse and confused when awakened.", chapter: "ch27" },
+            { term: "Comatose", definition: "State where patient cannot be aroused and is unresponsive.", chapter: "ch27" },
+            { term: "Kyphosis", definition: "Increased dorsal spinal curve; common variation in older adults affecting thorax assessment.", chapter: "ch27" },
+            { term: "Sinus Dysrhythmia", definition: "Normal variation in children where heart rate increases with inspiration and decreases with expiration.", chapter: "ch27" }
         ];
 
         let currentVocabIndex = 0;
