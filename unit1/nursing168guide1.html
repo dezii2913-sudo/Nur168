@@ -5929,10 +5929,10 @@
 
             <!-- Chapter Filter -->
             <div class="chapter-filter">
-                <button class="filter-btn active" onclick="filterByChapter('all')">All</button>
-                <button class="filter-btn ch8-filter" onclick="filterByChapter('ch8')">Ch 8</button>
-                <button class="filter-btn ch9-filter" onclick="filterByChapter('ch9')">Ch 9</button>
-                <button class="filter-btn ch27-filter" onclick="filterByChapter('ch27')">Ch 27</button>
+                <button class="filter-btn active" onclick="filterByChapter('all', this)">All</button>
+                <button class="filter-btn ch8-filter" onclick="filterByChapter('ch8', this)">Ch 8</button>
+                <button class="filter-btn ch9-filter" onclick="filterByChapter('ch9', this)">Ch 9</button>
+                <button class="filter-btn ch27-filter" onclick="filterByChapter('ch27', this)">Ch 27</button>
             </div>
 
             <!-- Flashcard Mode -->
@@ -7175,10 +7175,22 @@
             }
         }
 
-        function filterByChapter(chapter) {
+        function filterByChapter(chapter, btn) {
             currentChapterFilter = chapter;
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
+            if (btn) {
+                btn.classList.add('active');
+            } else {
+                // Fallback: find the button that matches the chapter
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    if ((chapter === 'all' && b.textContent === 'All') ||
+                        (chapter === 'ch8' && b.textContent === 'Ch 8') ||
+                        (chapter === 'ch9' && b.textContent === 'Ch 9') ||
+                        (chapter === 'ch27' && b.textContent === 'Ch 27')) {
+                        b.classList.add('active');
+                    }
+                });
+            }
 
             if (chapter === 'all') {
                 filteredVocab = [...vocabularyData];
