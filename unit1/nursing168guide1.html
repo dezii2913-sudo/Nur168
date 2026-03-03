@@ -55,6 +55,123 @@
             box-shadow: 0 2px 15px rgba(0,0,0,0.1);
         }
 
+        /* Global Search Bar */
+        .global-search-container {
+            background: rgba(255,255,255,0.85);
+            border-radius: 15px;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        .global-search-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .global-search-input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 1em;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .global-search-input:focus {
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+        }
+
+        .global-search-btn {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .global-search-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .clear-search-btn {
+            padding: 12px 20px;
+            background: #e0e0e0;
+            color: #666;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .clear-search-btn:hover {
+            background: #d0d0d0;
+        }
+
+        .search-results-info {
+            margin-top: 12px;
+            padding: 10px 15px;
+            background: linear-gradient(135deg, rgba(107,203,119,0.2), rgba(34,197,94,0.2));
+            border-radius: 10px;
+            font-weight: 500;
+            display: none;
+        }
+
+        .search-results-info.visible {
+            display: block;
+        }
+
+        .search-results-info.no-results {
+            background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(220,38,38,0.15));
+            color: #dc2626;
+        }
+
+        .search-highlight {
+            background: linear-gradient(135deg, #ffd93d 0%, #ffb347 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            animation: highlightPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes highlightPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 217, 61, 0.4); }
+            50% { box-shadow: 0 0 0 6px rgba(255, 217, 61, 0); }
+        }
+
+        .mnemonic-quick-list {
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .mnemonic-quick-btn {
+            padding: 6px 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .mnemonic-quick-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+        }
+
         .progress-header {
             display: flex;
             justify-content: space-between;
@@ -1772,6 +1889,27 @@
             </div>
         </div>
 
+        <!-- Global Search Bar -->
+        <div class="global-search-container">
+            <div class="global-search-wrapper">
+                <input type="text" id="globalSearch" class="global-search-input" placeholder="🔍 Search for topics, terms, mnemonics (e.g., SBAR, palpation, PERRLA)..." onkeyup="handleSearchKeypress(event)">
+                <button class="global-search-btn" onclick="performGlobalSearch()">Search</button>
+                <button class="clear-search-btn" onclick="clearGlobalSearch()">Clear</button>
+            </div>
+            <div id="searchResultsInfo" class="search-results-info"></div>
+            <div class="mnemonic-quick-list">
+                <span style="font-size: 0.85em; color: #666; margin-right: 5px;">Quick find:</span>
+                <button class="mnemonic-quick-btn" onclick="quickSearchMnemonic('SBAR')">SBAR</button>
+                <button class="mnemonic-quick-btn" onclick="quickSearchMnemonic('SMCRF')">SMCRF</button>
+                <button class="mnemonic-quick-btn" onclick="quickSearchMnemonic('IPPA')">IPPA</button>
+                <button class="mnemonic-quick-btn" onclick="quickSearchMnemonic('PERRLA')">PERRLA</button>
+                <button class="mnemonic-quick-btn" onclick="quickSearchMnemonic('OLDCARTS')">OLDCARTS</button>
+                <button class="mnemonic-quick-btn" onclick="quickSearchMnemonic('COFE')">COFE</button>
+                <button class="mnemonic-quick-btn" onclick="quickSearchMnemonic('therapeutic')">Therapeutic</button>
+                <button class="mnemonic-quick-btn" onclick="quickSearchMnemonic('assessment')">Assessment</button>
+            </div>
+        </div>
+
         <!-- Navigation Tabs -->
         <div class="nav-tabs">
             <button class="nav-tab ch8 active" onclick="showSection('ch8')">💬 Ch 8: Communication</button>
@@ -2095,6 +2233,142 @@
                             <li><strong>Address</strong> barriers before important teaching or conversations</li>
                             <li><strong>Ask</strong> if the patient understood (use teach-back method)</li>
                         </ul>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Five Reasons for Listening -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>👂 Five Reasons for Listening</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Why Listening Matters</div>
+                        <p>Active listening is one of the most important skills in therapeutic communication. There are <strong>5 key reasons</strong> why nurses must be effective listeners.</p>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        <h4>🧠 MNEMONIC: "GUCER" - 5 Reasons for Listening (Hover for details!)</h4>
+                        <div class="mnemonic-letters" style="gap: 15px;">
+                            
+                            <div class="mnemonic-letter-hover">
+                                <span>G</span>
+                                <div class="letter-title">Gather Info</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">To Gather Information</div>
+                                    Listening allows the nurse to collect important data about the patient's condition, symptoms, concerns, and needs.
+                                    <div class="tooltip-example">By listening carefully to a patient describe their chest pain, the nurse gathers crucial information about onset, location, and severity.</div>
+                                </div>
+                            </div>
+
+                            <div class="mnemonic-letter-hover">
+                                <span>U</span>
+                                <div class="letter-title">Understand</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">To Understand the Patient</div>
+                                    Listening helps the nurse truly understand the patient's perspective, feelings, and experiences - not just the facts.
+                                    <div class="tooltip-example">Listening to a newly diagnosed cancer patient helps the nurse understand their fears, hopes, and what matters most to them.</div>
+                                </div>
+                            </div>
+
+                            <div class="mnemonic-letter-hover">
+                                <span>C</span>
+                                <div class="letter-title">Critically Evaluate</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">To Critically Evaluate the Message</div>
+                                    Listening allows the nurse to analyze and evaluate what is being said, identifying inconsistencies or important details.
+                                    <div class="tooltip-example">A patient says they're "fine" but their tone and body language suggest otherwise - the nurse evaluates both verbal and nonverbal cues.</div>
+                                </div>
+                            </div>
+
+                            <div class="mnemonic-letter-hover">
+                                <span>E</span>
+                                <div class="letter-title">Empathize</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">To Empathize with the Patient</div>
+                                    Listening demonstrates caring and allows the nurse to connect emotionally with the patient's experience.
+                                    <div class="tooltip-example">When a patient shares their grief over losing a spouse, listening with empathy helps them feel heard and supported.</div>
+                                </div>
+                            </div>
+
+                            <div class="mnemonic-letter-hover">
+                                <span>R</span>
+                                <div class="letter-title">Respond</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">To Respond Appropriately</div>
+                                    Effective listening enables the nurse to formulate appropriate, helpful responses that address the patient's actual needs.
+                                    <div class="tooltip-example">After listening to a patient's concerns about surgery, the nurse can provide targeted information and reassurance that addresses their specific fears.</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Reason</th>
+                            <th>Purpose</th>
+                            <th>Clinical Example</th>
+                        </tr>
+                        <tr>
+                            <td><strong>1. Gather Information</strong></td>
+                            <td>Collect data about patient's condition</td>
+                            <td>Listening to patient describe symptoms to complete assessment</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2. Understand the Patient</strong></td>
+                            <td>Comprehend their perspective and feelings</td>
+                            <td>Understanding why a patient is refusing medication</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3. Critically Evaluate</strong></td>
+                            <td>Analyze and assess the message</td>
+                            <td>Noticing a patient says they have "no pain" but is grimacing</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4. Empathize</strong></td>
+                            <td>Connect emotionally, show you care</td>
+                            <td>Being present when a patient shares fears about diagnosis</td>
+                        </tr>
+                        <tr>
+                            <td><strong>5. Respond Appropriately</strong></td>
+                            <td>Provide helpful, relevant responses</td>
+                            <td>Addressing specific concerns after fully hearing them</td>
+                        </tr>
+                    </table>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">💡 Active Listening Techniques</div>
+                        <ul class="content-list">
+                            <li><strong>Face the patient</strong> and maintain appropriate eye contact</li>
+                            <li><strong>Use open posture</strong> - uncrossed arms, leaning slightly forward</li>
+                            <li><strong>Nod and use verbal cues</strong> - "mm-hmm," "I see," "go on"</li>
+                            <li><strong>Don't interrupt</strong> - let them finish their thoughts</li>
+                            <li><strong>Reflect back</strong> - "It sounds like you're feeling..."</li>
+                            <li><strong>Ask clarifying questions</strong> - "Can you tell me more about that?"</li>
+                            <li><strong>Summarize</strong> - "So what I'm hearing is..."</li>
+                            <li><strong>Minimize distractions</strong> - put down the chart, silence your phone</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ Barriers to Effective Listening</div>
+                        <ul class="content-list">
+                            <li><strong>Interrupting</strong> the patient before they finish</li>
+                            <li><strong>Thinking ahead</strong> to your response instead of listening</li>
+                            <li><strong>Being distracted</strong> by tasks, devices, or environment</li>
+                            <li><strong>Making assumptions</strong> about what they're going to say</li>
+                            <li><strong>Judging</strong> the patient while they speak</li>
+                            <li><strong>Rushing</strong> due to time constraints</li>
+                        </ul>
+                    </div>
+
+                    <div class="sticky-note">
+                        <h4>💡 Remember!</h4>
+                        <p>Patients can tell when you're truly listening vs. just waiting for your turn to talk. <strong>Active listening builds trust</strong> and is essential for therapeutic communication!</p>
                     </div>
                     <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
                 </div>
@@ -3874,6 +4148,429 @@
                             <li>What you found (normal AND abnormal)</li>
                             <li>Any patient complaints during assessment</li>
                             <li>Comparison to previous assessments if applicable</li>
+                        </ul>
+                    </div>
+                    <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
+                </div>
+            </div>
+
+            <!-- Head-to-Toe Assessment Memory Guide -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span>📋 Head-to-Toe Assessment Memory Guide</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Remember the Order!</div>
+                        <p>A systematic head-to-toe approach ensures you don't miss anything. Always work in the <strong>same order</strong> every time to build muscle memory!</p>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        <h4>🧠 MNEMONIC: "HEENT CLAM GNSS" - Head-to-Toe Order (Hover for what to assess!)</h4>
+                        <div class="mnemonic-letters" style="gap: 10px; flex-wrap: wrap;">
+                            
+                            <div class="mnemonic-letter-hover">
+                                <span>H</span>
+                                <div class="letter-title">Head</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Head Assessment</div>
+                                    Inspect skull shape (normocephalic), symmetry, hair, scalp. Palpate for lumps, tenderness.
+                                    <div class="tooltip-example">Look for: Symmetry, lesions, facial droop. Ask: Any headaches? Dizziness?</div>
+                                </div>
+                            </div>
+
+                            <div class="mnemonic-letter-hover">
+                                <span>E</span>
+                                <div class="letter-title">Eyes</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Eye Assessment</div>
+                                    PERRLA, visual acuity, EOMs, sclera color, conjunctiva. Check for drainage, redness.
+                                    <div class="tooltip-example">Look for: Pupil equality, yellow sclera (jaundice), ptosis. Ask: Vision changes? Eye pain?</div>
+                                </div>
+                            </div>
+
+                            <div class="mnemonic-letter-hover">
+                                <span>E</span>
+                                <div class="letter-title">Ears</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Ear Assessment</div>
+                                    External ear, hearing (whisper test), otoscope exam if indicated.
+                                    <div class="tooltip-example">Look for: Drainage, redness, hearing response. Ask: Hearing loss? Ear pain? Ringing?</div>
+                                </div>
+                            </div>
+
+                            <div class="mnemonic-letter-hover">
+                                <span>N</span>
+                                <div class="letter-title">Nose</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Nose Assessment</div>
+                                    Patency (occlude one nostril), septum position, mucosa color, discharge.
+                                    <div class="tooltip-example">Look for: Deviated septum, discharge color, swelling. Ask: Congestion? Nosebleeds? Smell changes?</div>
+                                </div>
+                            </div>
+
+                            <div class="mnemonic-letter-hover">
+                                <span>T</span>
+                                <div class="letter-title">Throat/Mouth</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Throat & Mouth Assessment</div>
+                                    Lips, teeth, gums, tongue, buccal mucosa, tonsils, uvula. Assess swallowing.
+                                    <div class="tooltip-example">Look for: Moist/dry mucosa, lesions, tongue deviation, dental issues. Ask: Sore throat? Difficulty swallowing?</div>
+                                </div>
+                            </div>
+
+                            <div class="mnemonic-letter-hover">
+                                <span>C</span>
+                                <div class="letter-title">Chest/Lungs</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Chest & Lung Assessment</div>
+                                    Inspect shape, symmetry, breathing effort. Auscultate all lobes anteriorly and posteriorly.
+                                    <div class="tooltip-example">Look for: Accessory muscle use, retractions, symmetry. Listen for: Clear vs adventitious sounds. Ask: SOB? Cough?</div>
+                                </div>
+                            </div>
+
+                            <div class="mnemonic-letter-hover">
+                                <span>L</span>
+                                <div class="letter-title">Cardiac (Love)</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Cardiovascular Assessment</div>
+                                    Auscultate heart sounds (S1, S2), check pulses, JVD, capillary refill, edema.
+                                    <div class="tooltip-example">Look for: JVD, edema, skin color. Listen for: Murmurs, extra sounds. Palpate: PMI, pulses. Ask: Chest pain? Palpitations?</div>
+                                </div>
+                            </div>
+
+                            <div class="mnemonic-letter-hover">
+                                <span>A</span>
+                                <div class="letter-title">Abdomen</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Abdominal Assessment</div>
+                                    ORDER: Inspect → Auscultate → Percuss → Palpate. Check all 4 quadrants.
+                                    <div class="tooltip-example">Look for: Distension, scars, pulsations. Listen FIRST: Bowel sounds. Palpate LAST: Tenderness, masses. Ask: Pain? N/V? BMs?</div>
+                                </div>
+                            </div>
+
+                            <div class="mnemonic-letter-hover">
+                                <span>M</span>
+                                <div class="letter-title">MSK (Musculoskeletal)</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Musculoskeletal Assessment</div>
+                                    ROM, strength, gait, posture, joint swelling/deformity. Compare bilaterally.
+                                    <div class="tooltip-example">Look for: Symmetry, deformity, gait. Test: Grip strength, push/pull, ROM. Ask: Joint pain? Weakness? Falls?</div>
+                                </div>
+                            </div>
+
+                            <div class="mnemonic-letter-hover">
+                                <span>G</span>
+                                <div class="letter-title">GU (Genitourinary)</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Genitourinary Assessment</div>
+                                    Urine output, bladder distension, CVA tenderness. External genitalia if indicated.
+                                    <div class="tooltip-example">Look for: Bladder distension, catheter patency. Palpate: Suprapubic area. Ask: Burning? Frequency? Incontinence?</div>
+                                </div>
+                            </div>
+
+                            <div class="mnemonic-letter-hover">
+                                <span>N</span>
+                                <div class="letter-title">Neuro</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Neurological Assessment</div>
+                                    LOC, orientation (person, place, time), pupils, motor/sensory, reflexes if indicated.
+                                    <div class="tooltip-example">Look for: Alertness, appropriate responses, movement. Test: A&O x3, PERRLA, grip strength, sensation. Ask: Numbness? Tingling?</div>
+                                </div>
+                            </div>
+
+                            <div class="mnemonic-letter-hover">
+                                <span>S</span>
+                                <div class="letter-title">Skin</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Integumentary Assessment</div>
+                                    Color, temperature, turgor, moisture, lesions, wounds, pressure areas.
+                                    <div class="tooltip-example">Look for: Color changes (pallor, cyanosis, jaundice), wounds, rashes. Palpate: Temperature, turgor. Check: Pressure points!</div>
+                                </div>
+                            </div>
+
+                            <div class="mnemonic-letter-hover">
+                                <span>S</span>
+                                <div class="letter-title">Safety</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Safety Assessment</div>
+                                    Fall risk, IV sites, tubes/drains, restraints, call light, bed position.
+                                    <div class="tooltip-example">Check: Bed low, brakes locked, call light in reach, side rails appropriate, ID band on, tubes patent.</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="sticky-note">
+                        <h4>💡 Easy Memory Trick!</h4>
+                        <p><strong>"HEENT CLAM GNSS"</strong> = "He Went Clam Digging, Got Nervous, Saw Snakes!"</p>
+                        <p style="margin-top: 8px;">Or simply remember to go <strong>HEAD → TOES</strong> and think: "What's at this level of the body?"</p>
+                    </div>
+
+                    <h4 style="margin: 25px 0 15px; color: #7c3aed;">📋 Detailed Assessment Checklist by System:</h4>
+
+                    <!-- General Survey -->
+                    <div class="key-point definition" style="margin-bottom: 15px;">
+                        <div class="key-point-label">👁️ GENERAL SURVEY (Do First!)</div>
+                        <table class="comparison-table">
+                            <tr>
+                                <th>Assess</th>
+                                <th>What to Look For</th>
+                                <th>Red Flags</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Appearance</strong></td>
+                                <td>Age-appropriate, hygiene, dress, nutrition</td>
+                                <td>Appears older than stated age, unkempt, malnourished</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Behavior</strong></td>
+                                <td>Cooperative, appropriate affect, eye contact</td>
+                                <td>Agitated, flat affect, avoidant, confused</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Mobility</strong></td>
+                                <td>Gait steady, uses assistive devices appropriately</td>
+                                <td>Unsteady, shuffling, limping, needs assistance</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Vital Signs</strong></td>
+                                <td>Within normal limits for patient</td>
+                                <td>Fever, hypotension, tachycardia, tachypnea, low O2</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- Respiratory -->
+                    <div class="key-point tip" style="margin-bottom: 15px;">
+                        <div class="key-point-label">🫁 RESPIRATORY - What Exactly to Assess</div>
+                        <table class="comparison-table">
+                            <tr>
+                                <th>Technique</th>
+                                <th>What to Do</th>
+                                <th>Normal Finding</th>
+                                <th>Abnormal Finding</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Inspect</strong></td>
+                                <td>Watch breathing pattern, chest shape, symmetry</td>
+                                <td>Relaxed, even respirations 12-20/min, symmetric expansion</td>
+                                <td>Labored, use of accessory muscles, asymmetric, retractions</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Palpate</strong></td>
+                                <td>Chest expansion, tactile fremitus ("99")</td>
+                                <td>Equal bilateral expansion, symmetric fremitus</td>
+                                <td>Unequal expansion, increased/decreased fremitus</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Percuss</strong></td>
+                                <td>Tap over lung fields</td>
+                                <td>Resonant sound throughout</td>
+                                <td>Dull (fluid/mass), hyperresonant (trapped air)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Auscultate</strong></td>
+                                <td>Listen anterior, lateral, posterior - ALL lobes</td>
+                                <td>Vesicular sounds peripherally, clear</td>
+                                <td>Crackles, wheezes, rhonchi, diminished/absent</td>
+                            </tr>
+                        </table>
+                        <p style="margin-top: 10px;"><strong>Questions to Ask:</strong> "Any shortness of breath? Cough? Bringing up any mucus? What color? Do you smoke?"</p>
+                    </div>
+
+                    <!-- Cardiovascular -->
+                    <div class="key-point tip" style="margin-bottom: 15px;">
+                        <div class="key-point-label">❤️ CARDIOVASCULAR - What Exactly to Assess</div>
+                        <table class="comparison-table">
+                            <tr>
+                                <th>Assess</th>
+                                <th>What to Do</th>
+                                <th>Normal</th>
+                                <th>Abnormal</th>
+                            </tr>
+                            <tr>
+                                <td><strong>JVD</strong></td>
+                                <td>Patient at 45°, look at neck veins</td>
+                                <td>No visible distension</td>
+                                <td>Visible distension (right heart failure)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Heart Sounds</strong></td>
+                                <td>Auscultate at 5 areas with diaphragm & bell</td>
+                                <td>S1, S2 heard, regular rhythm</td>
+                                <td>Murmurs, S3, S4, irregular rhythm</td>
+                            </tr>
+                            <tr>
+                                <td><strong>PMI</strong></td>
+                                <td>Palpate at 5th ICS, MCL</td>
+                                <td>Palpable, localized</td>
+                                <td>Displaced (cardiomegaly), heaves, thrills</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Pulses</strong></td>
+                                <td>Palpate radial, pedal, compare bilaterally</td>
+                                <td>Strong, equal bilaterally, 2+</td>
+                                <td>Weak, absent, unequal (0, 1+, 3+, 4+)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cap Refill</strong></td>
+                                <td>Press nail bed, release, count seconds</td>
+                                <td>&lt;3 seconds</td>
+                                <td>&gt;3 seconds (poor perfusion)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Edema</strong></td>
+                                <td>Press over tibia, sacrum, check ankles</td>
+                                <td>No pitting</td>
+                                <td>Pitting edema (grade 1+ to 4+)</td>
+                            </tr>
+                        </table>
+                        <p style="margin-top: 10px;"><strong>Questions to Ask:</strong> "Any chest pain? Palpitations? Swelling in legs? Shortness of breath when lying flat? How many pillows do you sleep on?"</p>
+                    </div>
+
+                    <!-- Abdominal -->
+                    <div class="key-point important" style="margin-bottom: 15px;">
+                        <div class="key-point-label">🔴 ABDOMINAL - What Exactly to Assess (Remember: I-A-P-P!)</div>
+                        <table class="comparison-table">
+                            <tr>
+                                <th>Order</th>
+                                <th>What to Do</th>
+                                <th>Normal</th>
+                                <th>Abnormal</th>
+                            </tr>
+                            <tr>
+                                <td><strong>1. INSPECT</strong></td>
+                                <td>Look at contour, symmetry, skin, pulsations</td>
+                                <td>Flat/rounded, symmetric, no visible pulsations</td>
+                                <td>Distended, asymmetric, visible peristalsis, scars</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2. AUSCULTATE</strong></td>
+                                <td>Listen ALL 4 quadrants (RUQ, LUQ, RLQ, LLQ)</td>
+                                <td>5-30 clicks/gurgles per minute</td>
+                                <td>Hyperactive (diarrhea), hypoactive, absent (ileus)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>3. PERCUSS</strong></td>
+                                <td>Tap all quadrants</td>
+                                <td>Tympany (gas), dull over organs</td>
+                                <td>Dull throughout (fluid/mass)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>4. PALPATE</strong></td>
+                                <td>Light first, then deep; start away from pain</td>
+                                <td>Soft, non-tender, no masses</td>
+                                <td>Rigid, guarding, rebound tenderness, masses</td>
+                            </tr>
+                        </table>
+                        <p style="margin-top: 10px;"><strong>Questions to Ask:</strong> "Any belly pain? Where? Nausea or vomiting? When was your last bowel movement? Any blood in stool? Gas or bloating?"</p>
+                    </div>
+
+                    <!-- Neurological -->
+                    <div class="key-point tip" style="margin-bottom: 15px;">
+                        <div class="key-point-label">🧠 NEUROLOGICAL - What Exactly to Assess</div>
+                        <table class="comparison-table">
+                            <tr>
+                                <th>Assess</th>
+                                <th>How to Test</th>
+                                <th>Normal</th>
+                                <th>Abnormal</th>
+                            </tr>
+                            <tr>
+                                <td><strong>LOC</strong></td>
+                                <td>Observe alertness, response to stimuli</td>
+                                <td>Alert, awake, responds appropriately</td>
+                                <td>Lethargic, stuporous, comatose</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Orientation</strong></td>
+                                <td>"What's your name? Where are you? What day is it?"</td>
+                                <td>A&O x3 (person, place, time)</td>
+                                <td>Disoriented to one or more</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Pupils</strong></td>
+                                <td>PERRLA check (see detailed section)</td>
+                                <td>Equal, round, reactive, 2-6mm</td>
+                                <td>Unequal, fixed, dilated, sluggish</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Motor</strong></td>
+                                <td>Grip strength, push/pull, leg movement</td>
+                                <td>Strong, equal bilaterally (5/5)</td>
+                                <td>Weakness, unilateral weakness (stroke!)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sensory</strong></td>
+                                <td>Light touch, sharp/dull, compare sides</td>
+                                <td>Intact, equal bilaterally</td>
+                                <td>Numbness, tingling, absent sensation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Speech</strong></td>
+                                <td>Listen to clarity, word finding</td>
+                                <td>Clear, coherent, appropriate</td>
+                                <td>Slurred, aphasia, confusion</td>
+                            </tr>
+                        </table>
+                        <p style="margin-top: 10px;"><strong>Questions to Ask:</strong> "Any headaches? Dizziness? Numbness or tingling? Weakness? Vision changes? Memory problems?"</p>
+                    </div>
+
+                    <!-- Skin -->
+                    <div class="key-point tip" style="margin-bottom: 15px;">
+                        <div class="key-point-label">🧴 SKIN/INTEGUMENTARY - What Exactly to Assess</div>
+                        <table class="comparison-table">
+                            <tr>
+                                <th>Assess</th>
+                                <th>How to Check</th>
+                                <th>Normal</th>
+                                <th>Abnormal</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Color</strong></td>
+                                <td>Observe overall, mucous membranes, nail beds</td>
+                                <td>Pink, consistent with ethnicity</td>
+                                <td>Pallor, cyanosis, jaundice, mottling</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Temperature</strong></td>
+                                <td>Use back of hand</td>
+                                <td>Warm, equal bilaterally</td>
+                                <td>Hot (fever, infection), cool (poor perfusion)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Turgor</strong></td>
+                                <td>Pinch skin on forearm or sternum</td>
+                                <td>Springs back immediately</td>
+                                <td>Tenting (dehydration)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Moisture</strong></td>
+                                <td>Observe/feel skin</td>
+                                <td>Dry to slightly moist</td>
+                                <td>Diaphoretic (sweaty), excessively dry</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Integrity</strong></td>
+                                <td>Inspect all areas, especially pressure points</td>
+                                <td>Intact, no breakdown</td>
+                                <td>Wounds, ulcers, rashes, bruising</td>
+                            </tr>
+                        </table>
+                        <p style="margin-top: 10px;"><strong>Pressure Points to Check:</strong> Heels, sacrum, coccyx, elbows, shoulder blades, back of head, ears (if on O2)</p>
+                    </div>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ Quick Reference: What NOT to Miss!</div>
+                        <ul class="content-list">
+                            <li><strong>Neuro:</strong> LOC changes, pupil changes, new weakness = EMERGENCY</li>
+                            <li><strong>Respiratory:</strong> New O2 requirement, increased work of breathing, absent breath sounds</li>
+                            <li><strong>Cardiac:</strong> New chest pain, irregular rhythm, new edema, absent pulses</li>
+                            <li><strong>Abdomen:</strong> Rigid abdomen, rebound tenderness, absent bowel sounds x 5 min</li>
+                            <li><strong>Skin:</strong> New pressure injuries, signs of infection (redness, warmth, drainage)</li>
                         </ul>
                     </div>
                     <input type="checkbox" class="topic-check" onchange="updateProgress()"> <label>I understand this topic</label>
@@ -6520,7 +7217,7 @@
             const sortedVocab = [...vocabularyData].sort((a, b) => a.term.localeCompare(b.term));
 
             sortedVocab.forEach(item => {
-                const chapterLabel = item.chapter === 'ch8' ? 'Ch 8' : item.chapter === 'ch9' ? 'Ch 9' : 'Ch 10';
+                const chapterLabel = item.chapter === 'ch8' ? 'Ch 8' : item.chapter === 'ch9' ? 'Ch 9' : 'Ch 27';
                 const div = document.createElement('div');
                 div.className = `glossary-item ${item.chapter}`;
                 div.innerHTML = `
@@ -6538,7 +7235,7 @@
             if (filteredVocab.length === 0) return;
 
             const card = filteredVocab[currentVocabIndex];
-            const chapterLabel = card.chapter === 'ch8' ? 'Chapter 8' : card.chapter === 'ch9' ? 'Chapter 9' : 'Chapter 10';
+            const chapterLabel = card.chapter === 'ch8' ? 'Chapter 8' : card.chapter === 'ch9' ? 'Chapter 9' : 'Chapter 27';
 
             document.getElementById('flashcardTerm').textContent = card.term;
             document.getElementById('flashcardDefinition').textContent = card.definition;
@@ -6657,6 +7354,178 @@
             }
 
             document.querySelectorAll('.matching-term').forEach(t => t.classList.remove('selected'));
+        }
+
+        // ==================== GLOBAL SEARCH FUNCTIONS ====================
+        let originalContent = {};
+        let searchActive = false;
+
+        function handleSearchKeypress(event) {
+            if (event.key === 'Enter') {
+                performGlobalSearch();
+            }
+        }
+
+        function quickSearchMnemonic(term) {
+            document.getElementById('globalSearch').value = term;
+            performGlobalSearch();
+        }
+
+        function performGlobalSearch() {
+            const searchTerm = document.getElementById('globalSearch').value.trim().toLowerCase();
+            const resultsInfo = document.getElementById('searchResultsInfo');
+            
+            if (searchTerm.length < 2) {
+                resultsInfo.innerHTML = '⚠️ Please enter at least 2 characters to search.';
+                resultsInfo.className = 'search-results-info visible no-results';
+                return;
+            }
+
+            // Clear previous highlights
+            clearHighlights();
+
+            // Search through all content sections
+            let matchCount = 0;
+            let matchedSections = [];
+            const allTopicBoxes = document.querySelectorAll('.topic-box');
+            
+            allTopicBoxes.forEach(box => {
+                const content = box.textContent.toLowerCase();
+                const header = box.querySelector('.topic-header span:first-child');
+                
+                if (content.includes(searchTerm)) {
+                    matchCount++;
+                    
+                    // Expand this topic box
+                    box.classList.add('expanded');
+                    const icon = box.querySelector('.expand-icon');
+                    if (icon) icon.textContent = '−';
+                    
+                    // Get the section name
+                    if (header) {
+                        matchedSections.push(header.textContent.trim());
+                    }
+                    
+                    // Highlight matches in the content
+                    highlightMatches(box, searchTerm);
+                    
+                    // Add visual indicator to the box
+                    box.style.boxShadow = '0 0 0 3px #ffd93d, 0 4px 20px rgba(255, 217, 61, 0.4)';
+                }
+            });
+
+            // Also search in chapter cards
+            const chapterCards = document.querySelectorAll('.chapter-card');
+            chapterCards.forEach(card => {
+                if (card.textContent.toLowerCase().includes(searchTerm)) {
+                    highlightMatches(card, searchTerm);
+                }
+            });
+
+            // Show the relevant section
+            if (matchCount > 0) {
+                // Find which main section has the most matches
+                const sections = ['ch8', 'ch9', 'ch27', 'vocab', 'scenarios', 'quiz'];
+                let bestSection = null;
+                let bestCount = 0;
+                
+                sections.forEach(sectionId => {
+                    const section = document.getElementById(sectionId);
+                    if (section) {
+                        const sectionContent = section.textContent.toLowerCase();
+                        const sectionMatches = (sectionContent.match(new RegExp(searchTerm, 'gi')) || []).length;
+                        if (sectionMatches > bestCount) {
+                            bestCount = sectionMatches;
+                            bestSection = sectionId;
+                        }
+                    }
+                });
+                
+                if (bestSection) {
+                    showSection(bestSection);
+                }
+                
+                // Scroll to first match
+                const firstHighlight = document.querySelector('.search-highlight');
+                if (firstHighlight) {
+                    setTimeout(() => {
+                        firstHighlight.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 300);
+                }
+                
+                resultsInfo.innerHTML = `✅ Found <strong>${matchCount}</strong> section(s) matching "<strong>${searchTerm}</strong>"`;
+                resultsInfo.className = 'search-results-info visible';
+            } else {
+                resultsInfo.innerHTML = `❌ No results found for "<strong>${searchTerm}</strong>". Try different keywords.`;
+                resultsInfo.className = 'search-results-info visible no-results';
+            }
+            
+            searchActive = true;
+        }
+
+        function highlightMatches(element, searchTerm) {
+            const walker = document.createTreeWalker(
+                element,
+                NodeFilter.SHOW_TEXT,
+                null,
+                false
+            );
+            
+            const textNodes = [];
+            while (walker.nextNode()) {
+                if (walker.currentNode.textContent.toLowerCase().includes(searchTerm)) {
+                    textNodes.push(walker.currentNode);
+                }
+            }
+            
+            textNodes.forEach(node => {
+                const text = node.textContent;
+                const regex = new RegExp(`(${escapeRegExp(searchTerm)})`, 'gi');
+                
+                if (regex.test(text)) {
+                    const span = document.createElement('span');
+                    span.innerHTML = text.replace(regex, '<span class="search-highlight">$1</span>');
+                    node.parentNode.replaceChild(span, node);
+                }
+            });
+        }
+
+        function escapeRegExp(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        function clearGlobalSearch() {
+            document.getElementById('globalSearch').value = '';
+            document.getElementById('searchResultsInfo').className = 'search-results-info';
+            clearHighlights();
+            
+            // Reset topic box styles
+            document.querySelectorAll('.topic-box').forEach(box => {
+                box.style.boxShadow = '';
+            });
+            
+            searchActive = false;
+        }
+
+        function clearHighlights() {
+            // Remove highlight spans and restore original text
+            document.querySelectorAll('.search-highlight').forEach(highlight => {
+                const parent = highlight.parentNode;
+                parent.replaceChild(document.createTextNode(highlight.textContent), highlight);
+                parent.normalize();
+            });
+            
+            // Clean up wrapper spans
+            document.querySelectorAll('span:not([class])').forEach(span => {
+                if (span.childNodes.length === 1 && span.childNodes[0].nodeType === Node.TEXT_NODE) {
+                    span.parentNode.replaceChild(span.childNodes[0], span);
+                }
+            });
+            
+            // Reset topic box styles
+            document.querySelectorAll('.topic-box').forEach(box => {
+                box.style.boxShadow = '';
+            });
         }
     </script>
 </body>
