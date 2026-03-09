@@ -743,6 +743,29 @@
             box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
         }
 
+        .quiz-option.multi-select.selected {
+            border-color: #f59e0b;
+            background: rgba(245,158,11,0.15);
+        }
+
+        .quiz-option.multi-select.selected::before {
+            content: '✓ ';
+            color: #f59e0b;
+            font-weight: bold;
+        }
+
+        .hint-btn {
+            background: #6366f1 !important;
+        }
+
+        .hint-btn:hover {
+            background: #4f46e5 !important;
+        }
+
+        .quiz-question.answered .quiz-option {
+            cursor: default;
+        }
+
         /* Quick Reference Cards */
         .quick-ref-grid {
             display: grid;
@@ -3961,7 +3984,7 @@
                         <div class="quick-ref-card green">
                             <h4>🔴 Abdomen</h4>
                             <ul class="content-list">
-                                <li><strong>ORDER: I-A-P-P</strong> (Auscultate BEFORE touching!)</li>
+                                <li><strong>ORDER: I-A-P-P</strong> (Auscultate BEFORE touching! Palpate BEFORE Percuss!)</li>
                                 <li>Inspect: contour, symmetry, scars</li>
                                 <li>Auscultate: bowel sounds all 4 quadrants</li>
                                 <li>Percuss: tympany vs dullness</li>
@@ -4360,7 +4383,7 @@
                                 <div class="letter-title">Abdomen/GI</div>
                                 <div class="mnemonic-tooltip">
                                     <div class="tooltip-title">Abdominal/GI Assessment</div>
-                                    ORDER: Inspect → Auscultate → Percuss → Palpate. Check all 4 quadrants. Assess bowel function.
+                                    ORDER: Inspect → Auscultate → Palpate → Percuss. Check all 4 quadrants. Assess bowel function.
                                     <div class="tooltip-example">Look for: Distension, scars. Listen FIRST: Bowel sounds. Palpate LAST: Tenderness, masses. Ask: Pain? N/V? BMs? Blood in stool?</div>
                                 </div>
                             </div>
@@ -5545,7 +5568,7 @@
 
                     <div class="key-point important">
                         <div class="key-point-label">⚠️ EXCEPTION for Abdomen!</div>
-                        <p>For abdominal assessment, the order is: <strong>Inspection → Auscultation → Percussion → Palpation</strong></p>
+                        <p>For abdominal assessment, the order is: <strong>Inspection → Auscultation → Palpation → Percussion</strong></p>
                         <p><em>(Auscultate BEFORE percussion/palpation to avoid altering bowel sounds!)</em></p>
                         <p style="margin-top: 10px;"><strong>Why?</strong> Touching, pressing, or tapping the abdomen can stimulate or slow bowel activity, giving you inaccurate bowel sound assessment.</p>
                     </div>
@@ -6372,7 +6395,7 @@
                     <div class="key-point important">
                         <div class="key-point-label">⚠️ Critical Order!</div>
                         <p style="font-size: 1.2em; text-align: center;">
-                            <strong>Inspection → Auscultation → Percussion → Palpation</strong>
+                            <strong>Inspection → Auscultation → Palpation → Percussion</strong>
                         </p>
                         <p style="text-align: center;"><em>Auscultate BEFORE touching to avoid altering bowel sounds!</em></p>
                     </div>
@@ -8158,7 +8181,7 @@
                             <li>Subjective data = what the patient SAYS (symptoms); Objective data = what you can MEASURE (signs)</li>
                             <li>Four types of assessment: Comprehensive, Ongoing, Focused, Emergency (COFE)</li>
                             <li>Assessment techniques in order: Inspection → Palpation → Percussion → Auscultation (IPPA)</li>
-                            <li>EXCEPTION: Abdominal assessment = Inspection → Auscultation → Percussion → Palpation</li>
+                            <li>EXCEPTION: Abdominal assessment = Inspection → Auscultation → Palpation → Percussion</li>
                             <li>Sims' position is used for rectal and vaginal exams</li>
                             <li>Palpation assesses turgor (skin elasticity) - important for dehydration assessment</li>
                             <li>Wheezes are high-pitched, musical sounds indicating narrowed airways</li>
@@ -8341,185 +8364,798 @@
         <div id="quiz" class="content-section">
             <div class="chapter-card" style="border-left-color: #6bcb77;">
                 <h2>✏️ Practice Quiz - Unit 1</h2>
-                <p>Test your knowledge with NCLEX-style questions</p>
+                <p>Test your knowledge with challenging NCLEX, Next-Gen NCLEX & Doctoral-Level questions</p>
+            </div>
+
+            <!-- Quiz Progress Bar -->
+            <div id="quizProgressContainer" style="background: #2d2d44; border-radius: 15px; padding: 20px; margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+                    <h3 style="margin: 0; color: #a78bfa;">📊 Quiz Progress</h3>
+                    <div>
+                        <button onclick="resetQuizProgress()" style="background: #ef4444; color: white; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; margin-right: 10px;">🔄 Reset Progress</button>
+                        <button onclick="resetCurrentQuiz()" style="background: #f59e0b; color: white; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer;">🔃 New Quiz</button>
+                    </div>
+                </div>
+                <div style="background: #1a1a2e; border-radius: 10px; height: 30px; overflow: hidden; margin-bottom: 10px; position: relative;">
+                    <div id="quizProgressBar" style="background: linear-gradient(90deg, #6bcb77, #4ade80); height: 100%; width: 0%; transition: width 0.5s; border-radius: 10px;"></div>
+                    <span id="quizProgressText" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); color: white; font-weight: bold;">0%</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; color: #9ca3af; font-size: 0.9em; text-align: center;">
+                    <div style="background: #1a1a2e; padding: 10px; border-radius: 8px;">
+                        <div style="font-size: 1.5em; font-weight: bold; color: #a78bfa;" id="answeredCount">0</div>
+                        <div>Answered</div>
+                    </div>
+                    <div style="background: #1a1a2e; padding: 10px; border-radius: 8px;">
+                        <div style="font-size: 1.5em; font-weight: bold; color: #4ade80;" id="correctCount">0</div>
+                        <div>Correct</div>
+                    </div>
+                    <div style="background: #1a1a2e; padding: 10px; border-radius: 8px;">
+                        <div style="font-size: 1.5em; font-weight: bold; color: #f87171;" id="incorrectCount">0</div>
+                        <div>Incorrect</div>
+                    </div>
+                    <div style="background: #1a1a2e; padding: 10px; border-radius: 8px;">
+                        <div style="font-size: 1.5em; font-weight: bold; color: #fbbf24;" id="quizScore">0%</div>
+                        <div>Score</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Missed Questions Vault Button -->
+            <button id="showVaultBtn" onclick="toggleMissedVault()" style="display: none; background: linear-gradient(135deg, #f87171, #ef4444); color: white; border: none; padding: 15px 20px; border-radius: 12px; cursor: pointer; margin-bottom: 20px; width: 100%; font-size: 1.1em; font-weight: bold;">
+                📚 Open Missed Questions Vault (<span id="missedCount">0</span> questions to review)
+            </button>
+
+            <!-- Missed Questions Vault -->
+            <div id="missedQuestionsVault" style="background: linear-gradient(135deg, #2d2d44, #1a1a2e); border: 2px solid #f87171; border-radius: 15px; padding: 20px; margin-bottom: 20px; display: none;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="margin: 0; color: #f87171;">📚 Missed Questions Vault - Study These!</h3>
+                    <button onclick="toggleMissedVault()" style="background: #6366f1; color: white; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer;">✕ Close</button>
+                </div>
+                <p style="color: #fbbf24; margin-bottom: 15px; font-style: italic;">💡 Click on each section link to review the topic in the study guide!</p>
+                <div id="missedQuestionsList"></div>
+                <button onclick="clearMissedQuestions()" style="background: #10b981; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-top: 15px;">✅ Clear Vault (I've Studied These!)</button>
             </div>
 
             <div id="quizContainer">
                 <!-- Questions will be loaded here by JavaScript -->
             </div>
 
-            <div style="text-align: center; margin-top: 30px;">
-                <button onclick="loadNewQuiz()" class="check-answer-btn">🔄 Load New Questions</button>
+            <div style="text-align: center; margin-top: 30px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+                <button onclick="loadNewQuiz(10)" class="check-answer-btn">🎯 Quick Quiz (10)</button>
+                <button onclick="loadNewQuiz(20)" class="check-answer-btn" style="background: #8b5cf6;">📝 Standard Quiz (20)</button>
+                <button onclick="loadNewQuiz(quizQuestions.length)" class="check-answer-btn" style="background: #ec4899;">🏆 Full Exam (All)</button>
             </div>
         </div>
 
     </div>
 
     <script>
-        // Quiz Questions Database
+        // Quiz Questions Database - Advanced NCLEX, Next-Gen NCLEX & Doctoral-Level Questions
         const quizQuestions = [
+            // CHAPTER 8: COMMUNICATION
             {
-                question: "A nurse reassuring oneself of being prepared to speak in front of a peer group is using which type of communication?",
-                options: ["Intrapersonal", "Interpersonal", "Group", "Organizational"],
-                correct: 0,
-                rationale: "Intrapersonal communication is self-talk that happens within the individual. The nurse is talking to themselves internally."
-            },
-            {
-                question: "Touch is a personal behavior that means the same thing to all persons.",
-                options: ["True", "False"],
-                correct: 1,
-                rationale: "Touch is a personal behavior that means DIFFERENT things to different people. Cultural backgrounds, personal experiences, and individual preferences all affect how touch is perceived."
-            },
-            {
-                question: "Which activity occurs during the ORIENTATION phase of the helping relationship?",
+                question: "A nurse is caring for a patient who becomes increasingly agitated and states, 'You're all incompetent! I want a different nurse!' Which response demonstrates the MOST therapeutic communication?",
                 options: [
-                    "An agreement or contract about the relationship is established",
-                    "The nurse provides assistance needed to achieve patient goals",
-                    "The nurse provides patient counseling and teaching",
-                    "Goals are examined for indications of attainment"
+                    "I understand you're frustrated. Let me get my charge nurse to speak with you.",
+                    "I can see you're upset. Can you tell me what's bothering you so I can help?",
+                    "I'm sorry you feel that way. I'll try to do better.",
+                    "That's not fair. I've been doing everything I can for you."
                 ],
-                correct: 0,
-                rationale: "In the orientation phase, a contract is made defining goals, frequency, location, length of contacts, and duration. Assistance, counseling, and teaching occur in the working phase. Examining goals occurs in termination."
-            },
-            {
-                question: "An open-ended question serves to validate what the nurse believes is heard or observed.",
-                options: ["True", "False"],
                 correct: 1,
-                rationale: "A VALIDATING question (not open-ended) serves to validate what the nurse believes is heard or observed. Open-ended questions allow free expression."
+                rationale: "The therapeutic response acknowledges the patient's feelings AND invites them to express concerns. Option A avoids the issue. Option C is passive and doesn't address the underlying problem. Option D is defensive.",
+                hint: "Think about what validates the patient's feelings while keeping the conversation open for problem-solving.",
+                studySection: "Chapter 8: Communication - Therapeutic Communication",
+                chapter: "ch8",
+                difficulty: "hard"
             },
             {
-                question: "Which action is an example of COGNITIVE learning?",
+                question: "A patient who recently immigrated from Japan avoids eye contact during the health history interview. The nurse should interpret this behavior as:",
                 options: [
-                    "A patient demonstrates how to change their wound dressing",
-                    "A new mother follows instructions for umbilical cord care",
-                    "A patient describes how to portion food for calorie counting",
-                    "A patient expresses renewed confidence after teaching"
+                    "A sign of depression requiring further assessment",
+                    "Possible indication of deception or withholding information",
+                    "A culturally appropriate sign of respect",
+                    "Evidence of cognitive impairment"
                 ],
                 correct: 2,
-                rationale: "Cognitive learning involves storing and recalling new knowledge (describing food portions). Demonstrating is psychomotor. Following instructions is psychomotor. Expressing confidence is affective."
+                rationale: "In many Asian cultures, avoiding direct eye contact with authority figures is a sign of respect, not evasion or pathology. Cultural competence requires understanding these differences.",
+                hint: "Consider cultural variations in nonverbal communication. What might be 'normal' varies by culture.",
+                studySection: "Chapter 9: Cultural Competence in Teaching",
+                chapter: "ch9",
+                difficulty: "medium"
             },
             {
-                question: "Most adults' orientation to learning is that material should be useful immediately, rather than in the future.",
-                options: ["True", "False"],
+                question: "During shift report, a nurse uses SBAR communication. Which statement belongs in the 'A' component?",
+                options: [
+                    "The patient was admitted yesterday for chest pain.",
+                    "The patient's blood pressure is 88/52 and has dropped 20 points in the last hour.",
+                    "I believe the patient may be going into cardiogenic shock.",
+                    "I recommend a bolus and notifying the rapid response team."
+                ],
+                correct: 2,
+                rationale: "A = Assessment (what YOU think is the problem). S = Situation (what's happening now - BP dropping). B = Background (admitted for chest pain). R = Recommendation (bolus, rapid response).",
+                hint: "SBAR: Situation, Background, Assessment, Recommendation. 'A' is YOUR clinical judgment.",
+                studySection: "Chapter 8: Communication - SBAR",
+                chapter: "ch8",
+                difficulty: "medium"
+            },
+            {
+                question: "[SELECT ALL THAT APPLY] Which nursing actions demonstrate blocks to therapeutic communication? Select all that apply.",
+                options: [
+                    "Offering false reassurance by saying 'Everything will be fine'",
+                    "Asking 'Why did you stop taking your medication?'",
+                    "Using silence to allow the patient time to think",
+                    "Changing the subject when the patient mentions death",
+                    "Giving advice by saying 'If I were you, I would...'"
+                ],
+                correct: [0, 1, 3, 4],
+                rationale: "Blocks include: false reassurance (A), asking 'why' questions which can sound judgmental (B), changing subjects to avoid uncomfortable topics (D), and giving personal advice (E). Silence (C) is a therapeutic technique that allows reflection.",
+                hint: "Look for responses that shut down communication, avoid topics, or impose the nurse's views.",
+                studySection: "Chapter 8: Communication - Blocks to Communication",
+                chapter: "ch8",
+                difficulty: "hard",
+                type: "sata"
+            },
+            {
+                question: "A patient in the termination phase of the nurse-patient relationship states, 'I don't know what I'll do without you.' The nurse's BEST response is:",
+                options: [
+                    "You'll be fine. You've learned so much.",
+                    "I'll miss you too. You've been a great patient.",
+                    "It sounds like you're worried about managing on your own. Let's review your support system.",
+                    "Don't worry, you can always call the unit if you need help."
+                ],
+                correct: 2,
+                rationale: "The therapeutic response acknowledges the patient's concern and redirects to problem-solving (reviewing support systems). This maintains professional boundaries while addressing the underlying anxiety about self-management.",
+                hint: "Focus on the patient's feelings AND promoting independence. Avoid creating dependency.",
+                studySection: "Chapter 8: Phases of Therapeutic Relationship",
+                chapter: "ch8",
+                difficulty: "hard"
+            },
+            {
+                question: "A nurse notices that a patient's verbal message ('I'm fine') conflicts with nonverbal cues (tearful, avoiding eye contact). This is an example of:",
+                options: [
+                    "Incongruent communication",
+                    "Assertive communication",
+                    "Intrapersonal communication",
+                    "Aggressive communication"
+                ],
                 correct: 0,
-                rationale: "According to Knowles' Adult Learning Theory, adults want to use what they learn RIGHT NOW, not at some future time. This is a key assumption about adult learners."
+                rationale: "Incongruent communication occurs when verbal and nonverbal messages don't match. The nurse should address this discrepancy therapeutically.",
+                hint: "When words say one thing but body language says another, what is that called?",
+                studySection: "Chapter 8: Communication - Nonverbal Communication",
+                chapter: "ch8",
+                difficulty: "easy"
+            },
+            // CHAPTER 9: TEACHING & COUNSELING
+            {
+                question: "A nurse is teaching insulin injection to a 72-year-old patient with mild arthritis and presbyopia. Which teaching strategy is MOST appropriate?",
+                options: [
+                    "Provide a detailed written pamphlet with all injection information",
+                    "Show a video demonstration and provide a return demonstration kit with large-print instructions",
+                    "Explain the procedure verbally and have the patient repeat back the steps",
+                    "Give the patient the hospital's standard insulin teaching packet"
+                ],
+                correct: 1,
+                rationale: "For older adults with visual and dexterity changes, multi-modal teaching (visual demo + hands-on practice) with accommodations (large print) is most effective. Standard packets don't account for individual needs.",
+                hint: "Consider age-related changes (vision, dexterity) and adult learning principles (hands-on practice).",
+                studySection: "Chapter 9: Teaching Older Adults & Psychomotor Learning",
+                chapter: "ch9",
+                difficulty: "medium"
             },
             {
-                question: "What is the BEST teaching strategy to teach a patient how to care for an indwelling catheter?",
-                options: ["Lecture", "Role modeling", "Discovery", "Demonstration"],
+                question: "According to Knowles' Adult Learning Theory, which statement BEST reflects how adults learn?",
+                options: [
+                    "Adults prefer teacher-directed learning with structured content",
+                    "Adults learn best when they understand the immediate relevance to their lives",
+                    "Adults require more repetition than younger learners",
+                    "Adults prefer to learn new information separate from their life experiences"
+                ],
+                correct: 1,
+                rationale: "Knowles' theory states adults are self-directed, bring life experience, want immediate application, and are problem-centered rather than content-centered.",
+                hint: "Adults want to know 'Why do I need to learn this NOW?' They're practical learners.",
+                studySection: "Chapter 9: Adult Learning Theory (Knowles)",
+                chapter: "ch9",
+                difficulty: "medium"
+            },
+            {
+                question: "A patient with newly diagnosed heart failure asks the nurse, 'Why should I weigh myself every day?' This question indicates the patient is in which stage of learning readiness?",
+                options: [
+                    "Affective - expressing feelings about the diagnosis",
+                    "Cognitive - seeking to understand the rationale",
+                    "Psychomotor - ready to perform the skill",
+                    "Motivational - resistant to learning"
+                ],
+                correct: 1,
+                rationale: "The patient is asking 'why' - seeking knowledge and understanding, which is the cognitive domain. This shows readiness to learn the reasoning behind the recommendation.",
+                hint: "What domain of learning involves understanding, reasoning, and 'knowing why'?",
+                studySection: "Chapter 9: Learning Domains - Cognitive",
+                chapter: "ch9",
+                difficulty: "medium"
+            },
+            {
+                question: "[PRIORITIZATION] A nurse must teach a newly diagnosed diabetic patient. Rank the following teaching priorities from FIRST to LAST:",
+                options: [
+                    "Long-term complications of diabetes",
+                    "Signs and symptoms of hypoglycemia",
+                    "How to use a glucometer",
+                    "Dietary modifications for optimal control"
+                ],
+                correct: [1, 2, 3, 0],
+                rationale: "Priority order: 1) Hypoglycemia recognition (safety/survival), 2) Glucometer use (immediate self-monitoring), 3) Diet (daily management), 4) Long-term complications (important but not urgent). Teach survival skills first!",
+                hint: "Think Maslow's hierarchy and survival skills. What could KILL the patient first?",
+                studySection: "Chapter 9: Teaching Priorities - Survival Skills First",
+                chapter: "ch9",
+                difficulty: "hard",
+                type: "ordered"
+            },
+            {
+                question: "A patient demonstrates correct insulin injection technique but states, 'I still don't believe I really need to do this every day.' Which domain of learning needs reinforcement?",
+                options: [
+                    "Cognitive",
+                    "Psychomotor",
+                    "Affective",
+                    "Behavioral"
+                ],
+                correct: 2,
+                rationale: "The patient can perform the skill (psychomotor achieved) but hasn't accepted/internalized the need (affective domain). Affective learning involves attitudes, values, and beliefs.",
+                hint: "The patient CAN do it but doesn't BELIEVE in it. Which domain deals with attitudes and acceptance?",
+                studySection: "Chapter 9: Learning Domains - Affective",
+                chapter: "ch9",
+                difficulty: "medium"
+            },
+            {
+                question: "Which patient statement indicates that health teaching about warfarin has been effective?",
+                options: [
+                    "I will take aspirin if I get a headache",
+                    "I will eat the same amount of leafy greens each week",
+                    "I will double my dose if I miss one",
+                    "I will stop taking it when I feel better"
+                ],
+                correct: 1,
+                rationale: "Vitamin K (in leafy greens) affects warfarin. The key is CONSISTENCY, not avoidance. Taking aspirin increases bleeding risk. Never double doses. Warfarin is lifelong for most indications.",
+                hint: "Warfarin + Vitamin K interaction. The goal isn't to avoid greens but to be CONSISTENT.",
+                studySection: "Chapter 9: Evaluating Teaching Effectiveness",
+                chapter: "ch9",
+                difficulty: "hard"
+            },
+            // CHAPTER 27: HEALTH ASSESSMENT
+            {
+                question: "During abdominal assessment, the nurse auscultates before palpating. The PRIMARY rationale for this sequence is:",
+                options: [
+                    "To establish rapport with the patient before touching",
+                    "To prevent alteration of bowel sounds from manipulation",
+                    "To identify areas of tenderness before palpation",
+                    "To allow time for the patient to relax"
+                ],
+                correct: 1,
+                rationale: "Palpation and percussion can stimulate or inhibit peristalsis, altering bowel sounds. Therefore, auscultation must be performed BEFORE any manipulation of the abdomen.",
+                hint: "Think about what touching the abdomen might do to the intestines and their sounds.",
+                studySection: "Chapter 27: Abdominal Assessment - Order of Techniques",
+                chapter: "ch27",
+                difficulty: "medium"
+            },
+            {
+                question: "A nurse assesses a patient's pupils and documents 'PERRLA.' The 'A' in this abbreviation refers to:",
+                options: [
+                    "Alignment",
+                    "Accommodation",
+                    "Acuity",
+                    "Aperture"
+                ],
+                correct: 1,
+                rationale: "PERRLA = Pupils Equal, Round, Reactive to Light and Accommodation. Accommodation is the pupillary constriction that occurs when focusing on a near object.",
+                hint: "This tests how pupils respond when you move your finger toward the patient's nose.",
+                studySection: "Chapter 27: Eye Assessment - PERRLA",
+                chapter: "ch27",
+                difficulty: "easy"
+            },
+            {
+                question: "An 82-year-old patient is admitted with confusion. The family states, 'She was fine yesterday.' Which assessment finding would be MOST concerning?",
+                options: [
+                    "Blood pressure 142/88 mmHg",
+                    "Temperature 99.8°F (37.7°C)",
+                    "Heart rate 88 bpm, regular",
+                    "Pupils 3mm, equal, reactive"
+                ],
+                correct: 1,
+                rationale: "In older adults, acute confusion is often the FIRST and sometimes ONLY sign of infection. Even low-grade fever in an elderly patient with acute mental status change suggests infection (often UTI or pneumonia).",
+                hint: "In older adults, confusion is often the first sign of what common problem? Even mild fever is significant!",
+                studySection: "Chapter 27: Assessing the Older Adult - Atypical Presentations",
+                chapter: "ch27",
+                difficulty: "hard"
+            },
+            {
+                question: "[SELECT ALL THAT APPLY] Which findings during a head-to-toe assessment require IMMEDIATE notification of the provider? Select all that apply.",
+                options: [
+                    "Unequal pupils with altered level of consciousness",
+                    "Crackles in lung bases bilaterally",
+                    "Absent bowel sounds for 2 minutes",
+                    "Tracheal deviation to the left",
+                    "New onset confusion in a 78-year-old"
+                ],
+                correct: [0, 3, 4],
+                rationale: "Unequal pupils + altered LOC = possible herniation (emergency). Tracheal deviation = tension pneumothorax (emergency). New confusion in elderly = possible stroke, infection, or other acute process. Bilateral crackles need assessment but aren't always emergent. Must auscultate bowel sounds for 5 minutes before documenting absent.",
+                hint: "Think about what could indicate immediately life-threatening conditions vs. concerning but not emergent findings.",
+                studySection: "Chapter 27: Red Flags in Assessment",
+                chapter: "ch27",
+                difficulty: "hard",
+                type: "sata"
+            },
+            {
+                question: "When assessing a patient using the FOUR Score coma scale, the nurse notes: eyes open to loud voice, makes a fist on command, pupil and corneal reflexes present, patient is intubated and breathing above the ventilator rate. What is the total FOUR Score?",
+                options: [
+                    "12",
+                    "13",
+                    "14",
+                    "15"
+                ],
+                correct: 1,
+                rationale: "Eye (opens to loud voice) = 2. Motor (fist on command) = 4. Brainstem (pupil AND corneal present) = 4. Respiration (intubated, breathes above vent) = 3. Total = 2+4+4+3 = 13",
+                hint: "FOUR Score: Eye (0-4), Motor (0-4), Brainstem (0-4), Respiration (0-4). Add them up!",
+                studySection: "Chapter 27: FOUR Score Coma Scale",
+                chapter: "ch27",
+                difficulty: "hard"
+            },
+            {
+                question: "The nurse is assessing a patient's extraocular movements (EOMs). Which cranial nerves are being tested?",
+                options: [
+                    "CN II, III, IV",
+                    "CN III, IV, VI",
+                    "CN V, VII, IX",
+                    "CN I, II, III"
+                ],
+                correct: 1,
+                rationale: "EOMs test CN III (oculomotor), CN IV (trochlear), and CN VI (abducens). Remember: LR6 SO4 AO3 - Lateral Rectus is CN6, Superior Oblique is CN4, All Others are CN3.",
+                hint: "Remember LR6 SO4 AO3. Which three cranial nerves control eye movement?",
+                studySection: "Chapter 27: EOMs and Cranial Nerves",
+                chapter: "ch27",
+                difficulty: "medium"
+            },
+            {
+                question: "During cardiac auscultation, the nurse hears a murmur best at the 5th intercostal space, left midclavicular line. This is the:",
+                options: [
+                    "Aortic area",
+                    "Pulmonic area",
+                    "Tricuspid area",
+                    "Mitral (apical) area"
+                ],
                 correct: 3,
-                rationale: "Demonstration of techniques, procedures, and equipment, combined with practice, is the most effective strategy for psychomotor learning like catheter care."
+                rationale: "The mitral/apical area is at the 5th ICS, left MCL. This is also where S1 is loudest and the PMI is located. Remember 'APE To Man' - Mitral is last and lowest.",
+                hint: "APE To Man: Aortic (2nd R), Pulmonic (2nd L), Erb's (3rd L), Tricuspid (4th L), Mitral (5th L MCL).",
+                studySection: "Chapter 27: Heart Auscultation Sites - APE To Man",
+                chapter: "ch27",
+                difficulty: "medium"
             },
             {
-                question: "Long-term counseling is often appropriate for a person experiencing a developmental crisis.",
-                options: ["True", "False"],
+                question: "A nurse is assessing an older adult's skin turgor. The BEST location to assess is:",
+                options: [
+                    "Back of the hand",
+                    "Forearm",
+                    "Forehead or sternum",
+                    "Abdomen"
+                ],
+                correct: 2,
+                rationale: "In older adults, skin on extremities naturally loses elasticity with age, making it unreliable for turgor assessment. The forehead or sternum retains elasticity longer and provides more accurate assessment.",
+                hint: "Older adults have naturally decreased skin elasticity on extremities. Where is skin turgor more reliable?",
+                studySection: "Chapter 27: Assessing the Older Adult - Integumentary Changes",
+                chapter: "ch27",
+                difficulty: "medium"
+            },
+            {
+                question: "Which assessment finding is considered NORMAL in a healthy 75-year-old patient?",
+                options: [
+                    "Sudden onset confusion",
+                    "S4 heart sound",
+                    "Absent bowel sounds",
+                    "Fixed, dilated pupils"
+                ],
+                correct: 1,
+                rationale: "S4 (atrial gallop) can be normal in older adults due to decreased ventricular compliance. Sudden confusion, absent bowel sounds, and fixed pupils are NEVER normal at any age.",
+                hint: "What heart sound can be normal in elderly due to a stiffer left ventricle?",
+                studySection: "Chapter 27: Assessing the Older Adult - Cardiovascular Changes",
+                chapter: "ch27",
+                difficulty: "medium"
+            },
+            {
+                question: "[CASE STUDY] A 68-year-old female presents with fatigue and weakness. Assessment reveals: BP 142/88, HR 92 irregular, pale conjunctiva, smooth tongue, spoon-shaped nails. Based on these findings, which condition is MOST likely?",
+                options: [
+                    "Hyperthyroidism",
+                    "Iron deficiency anemia",
+                    "Heart failure",
+                    "Vitamin D deficiency"
+                ],
+                correct: 1,
+                rationale: "Classic signs of iron deficiency anemia include: pallor (pale conjunctiva), glossitis (smooth tongue), koilonychia (spoon-shaped nails), fatigue, and weakness. The irregular HR may be secondary to anemia.",
+                hint: "Look at the combination: pallor + smooth tongue + spoon nails. What nutritional deficiency causes all three?",
+                studySection: "Chapter 27: Nutritional Assessment - Clinical Signs",
+                chapter: "ch27",
+                difficulty: "hard"
+            },
+            {
+                question: "When performing a respiratory assessment, the nurse notes increased tactile fremitus over the right lower lobe. This finding suggests:",
+                options: [
+                    "Pneumothorax",
+                    "Pleural effusion",
+                    "Consolidation (pneumonia)",
+                    "Emphysema"
+                ],
+                correct: 2,
+                rationale: "Increased fremitus indicates consolidated (solid) lung tissue, as seen in pneumonia. Sound travels better through solid than air. Decreased fremitus occurs with pneumothorax, effusion, and emphysema (all involve air or fluid).",
+                hint: "Fremitus is vibration. Does sound travel better through solid tissue or air/fluid?",
+                studySection: "Chapter 27: Thorax and Lung Assessment",
+                chapter: "ch27",
+                difficulty: "hard"
+            },
+            {
+                question: "A nurse is assessing a male patient's genitalia and notes the foreskin is retracted and cannot be returned to its normal position over the glans. This is called:",
+                options: [
+                    "Phimosis",
+                    "Paraphimosis",
+                    "Epispadias",
+                    "Hypospadias"
+                ],
+                correct: 1,
+                rationale: "Paraphimosis is when the foreskin is stuck in the retracted position - this is a UROLOGIC EMERGENCY as it can cause ischemia. Phimosis is inability to retract. Epispadias/hypospadias are urethral opening malpositions.",
+                hint: "Para- means beside/beyond. The foreskin is stuck BEYOND its normal position. This is an emergency!",
+                studySection: "Chapter 27: Male Genitalia Assessment",
+                chapter: "ch27",
+                difficulty: "medium"
+            },
+            {
+                question: "During an abdominal assessment, the nurse percusses dullness in the left upper quadrant that shifts when the patient turns to the side. This finding suggests:",
+                options: [
+                    "Enlarged spleen",
+                    "Ascites",
+                    "Full bladder",
+                    "Constipation"
+                ],
+                correct: 1,
+                rationale: "Shifting dullness is a classic sign of ascites (fluid in the peritoneal cavity). Fluid shifts with gravity when the patient changes position. Organ enlargement doesn't shift.",
+                hint: "What in the abdomen would SHIFT when the patient moves? Think about fluid vs. organs.",
+                studySection: "Chapter 27: Abdominal Assessment - Percussion Findings",
+                chapter: "ch27",
+                difficulty: "hard"
+            },
+            {
+                question: "Which respiratory pattern would the nurse expect in a patient with diabetic ketoacidosis (DKA)?",
+                options: [
+                    "Cheyne-Stokes respirations",
+                    "Kussmaul respirations",
+                    "Biot's respirations",
+                    "Apneustic respirations"
+                ],
+                correct: 1,
+                rationale: "Kussmaul respirations (deep, rapid breathing) occur in metabolic acidosis as the body attempts to blow off CO2 to compensate. This is classic in DKA.",
+                hint: "In metabolic acidosis, how does the body try to compensate through breathing?",
+                studySection: "Chapter 27: Respiratory Assessment Patterns",
+                chapter: "ch27",
+                difficulty: "medium"
+            },
+            {
+                question: "A patient has a Glasgow Coma Scale score of 9 (E2, V3, M4). This score indicates:",
+                options: [
+                    "Mild brain injury",
+                    "Moderate brain injury",
+                    "Severe brain injury",
+                    "Normal neurological status"
+                ],
+                correct: 1,
+                rationale: "GCS interpretation: 13-15 = mild, 9-12 = moderate, 3-8 = severe. A score of 9 falls in the moderate range.",
+                hint: "GCS ranges: 13-15 mild, 9-12 moderate, 3-8 severe. Where does 9 fall?",
+                studySection: "Chapter 27: Glasgow Coma Scale",
+                chapter: "ch27",
+                difficulty: "easy"
+            },
+            {
+                question: "[NEXT-GEN NCLEX - CLOZE] Complete the statement: When assessing bowel sounds, the nurse should listen for at least _____ minutes in each quadrant before documenting _____ bowel sounds.",
+                options: [
+                    "1 minute; hypoactive",
+                    "2 minutes; absent",
+                    "5 minutes; absent",
+                    "3 minutes; hyperactive"
+                ],
+                correct: 2,
+                rationale: "The nurse must listen for a full 5 minutes before documenting ABSENT bowel sounds. This prevents false documentation of absent sounds when they may just be infrequent.",
+                hint: "How long is long enough to confirm there are truly NO sounds? Think about being certain.",
+                studySection: "Chapter 27: Abdominal Assessment - Auscultation",
+                chapter: "ch27",
+                difficulty: "medium"
+            },
+            {
+                question: "During a psychosocial assessment, an older adult patient states, 'I don't have any reason to get up in the morning anymore.' The nurse's PRIORITY action is to:",
+                options: [
+                    "Document the statement and continue the assessment",
+                    "Ask the patient if they are having thoughts of suicide",
+                    "Reassure the patient that things will get better",
+                    "Refer the patient to the chaplain"
+                ],
+                correct: 1,
+                rationale: "This statement may indicate depression or suicidal ideation. The nurse must directly assess for suicide risk. Never assume - always ask directly. This is a safety priority.",
+                hint: "This could be a statement of hopelessness. What is the SAFETY priority?",
+                studySection: "Chapter 27: Psychosocial Assessment - Red Flags",
+                chapter: "ch27",
+                difficulty: "hard"
+            },
+            {
+                question: "A nurse is assessing a patient's jugular venous distension (JVD). At what angle should the patient be positioned?",
+                options: [
+                    "Supine (flat)",
+                    "30 degrees",
+                    "45 degrees",
+                    "90 degrees (sitting upright)"
+                ],
+                correct: 2,
+                rationale: "JVD should be assessed with the patient at 45 degrees. At this angle, visible JVD above the clavicle indicates elevated central venous pressure (right heart failure, fluid overload).",
+                hint: "Not too flat (JVD appears in everyone), not too upright (JVD disappears). What's the middle ground?",
+                studySection: "Chapter 27: Cardiovascular Assessment - JVD",
+                chapter: "ch27",
+                difficulty: "medium"
+            },
+            {
+                question: "Which finding during a breast examination requires immediate follow-up?",
+                options: [
+                    "Bilateral breast tenderness before menstruation",
+                    "Symmetric nipple inversion present since puberty",
+                    "Unilateral bloody nipple discharge",
+                    "Mobile, rubbery, well-defined mass in a 22-year-old"
+                ],
+                correct: 2,
+                rationale: "Unilateral bloody nipple discharge is a red flag for breast cancer and requires immediate investigation. Bilateral tenderness is often hormonal. Lifelong symmetric inversion is normal. Mobile rubbery masses in young women are often fibroadenomas.",
+                hint: "Which finding is UNILATERAL and involves BLOOD? These are cancer warning signs.",
+                studySection: "Chapter 27: Breast Assessment",
+                chapter: "ch27",
+                difficulty: "hard"
+            },
+            {
+                question: "When documenting lymph node findings, which characteristic is MOST concerning for malignancy?",
+                options: [
+                    "Tender, mobile, soft nodes",
+                    "Hard, fixed, non-tender nodes",
+                    "Bilateral, symmetrically enlarged nodes",
+                    "Nodes that decrease in size over 2 weeks"
+                ],
+                correct: 1,
+                rationale: "Malignant lymph nodes are typically: hard, fixed (matted/attached to surrounding tissue), non-tender, and unilateral. Tender, mobile nodes suggest infection. Nodes that shrink are responding to treatment.",
+                hint: "Cancer nodes are 'stuck' and hard. Infection nodes are 'squishy' and hurt.",
+                studySection: "Chapter 27: Head and Neck Assessment - Lymph Nodes",
+                chapter: "ch27",
+                difficulty: "medium"
+            },
+            {
+                question: "[MATRIX/MULTIPLE RESPONSE] Match the adventitious breath sound with its MOST likely cause:",
+                options: [
+                    "Fine crackles - Pulmonary fibrosis, early heart failure",
+                    "Coarse crackles - Pneumonia, bronchiectasis",
+                    "Wheezes - Asthma, COPD, bronchospasm",
+                    "Stridor - Upper airway obstruction (emergency)"
+                ],
+                correct: [0, 1, 2, 3],
+                rationale: "Fine crackles = interstitial disease, early CHF. Coarse crackles = secretions in large airways. Wheezes = narrowed airways. Stridor = upper airway obstruction requiring immediate intervention.",
+                hint: "Think about where in the respiratory tract each sound originates and what causes narrowing/fluid there.",
+                studySection: "Chapter 27: Lung Sounds - Clinical Correlations",
+                chapter: "ch27",
+                difficulty: "hard",
+                type: "matrix"
+            },
+            {
+                question: "A nurse is performing the Romberg test. The patient sways significantly with eyes closed. This indicates dysfunction of the:",
+                options: [
+                    "Cerebellum only",
+                    "Vestibular system or proprioception",
+                    "Motor cortex",
+                    "Visual system"
+                ],
+                correct: 1,
+                rationale: "The Romberg test assesses proprioception and vestibular function. Positive Romberg (swaying with eyes closed) indicates the patient relies on vision to maintain balance because proprioception or vestibular function is impaired.",
+                hint: "With eyes closed, what systems are you relying on for balance? If you sway, which is impaired?",
+                studySection: "Chapter 27: Neurological Assessment",
+                chapter: "ch27",
+                difficulty: "hard"
+            },
+            {
+                question: "During assessment of an 80-year-old patient, which finding would require further investigation rather than being attributed to normal aging?",
+                options: [
+                    "Decreased height of 2 inches since age 40",
+                    "Bilateral hearing loss for high-frequency sounds",
+                    "Unilateral leg weakness with facial droop",
+                    "Kyphosis with mild decrease in chest expansion"
+                ],
+                correct: 2,
+                rationale: "Unilateral weakness with facial droop suggests stroke - NEVER normal aging. Height loss, presbycusis (high-frequency hearing loss), and kyphosis are expected age-related changes.",
+                hint: "Which finding is UNILATERAL or suggests a new neurological event? Aging changes are usually bilateral and gradual.",
+                studySection: "Chapter 27: Assessing the Older Adult - What's Normal vs Abnormal",
+                chapter: "ch27",
+                difficulty: "medium"
+            },
+            {
+                question: "The nurse assesses capillary refill in a patient. Which finding indicates adequate peripheral perfusion?",
+                options: [
+                    "Color returns in 5 seconds",
+                    "Color returns in less than 3 seconds",
+                    "Nail beds remain pale for 4 seconds",
+                    "Capillary refill is brisk but skin is cool"
+                ],
+                correct: 1,
+                rationale: "Normal capillary refill is less than 3 seconds. Delayed refill (>3 seconds) indicates poor peripheral perfusion. Cool skin with brisk refill may indicate compensation or environmental factors.",
+                hint: "What's the magic number for capillary refill? Less than ___ seconds is normal.",
+                studySection: "Chapter 27: Cardiovascular Assessment - Peripheral Perfusion",
+                chapter: "ch27",
+                difficulty: "easy"
+            },
+            {
+                question: "A patient's morning weight is 3 kg higher than yesterday. This is equivalent to approximately how much fluid retention?",
+                options: [
+                    "1 liter",
+                    "2 liters",
+                    "3 liters",
+                    "5 liters"
+                ],
+                correct: 2,
+                rationale: "1 kg of weight gain = approximately 1 liter of fluid retention. Therefore, 3 kg = approximately 3 liters of fluid. This is significant and should be reported.",
+                hint: "1 kg = 1 liter of water. Simple math!",
+                studySection: "Chapter 27: Nutritional Assessment - Weight Monitoring",
+                chapter: "ch27",
+                difficulty: "easy"
+            },
+            {
+                question: "[DRAG AND DROP] Arrange the components of a comprehensive health history in the correct order:",
+                options: [
+                    "1) Biographical data → 2) Chief complaint → 3) History of present illness → 4) Past health history → 5) Family history → 6) Review of systems",
+                    "1) Chief complaint → 2) Biographical data → 3) Past health history → 4) History of present illness → 5) Review of systems → 6) Family history",
+                    "1) Review of systems → 2) Chief complaint → 3) History of present illness → 4) Biographical data → 5) Family history → 6) Past health history",
+                    "1) History of present illness → 2) Chief complaint → 3) Biographical data → 4) Family history → 5) Past health history → 6) Review of systems"
+                ],
                 correct: 0,
-                rationale: "Long-term counseling is appropriate for DEVELOPMENTAL crises (life stage transitions). Short-term counseling is for SITUATIONAL crises (acute events)."
-            },
-            {
-                question: "A patient's report of dizziness would be an example of subjective data.",
-                options: ["True", "False"],
-                correct: 0,
-                rationale: "Subjective data is known only by the patient, based on patient experiences or perceptions, and reported by the patient in their own words."
-            },
-            {
-                question: "The primary source of data for the health history is the patient's significant others.",
-                options: ["True", "False"],
-                correct: 1,
-                rationale: "The PRIMARY source of data for the health history is the PATIENT, not family members or significant others."
-            },
-            {
-                question: "Which position is used to assess the rectum of a patient?",
-                options: ["Supine", "Sims'", "Prone", "Dorsal recumbent"],
-                correct: 1,
-                rationale: "Sims' position (side-lying) is used to assess the rectum and vagina. Supine and dorsal recumbent assess head, neck, thorax. Prone assesses hip joint and posterior thorax."
-            },
-            {
-                question: "Which physical assessment technique uses the sense of touch to assess temperature, turgor, and texture?",
-                options: ["Inspection", "Percussion", "Palpation", "Auscultation"],
-                correct: 2,
-                rationale: "Palpation uses touch to assess temperature, turgor, texture, moisture, vibrations, and shape. Inspection is observation. Percussion is striking to produce sound. Auscultation is listening."
-            },
-            {
-                question: "What is the correct order for abdominal assessment?",
-                options: [
-                    "Inspection, Palpation, Percussion, Auscultation",
-                    "Inspection, Auscultation, Percussion, Palpation",
-                    "Auscultation, Inspection, Percussion, Palpation",
-                    "Palpation, Percussion, Auscultation, Inspection"
-                ],
-                correct: 1,
-                rationale: "For abdominal assessment: Inspection → Auscultation → Percussion → Palpation. Auscultate BEFORE touching to avoid altering bowel sounds!"
-            },
-            {
-                question: "Which term describes a musical, squeaking, high-pitched sound heard in the lungs?",
-                options: ["Crackles", "Stridor", "Rhonchi", "Wheeze"],
-                correct: 3,
-                rationale: "Wheezes are musical, squeaking, high-pitched continuous sounds heard as air passes through narrowed airways."
-            },
-            {
-                question: "Which type of assessment is conducted upon admission to a health care facility?",
-                options: ["Focused", "Emergency", "Comprehensive", "Ongoing"],
-                correct: 2,
-                rationale: "Comprehensive assessment is a complete head-to-toe assessment conducted upon admission. Focused assesses specific problems. Emergency assesses life-threatening conditions. Ongoing is at regular intervals."
-            },
-            {
-                question: "What does the 'S' in SBAR stand for?",
-                options: ["Summary", "Situation", "Status", "System"],
-                correct: 1,
-                rationale: "SBAR = Situation (what's happening now), Background (clinical context), Assessment (what you think the problem is), Recommendation (what should be done)."
-            },
-            {
-                question: "The therapeutic nurse-patient relationship occurs spontaneously.",
-                options: ["True", "False"],
-                correct: 1,
-                rationale: "The therapeutic relationship does NOT occur spontaneously - it requires intention and effort to develop. It is purposeful and time-limited."
-            },
-            {
-                question: "Which factor affects patient learning?",
-                options: [
-                    "Nurse's personal beliefs",
-                    "Health literacy",
-                    "Hospital budget",
-                    "Nursing shift schedule"
-                ],
-                correct: 1,
-                rationale: "Factors affecting patient learning include: age/developmental level, family support, financial resources, cultural influences/language, and HEALTH LITERACY."
-            },
-            {
-                question: "Ecchymosis refers to which skin finding?",
-                options: [
-                    "Redness of the skin",
-                    "Collection of blood in subcutaneous tissue (bruise)",
-                    "Yellow discoloration",
-                    "Excessive sweating"
-                ],
-                correct: 1,
-                rationale: "Ecchymosis is a collection of blood in subcutaneous tissue (bruise). Erythema is redness. Jaundice is yellow. Diaphoresis is excessive sweating."
-            },
-            {
-                question: "Which is a characteristic of aggressive (NOT assertive) behavior?",
-                options: [
-                    "Using clear 'I' statements",
-                    "Asking for help when necessary",
-                    "Focus on 'winning at all costs'",
-                    "Admitting mistakes"
-                ],
-                correct: 2,
-                rationale: "Aggressive behavior focuses on 'winning at all costs,' violates others' rights, uses angry tone, is condescending, and threatening. Assertive behavior uses 'I' statements and admits mistakes."
-            },
-            {
-                question: "What is the nurse's role as a counselor focused on?",
-                options: [
-                    "Prescribing medications",
-                    "Improving coping abilities",
-                    "Performing procedures",
-                    "Administrative duties"
-                ],
-                correct: 1,
-                rationale: "The nurse counselor focuses on: improving coping abilities, reinforcing healthy behaviors, fostering positive interactions, and preventing illness/disability."
+                rationale: "The correct order is: Biographical data (who is this person), Chief complaint (why are they here), HPI (details about the current problem), Past health history (medical/surgical), Family history (genetic/familial risks), Review of systems (systematic symptom review).",
+                hint: "Start with WHO (biographical), then WHY are they here (CC), then details about the NOW, PAST, FAMILY, and finally SYSTEMS review.",
+                studySection: "Chapter 27: Health History Process",
+                chapter: "ch27",
+                difficulty: "medium",
+                type: "ordered"
             }
         ];
+
+        // Quiz state variables
+        let currentQuizQuestions = [];
+        let quizState = {
+            answered: 0,
+            correct: 0,
+            incorrect: 0,
+            totalQuestions: 0,
+            missedQuestions: []
+        };
+
+        // Load saved quiz state
+        function loadQuizState() {
+            const saved = localStorage.getItem('nur168-quiz-state');
+            if (saved) {
+                quizState = JSON.parse(saved);
+                updateQuizProgress();
+                updateMissedVaultButton();
+            }
+        }
+
+        // Save quiz state
+        function saveQuizState() {
+            localStorage.setItem('nur168-quiz-state', JSON.stringify(quizState));
+        }
+
+        // Update progress display
+        function updateQuizProgress() {
+            const total = quizState.answered;
+            const percent = total > 0 ? Math.round((quizState.correct / total) * 100) : 0;
+            
+            document.getElementById('answeredCount').textContent = quizState.answered;
+            document.getElementById('correctCount').textContent = quizState.correct;
+            document.getElementById('incorrectCount').textContent = quizState.incorrect;
+            document.getElementById('quizScore').textContent = percent + '%';
+            document.getElementById('quizProgressBar').style.width = (quizState.answered > 0 ? (quizState.correct / quizState.answered) * 100 : 0) + '%';
+            document.getElementById('quizProgressText').textContent = percent + '%';
+        }
+
+        // Update missed vault button
+        function updateMissedVaultButton() {
+            const btn = document.getElementById('showVaultBtn');
+            const count = document.getElementById('missedCount');
+            if (quizState.missedQuestions.length > 0) {
+                btn.style.display = 'block';
+                count.textContent = quizState.missedQuestions.length;
+            } else {
+                btn.style.display = 'none';
+            }
+        }
+
+        // Toggle missed questions vault
+        function toggleMissedVault() {
+            const vault = document.getElementById('missedQuestionsVault');
+            const btn = document.getElementById('showVaultBtn');
+            
+            if (vault.style.display === 'none') {
+                vault.style.display = 'block';
+                btn.style.display = 'none';
+                renderMissedQuestions();
+            } else {
+                vault.style.display = 'none';
+                if (quizState.missedQuestions.length > 0) {
+                    btn.style.display = 'block';
+                }
+            }
+        }
+
+        // Render missed questions
+        function renderMissedQuestions() {
+            const container = document.getElementById('missedQuestionsList');
+            container.innerHTML = '';
+            
+            if (quizState.missedQuestions.length === 0) {
+                container.innerHTML = '<p style="color: #4ade80; text-align: center; padding: 20px;">🎉 No missed questions! Great job!</p>';
+                return;
+            }
+            
+            // Group by study section
+            const grouped = {};
+            quizState.missedQuestions.forEach(q => {
+                const section = q.studySection || 'General';
+                if (!grouped[section]) grouped[section] = [];
+                grouped[section].push(q);
+            });
+            
+            for (const section in grouped) {
+                const sectionDiv = document.createElement('div');
+                sectionDiv.style.cssText = 'background: #1a1a2e; border-radius: 10px; padding: 15px; margin-bottom: 15px; border-left: 4px solid #f87171;';
+                sectionDiv.innerHTML = `
+                    <h4 style="color: #fbbf24; margin: 0 0 10px 0; cursor: pointer;" onclick="scrollToSection('${grouped[section][0].chapter}')"">
+                        📖 ${section} <span style="font-size: 0.8em; color: #9ca3af;">(click to review)</span>
+                    </h4>
+                    ${grouped[section].map(q => `
+                        <div style="background: #2d2d44; padding: 10px; border-radius: 8px; margin-bottom: 8px;">
+                            <p style="color: #e2e8f0; margin: 0 0 5px 0; font-size: 0.95em;">"${q.question.substring(0, 100)}..."</p>
+                            <p style="color: #4ade80; margin: 0; font-size: 0.85em;"><strong>Correct Answer:</strong> ${q.correctAnswer}</p>
+                        </div>
+                    `).join('')}
+                `;
+                container.appendChild(sectionDiv);
+            }
+        }
+
+        // Scroll to study section
+        function scrollToSection(chapter) {
+            document.getElementById('missedQuestionsVault').style.display = 'none';
+            document.getElementById('showVaultBtn').style.display = 'block';
+            showSection(chapter);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Clear missed questions
+        function clearMissedQuestions() {
+            if (confirm('Are you sure you want to clear all missed questions from the vault?')) {
+                quizState.missedQuestions = [];
+                saveQuizState();
+                updateMissedVaultButton();
+                renderMissedQuestions();
+            }
+        }
+
+        // Reset quiz progress
+        function resetQuizProgress() {
+            if (confirm('Are you sure you want to reset ALL quiz progress including missed questions?')) {
+                quizState = {
+                    answered: 0,
+                    correct: 0,
+                    incorrect: 0,
+                    totalQuestions: 0,
+                    missedQuestions: []
+                };
+                saveQuizState();
+                updateQuizProgress();
+                updateMissedVaultButton();
+                document.getElementById('missedQuestionsVault').style.display = 'none';
+            }
+        }
+
+        // Reset current quiz only
+        function resetCurrentQuiz() {
+            loadNewQuiz(10);
+        }
 
         // Shuffle function
         function shuffleArray(array) {
@@ -8532,65 +9168,158 @@
         }
 
         // Load quiz questions
-        function loadNewQuiz() {
+        function loadNewQuiz(count = 10) {
             const container = document.getElementById('quizContainer');
             const shuffled = shuffleArray(quizQuestions);
-            const selected = shuffled.slice(0, 10);
+            currentQuizQuestions = shuffled.slice(0, Math.min(count, quizQuestions.length));
             
             container.innerHTML = '';
             
-            selected.forEach((q, index) => {
+            currentQuizQuestions.forEach((q, index) => {
+                const isMultiSelect = q.type === 'sata' || Array.isArray(q.correct);
+                const difficultyColor = q.difficulty === 'hard' ? '#ef4444' : q.difficulty === 'medium' ? '#f59e0b' : '#4ade80';
+                const difficultyLabel = q.difficulty === 'hard' ? '🔴 Hard' : q.difficulty === 'medium' ? '🟡 Medium' : '🟢 Easy';
+                
                 const questionDiv = document.createElement('div');
                 questionDiv.className = 'quiz-question';
+                questionDiv.id = `question-${index}`;
                 questionDiv.innerHTML = `
-                    <h3>Question ${index + 1}: ${q.question}</h3>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 5px;">
+                        <h3 style="margin: 0;">Question ${index + 1} of ${currentQuizQuestions.length}</h3>
+                        <span style="background: ${difficultyColor}22; color: ${difficultyColor}; padding: 4px 10px; border-radius: 12px; font-size: 0.8em;">${difficultyLabel}</span>
+                    </div>
+                    <p style="font-size: 1.1em; line-height: 1.6; margin-bottom: 15px;">${q.question}</p>
+                    ${isMultiSelect ? '<p style="color: #fbbf24; font-size: 0.9em; margin-bottom: 10px;">⚠️ Select ALL that apply</p>' : ''}
                     <div class="quiz-options">
                         ${q.options.map((opt, i) => `
-                            <div class="quiz-option" data-index="${i}" onclick="selectOption(this, ${index})">
-                                ${String.fromCharCode(65 + i)}. ${opt}
+                            <div class="quiz-option ${isMultiSelect ? 'multi-select' : ''}" data-index="${i}" onclick="selectOption(this, ${index}, ${isMultiSelect})">
+                                <span style="font-weight: bold; margin-right: 8px;">${String.fromCharCode(65 + i)}.</span> ${opt}
                             </div>
                         `).join('')}
                     </div>
-                    <button class="check-answer-btn" onclick="checkAnswer(${index}, ${q.correct})">Check Answer</button>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
+                        <button class="hint-btn" onclick="showHint(${index})" style="background: #6366f1; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;">
+                            💡 Show Hint
+                        </button>
+                        <button class="check-answer-btn" onclick="checkAnswer(${index})">
+                            ✓ Check Answer
+                        </button>
+                    </div>
+                    <div class="quiz-hint" id="hint-${index}" style="display: none; background: #1e1b4b; border: 1px solid #6366f1; border-radius: 10px; padding: 15px; margin-top: 15px;">
+                        <strong style="color: #a78bfa;">💡 Hint:</strong> <span style="color: #e2e8f0;">${q.hint || 'Think carefully about the key concepts.'}</span>
+                    </div>
                     <div class="quiz-feedback" id="feedback-${index}">
-                        <strong>Rationale:</strong> ${q.rationale}
+                        <div style="margin-bottom: 10px;">
+                            <strong style="color: #4ade80;">📚 Rationale:</strong> <span style="color: #e2e8f0;">${q.rationale}</span>
+                        </div>
+                        <div style="background: #1a1a2e; padding: 10px; border-radius: 8px; margin-top: 10px;">
+                            <strong style="color: #fbbf24;">📖 Study Section:</strong> 
+                            <a href="#" onclick="scrollToSection('${q.chapter}'); return false;" style="color: #60a5fa; text-decoration: underline;">${q.studySection || 'Review the chapter'}</a>
+                        </div>
                     </div>
                 `;
                 container.appendChild(questionDiv);
             });
+            
+            // Scroll to top of quiz
+            container.scrollIntoView({ behavior: 'smooth' });
         }
 
-        function selectOption(element, questionIndex) {
-            const options = element.parentElement.querySelectorAll('.quiz-option');
-            options.forEach(opt => opt.classList.remove('selected'));
-            element.classList.add('selected');
+        // Show hint
+        function showHint(questionIndex) {
+            const hint = document.getElementById(`hint-${questionIndex}`);
+            hint.style.display = hint.style.display === 'none' ? 'block' : 'none';
         }
 
-        function checkAnswer(questionIndex, correctIndex) {
-            const questionDiv = document.querySelectorAll('.quiz-question')[questionIndex];
+        // Select option
+        function selectOption(element, questionIndex, isMultiSelect = false) {
+            if (isMultiSelect) {
+                element.classList.toggle('selected');
+            } else {
+                const options = element.parentElement.querySelectorAll('.quiz-option');
+                options.forEach(opt => opt.classList.remove('selected'));
+                element.classList.add('selected');
+            }
+        }
+
+        // Check answer
+        function checkAnswer(questionIndex) {
+            const q = currentQuizQuestions[questionIndex];
+            const questionDiv = document.getElementById(`question-${questionIndex}`);
             const options = questionDiv.querySelectorAll('.quiz-option');
             const feedback = document.getElementById(`feedback-${questionIndex}`);
-            const selected = questionDiv.querySelector('.quiz-option.selected');
+            const selectedOptions = questionDiv.querySelectorAll('.quiz-option.selected');
             
-            if (!selected) {
+            if (selectedOptions.length === 0) {
                 alert('Please select an answer first!');
                 return;
             }
             
-            const selectedIndex = parseInt(selected.getAttribute('data-index'));
+            // Check if already answered
+            if (questionDiv.classList.contains('answered')) {
+                return;
+            }
+            questionDiv.classList.add('answered');
             
+            let isCorrect = false;
+            const selectedIndices = Array.from(selectedOptions).map(opt => parseInt(opt.getAttribute('data-index')));
+            
+            if (Array.isArray(q.correct)) {
+                // Multi-select question
+                isCorrect = selectedIndices.length === q.correct.length && 
+                           selectedIndices.every(i => q.correct.includes(i)) &&
+                           q.correct.every(i => selectedIndices.includes(i));
+            } else {
+                // Single select
+                isCorrect = selectedIndices.length === 1 && selectedIndices[0] === q.correct;
+            }
+            
+            // Mark options
             options.forEach((opt, i) => {
                 opt.classList.remove('selected');
-                if (i === correctIndex) {
+                const correctIndices = Array.isArray(q.correct) ? q.correct : [q.correct];
+                if (correctIndices.includes(i)) {
                     opt.classList.add('correct');
-                } else if (i === selectedIndex && selectedIndex !== correctIndex) {
+                } else if (selectedIndices.includes(i)) {
                     opt.classList.add('incorrect');
                 }
+                opt.style.pointerEvents = 'none';
             });
             
+            // Update state
+            quizState.answered++;
+            if (isCorrect) {
+                quizState.correct++;
+                feedback.classList.add('correct');
+            } else {
+                quizState.incorrect++;
+                feedback.classList.add('incorrect');
+                // Add to missed questions
+                const correctAnswerText = Array.isArray(q.correct) 
+                    ? q.correct.map(i => q.options[i]).join(', ')
+                    : q.options[q.correct];
+                quizState.missedQuestions.push({
+                    question: q.question,
+                    correctAnswer: correctAnswerText,
+                    studySection: q.studySection,
+                    chapter: q.chapter
+                });
+            }
+            
             feedback.classList.add('show');
-            feedback.classList.add(selectedIndex === correctIndex ? 'correct' : 'incorrect');
+            saveQuizState();
+            updateQuizProgress();
+            updateMissedVaultButton();
+            
+            // Disable hint button
+            questionDiv.querySelector('.hint-btn').disabled = true;
+            questionDiv.querySelector('.hint-btn').style.opacity = '0.5';
         }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadQuizState();
+        });
 
         // Navigation functions
         function showSection(sectionId) {
@@ -8601,11 +9330,19 @@
                 tab.classList.remove('active');
             });
             
-            document.getElementById(sectionId).classList.add('active');
-            event.target.classList.add('active');
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('active');
+            }
+            
+            // Find and activate the corresponding tab
+            const tab = document.querySelector(`.nav-tab.${sectionId}, .nav-tab[onclick*="'${sectionId}'"]`);
+            if (tab) {
+                tab.classList.add('active');
+            }
             
             if (sectionId === 'quiz') {
-                loadNewQuiz();
+                loadNewQuiz(10);
             }
         }
 
@@ -8673,6 +9410,7 @@
             initVocabulary();
             initScenarios();
             initNegativeComm();
+            loadQuizState();
         });
 
         // ==================== NEGATIVE COMMUNICATION EXAMPLES ====================
@@ -9098,11 +9836,11 @@
                 options: [
                     "Palpation → Percussion → Auscultation → Inspection",
                     "Inspection → Palpation → Percussion → Auscultation",
-                    "Inspection → Auscultation → Percussion → Palpation",
+                    "Inspection → Auscultation → Palpation → Percussion",
                     "Auscultation → Inspection → Percussion → Palpation"
                 ],
                 correct: 2,
-                rationale: "For ABDOMINAL assessment, the correct order is: Inspection → Auscultation → Percussion → Palpation. This differs from other body systems! Auscultation must be done BEFORE percussion and palpation because touching the abdomen can alter bowel sounds and give inaccurate findings. Always listen to bowel sounds first!"
+                rationale: "For ABDOMINAL assessment, the correct order is: Inspection → Auscultation → Palpation → Percussion. This differs from other body systems! Auscultation must be done BEFORE percussion and palpation because touching the abdomen can alter bowel sounds and give inaccurate findings. Always listen to bowel sounds first!"
             },
             {
                 id: 7,
