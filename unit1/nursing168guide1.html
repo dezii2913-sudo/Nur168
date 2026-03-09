@@ -705,9 +705,11 @@
 
         .quiz-feedback {
             margin-top: 15px;
-            padding: 15px;
-            border-radius: 10px;
+            padding: 20px;
+            border-radius: 12px;
             display: none;
+            font-size: 1.05em;
+            line-height: 1.7;
         }
 
         .quiz-feedback.show {
@@ -716,13 +718,30 @@
         }
 
         .quiz-feedback.correct {
-            background: rgba(107,203,119,0.2);
-            border-left: 4px solid #6bcb77;
+            background: linear-gradient(135deg, #065f46 0%, #064e3b 100%);
+            border-left: 5px solid #10b981;
+            color: #d1fae5;
         }
 
         .quiz-feedback.incorrect {
-            background: rgba(255,107,107,0.2);
-            border-left: 4px solid #ff6b6b;
+            background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
+            border-left: 5px solid #f87171;
+            color: #fee2e2;
+        }
+
+        .quiz-feedback strong {
+            color: #fbbf24;
+            font-size: 1.1em;
+        }
+
+        .quiz-feedback a {
+            color: #60a5fa !important;
+            font-weight: 600;
+        }
+
+        .quiz-feedback a:hover {
+            color: #93c5fd !important;
+            text-decoration: underline;
         }
 
         .check-answer-btn {
@@ -9209,12 +9228,18 @@
                         <strong style="color: #a78bfa;">💡 Hint:</strong> <span style="color: #e2e8f0;">${q.hint || 'Think carefully about the key concepts.'}</span>
                     </div>
                     <div class="quiz-feedback" id="feedback-${index}">
-                        <div style="margin-bottom: 10px;">
-                            <strong style="color: #4ade80;">📚 Rationale:</strong> <span style="color: #e2e8f0;">${q.rationale}</span>
+                        <div style="margin-bottom: 15px;">
+                            <div style="font-size: 1.15em; font-weight: bold; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                                <span style="font-size: 1.3em;">📚</span> Rationale
+                            </div>
+                            <div style="padding: 12px 15px; background: rgba(0,0,0,0.2); border-radius: 8px; line-height: 1.8; font-size: 1.05em;">
+                                ${q.rationale}
+                            </div>
                         </div>
-                        <div style="background: #1a1a2e; padding: 10px; border-radius: 8px; margin-top: 10px;">
-                            <strong style="color: #fbbf24;">📖 Study Section:</strong> 
-                            <a href="#" onclick="scrollToSection('${q.chapter}'); return false;" style="color: #60a5fa; text-decoration: underline;">${q.studySection || 'Review the chapter'}</a>
+                        <div style="background: rgba(0,0,0,0.3); padding: 12px 15px; border-radius: 8px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                            <span style="font-size: 1.2em;">📖</span>
+                            <span style="font-weight: bold;">Need to review?</span> 
+                            <a href="#" onclick="scrollToSection('${q.chapter}'); return false;" style="color: #60a5fa; text-decoration: none; font-weight: 600; padding: 5px 12px; background: rgba(96,165,250,0.2); border-radius: 6px;">${q.studySection || 'Review the chapter'} →</a>
                         </div>
                     </div>
                 `;
