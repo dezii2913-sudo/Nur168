@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUR168 Unit 2 - Leadership, Oxygenation & Self-Concept</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #b8b5c9 0%, #9994a8 100%);
+            min-height: 100vh;
+            color: #2d2d3a;
+            line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+        }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); color: white; }
+        .header .subtitle { font-size: 1.2em; opacity: 0.9; color: white; }
+        .header .features { font-size: 0.95em; margin-top: 10px; color: rgba(255,255,255,0.85); }
+
+        .ap-alert {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white; padding: 20px; border-radius: 15px;
+            margin-bottom: 25px; text-align: center;
+        }
+        .ap-alert h3 { font-size: 1.3em; margin-bottom: 10px; }
+
+        .progress-container {
+            background: rgba(255,255,255,0.85);
+            border-radius: 15px; padding: 20px; margin-bottom: 30px;
+        }
+        .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; }
+        .progress-bar { height: 25px; background: rgba(0,0,0,0.1); border-radius: 15px; overflow: hidden; }
+        .progress-fill {
+            height: 100%; background: linear-gradient(90deg, #00f260, #0575e6);
+            border-radius: 15px; transition: width 0.5s ease;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; color: white;
+        }
+
+        .nav-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; justify-content: center; }
+        .nav-tab {
+            padding: 15px 25px; background: rgba(255,255,255,0.8);
+            border: 2px solid transparent; border-radius: 50px;
+            cursor: pointer; transition: all 0.3s ease;
+            font-size: 1em; color: #2d2d3a; font-weight: 600;
+        }
+        .nav-tab:hover { background: rgba(255,255,255,0.95); transform: translateY(-3px); }
+        .nav-tab.active { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .nav-tab.ch10 { border-left: 4px solid #6366f1; }
+        .nav-tab.ch40 { border-left: 4px solid #ef4444; }
+        .nav-tab.ch42 { border-left: 4px solid #14b8a6; }
+        .nav-tab.vocab { border-left: 4px solid #a855f7; }
+        .nav-tab.quiz { border-left: 4px solid #6bcb77; }
+
+        .content-section { display: none; }
+        .content-section.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .chapter-card {
+            background: rgba(255,255,255,0.85);
+            border-radius: 20px; padding: 25px; margin-bottom: 20px;
+            border-left: 5px solid;
+        }
+        .ch10-card { border-left-color: #6366f1; }
+        .ch40-card { border-left-color: #ef4444; }
+        .ch42-card { border-left-color: #14b8a6; }
+        .chapter-card h2 { font-size: 1.5em; margin-bottom: 10px; }
+
+        .topic-box {
+            background: rgba(255,255,255,0.8);
+            border-radius: 15px; padding: 20px; margin-bottom: 15px;
+            cursor: pointer; transition: all 0.3s ease;
+        }
+        .topic-box:hover { background: rgba(255,255,255,0.95); transform: translateX(5px); }
+        .topic-header { display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 1.1em; }
+        .topic-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+        .topic-box.expanded .topic-content { max-height: none; margin-top: 15px; overflow: visible; }
+        .expand-icon { font-size: 1.5em; transition: transform 0.3s ease; }
+        .topic-box.expanded .expand-icon { transform: rotate(45deg); }
+        .topic-check { width: 18px; height: 18px; margin-right: 8px; accent-color: #6bcb77; }
+
+        .key-point { background: rgba(255,255,255,0.6); border-radius: 10px; padding: 15px; margin: 10px 0; border-left: 4px solid; }
+        .key-point.important { border-left-color: #ff6b6b; background: rgba(255,107,107,0.15); }
+        .key-point.tip { border-left-color: #6bcb77; background: rgba(107,203,119,0.15); }
+        .key-point.definition { border-left-color: #00d4ff; background: rgba(0,212,255,0.12); }
+        .key-point.ap { border-left-color: #ef4444; background: rgba(239,68,68,0.15); }
+        .key-point-label { font-weight: bold; font-size: 0.85em; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+
+        .content-list { list-style: none; padding-left: 0; }
+        .content-list li { padding: 8px 0 8px 25px; position: relative; }
+        .content-list li::before { content: '→'; position: absolute; left: 0; color: #7c3aed; font-weight: bold; }
+
+        .mnemonic-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+            border-radius: 15px; padding: 20px; margin: 15px 0;
+            text-align: center; border: 2px solid rgba(102, 126, 234, 0.3);
+        }
+        .mnemonic-box h4 { color: #7c3aed; margin-bottom: 10px; font-size: 1.2em; }
+        .mnemonic-letters { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 15px; }
+        .mnemonic-letter-hover { position: relative; display: inline-block; cursor: pointer; }
+        .mnemonic-letter-hover .letter-circle {
+            display: flex; align-items: center; justify-content: center;
+            width: 55px; height: 55px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%; color: white; font-weight: bold; font-size: 1.3em;
+            transition: all 0.3s ease;
+        }
+        .mnemonic-letter-hover:hover .letter-circle { transform: scale(1.15); box-shadow: 0 6px 25px rgba(102, 126, 234, 0.5); }
+        .letter-title { font-size: 0.7em; color: #7c3aed; margin-top: 5px; font-weight: 600; }
+        .mnemonic-tooltip {
+            visibility: hidden; opacity: 0;
+            position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+            background: linear-gradient(135deg, #1e1b4b, #312e81);
+            border: 2px solid #6366f1; border-radius: 12px; padding: 15px;
+            width: 250px; z-index: 100; transition: all 0.3s ease;
+            text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.4); color: white;
+        }
+        .mnemonic-letter-hover:hover .mnemonic-tooltip { visibility: visible; opacity: 1; bottom: calc(100% + 10px); }
+        .tooltip-title { color: #a78bfa; font-weight: bold; margin-bottom: 8px; font-size: 1.1em; }
+        .tooltip-example { color: #4ade80; font-size: 0.9em; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.2); }
+
+        .comparison-table {
+            width: 100%; border-collapse: separate; border-spacing: 0;
+            margin: 15px 0; border-radius: 15px; overflow: hidden;
+        }
+        .comparison-table th { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 15px; text-align: left; color: #fff; }
+        .comparison-table td { padding: 12px 15px; background: rgba(255,255,255,0.8); border-bottom: 1px solid rgba(0,0,0,0.1); }
+        .comparison-table tr:last-child td { border-bottom: none; }
+        .comparison-table tr:hover td { background: rgba(255,255,255,0.95); }
+
+        .sticky-note {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            color: #92400e; padding: 20px; border-radius: 5px;
+            transform: rotate(-1deg); box-shadow: 5px 5px 15px rgba(0,0,0,0.2); margin: 20px 0;
+        }
+        .sticky-note h4 { border-bottom: 2px dashed rgba(0,0,0,0.2); padding-bottom: 10px; margin-bottom: 10px; color: #b45309; }
+
+        .quick-ref-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 20px 0; }
+        .quick-ref-card { background: rgba(255,255,255,0.85); border-radius: 15px; padding: 20px; border-top: 4px solid; }
+        .quick-ref-card.blue { border-top-color: #3b82f6; }
+        .quick-ref-card.green { border-top-color: #22c55e; }
+        .quick-ref-card.red { border-top-color: #ef4444; }
+        .quick-ref-card.purple { border-top-color: #8b5cf6; }
+        .quick-ref-card.yellow { border-top-color: #f59e0b; }
+        .quick-ref-card h4 { margin-bottom: 12px; font-size: 1.1em; }
+
+        .anatomy-diagram {
+            background: linear-gradient(135deg, rgba(239,68,68,0.1), rgba(220,38,38,0.1));
+            border: 2px solid rgba(239,68,68,0.3); border-radius: 15px; padding: 20px; margin: 15px 0;
+        }
+        .anatomy-diagram h4 { color: #dc2626; margin-bottom: 15px; }
+        .anatomy-part { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; padding: 12px; background: rgba(255,255,255,0.8); border-radius: 10px; }
+        .anatomy-number {
+            width: 30px; height: 30px;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; flex-shrink: 0;
+        }
+        .anatomy-content strong { color: #dc2626; }
+
+        .quiz-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 15px; margin-bottom: 20px; }
+        .quiz-stat { background: rgba(255,255,255,0.85); padding: 15px; border-radius: 12px; text-align: center; }
+        .quiz-stat-value { font-size: 1.8em; font-weight: bold; }
+        .quiz-stat-label { font-size: 0.85em; color: #666; margin-top: 5px; }
+        .quiz-stat.correct .quiz-stat-value { color: #22c55e; }
+        .quiz-stat.incorrect .quiz-stat-value { color: #ef4444; }
+        .quiz-stat.score .quiz-stat-value { color: #8b5cf6; }
+
+        .quiz-question { background: rgba(255,255,255,0.85); border-radius: 15px; padding: 25px; margin-bottom: 20px; }
+        .quiz-question h3 { margin-bottom: 5px; font-size: 1.1em; }
+        .quiz-difficulty { font-size: 0.85em; margin-bottom: 15px; }
+        .quiz-difficulty.easy { color: #22c55e; }
+        .quiz-difficulty.medium { color: #f59e0b; }
+        .quiz-difficulty.hard { color: #ef4444; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option {
+            padding: 15px 20px; background: rgba(255,255,255,0.9);
+            border: 2px solid rgba(0,0,0,0.1); border-radius: 12px;
+            cursor: pointer; transition: all 0.3s ease;
+        }
+        .quiz-option:hover { background: #f3f4f6; border-color: #7c3aed; }
+        .quiz-option.selected { border-color: #7c3aed; background: rgba(124,58,237,0.1); }
+        .quiz-option.correct { border-color: #22c55e; background: rgba(34,197,94,0.15); }
+        .quiz-option.incorrect { border-color: #ef4444; background: rgba(239,68,68,0.15); }
+        .quiz-option.disabled { pointer-events: none; opacity: 0.8; }
+        .quiz-feedback { margin-top: 15px; padding: 20px; border-radius: 12px; display: none; line-height: 1.7; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct-fb { background: linear-gradient(135deg, #065f46, #064e3b); border-left: 5px solid #10b981; color: #d1fae5; }
+        .quiz-feedback.incorrect-fb { background: linear-gradient(135deg, #7f1d1d, #991b1b); border-left: 5px solid #f87171; color: #fee2e2; }
+        .quiz-feedback strong { color: #fbbf24; }
+        .quiz-btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+        .quiz-btn {
+            padding: 12px 25px; border: none; border-radius: 25px;
+            cursor: pointer; font-size: 0.95em; font-weight: 600; transition: all 0.3s ease;
+        }
+        .quiz-btn.primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .quiz-btn.hint { background: #f59e0b; color: white; }
+        .quiz-btn:hover { transform: scale(1.05); }
+        .hint-text { background: rgba(245,158,11,0.15); border: 2px solid #f59e0b; border-radius: 10px; padding: 12px; margin-top: 10px; display: none; }
+        .hint-text.show { display: block; }
+
+        .flashcard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .flashcard-container { perspective: 1000px; }
+        .flashcard { width: 100%; min-height: 180px; position: relative; transform-style: preserve-3d; transition: transform 0.6s; cursor: pointer; }
+        .flashcard.flipped { transform: rotateY(180deg); }
+        .flashcard-front, .flashcard-back {
+            position: absolute; width: 100%; min-height: 180px; backface-visibility: hidden;
+            border-radius: 15px; padding: 25px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+        }
+        .flashcard-front { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .flashcard-back { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); transform: rotateY(180deg); color: white; }
+        .flashcard-term { font-size: 1.3em; font-weight: bold; margin-bottom: 8px; }
+        .flashcard-chapter { font-size: 0.85em; opacity: 0.8; }
+        .flashcard-definition { font-size: 1.1em; line-height: 1.5; }
+
+        .filter-btns { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+        .filter-btn { padding: 10px 20px; border: 2px solid #7c3aed; background: transparent; border-radius: 25px; cursor: pointer; font-weight: 600; color: #7c3aed; transition: all 0.3s ease; }
+        .filter-btn:hover, .filter-btn.active { background: #7c3aed; color: white; }
+
+        .reset-btn { padding: 10px 20px; background: rgba(239,68,68,0.15); border: 2px solid #ef4444; border-radius: 10px; color: #ef4444; cursor: pointer; font-weight: 600; transition: all 0.3s ease; }
+        .reset-btn:hover { background: #ef4444; color: white; }
+
+        .wrapup { background: linear-gradient(135deg, rgba(107,203,119,0.15), rgba(34,197,94,0.15)); border: 2px solid rgba(107,203,119,0.4); border-radius: 20px; padding: 25px; margin-top: 25px; }
+        .wrapup h3 { color: #16a34a; margin-bottom: 15px; }
+        .wrapup-box { background: rgba(255,255,255,0.75); border-radius: 12px; padding: 18px; margin-bottom: 15px; }
+        .wrapup-box h4 { color: #15803d; margin-bottom: 12px; }
+        .wrapup-box ul { list-style: none; padding: 0; }
+        .wrapup-box li { padding: 6px 0 6px 22px; position: relative; }
+        .wrapup-box li::before { content: '✓'; position: absolute; left: 0; color: #22c55e; font-weight: bold; }
+        .wrapup-terms { display: flex; flex-wrap: wrap; gap: 8px; }
+        .wrapup-term { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 5px 12px; border-radius: 15px; font-size: 0.85em; }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8em; }
+            .nav-tabs { flex-direction: column; }
+            .nav-tab { width: 100%; text-align: center; }
+            .mnemonic-tooltip { width: 200px; font-size: 0.85em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 NUR168 Unit 2 Study Guide</h1>
+            <p class="subtitle">Chapters 10, 40 & 42: Leadership, Oxygenation & Self-Concept</p>
+            <p class="features">✨ ADHD-Friendly • Hover Mnemonics • A&P Deep Dive • 30 NCLEX Questions • Progress Tracking ✨</p>
+        </div>
+
+        <div class="ap-alert">
+            <h3>⚠️ A&P ALERT - HEAVY ANATOMY ON THIS EXAM!</h3>
+            <p>Your teacher said there were LOTS of anatomy questions on Exam 1. Chapter 40 is A&P INTENSIVE! Study respiratory & cardiovascular anatomy carefully! 🫀🫁</p>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-header">
+                <span><strong>📊 Study Progress</strong></span>
+                <button class="reset-btn" onclick="resetProgress()">🔄 Reset All</button>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%">0%</div>
+            </div>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab ch10 active" onclick="showSection('ch10')">👔 Ch 10: Leadership</button>
+            <button class="nav-tab ch40" onclick="showSection('ch40')">🫁 Ch 40: Oxygenation</button>
+            <button class="nav-tab ch42" onclick="showSection('ch42')">🧠 Ch 42: Self-Concept</button>
+            <button class="nav-tab vocab" onclick="showSection('vocab')">📖 Flashcards</button>
+            <button class="nav-tab quiz" onclick="showSection('quiz')">✏️ Quiz (50 Qs)</button>
+        </div>
+
+        <!-- ===================== CHAPTER 10: LEADERSHIP ===================== -->
+        <div id="ch10" class="content-section active">
+            <div class="chapter-card ch10-card">
+                <h2>👔 Chapter 10: Leading, Managing, and Delegating</h2>
+                <p>Master leadership styles, delegation principles, and change management</p>
+            </div>
+
+            <!-- Leadership vs Management -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 🔄 Leadership vs. Management</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="sticky-note">
+                        <h4>💡 Peter Drucker's Famous Quote!</h4>
+                        <p><strong>"Management is doing things RIGHT; Leadership is doing the RIGHT things."</strong></p>
+                    </div>
+
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Leadership</div>
+                        <p>The ability to <strong>direct or motivate</strong> a person or group to achieve set goals. Leaders have power to influence a group which depends on their leadership style.</p>
+                    </div>
+
+                    <table class="comparison-table">
+                        <tr><th>Leadership</th><th>Management</th></tr>
+                        <tr><td>Directs and motivates toward goals</td><td>Planning, organizing, staffing, directing, controlling</td></tr>
+                        <tr><td>Focuses on <strong>vision and direction</strong></td><td>Focuses on <strong>processes and operations</strong></td></tr>
+                        <tr><td>Doing the <strong>RIGHT things</strong></td><td>Doing things <strong>RIGHT</strong></td></tr>
+                    </table>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ Types of Power - HIGH YIELD!</div>
+                        <table class="comparison-table">
+                            <tr><th>Type</th><th>Definition</th><th>Example</th></tr>
+                            <tr><td><strong>Explicit Power</strong></td><td>Power by virtue of POSITION</td><td>Charge nurse, nurse manager, CEO</td></tr>
+                            <tr><td><strong>Implied Power</strong></td><td>Power due to OTHER FACTORS (personality, intimidation)</td><td>Class bully, charismatic peer</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">💡 Test Question Pattern</div>
+                        <p><strong>Q:</strong> A class bully who gets his way by intimidating classmates has what type of power?</p>
+                        <p><strong>A:</strong> <u>Implied power</u> - No formal position, power comes from personality/intimidation!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leadership Qualities -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> ⭐ Leadership Qualities & Skills</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card purple">
+                            <h4>🌟 Leadership Qualities</h4>
+                            <ul class="content-list">
+                                <li><strong>Charismatic</strong> - Inspires through presence</li>
+                                <li><strong>Dynamic</strong> - Adapts to rapid changes</li>
+                                <li><strong>Enthusiastic</strong> - Encourages team energy</li>
+                                <li><strong>Poised</strong> - Maintains composure under pressure</li>
+                                <li><strong>Confident</strong> - Makes decisions decisively</li>
+                                <li><strong>Self-directed</strong> - Manages without constant supervision</li>
+                                <li><strong>Flexible</strong> - Adjusts to changing needs</li>
+                                <li><strong>Knowledgeable</strong> - Stays updated with best practices</li>
+                                <li><strong>Politically aware</strong> - Understands organizational structure</li>
+                            </ul>
+                        </div>
+                        <div class="quick-ref-card blue">
+                            <h4>🛠️ Leadership Skills</h4>
+                            <ul class="content-list">
+                                <li>Commitment to excellence</li>
+                                <li>Problem-solving skills</li>
+                                <li>Passion for one's work</li>
+                                <li>Trustworthiness and integrity</li>
+                                <li>Respectfulness</li>
+                                <li>Accessibility</li>
+                                <li>Empathy and caring</li>
+                                <li>Responsibility for staff growth</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Achieving Self-Knowledge as a Leader</div>
+                        <ul class="content-list">
+                            <li><strong>Identify your strengths</strong> in clinical practice</li>
+                            <li><strong>Evaluate</strong> how you accomplish work</li>
+                            <li><strong>Clarify your values</strong></li>
+                            <li><strong>Determine</strong> where you belong and what you can contribute</li>
+                            <li><strong>Assume responsibility</strong> for relationships</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leadership Styles -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 📋 Leadership Styles (7 Types) - HIGH YIELD! 🎯</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <table class="comparison-table">
+                        <tr><th>Style</th><th>Description</th><th>Best Used When</th></tr>
+                        <tr><td><strong>Autocratic</strong></td><td>Leader assumes CONTROL over all decisions</td><td>Crisis situations (e.g., during resuscitation)</td></tr>
+                        <tr><td><strong>Democratic</strong></td><td>Shared decision-making; sense of equality</td><td>Unit planning meetings, shared governance</td></tr>
+                        <tr><td><strong>Laissez-faire</strong></td><td>Leader RELINQUISHES power to group</td><td>Highly experienced teams (poor for new staff)</td></tr>
+                        <tr><td><strong>Servant</strong></td><td>Focuses on SERVING others first</td><td>Mentoring, facilitating staff development</td></tr>
+                        <tr><td><strong>Quantum</strong></td><td>Adaptable to rapid change</td><td>Technology-driven healthcare</td></tr>
+                        <tr><td><strong>Transactional</strong></td><td>Based on REWARDS/punishments</td><td>Routine tasks, policy adherence</td></tr>
+                        <tr><td><strong>Transformational</strong></td><td>Inspires revolutionary change</td><td>Magnet organizations, innovation</td></tr>
+                    </table>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ EXACT Test Language!</div>
+                        <p><strong>Q:</strong> Which style describes a nurse leader who <u>assumes control over the decisions and activities</u> of the group?</p>
+                        <p><strong>A:</strong> <strong>Autocratic leadership</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- POSDC -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 📊 Manager Functions: POSDC</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="mnemonic-box">
+                        <h4>🧠 "POSDC" - 5 Functions of Management</h4>
+                        <p style="color: #666; margin-bottom: 10px;">Hover over each letter!</p>
+                        <div class="mnemonic-letters">
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">P</div>
+                                <div class="letter-title">Planning</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Planning</div>
+                                    Setting goals and determining HOW to achieve them
+                                    <div class="tooltip-example">📝 Staffing schedules, budget planning, policies</div>
+                                </div>
+                            </div>
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">O</div>
+                                <div class="letter-title">Organizing</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Organizing</div>
+                                    Arranging resources and activities
+                                    <div class="tooltip-example">📝 Room assignments, workload distribution</div>
+                                </div>
+                            </div>
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">S</div>
+                                <div class="letter-title">Staffing</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Staffing</div>
+                                    Recruiting, hiring, training, retaining staff
+                                    <div class="tooltip-example">📝 Interviewing, orienting new hires</div>
+                                </div>
+                            </div>
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">D</div>
+                                <div class="letter-title">Directing</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Directing</div>
+                                    Leading, motivating, guiding staff
+                                    <div class="tooltip-example">📝 Giving assignments, coaching</div>
+                                </div>
+                            </div>
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">C</div>
+                                <div class="letter-title">Controlling</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Controlling</div>
+                                    Monitoring performance and making corrections
+                                    <div class="tooltip-example">📝 Quality audits, performance reviews</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p style="color: #7c3aed; margin-top: 15px; font-weight: 600;">"Please Order Some Delicious Cake!"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lewin's Change Theory -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 🧊 Lewin's Change Theory - HIGH YIELD! 🎯</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="mnemonic-box">
+                        <h4>🧠 Ice Cube Analogy!</h4>
+                        <div class="mnemonic-letters">
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">U</div>
+                                <div class="letter-title">Unfreeze</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Unfreezing 🧊→💧</div>
+                                    The need for change is RECOGNIZED. Old behaviors "melt."
+                                    <div class="tooltip-example">📝 Staff agrees current fall rates are unacceptable</div>
+                                </div>
+                            </div>
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">M</div>
+                                <div class="letter-title">Moving</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Moving/Changing 💧</div>
+                                    Change is INITIATED after careful planning.
+                                    <div class="tooltip-example">📝 New fall prevention protocol implemented</div>
+                                </div>
+                            </div>
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">R</div>
+                                <div class="letter-title">Refreeze</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Refreezing 💧→🧊</div>
+                                    Change becomes OPERATIONAL - the new normal.
+                                    <div class="tooltip-example">📝 Fall prevention is now routine practice</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ Overcoming Resistance to Change</div>
+                        <ul class="content-list">
+                            <li><strong>Explain</strong> proposed change to all affected</li>
+                            <li><strong>List advantages</strong> of the change</li>
+                            <li><strong>Relate</strong> to person's existing beliefs and values</li>
+                            <li>Provide <strong>open communication</strong> and feedback</li>
+                            <li>Indicate how change will be <strong>evaluated</strong></li>
+                            <li>Introduce change <strong>gradually</strong></li>
+                            <li>Provide <strong>incentives</strong> for commitment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conflict Resolution -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> ⚔️ Conflict Resolution Strategies</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <table class="comparison-table">
+                        <tr><th>Strategy</th><th>Description</th><th>When to Use</th></tr>
+                        <tr><td><strong>Avoiding</strong></td><td>Withdrawing from conflict</td><td>Minor issues, cooling-off periods</td></tr>
+                        <tr><td><strong>Collaborating</strong></td><td>Working together for WIN-WIN</td><td>Long-term solutions; requires time</td></tr>
+                        <tr><td><strong>Competing</strong></td><td>WIN-LOSE; asserting forcefully</td><td>When safety is at risk (infection control)</td></tr>
+                        <tr><td><strong>Compromising</strong></td><td>Each side gives something up</td><td>Equal goals, scheduling conflicts</td></tr>
+                        <tr><td><strong>Accommodating</strong></td><td>Yielding to other side</td><td>When you're wrong, preserving relationships</td></tr>
+                        <tr><td><strong>Smoothing</strong></td><td>Complimenting all parties</td><td>Calming tensions temporarily</td></tr>
+                    </table>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ EXACT Test Language!</div>
+                        <p><strong>Q:</strong> The nurse manager spends time <u>complimenting nurses who are in conflict</u>. What approach is this?</p>
+                        <p><strong>A:</strong> <strong>Smoothing</strong> - involves complimenting all parties to prevent emotional outbursts.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delegation -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 📋 Delegation - SUPER HIGH YIELD! 🎯🎯🎯</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="mnemonic-box">
+                        <h4>🧠 "5 Rights" of Delegation</h4>
+                        <div class="mnemonic-letters">
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">T</div>
+                                <div class="letter-title">Task</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Right TASK</div>
+                                    Is this task appropriate to delegate?
+                                    <div class="tooltip-example">✅ Vitals = YES | ❌ Assessment = NO</div>
+                                </div>
+                            </div>
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">C</div>
+                                <div class="letter-title">Circumstance</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Right CIRCUMSTANCE</div>
+                                    Is the patient stable? Is setting appropriate?
+                                    <div class="tooltip-example">✅ Stable = OK | ❌ Unstable = RN only</div>
+                                </div>
+                            </div>
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">P</div>
+                                <div class="letter-title">Person</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Right PERSON</div>
+                                    Is the person competent for this task?
+                                    <div class="tooltip-example">Check training, experience, workload</div>
+                                </div>
+                            </div>
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">D</div>
+                                <div class="letter-title">Direction</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Right DIRECTION</div>
+                                    Did you give clear instructions?
+                                    <div class="tooltip-example">"Get vitals q4h, report if BP >160"</div>
+                                </div>
+                            </div>
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">S</div>
+                                <div class="letter-title">Supervision</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Right SUPERVISION</div>
+                                    Are you available? Will you follow up?
+                                    <div class="tooltip-example">Check back, evaluate, give feedback</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="key-point ap">
+                        <div class="key-point-label">🔴 Considerations When Delegating</div>
+                        <ul class="content-list">
+                            <li><strong>Stability</strong> of the patient's condition</li>
+                            <li><strong>Complexity</strong> of the activity</li>
+                            <li><strong>Potential for harm</strong></li>
+                            <li><strong>Predictability</strong> of the outcome</li>
+                            <li><strong>Overall context</strong> of other patient needs</li>
+                        </ul>
+                    </div>
+
+                    <table class="comparison-table">
+                        <tr>
+                            <th style="background: linear-gradient(135deg, #22c55e, #16a34a);">✅ CAN Delegate to UAP</th>
+                            <th style="background: linear-gradient(135deg, #ef4444, #dc2626);">❌ CANNOT Delegate (RN Only)</th>
+                        </tr>
+                        <tr><td>Basic care (bathing, feeding, ambulation)</td><td><strong>Initial patient assessment</strong></td></tr>
+                        <tr><td>Vital signs collection</td><td><strong>Nursing diagnosis</strong></td></tr>
+                        <tr><td>I&O measurement</td><td><strong>Health education/teaching</strong></td></tr>
+                        <tr><td>Simple dressing changes</td><td><strong>Care planning</strong></td></tr>
+                        <tr><td>Transfers and positioning</td><td><strong>Evaluation</strong></td></tr>
+                        <tr><td>Postmortem care</td><td><strong>Counseling</strong></td></tr>
+                    </table>
+
+                    <div class="sticky-note">
+                        <h4>💡 Golden Rule of Delegation!</h4>
+                        <p><strong>The RN is ALWAYS responsible and accountable</strong> for nursing practice. You delegate the TASK, not the RESPONSIBILITY!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chapter 10 Wrap-Up -->
+            <div class="wrapup">
+                <h3>✅ Chapter 10 Wrap-Up</h3>
+                <div class="wrapup-box">
+                    <h4>📝 Must-Know Points</h4>
+                    <ul>
+                        <li>Leadership = doing the RIGHT things; Management = doing things RIGHT</li>
+                        <li>Explicit power = from position; Implied power = from personality</li>
+                        <li>Autocratic = assumes CONTROL over decisions</li>
+                        <li>Lewin's Change: Unfreezing → Moving → Refreezing</li>
+                        <li>5 Rights of Delegation: Task, Circumstance, Person, Direction, Supervision</li>
+                        <li>RN is ALWAYS responsible - delegate task, NOT responsibility</li>
+                        <li>Smoothing = complimenting parties in conflict</li>
+                    </ul>
+                </div>
+                <div class="wrapup-box">
+                    <h4>🔤 Key Terms</h4>
+                    <div class="wrapup-terms">
+                        <span class="wrapup-term">Autocratic</span>
+                        <span class="wrapup-term">Democratic</span>
+                        <span class="wrapup-term">Laissez-faire</span>
+                        <span class="wrapup-term">Transformational</span>
+                        <span class="wrapup-term">Delegation</span>
+                        <span class="wrapup-term">Smoothing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== CHAPTER 40: OXYGENATION ===================== -->
+        <div id="ch40" class="content-section">
+            <div class="chapter-card ch40-card">
+                <h2>🫁 Chapter 40: Oxygenation and Perfusion</h2>
+                <p>Master respiratory & cardiovascular anatomy, gas exchange, and oxygen therapy</p>
+            </div>
+
+            <div class="key-point ap">
+                <div class="key-point-label">🔴 A&P HEAVY - STUDY THIS!</div>
+                <p>This chapter has extensive anatomy. Know: upper/lower airway, lung structures, gas exchange, heart conduction, breath sounds, O2 delivery devices!</p>
+            </div>
+
+            <!-- VRP -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 📊 Ventilation vs. Respiration vs. Perfusion - MUST KNOW!</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="mnemonic-box">
+                        <h4>🧠 VRP - Three Processes!</h4>
+                        <div class="mnemonic-letters">
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">V</div>
+                                <div class="letter-title">Ventilation</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Pulmonary Ventilation</div>
+                                    Movement of AIR into and out of lungs
+                                    <div class="tooltip-example">"Vent" = moving air like a ventilator!</div>
+                                </div>
+                            </div>
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">R</div>
+                                <div class="letter-title">Respiration</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Respiration (Gas Exchange)</div>
+                                    Exchange of O2/CO2 between alveoli and blood via diffusion
+                                    <div class="tooltip-example">Occurs at alveolar-capillary membrane</div>
+                                </div>
+                            </div>
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">P</div>
+                                <div class="letter-title">Perfusion</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Perfusion</div>
+                                    Oxygenated blood passing through body TISSUES
+                                    <div class="tooltip-example">Blood flow delivering O2 to cells</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ EXACT Test Language!</div>
+                        <p><strong>Q:</strong> Pulmonary ventilation is the process by which oxygenated capillary blood passes through body tissues. True or False?</p>
+                        <p><strong>A:</strong> <u>FALSE!</u> That's <strong>PERFUSION</strong>. Pulmonary ventilation is movement of air in/out of lungs!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alterations in Respiratory Function -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> ⚠️ Alterations in Respiratory Function</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <table class="comparison-table">
+                        <tr><th>Condition</th><th>Definition</th><th>Key Points</th></tr>
+                        <tr><td><strong>Hypoxia</strong></td><td>Inadequate O2 available to cells</td><td>Signs: dyspnea, cyanosis</td></tr>
+                        <tr><td><strong>Dyspnea</strong></td><td>Difficulty breathing</td><td>Subjective sensation</td></tr>
+                        <tr><td><strong>Hypoventilation</strong></td><td>Decreased rate/depth of breathing</td><td>↓ air movement into lungs</td></tr>
+                        <tr><td><strong>Atelectasis</strong></td><td>Incomplete lung expansion/collapse of alveoli</td><td>Prevents gas diffusion</td></tr>
+                        <tr><td><strong>Pneumonia</strong></td><td>Infection causing alveolar inflammation</td><td>Fluid/pus in air sacs</td></tr>
+                        <tr><td><strong>Asthma</strong></td><td>Chronic inflammation with airway constriction</td><td>Wheezes, dyspnea</td></tr>
+                        <tr><td><strong>COPD</strong></td><td>Airflow obstruction (emphysema, chronic bronchitis)</td><td>Smoking is primary cause</td></tr>
+                    </table>
+
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card red">
+                            <h4>🫁 Atelectasis Predisposing Conditions</h4>
+                            <ul class="content-list">
+                                <li>Foreign body obstruction</li>
+                                <li>Mucus plugs</li>
+                                <li>Airway constriction</li>
+                                <li>Immobility (post-surgery!)</li>
+                            </ul>
+                        </div>
+                        <div class="quick-ref-card blue">
+                            <h4>🫁 COPD Types</h4>
+                            <ul class="content-list">
+                                <li><strong>Emphysema</strong> - Alveolar damage, ↓ lung compliance</li>
+                                <li><strong>Chronic Bronchitis</strong> - Airway inflammation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upper Airway -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 🔬 Upper Airway Anatomy (A&P)</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point ap">
+                        <div class="key-point-label">🔴 Upper Airway Function</div>
+                        <strong>WARM, FILTER, and HUMIDIFY</strong> inspired air
+                    </div>
+
+                    <div class="anatomy-diagram">
+                        <h4>🫁 Upper Airway Structures</h4>
+                        <div class="anatomy-part">
+                            <div class="anatomy-number">1</div>
+                            <div class="anatomy-content"><strong>Nose</strong> - Entry point; warms, filters, humidifies air</div>
+                        </div>
+                        <div class="anatomy-part">
+                            <div class="anatomy-number">2</div>
+                            <div class="anatomy-content"><strong>Pharynx (Throat)</strong> - 3 parts: nasopharynx, oropharynx, laryngopharynx</div>
+                        </div>
+                        <div class="anatomy-part">
+                            <div class="anatomy-number">3</div>
+                            <div class="anatomy-content"><strong>Larynx (Voice Box)</strong> - Contains vocal cords</div>
+                        </div>
+                        <div class="anatomy-part">
+                            <div class="anatomy-number">4</div>
+                            <div class="anatomy-content"><strong>Epiglottis</strong> - Covers larynx during swallowing to PREVENT ASPIRATION</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lower Airway -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 🔬 Lower Airway - Tracheobronchial Tree (A&P)</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="anatomy-diagram">
+                        <h4>🫁 Lower Airway Structures</h4>
+                        <div class="anatomy-part">
+                            <div class="anatomy-number">1</div>
+                            <div class="anatomy-content"><strong>Trachea</strong> - Windpipe; C-shaped cartilage rings</div>
+                        </div>
+                        <div class="anatomy-part">
+                            <div class="anatomy-number">2</div>
+                            <div class="anatomy-content"><strong>Carina</strong> - Where trachea divides into R & L bronchi (T4-T5)</div>
+                        </div>
+                        <div class="anatomy-part">
+                            <div class="anatomy-number">3</div>
+                            <div class="anatomy-content"><strong>Mainstem Bronchi</strong> - RIGHT = shorter, wider, more vertical</div>
+                        </div>
+                        <div class="anatomy-part">
+                            <div class="anatomy-number">4</div>
+                            <div class="anatomy-content"><strong>Terminal Bronchioles</strong> - Smallest airways → alveoli</div>
+                        </div>
+                    </div>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ HIGH YIELD!</div>
+                        <p>The <strong>RIGHT mainstem bronchus</strong> is shorter, wider, and more vertical - making it the most common site for:</p>
+                        <ul class="content-list">
+                            <li><strong>Aspiration</strong> (food, secretions go to RIGHT lung)</li>
+                            <li><strong>ET tube misplacement</strong></li>
+                            <li><strong>Right-sided pneumonia</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lungs & Alveoli -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 🫁 Lungs & Alveoli - HIGH YIELD! 🎯</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <table class="comparison-table">
+                        <tr><th></th><th style="background: #3b82f6;">Right Lung</th><th style="background: #ec4899;">Left Lung</th></tr>
+                        <tr><td><strong>Lobes</strong></td><td><strong>3 lobes</strong></td><td><strong>2 lobes</strong></td></tr>
+                        <tr><td>Why?</td><td>More space</td><td>Heart takes space (cardiac notch)</td></tr>
+                    </table>
+
+                    <div class="sticky-note">
+                        <h4>💡 Memory Trick!</h4>
+                        <p><strong>Right = 3</strong> lobes (Right has more Room)<br>
+                        <strong>Left = 2</strong> lobes (Left Leaves room for Love ❤️)</p>
+                    </div>
+
+                    <div class="key-point ap">
+                        <div class="key-point-label">🔴 ALVEOLI - Site of Gas Exchange!</div>
+                        <ul class="content-list">
+                            <li>~<strong>300 million alveoli</strong> in adult lungs</li>
+                            <li>Walls = <strong>single-cell layer</strong> (super thin for diffusion!)</li>
+                            <li>Produce <strong>SURFACTANT</strong> to prevent collapse</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ EXACT Test Question!</div>
+                        <p><strong>Q:</strong> Which respiratory organ is the site of gas exchange?</p>
+                        <p><strong>A:</strong> <u>Alveoli</u></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Breath Sounds -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 🩺 Breath Sounds - HIGH YIELD! 🎯</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <h4 style="color: #22c55e; margin-bottom: 10px;">Normal Breath Sounds:</h4>
+                    <table class="comparison-table">
+                        <tr><th>Sound</th><th>Characteristics</th><th>Where Heard</th></tr>
+                        <tr><td><strong>Vesicular</strong></td><td>Low-pitched, soft, rustling</td><td>Most of lung fields</td></tr>
+                        <tr><td><strong>Bronchial</strong></td><td>High-pitched, loud, harsh</td><td>Over trachea ONLY</td></tr>
+                        <tr><td><strong>Bronchovesicular</strong></td><td>Medium pitch</td><td>Upper anterior chest</td></tr>
+                    </table>
+
+                    <h4 style="color: #ef4444; margin: 20px 0 10px;">Abnormal (Adventitious) Breath Sounds:</h4>
+                    <table class="comparison-table">
+                        <tr><th>Sound</th><th>Description</th><th>Indicates</th></tr>
+                        <tr><td><strong>Crackles (Rales)</strong></td><td>Intermittent; air through fluid</td><td>CHF, pneumonia</td></tr>
+                        <tr><td><strong>Wheezes</strong></td><td>Continuous, musical</td><td>Narrowed airways (asthma)</td></tr>
+                        <tr><td><strong>Stridor</strong></td><td>High-pitched, inspiratory</td><td style="background: rgba(239,68,68,0.2);"><strong>UPPER airway obstruction - EMERGENCY!</strong></td></tr>
+                    </table>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ EXACT Test Language!</div>
+                        <p><strong>"Wheezes are continuous sounds heard on expiration as air passes through airways constricted by swelling, narrowing, secretions, or tumors."</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PFTs -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 📊 Pulmonary Function Tests & Diagnostics</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <table class="comparison-table">
+                        <tr><th>Test</th><th>What It Measures</th></tr>
+                        <tr><td><strong>Tidal Volume (TV)</strong></td><td>Air in normal breath (~500 mL)</td></tr>
+                        <tr><td><strong>Vital Capacity (VC)</strong></td><td>Maximum air expelled after max inhalation</td></tr>
+                        <tr><td><strong>Total Lung Capacity (TLC)</strong></td><td>Air at MAXIMUM inspiration</td></tr>
+                        <tr><td><strong>Residual Volume (RV)</strong></td><td>Air LEFT after max expiration</td></tr>
+                        <tr><td><strong>FEV1</strong></td><td>Forced expiratory volume in 1 sec</td></tr>
+                        <tr><td><strong>Peak Flow (PEFR)</strong></td><td>Max flow during forced expiration</td></tr>
+                    </table>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ EXACT Test Language!</div>
+                        <p><strong>Q:</strong> Which lung value is the amount of air at maximum inspiration?</p>
+                        <p><strong>A:</strong> <u>Total Lung Capacity (TLC)</u></p>
+                    </div>
+
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card green">
+                            <h4>📊 Pulse Oximetry (SpO2)</h4>
+                            <ul class="content-list">
+                                <li><strong>Normal: 90-100%</strong></li>
+                                <li>Chronic lung disease: 88-92% may be normal</li>
+                                <li>On O2: target 94-98%</li>
+                                <li>Less accurate if SpO2 <80%</li>
+                            </ul>
+                        </div>
+                        <div class="quick-ref-card blue">
+                            <h4>📊 Spirometry</h4>
+                            <ul class="content-list">
+                                <li>Measures volume of air exhaled/inhaled</li>
+                                <li>Evaluates lung function</li>
+                                <li>Promotes deep breathing post-surgery</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Oxygen Delivery -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 💨 Oxygen Delivery Systems</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <table class="comparison-table">
+                        <tr><th>Device</th><th>Flow Rate</th><th>FiO2</th><th>Key Point</th></tr>
+                        <tr><td><strong>Nasal Cannula</strong></td><td>1-6 L/min</td><td>24-45%</td><td>Low flow; can eat/talk</td></tr>
+                        <tr><td><strong>Simple Mask</strong></td><td>5-8 L/min</td><td>40-60%</td><td>Min 5 L (prevent CO2 rebreathing)</td></tr>
+                        <tr><td><strong>Non-rebreather</strong></td><td>10-15 L/min</td><td>80-95%</td><td><strong>HIGHEST O2</strong> without intubation</td></tr>
+                        <tr><td><strong>Venturi Mask</strong></td><td>4-12 L/min</td><td>24-50%</td><td><strong>MOST PRECISE</strong>; for COPD</td></tr>
+                    </table>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ Oxygen Safety Precautions!</div>
+                        <ul class="content-list">
+                            <li><strong>No open flames</strong> in patient's room</li>
+                            <li>Post <strong>"NO SMOKING"</strong> signs</li>
+                            <li>Check electrical equipment is in good order</li>
+                            <li><strong>Avoid synthetic fabrics</strong> (static electricity)</li>
+                            <li><strong>Avoid oils</strong> near oxygen (ignite spontaneously!)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inhalers -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 💊 Inhaled Medications & Breathing Techniques</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <table class="comparison-table">
+                        <tr><th>Device</th><th>Description</th><th>Key Point</th></tr>
+                        <tr><td><strong>Nebulizer</strong></td><td>Fine particles to respiratory tract</td><td>Uses high-flow oxygen; breathe normally</td></tr>
+                        <tr><td><strong>MDI (Metered-Dose)</strong></td><td>Controlled dose per compression</td><td>Shake; coordinate breath; use spacer</td></tr>
+                        <tr><td><strong>DPI (Dry Powder)</strong></td><td>Breath-activated</td><td>Breathe FAST and DEEP; no spacer</td></tr>
+                    </table>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ EXACT Test Language!</div>
+                        <p><strong>"A metered-dose inhaler delivers a controlled dose of medication with each compression of the canister."</strong></p>
+                    </div>
+
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card blue">
+                            <h4>🫁 Pursed-Lip Breathing</h4>
+                            <p>IN through nose, OUT through pursed lips. <strong>Prolongs exhalation, improves air trapping.</strong> Excellent for COPD.</p>
+                        </div>
+                        <div class="quick-ref-card green">
+                            <h4>🫁 Diaphragmatic Breathing</h4>
+                            <p>Belly breathing. <strong>Abdomen rises on inspiration.</strong> More efficient ventilation.</p>
+                        </div>
+                        <div class="quick-ref-card purple">
+                            <h4>🫁 Incentive Spirometry</h4>
+                            <p><strong>Prevents atelectasis.</strong> Encourages sustained deep inhalation. Used post-operatively.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Factors Affecting -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 📋 Factors Affecting Cardiopulmonary Function</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <table class="comparison-table">
+                        <tr><th>Factor</th><th>Effect</th></tr>
+                        <tr><td><strong>Level of health</strong></td><td>Overall health status affects function</td></tr>
+                        <tr><td><strong>Developmental</strong></td><td>Age-related changes in lung capacity</td></tr>
+                        <tr><td><strong>Medications</strong></td><td>Some depress respiration (opioids!)</td></tr>
+                        <tr><td><strong>Lifestyle (Smoking)</strong></td><td>Inhibits mucus removal, ↑ production</td></tr>
+                        <tr><td><strong>Environment</strong></td><td>Pollutants, fumes impair function</td></tr>
+                        <tr><td><strong>Psychological</strong></td><td>Anxiety ↑ oxygen demand</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Chapter 40 Wrap-Up -->
+            <div class="wrapup">
+                <h3>✅ Chapter 40 Wrap-Up</h3>
+                <div class="wrapup-box">
+                    <h4>📝 Must-Know Points</h4>
+                    <ul>
+                        <li>Ventilation = air movement; Respiration = gas exchange; Perfusion = blood through tissues</li>
+                        <li>Right bronchus: shorter, wider, vertical → aspiration goes RIGHT</li>
+                        <li>Right lung = 3 lobes; Left lung = 2 lobes</li>
+                        <li>Alveoli = site of gas exchange; Surfactant prevents collapse</li>
+                        <li>Wheezes = continuous, musical (asthma); Stridor = EMERGENCY!</li>
+                        <li>TLC = air at maximum inspiration</li>
+                        <li>Non-rebreather = HIGHEST O2; Venturi = MOST PRECISE</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== CHAPTER 42: SELF-CONCEPT ===================== -->
+        <div id="ch42" class="content-section">
+            <div class="chapter-card ch42-card">
+                <h2>🧠 Chapter 42: Self-Concept</h2>
+                <p>Understanding identity, self-esteem, and how illness affects self-perception</p>
+            </div>
+
+            <!-- Dimensions of Self-Concept -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 🪞 Dimensions of Self-Concept</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="mnemonic-box">
+                        <h4>🧠 Three Dimensions: "KEE"</h4>
+                        <div class="mnemonic-letters">
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">K</div>
+                                <div class="letter-title">Knowledge</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Self-Knowledge</div>
+                                    "Who am I?" - Personal beliefs, traits, values, roles
+                                    <div class="tooltip-example">"I am a mother" "I am independent"</div>
+                                </div>
+                            </div>
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">E</div>
+                                <div class="letter-title">Expectation</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Self-Expectation</div>
+                                    "Who do I want to be?" - Standards and goals
+                                    <div class="tooltip-example">"I want to be a great caregiver"</div>
+                                </div>
+                            </div>
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">E</div>
+                                <div class="letter-title">Evaluation</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Self-Evaluation</div>
+                                    "How well do I like myself?" - Linked to self-esteem
+                                    <div class="tooltip-example">Self-approval, self-respect, satisfaction</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Important for Nursing!</div>
+                        <p>Identify which area of self-concept is impacted so interventions can be <strong>targeted appropriately</strong>. When illness disrupts identities (mother, worker, independent person), it significantly affects self-concept.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coopersmith's 4 Bases -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 📊 Coopersmith's 4 Bases of Self-Esteem - HIGH YIELD! 🎯</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="mnemonic-box">
+                        <h4>🧠 "SCVP" - Coopersmith's 4 Bases</h4>
+                        <div class="mnemonic-letters">
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">S</div>
+                                <div class="letter-title">Significance</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Significance</div>
+                                    Feeling loved and cared about; that you MATTER
+                                    <div class="tooltip-example">Patients with limited support may struggle here</div>
+                                </div>
+                            </div>
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">C</div>
+                                <div class="letter-title">Competence</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Competence</div>
+                                    Feeling capable and effective in performing tasks
+                                    <div class="tooltip-example">Illness often limits ability to perform tasks</div>
+                                </div>
+                            </div>
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">V</div>
+                                <div class="letter-title">Virtue</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Virtue</div>
+                                    Adherence to moral and ethical standards
+                                    <div class="tooltip-example">Patients with addiction may feel moral failure</div>
+                                </div>
+                            </div>
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">P</div>
+                                <div class="letter-title">Power</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Power</div>
+                                    Sense of control over one's life
+                                    <div class="tooltip-example">Hospitalization strips patients of control</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p style="color: #7c3aed; margin-top: 15px; font-weight: 600;">"Some Cool Veterans have Power"</p>
+                    </div>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ EXACT Test Question!</div>
+                        <p><strong>Q:</strong> A nurse asks: "How important is it to you that your work has value to others?" Which aspect is being assessed?</p>
+                        <p><strong>A:</strong> <u>Competence</u> - ability to perform job/role in life</p>
+                    </div>
+
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Assessing Self-Esteem</div>
+                        <ul class="content-list">
+                            <li><strong>Significance</strong> - Ask about social support and relationships</li>
+                            <li><strong>Competence</strong> - Ask about abilities and accomplishments</li>
+                            <li><strong>Virtue</strong> - Ask about values and ethical standards</li>
+                            <li><strong>Power</strong> - Ask about control and decision-making</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Three Self-Evaluation Feelings -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 😊😔😰 Three Self-Evaluation Feelings</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <table class="comparison-table">
+                        <tr><th>Feeling</th><th>Based On</th><th>Example</th></tr>
+                        <tr style="background: rgba(34, 197, 94, 0.15);"><td><strong>Pride 😊</strong></td><td>Positive self-evaluation</td><td>"I'm proud I passed my NCLEX!"</td></tr>
+                        <tr style="background: rgba(245, 158, 11, 0.15);"><td><strong>Guilt 😔</strong></td><td>Behaviors incongruent with IDEAL self</td><td>Diabetic patient who ate sugary foods</td></tr>
+                        <tr style="background: rgba(239, 68, 68, 0.15);"><td><strong>Shame 😰</strong></td><td>Low GLOBAL self-worth</td><td>Deeper sense of inadequacy - "I'm a failure"</td></tr>
+                    </table>
+
+                    <div class="sticky-note">
+                        <h4>💡 Guilt vs. Shame</h4>
+                        <p><strong>Guilt</strong> = "I DID something bad" (behavior-specific)<br>
+                        <strong>Shame</strong> = "I AM bad" (global self-worth)<br><br>
+                        <strong>Shame is much more damaging than guilt!</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Self-Actualization -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> ⭐ Self-Actualization</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Self-Actualization</div>
+                        <p>The need to reach one's <strong>POTENTIAL</strong> through full development of one's unique capability. Highest level of Maslow's hierarchy!</p>
+                    </div>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ EXACT Test Language!</div>
+                        <p><strong>Q:</strong> Which term best describes a person's need to reach one's potential by pursuing a career in medicine?</p>
+                        <p><strong>A:</strong> <u>Self-actualization</u> (NOT self-esteem!)</p>
+                    </div>
+
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Ideal Self</div>
+                        <p><strong>The ideal self constitutes the self one WANTS to be.</strong> = TRUE!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formation of Self-Concept -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 👶 Formation of Self-Concept</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ HIGH YIELD!</div>
+                        <p><strong>People are NOT born with a self-concept!</strong> It develops gradually over a lifetime.</p>
+                    </div>
+
+                    <table class="comparison-table">
+                        <tr><th>Stage</th><th>Age</th><th>What Happens</th></tr>
+                        <tr><td><strong>Self-awareness</strong></td><td>Infancy</td><td>Learns physical self is different from environment</td></tr>
+                        <tr><td><strong>Self-recognition</strong></td><td>18 months</td><td>Recognizes self in mirrors and photos</td></tr>
+                        <tr><td><strong>Self-definition</strong></td><td>3 years</td><td>Describes self with simple characteristics</td></tr>
+                        <tr><td><strong>Self-concept</strong></td><td>6-7 years</td><td>Stable sense including internal characteristics</td></tr>
+                    </table>
+
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Formation Process</div>
+                        <ul class="content-list">
+                            <li>Infant learns physical self is different from environment</li>
+                            <li>If <strong>basic needs are met</strong>, child has positive feelings of self</li>
+                            <li>Child <strong>internalizes others' attitudes</strong> toward self</li>
+                            <li>Child/adult <strong>internalizes standards of society</strong></li>
+                            <li>In adults, <strong>interpersonal losses</strong> can impact self-concept</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ False Self</div>
+                        <p>A <strong>false self</strong> may develop when individuals respond to the <strong>needs and ambitions of significant people</strong> (like parents) instead of their own.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Factors Affecting Self-Concept -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 📋 Factors Affecting Self-Concept</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <table class="comparison-table">
+                        <tr><th>Factor</th><th>How It Affects Self-Concept</th></tr>
+                        <tr><td><strong>Developmental</strong></td><td>Children, adolescents, adults face different challenges</td></tr>
+                        <tr><td><strong>Culture</strong></td><td>Influences expectations, roles, body image, values</td></tr>
+                        <tr><td><strong>Internal/External Resources</strong></td><td>Financial stability, emotional support, coping skills</td></tr>
+                        <tr><td><strong>History of Success/Failure</strong></td><td>Repeated failure lowers self-esteem</td></tr>
+                        <tr><td><strong>Crisis/Life Stressors</strong></td><td>Illness, divorce, trauma damage self-concept</td></tr>
+                        <tr><td><strong>Aging, Illness, Disability</strong></td><td>Alter body image, independence, roles</td></tr>
+                    </table>
+
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Cultural Considerations</div>
+                        <ul class="content-list">
+                            <li><strong>Cultural modernization</strong> - Shift from traditional to modern values</li>
+                            <li><strong>Cultural expectations</strong> - Shared norms within society</li>
+                            <li><strong>Cultural competence</strong> - Ability to interact with diverse backgrounds</li>
+                            <li><strong>Cultural dissonance</strong> - Discomfort when values clash</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nursing Strategies -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 🩺 Nursing Strategies for Self-Concept</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card green">
+                            <h4>💪 Identify Personal Strengths</h4>
+                            <ul class="content-list">
+                                <li>Encourage patients to identify positive abilities</li>
+                                <li>Replace negative self-talk with balanced thinking</li>
+                                <li>Reinforce strengths you observe</li>
+                                <li>Foster self-determination - let patients make choices</li>
+                                <li>Support through dependency without powerlessness</li>
+                            </ul>
+                        </div>
+                        <div class="quick-ref-card purple">
+                            <h4>💜 Maintain Sense of Self</h4>
+                            <ul class="content-list">
+                                <li>Communicate worth with looks, speech, touch</li>
+                                <li>Use <strong>preferred name</strong>; speak respectfully</li>
+                                <li>Converse about their life experiences</li>
+                                <li>Offer simple explanations for procedures</li>
+                                <li>Respect privacy and sensibilities</li>
+                                <li>Allow expression of negative feelings</li>
+                                <li>Help recognize strengths and explore alternatives</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">💡 Remember!</div>
+                        <p><strong>Every interaction is an opportunity to support the patient's sense of self.</strong> Move the patient's body respectfully, validate emotions, highlight strengths!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chapter 42 Wrap-Up -->
+            <div class="wrapup">
+                <h3>✅ Chapter 42 Wrap-Up</h3>
+                <div class="wrapup-box">
+                    <h4>📝 Must-Know Points</h4>
+                    <ul>
+                        <li>Self-concept: 3 dimensions - Knowledge, Expectation, Evaluation</li>
+                        <li>Self-actualization = reaching full POTENTIAL</li>
+                        <li>Coopersmith's 4 bases: Significance, Competence, Virtue, Power</li>
+                        <li>Competence = ability to perform job/role</li>
+                        <li>3 self-evaluation feelings: Pride, Guilt, Shame</li>
+                        <li>Guilt = "I DID bad"; Shame = "I AM bad" (more damaging!)</li>
+                        <li>People are NOT born with self-concept - develops over time</li>
+                        <li>False self = responding to others' needs instead of own</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== FLASHCARDS ===================== -->
+        <div id="vocab" class="content-section">
+            <div class="chapter-card" style="border-left-color: #a855f7;">
+                <h2>📖 Vocabulary Flashcards</h2>
+                <p>Click cards to flip! Master these key terms.</p>
+            </div>
+
+            <div class="filter-btns">
+                <button class="filter-btn active" onclick="filterCards('all')">All Terms</button>
+                <button class="filter-btn" onclick="filterCards('ch10')">Ch 10</button>
+                <button class="filter-btn" onclick="filterCards('ch40')">Ch 40</button>
+                <button class="filter-btn" onclick="filterCards('ch42')">Ch 42</button>
+            </div>
+
+            <div class="flashcard-grid" id="flashcardGrid"></div>
+        </div>
+
+        <!-- ===================== QUIZ ===================== -->
+        <div id="quiz" class="content-section">
+            <div class="chapter-card" style="border-left-color: #6bcb77;">
+                <h2>✏️ Practice Quiz - 50 NCLEX-Style Questions</h2>
+                <p>Test your knowledge with hints and rationales!</p>
+            </div>
+
+            <div class="quiz-stats">
+                <div class="quiz-stat"><div class="quiz-stat-value" id="answeredCount">0</div><div class="quiz-stat-label">Answered</div></div>
+                <div class="quiz-stat correct"><div class="quiz-stat-value" id="correctCount">0</div><div class="quiz-stat-label">Correct</div></div>
+                <div class="quiz-stat incorrect"><div class="quiz-stat-value" id="incorrectCount">0</div><div class="quiz-stat-label">Incorrect</div></div>
+                <div class="quiz-stat score"><div class="quiz-stat-value" id="scorePercent">0%</div><div class="quiz-stat-label">Score</div></div>
+            </div>
+
+            <div id="quizContainer"></div>
+
+            <div style="text-align: center; margin-top: 25px;">
+                <button class="quiz-btn primary" onclick="resetQuiz()">🔄 Reset Quiz</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // ==================== VOCABULARY DATA ====================
+        const vocabTerms = [
+            { term: "Leadership", def: "Ability to direct or motivate a group to achieve goals; doing the RIGHT things", ch: "ch10" },
+            { term: "Management", def: "Planning, organizing, staffing, directing, controlling; doing things RIGHT", ch: "ch10" },
+            { term: "Explicit Power", def: "Power from POSITION/TITLE (e.g., nurse manager)", ch: "ch10" },
+            { term: "Implied Power", def: "Power from personality, expertise, or intimidation (e.g., class bully)", ch: "ch10" },
+            { term: "Autocratic", def: "Leader assumes CONTROL over all decisions and activities", ch: "ch10" },
+            { term: "Democratic", def: "Shared decision-making; sense of equality among members", ch: "ch10" },
+            { term: "Laissez-faire", def: "Leader relinquishes power to group; hands-off approach", ch: "ch10" },
+            { term: "Transformational", def: "Creates revolutionary change through charisma and inspiration", ch: "ch10" },
+            { term: "Smoothing", def: "Conflict resolution by complimenting all parties to calm tensions", ch: "ch10" },
+            { term: "Unfreezing", def: "Lewin's 1st stage: need for change is recognized", ch: "ch10" },
+            { term: "Refreezing", def: "Lewin's 3rd stage: change becomes operational", ch: "ch10" },
+            { term: "Delegation", def: "Transferring task authority while retaining accountability", ch: "ch10" },
+            { term: "Ventilation", def: "Movement of AIR into and out of the lungs", ch: "ch40" },
+            { term: "Respiration", def: "Gas exchange (O2/CO2) between alveoli and blood via diffusion", ch: "ch40" },
+            { term: "Perfusion", def: "Oxygenated blood passing through body TISSUES", ch: "ch40" },
+            { term: "Alveoli", def: "Site of gas exchange; ~300 million; single-cell walls produce surfactant", ch: "ch40" },
+            { term: "Surfactant", def: "Reduces surface tension; prevents alveolar collapse", ch: "ch40" },
+            { term: "Hypoxia", def: "Inadequate oxygen available to body cells/tissues", ch: "ch40" },
+            { term: "Atelectasis", def: "Incomplete lung expansion or collapse of alveoli", ch: "ch40" },
+            { term: "Wheezes", def: "Continuous, musical sounds from narrowed airways (asthma)", ch: "ch40" },
+            { term: "Stridor", def: "High-pitched inspiratory sound; UPPER airway obstruction - EMERGENCY", ch: "ch40" },
+            { term: "Crackles", def: "Intermittent sounds from air through fluid in airways", ch: "ch40" },
+            { term: "Total Lung Capacity", def: "Air in lungs at MAXIMUM inspiration", ch: "ch40" },
+            { term: "Venturi Mask", def: "MOST PRECISE O2 delivery; used for COPD", ch: "ch40" },
+            { term: "Non-rebreather", def: "HIGHEST O2 concentration without intubation (80-95%)", ch: "ch40" },
+            { term: "Self-Concept", def: "Mental image or picture of oneself", ch: "ch42" },
+            { term: "Self-Knowledge", def: "Who am I? - beliefs, traits, values, roles", ch: "ch42" },
+            { term: "Self-Expectation", def: "Who do I want to be? - goals and aspirations", ch: "ch42" },
+            { term: "Self-Evaluation", def: "How well do I like myself? - linked to self-esteem", ch: "ch42" },
+            { term: "Self-Actualization", def: "Need to reach one's POTENTIAL through full development", ch: "ch42" },
+            { term: "Ideal Self", def: "The self one WANTS to be", ch: "ch42" },
+            { term: "Significance", def: "Coopersmith: feeling you MATTER to others; being loved", ch: "ch42" },
+            { term: "Competence", def: "Coopersmith: ability to perform tasks/roles successfully", ch: "ch42" },
+            { term: "Virtue", def: "Coopersmith: living by moral-ethical principles", ch: "ch42" },
+            { term: "Power (Self-Esteem)", def: "Coopersmith: control over one's own life", ch: "ch42" },
+            { term: "Guilt", def: "Behaviors incongruent with IDEAL self (I did something bad)", ch: "ch42" },
+            { term: "Shame", def: "Low GLOBAL self-worth (I am bad) - more damaging than guilt", ch: "ch42" },
+            { term: "False Self", def: "Develops when responding to others' needs instead of own", ch: "ch42" }
+        ];
+
+        // ==================== QUIZ DATA - 50 QUESTIONS ====================
+        const quizQuestions = [
+            // CHAPTER 10: LEADERSHIP (Questions 1-17)
+            { q: "1. A class bully who intimidates classmates has what type of power?", opts: ["A. Explicit power", "B. Implied power", "C. Democratic power", "D. Referent power"], ans: 1, hint: "Is the power from a formal position or from personality?", rat: "Implied power comes from personality/intimidation, NOT formal position." },
+            { q: "2. Which leadership style describes a nurse who assumes control over decisions and activities of the group?", opts: ["A. Autocratic", "B. Democratic", "C. Laissez-faire", "D. Transformational"], ans: 0, hint: "Think about who makes all the decisions.", rat: "Autocratic leadership = leader assumes CONTROL over decisions and activities." },
+            { q: "3. The nurse manager spends time complimenting nurses who are in conflict. What approach is this?", opts: ["A. Avoiding", "B. Collaborating", "C. Smoothing", "D. Competing"], ans: 2, hint: "Complimenting to calm tensions...", rat: "Smoothing involves complimenting all parties to prevent emotional outbursts." },
+            { q: "4. In Lewin's Change Theory, which stage involves the change becoming operational?", opts: ["A. Unfreezing", "B. Moving", "C. Refreezing", "D. Evaluating"], ans: 2, hint: "Ice cube analogy - which is the final solid form?", rat: "Refreezing = change becomes operational and the new normal." },
+            { q: "5. Which leadership style works best with highly experienced teams but may lead to poor direction for new staff?", opts: ["A. Autocratic", "B. Democratic", "C. Laissez-faire", "D. Transactional"], ans: 2, hint: "Hands-off approach...", rat: "Laissez-faire = hands-off. Works with experienced teams but not new staff." },
+            { q: "6. The 5 Rights of Delegation include all EXCEPT:", opts: ["A. Right Task", "B. Right Circumstance", "C. Right Diagnosis", "D. Right Supervision"], ans: 2, hint: "Task, Circumstance, Person, Direction, Supervision", rat: "5 Rights: Task, Circumstance, Person, Direction, Supervision. NOT diagnosis." },
+            { q: "7. Which RN task can be delegated to UAP?", opts: ["A. Initial assessment", "B. Vital signs collection", "C. Care planning", "D. Health teaching"], ans: 1, hint: "RN cannot delegate assessment, planning, teaching, evaluation.", rat: "UAP can collect vital signs. RN cannot delegate assessment, teaching, or care planning." },
+            { q: "8. 'Management is doing things right; Leadership is doing the right things.' Who said this?", opts: ["A. Florence Nightingale", "B. Peter Drucker", "C. Abraham Maslow", "D. Stanley Coopersmith"], ans: 1, hint: "Famous management quote...", rat: "Peter Drucker: 'Management is doing things right; Leadership is doing the right things.'" },
+            { q: "9. A charge nurse position represents what type of power?", opts: ["A. Implied power", "B. Explicit power", "C. Charismatic power", "D. Personal power"], ans: 1, hint: "The power comes from the job TITLE...", rat: "Explicit power comes from POSITION/TITLE. Charge nurse is a formal position." },
+            { q: "10. Which leadership style inspires staff to innovate and pursue a shared vision, foundational in Magnet organizations?", opts: ["A. Autocratic", "B. Transactional", "C. Transformational", "D. Laissez-faire"], ans: 2, hint: "Creates revolutionary change through charisma...", rat: "Transformational leadership inspires innovation and is foundational in Magnet organizations." },
+            { q: "11. Which conflict resolution strategy is necessary when safety is at risk?", opts: ["A. Avoiding", "B. Accommodating", "C. Competing", "D. Compromising"], ans: 2, hint: "Sometimes you HAVE to enforce rules (like infection control)...", rat: "Competing (WIN-LOSE) is necessary when safety is at risk - enforcing critical policies." },
+            { q: "12. In Lewin's Change Theory, when is the need for change recognized?", opts: ["A. Unfreezing", "B. Moving", "C. Refreezing", "D. Planning"], ans: 0, hint: "The ice starts to melt - old ways breaking down...", rat: "Unfreezing = the need for change is RECOGNIZED. Old behaviors 'melt.'" },
+            { q: "13. Which is a consideration when delegating nursing care?", opts: ["A. The nurse's personal preferences", "B. Stability of the patient's condition", "C. The UAP's seniority", "D. Time of day"], ans: 1, hint: "Think about patient factors...", rat: "Consider: Stability, Complexity, Potential for harm, Predictability, Overall context." },
+            { q: "14. The RN delegates vitals to a UAP. Who is ACCOUNTABLE for the patient's care?", opts: ["A. The UAP", "B. The RN", "C. The charge nurse", "D. Both equally"], ans: 1, hint: "You delegate the TASK, not the...", rat: "The RN is ALWAYS accountable. You delegate the task, NOT the responsibility." },
+            { q: "15. Which leadership style is based on rewards and punishments?", opts: ["A. Servant", "B. Transactional", "C. Transformational", "D. Quantum"], ans: 1, hint: "Think exchange - reward for results...", rat: "Transactional leadership is based on REWARDS and punishments - useful for routine tasks." },
+            { q: "16. A nurse who focuses on serving others first and developing others' greatness demonstrates which style?", opts: ["A. Autocratic", "B. Democratic", "C. Servant", "D. Transactional"], ans: 2, hint: "The leader acts as mentor/facilitator...", rat: "Servant leadership focuses on SERVING others first and developing their greatness." },
+            { q: "17. Which RN task CANNOT be delegated to UAP?", opts: ["A. Ambulation", "B. I&O measurement", "C. Discharge planning", "D. Postmortem care"], ans: 2, hint: "Assessment, teaching, planning, evaluation = RN only", rat: "Discharge planning requires RN judgment. Cannot delegate assessment, planning, teaching, evaluation." },
+            
+            // CHAPTER 40: OXYGENATION (Questions 18-35)
+            { q: "18. Which respiratory organ is the site of gas exchange?", opts: ["A. Mediastinum", "B. Parietal pleura", "C. Alveoli", "D. Diaphragm"], ans: 2, hint: "Think about tiny air sacs at the end of bronchioles.", rat: "Alveoli are small air sacs where gas exchange occurs due to thin walls and capillary proximity." },
+            { q: "19. Pulmonary ventilation is the process by which oxygenated blood passes through body tissues. True or False?", opts: ["A. True", "B. False"], ans: 1, hint: "VRP - which one is blood through tissues?", rat: "FALSE! That's PERFUSION. Pulmonary ventilation is movement of air in/out of lungs." },
+            { q: "20. Which lung value is the amount of air at maximum inspiration?", opts: ["A. Vital Capacity", "B. Total Lung Capacity", "C. Residual Volume", "D. Tidal Volume"], ans: 1, hint: "TOTAL air when you breathe in as much as possible.", rat: "Total Lung Capacity (TLC) = air at maximum inspiration." },
+            { q: "21. The right mainstem bronchus is shorter, wider, and more vertical. What does this make it prone to?", opts: ["A. Pneumothorax", "B. Aspiration", "C. Atelectasis", "D. Emphysema"], ans: 1, hint: "When food/secretions go down wrong pipe...", rat: "Right bronchus anatomy makes it the most common site for aspiration." },
+            { q: "22. Which O2 delivery device provides the MOST PRECISE concentration?", opts: ["A. Nasal cannula", "B. Simple mask", "C. Non-rebreather", "D. Venturi mask"], ans: 3, hint: "Used for COPD patients who need exact FiO2.", rat: "Venturi mask delivers MOST PRECISE O2 concentration; ideal for COPD." },
+            { q: "23. Continuous, musical sounds heard during expiration indicate:", opts: ["A. Crackles", "B. Wheezes", "C. Stridor", "D. Rhonchi"], ans: 1, hint: "Think asthma, narrowed airways...", rat: "Wheezes are continuous, musical sounds from narrowed airways." },
+            { q: "24. How many lobes does the LEFT lung have?", opts: ["A. 1", "B. 2", "C. 3", "D. 4"], ans: 1, hint: "Left has less room because of the heart.", rat: "Left lung = 2 lobes (heart takes up space with cardiac notch)." },
+            { q: "25. A metered-dose inhaler delivers:", opts: ["A. Continuous medication flow", "B. Controlled dose with each compression", "C. Breath-activated powder", "D. Nebulized particles"], ans: 1, hint: "MDI = Metered (measured) DOSE...", rat: "MDI delivers a controlled dose of medication with each compression of the canister." },
+            { q: "26. Stridor indicates:", opts: ["A. Lower airway obstruction", "B. Fluid in alveoli", "C. Upper airway obstruction - EMERGENCY", "D. Pleural effusion"], ans: 2, hint: "High-pitched, inspiratory, URGENT!", rat: "Stridor = UPPER airway obstruction - this is an EMERGENCY!" },
+            { q: "27. A non-rebreather mask delivers what FiO2 range?", opts: ["A. 24-44%", "B. 40-60%", "C. 80-95%", "D. 100%"], ans: 2, hint: "HIGHEST O2 without intubation.", rat: "Non-rebreather delivers 80-95% FiO2 - highest without intubation." },
+            { q: "28. Oxygen safety precautions include all EXCEPT:", opts: ["A. No smoking signs", "B. Avoid synthetic fabrics", "C. Apply petroleum-based products", "D. Check electrical equipment"], ans: 2, hint: "Oils ignite spontaneously with O2!", rat: "AVOID oils/petroleum near oxygen - they ignite spontaneously!" },
+            { q: "29. Which breathing technique is BEST for COPD patients?", opts: ["A. Pursed-lip breathing", "B. Rapid shallow breathing", "C. Breath holding", "D. Hyperventilation"], ans: 0, hint: "Prolongs exhalation, improves air trapping.", rat: "Pursed-lip breathing prolongs exhalation and improves air trapping - excellent for COPD." },
+            { q: "30. What does surfactant do?", opts: ["A. Increases mucus production", "B. Prevents alveolar collapse", "C. Conducts nerve impulses", "D. Filters air particles"], ans: 1, hint: "Premature babies lack this and develop RDS.", rat: "Surfactant reduces surface tension and PREVENTS alveolar collapse." },
+            { q: "31. How many lobes does the RIGHT lung have?", opts: ["A. 1", "B. 2", "C. 3", "D. 4"], ans: 2, hint: "Right has more room (no heart).", rat: "Right lung = 3 lobes (upper, middle, lower). More space available." },
+            { q: "32. The process of oxygenated blood passing through body tissues is called:", opts: ["A. Ventilation", "B. Respiration", "C. Perfusion", "D. Diffusion"], ans: 2, hint: "Blood delivering O2 to cells...", rat: "Perfusion = oxygenated blood passing through body TISSUES." },
+            { q: "33. Which breath sound is low-pitched, soft, and heard over most of the lung fields?", opts: ["A. Bronchial", "B. Vesicular", "C. Bronchovesicular", "D. Wheezes"], ans: 1, hint: "Normal sound over peripheral lungs...", rat: "Vesicular sounds are low-pitched, soft, and heard over most of the lung fields." },
+            { q: "34. A patient using accessory muscles (neck muscles) to breathe is showing signs of:", opts: ["A. Normal breathing", "B. Respiratory distress", "C. Sleep", "D. Relaxation"], ans: 1, hint: "Normally we only use diaphragm and intercostals...", rat: "Using accessory muscles (SCM, scalenes) indicates RESPIRATORY DISTRESS - a red flag!" },
+            { q: "35. Incomplete lung expansion or collapse of alveoli is called:", opts: ["A. Pneumonia", "B. Emphysema", "C. Atelectasis", "D. Bronchitis"], ans: 2, hint: "Think collapsed alveoli post-surgery...", rat: "Atelectasis = incomplete lung expansion or collapse of alveoli. Prevents gas diffusion." },
+            { q: "36. The minimum flow rate for a simple face mask is:", opts: ["A. 1 L/min", "B. 3 L/min", "C. 5 L/min", "D. 10 L/min"], ans: 2, hint: "Need enough flow to prevent CO2 rebreathing...", rat: "Simple mask requires minimum 5 L/min to prevent CO2 rebreathing." },
+            { q: "37. Incentive spirometry is used primarily to:", opts: ["A. Deliver medications", "B. Prevent atelectasis", "C. Measure oxygen saturation", "D. Remove secretions"], ans: 1, hint: "Encourages deep breathing post-surgery...", rat: "Incentive spirometry PREVENTS ATELECTASIS by encouraging deep sustained inhalation." },
+            { q: "38. Which is the primary cause of COPD?", opts: ["A. Allergies", "B. Smoking", "C. Genetics", "D. Infections"], ans: 1, hint: "Leading preventable cause...", rat: "Smoking is the PRIMARY cause of COPD." },
+            
+            // CHAPTER 42: SELF-CONCEPT (Questions 39-50)
+            { q: "39. Which term describes a person's need to reach one's potential by pursuing a career in medicine?", opts: ["A. Self-esteem", "B. Self-concept", "C. Self-actualization", "D. Self-knowledge"], ans: 2, hint: "Maslow's highest level...", rat: "Self-actualization = reaching one's POTENTIAL through full development." },
+            { q: "40. People are born with a self-concept. True or False?", opts: ["A. True", "B. False"], ans: 1, hint: "Think about infant development stages.", rat: "FALSE! People are NOT born with self-concept; it develops over time." },
+            { q: "41. A nurse asks: 'How important is it that your work has value to others?' Which aspect of self-esteem is being assessed?", opts: ["A. Significance", "B. Competence", "C. Virtue", "D. Power"], ans: 1, hint: "Think about ability to perform your job/role.", rat: "Competence = ability to perform job/role in life. Work having value = being capable." },
+            { q: "42. Which is NOT part of Coopersmith's 4 Bases of Self-Esteem?", opts: ["A. Significance", "B. Competence", "C. Self-actualization", "D. Power"], ans: 2, hint: "SCVP - Significance, Competence, Virtue, Power", rat: "Self-actualization is Maslow's concept, not Coopersmith's 4 bases (SCVP)." },
+            { q: "43. The ideal self constitutes the self one wants to be. True or False?", opts: ["A. True", "B. False"], ans: 0, hint: "Ideal = what you aspire to...", rat: "TRUE! The ideal self is who you WANT to be." },
+            { q: "44. Shame is associated with:", opts: ["A. Positive self-evaluation", "B. Behaviors incongruent with ideal self", "C. Low global self-worth", "D. High competence"], ans: 2, hint: "Shame = 'I AM bad' not just 'I did bad'", rat: "Shame is associated with low GLOBAL self-worth. More damaging than guilt." },
+            { q: "45. Which self-evaluation feeling is based on behaviors incongruent with the ideal self?", opts: ["A. Pride", "B. Guilt", "C. Shame", "D. Joy"], ans: 1, hint: "'I DID something bad' vs 'I AM bad'", rat: "Guilt = behaviors incongruent with IDEAL self. 'I did something bad.'" },
+            { q: "46. Which stage of self-concept development occurs at 18 months?", opts: ["A. Self-awareness", "B. Self-recognition", "C. Self-definition", "D. Self-concept"], ans: 1, hint: "When children recognize themselves in mirrors.", rat: "Self-recognition at 18 months - children recognize themselves in mirrors." },
+            { q: "47. A false self may develop when individuals respond to:", opts: ["A. Their own inner needs", "B. The needs and ambitions of significant people", "C. Cultural competence", "D. Self-actualization"], ans: 1, hint: "Responding to others instead of yourself...", rat: "False self develops when responding to needs/ambitions of OTHERS (like parents) instead of own." },
+            { q: "48. 'Who am I?' represents which dimension of self-concept?", opts: ["A. Self-knowledge", "B. Self-expectation", "C. Self-evaluation", "D. Self-esteem"], ans: 0, hint: "The foundation - beliefs, traits, values, roles...", rat: "Self-knowledge = 'Who am I?' - personal beliefs, traits, values, strengths, roles." },
+            { q: "49. Feeling loved and cared about relates to which of Coopersmith's bases?", opts: ["A. Competence", "B. Virtue", "C. Significance", "D. Power"], ans: 2, hint: "Feeling that you MATTER to others...", rat: "Significance = feeling loved, cared about, that you MATTER to others." },
+            { q: "50. A diabetic patient feels bad after eating sugary foods. This is an example of:", opts: ["A. Pride", "B. Guilt", "C. Shame", "D. Power"], ans: 1, hint: "Behavior went against their values/ideal self...", rat: "Guilt = behavior incongruent with ideal self. The patient acted against their health values." }
+        ];
+
+        let currentFilter = 'all';
+        let quizAnswers = {};
+
+        // ==================== FLASHCARD FUNCTIONS ====================
+        function renderFlashcards() {
+            const grid = document.getElementById('flashcardGrid');
+            const filtered = currentFilter === 'all' ? vocabTerms : vocabTerms.filter(t => t.ch === currentFilter);
+            
+            grid.innerHTML = filtered.map((t, i) => `
+                <div class="flashcard-container">
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-front">
+                            <div class="flashcard-term">${t.term}</div>
+                            <div class="flashcard-chapter">${t.ch.toUpperCase()}</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="flashcard-definition">${t.def}</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterCards(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            renderFlashcards();
+        }
+
+        // ==================== QUIZ FUNCTIONS ====================
+        function renderQuiz() {
+            const container = document.getElementById('quizContainer');
+            container.innerHTML = quizQuestions.map((q, i) => `
+                <div class="quiz-question" id="q${i}">
+                    <h3>${q.q}</h3>
+                    <div class="quiz-options">
+                        ${q.opts.map((opt, j) => `
+                            <div class="quiz-option" onclick="selectOption(${i}, ${j})">${opt}</div>
+                        `).join('')}
+                    </div>
+                    <div class="quiz-btns">
+                        <button class="quiz-btn hint" onclick="showHint(${i})">💡 Hint</button>
+                        <button class="quiz-btn primary" onclick="checkAnswer(${i})">Check Answer</button>
+                    </div>
+                    <div class="hint-text" id="hint${i}">${q.hint}</div>
+                    <div class="quiz-feedback" id="feedback${i}"></div>
+                </div>
+            `).join('');
+        }
+
+        function selectOption(qNum, optNum) {
+            const question = document.getElementById('q' + qNum);
+            question.querySelectorAll('.quiz-option').forEach((opt, i) => {
+                opt.classList.remove('selected');
+                if (i === optNum) opt.classList.add('selected');
+            });
+        }
+
+        function showHint(qNum) {
+            document.getElementById('hint' + qNum).classList.toggle('show');
+        }
+
+        function checkAnswer(qNum) {
+            if (quizAnswers[qNum] !== undefined) return;
+            
+            const question = document.getElementById('q' + qNum);
+            const selected = question.querySelector('.quiz-option.selected');
+            const feedback = document.getElementById('feedback' + qNum);
+            const q = quizQuestions[qNum];
+            
+            if (!selected) {
+                feedback.className = 'quiz-feedback show incorrect-fb';
+                feedback.innerHTML = '<strong>Please select an answer first!</strong>';
+                return;
+            }
+            
+            const selectedIdx = Array.from(question.querySelectorAll('.quiz-option')).indexOf(selected);
+            quizAnswers[qNum] = selectedIdx;
+            
+            question.querySelectorAll('.quiz-option').forEach((opt, i) => {
+                opt.classList.add('disabled');
+                if (i === q.ans) opt.classList.add('correct');
+                else if (opt.classList.contains('selected')) opt.classList.add('incorrect');
+            });
+            
+            if (selectedIdx === q.ans) {
+                feedback.className = 'quiz-feedback show correct-fb';
+                feedback.innerHTML = '<strong>✅ Correct!</strong> ' + q.rat;
+            } else {
+                feedback.className = 'quiz-feedback show incorrect-fb';
+                feedback.innerHTML = '<strong>❌ Incorrect.</strong> ' + q.rat;
+            }
+            
+            updateQuizStats();
+            saveProgress();
+        }
+
+        function updateQuizStats() {
+            const answered = Object.keys(quizAnswers).length;
+            let correct = 0;
+            for (let q in quizAnswers) {
+                if (quizAnswers[q] === quizQuestions[q].ans) correct++;
+            }
+            const incorrect = answered - correct;
+            const pct = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+            
+            document.getElementById('answeredCount').textContent = answered;
+            document.getElementById('correctCount').textContent = correct;
+            document.getElementById('incorrectCount').textContent = incorrect;
+            document.getElementById('scorePercent').textContent = pct + '%';
+        }
+
+        function resetQuiz() {
+            if (confirm('Reset all quiz answers?')) {
+                quizAnswers = {};
+                renderQuiz();
+                updateQuizStats();
+                localStorage.removeItem('nur168u2_quiz');
+            }
+        }
+
+        // ==================== NAVIGATION & PROGRESS ====================
+        function showSection(sectionId) {
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function toggleTopic(el) {
+            if (event.target.type === 'checkbox') return;
+            el.classList.toggle('expanded');
+        }
+
+        function updateProgress() {
+            const total = document.querySelectorAll('.topic-check').length;
+            const checked = document.querySelectorAll('.topic-check:checked').length;
+            const pct = Math.round((checked / total) * 100);
+            const fill = document.getElementById('progressFill');
+            fill.style.width = pct + '%';
+            fill.textContent = pct + '%';
+            saveProgress();
+        }
+
+        function saveProgress() {
+            const checked = [];
+            document.querySelectorAll('.topic-check').forEach((cb, i) => {
+                if (cb.checked) checked.push(i);
+            });
+            localStorage.setItem('nur168u2_progress', JSON.stringify(checked));
+            localStorage.setItem('nur168u2_quiz', JSON.stringify(quizAnswers));
+        }
+
+        function loadProgress() {
+            const saved = localStorage.getItem('nur168u2_progress');
+            if (saved) {
+                const checked = JSON.parse(saved);
+                document.querySelectorAll('.topic-check').forEach((cb, i) => {
+                    if (checked.includes(i)) cb.checked = true;
+                });
+                updateProgress();
+            }
+            
+            const savedQuiz = localStorage.getItem('nur168u2_quiz');
+            if (savedQuiz) {
+                quizAnswers = JSON.parse(savedQuiz);
+                // Restore quiz state
+                for (let qNum in quizAnswers) {
+                    const question = document.getElementById('q' + qNum);
+                    if (question) {
+                        const opts = question.querySelectorAll('.quiz-option');
+                        opts.forEach((opt, i) => {
+                            opt.classList.add('disabled');
+                            if (i === quizQuestions[qNum].ans) opt.classList.add('correct');
+                            if (i === quizAnswers[qNum] && i !== quizQuestions[qNum].ans) opt.classList.add('incorrect');
+                            if (i === quizAnswers[qNum]) opt.classList.add('selected');
+                        });
+                        const feedback = document.getElementById('feedback' + qNum);
+                        if (quizAnswers[qNum] === quizQuestions[qNum].ans) {
+                            feedback.className = 'quiz-feedback show correct-fb';
+                            feedback.innerHTML = '<strong>✅ Correct!</strong> ' + quizQuestions[qNum].rat;
+                        } else {
+                            feedback.className = 'quiz-feedback show incorrect-fb';
+                            feedback.innerHTML = '<strong>❌ Incorrect.</strong> ' + quizQuestions[qNum].rat;
+                        }
+                    }
+                }
+                updateQuizStats();
+            }
+        }
+
+        function resetProgress() {
+            if (confirm('Reset ALL study progress and quiz answers?')) {
+                document.querySelectorAll('.topic-check').forEach(cb => cb.checked = false);
+                quizAnswers = {};
+                localStorage.removeItem('nur168u2_progress');
+                localStorage.removeItem('nur168u2_quiz');
+                updateProgress();
+                renderQuiz();
+                updateQuizStats();
+            }
+        }
+
+        // ==================== INITIALIZE ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            renderFlashcards();
+            renderQuiz();
+            loadProgress();
+        });
+    </script>
+</body>
+</html>
