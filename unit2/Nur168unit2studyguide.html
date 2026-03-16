@@ -208,6 +208,16 @@
         .quiz-btn:hover { transform: scale(1.05); }
         .hint-text { background: rgba(245,158,11,0.15); border: 2px solid #f59e0b; border-radius: 10px; padding: 12px; margin-top: 10px; display: none; }
         .hint-text.show { display: block; }
+        
+        .find-it-link { display: inline-block; margin-top: 10px; padding: 8px 15px; background: rgba(99, 102, 241, 0.2); border: 2px solid #6366f1; border-radius: 20px; color: #c7d2fe !important; text-decoration: none; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+        .find-it-link:hover { background: #6366f1; color: white !important; }
+        
+        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 50%; font-size: 1.5em; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); z-index: 1000; }
+        .back-to-top.show { opacity: 1; visibility: visible; }
+        .back-to-top:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6); }
+        
+        .sata-note { background: rgba(168, 85, 247, 0.15); border: 2px solid #a855f7; border-radius: 10px; padding: 10px 15px; margin-bottom: 15px; font-size: 0.95em; color: #7c3aed; }
+        .quiz-option.sata-selected { border-color: #a855f7; background: rgba(168, 85, 247, 0.15); }
 
         .flashcard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
         .flashcard-container { perspective: 1000px; }
@@ -247,14 +257,58 @@
             .nav-tab { width: 100%; text-align: center; }
             .mnemonic-tooltip { width: 200px; font-size: 0.85em; }
         }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5em;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: none;
+        }
+        .back-to-top:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+        }
+        .back-to-top.show { display: flex; align-items: center; justify-content: center; }
+
+        /* Find in Guide Box */
+        .find-in-guide {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            border: 2px solid #60a5fa;
+            border-radius: 10px;
+            padding: 12px 15px;
+            margin-top: 12px;
+            color: white;
+        }
+        .find-in-guide strong { color: #fde68a; }
+        .find-in-guide a {
+            color: #93c5fd;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .find-in-guide a:hover { color: #bfdbfe; }
     </style>
 </head>
 <body>
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+
     <div class="container">
         <div class="header">
             <h1>📚 NUR168 Unit 2 Study Guide</h1>
             <p class="subtitle">Chapters 10, 40 & 42: Leadership, Oxygenation & Self-Concept</p>
-            <p class="features">✨ ADHD-Friendly • Hover Mnemonics • A&P Deep Dive • 30 NCLEX Questions • Progress Tracking ✨</p>
+            <p class="features">✨ ADHD-Friendly • Hover Mnemonics • A&P Deep Dive • 50 NCLEX Questions • Progress Tracking ✨</p>
         </div>
 
         <div class="ap-alert">
@@ -1382,6 +1436,9 @@
         </div>
 
     </div>
+    
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
 
     <script>
         // ==================== VOCABULARY DATA ====================
@@ -1426,63 +1483,110 @@
             { term: "False Self", def: "Develops when responding to others' needs instead of own", ch: "ch42" }
         ];
 
-        // ==================== QUIZ DATA - 50 QUESTIONS ====================
+        // ==================== QUIZ DATA - 50 NCLEX-STYLE QUESTIONS ====================
         const quizQuestions = [
-            // CHAPTER 10: LEADERSHIP (Questions 1-17)
-            { q: "1. A class bully who intimidates classmates has what type of power?", opts: ["A. Explicit power", "B. Implied power", "C. Democratic power", "D. Referent power"], ans: 1, hint: "Is the power from a formal position or from personality?", rat: "Implied power comes from personality/intimidation, NOT formal position." },
-            { q: "2. Which leadership style describes a nurse who assumes control over decisions and activities of the group?", opts: ["A. Autocratic", "B. Democratic", "C. Laissez-faire", "D. Transformational"], ans: 0, hint: "Think about who makes all the decisions.", rat: "Autocratic leadership = leader assumes CONTROL over decisions and activities." },
-            { q: "3. The nurse manager spends time complimenting nurses who are in conflict. What approach is this?", opts: ["A. Avoiding", "B. Collaborating", "C. Smoothing", "D. Competing"], ans: 2, hint: "Complimenting to calm tensions...", rat: "Smoothing involves complimenting all parties to prevent emotional outbursts." },
-            { q: "4. In Lewin's Change Theory, which stage involves the change becoming operational?", opts: ["A. Unfreezing", "B. Moving", "C. Refreezing", "D. Evaluating"], ans: 2, hint: "Ice cube analogy - which is the final solid form?", rat: "Refreezing = change becomes operational and the new normal." },
-            { q: "5. Which leadership style works best with highly experienced teams but may lead to poor direction for new staff?", opts: ["A. Autocratic", "B. Democratic", "C. Laissez-faire", "D. Transactional"], ans: 2, hint: "Hands-off approach...", rat: "Laissez-faire = hands-off. Works with experienced teams but not new staff." },
-            { q: "6. The 5 Rights of Delegation include all EXCEPT:", opts: ["A. Right Task", "B. Right Circumstance", "C. Right Diagnosis", "D. Right Supervision"], ans: 2, hint: "Task, Circumstance, Person, Direction, Supervision", rat: "5 Rights: Task, Circumstance, Person, Direction, Supervision. NOT diagnosis." },
-            { q: "7. Which RN task can be delegated to UAP?", opts: ["A. Initial assessment", "B. Vital signs collection", "C. Care planning", "D. Health teaching"], ans: 1, hint: "RN cannot delegate assessment, planning, teaching, evaluation.", rat: "UAP can collect vital signs. RN cannot delegate assessment, teaching, or care planning." },
-            { q: "8. 'Management is doing things right; Leadership is doing the right things.' Who said this?", opts: ["A. Florence Nightingale", "B. Peter Drucker", "C. Abraham Maslow", "D. Stanley Coopersmith"], ans: 1, hint: "Famous management quote...", rat: "Peter Drucker: 'Management is doing things right; Leadership is doing the right things.'" },
-            { q: "9. A charge nurse position represents what type of power?", opts: ["A. Implied power", "B. Explicit power", "C. Charismatic power", "D. Personal power"], ans: 1, hint: "The power comes from the job TITLE...", rat: "Explicit power comes from POSITION/TITLE. Charge nurse is a formal position." },
-            { q: "10. Which leadership style inspires staff to innovate and pursue a shared vision, foundational in Magnet organizations?", opts: ["A. Autocratic", "B. Transactional", "C. Transformational", "D. Laissez-faire"], ans: 2, hint: "Creates revolutionary change through charisma...", rat: "Transformational leadership inspires innovation and is foundational in Magnet organizations." },
-            { q: "11. Which conflict resolution strategy is necessary when safety is at risk?", opts: ["A. Avoiding", "B. Accommodating", "C. Competing", "D. Compromising"], ans: 2, hint: "Sometimes you HAVE to enforce rules (like infection control)...", rat: "Competing (WIN-LOSE) is necessary when safety is at risk - enforcing critical policies." },
-            { q: "12. In Lewin's Change Theory, when is the need for change recognized?", opts: ["A. Unfreezing", "B. Moving", "C. Refreezing", "D. Planning"], ans: 0, hint: "The ice starts to melt - old ways breaking down...", rat: "Unfreezing = the need for change is RECOGNIZED. Old behaviors 'melt.'" },
-            { q: "13. Which is a consideration when delegating nursing care?", opts: ["A. The nurse's personal preferences", "B. Stability of the patient's condition", "C. The UAP's seniority", "D. Time of day"], ans: 1, hint: "Think about patient factors...", rat: "Consider: Stability, Complexity, Potential for harm, Predictability, Overall context." },
-            { q: "14. The RN delegates vitals to a UAP. Who is ACCOUNTABLE for the patient's care?", opts: ["A. The UAP", "B. The RN", "C. The charge nurse", "D. Both equally"], ans: 1, hint: "You delegate the TASK, not the...", rat: "The RN is ALWAYS accountable. You delegate the task, NOT the responsibility." },
-            { q: "15. Which leadership style is based on rewards and punishments?", opts: ["A. Servant", "B. Transactional", "C. Transformational", "D. Quantum"], ans: 1, hint: "Think exchange - reward for results...", rat: "Transactional leadership is based on REWARDS and punishments - useful for routine tasks." },
-            { q: "16. A nurse who focuses on serving others first and developing others' greatness demonstrates which style?", opts: ["A. Autocratic", "B. Democratic", "C. Servant", "D. Transactional"], ans: 2, hint: "The leader acts as mentor/facilitator...", rat: "Servant leadership focuses on SERVING others first and developing their greatness." },
-            { q: "17. Which RN task CANNOT be delegated to UAP?", opts: ["A. Ambulation", "B. I&O measurement", "C. Discharge planning", "D. Postmortem care"], ans: 2, hint: "Assessment, teaching, planning, evaluation = RN only", rat: "Discharge planning requires RN judgment. Cannot delegate assessment, planning, teaching, evaluation." },
+            // CHAPTER 10: LEADERSHIP (Questions 1-15)
+            { q: "1. A nursing student observes a peer getting others to do their work by intimidating them. The instructor explains this is an example of which type of power?", opts: ["A. Explicit power from a formal role", "B. Implied power from personality factors", "C. Legitimate power from credentials", "D. Reward power from incentives"], ans: 1, hint: "Explicit = from job title/position. This student has no title but uses personality to influence others.", rat: "Implied power comes from personality factors like intimidation or charisma, NOT from a formal position or title.", loc: "Ch 10: Leadership vs. Management → Types of Power" },
             
-            // CHAPTER 40: OXYGENATION (Questions 18-35)
-            { q: "18. Which respiratory organ is the site of gas exchange?", opts: ["A. Mediastinum", "B. Parietal pleura", "C. Alveoli", "D. Diaphragm"], ans: 2, hint: "Think about tiny air sacs at the end of bronchioles.", rat: "Alveoli are small air sacs where gas exchange occurs due to thin walls and capillary proximity." },
-            { q: "19. Pulmonary ventilation is the process by which oxygenated blood passes through body tissues. True or False?", opts: ["A. True", "B. False"], ans: 1, hint: "VRP - which one is blood through tissues?", rat: "FALSE! That's PERFUSION. Pulmonary ventilation is movement of air in/out of lungs." },
-            { q: "20. Which lung value is the amount of air at maximum inspiration?", opts: ["A. Vital Capacity", "B. Total Lung Capacity", "C. Residual Volume", "D. Tidal Volume"], ans: 1, hint: "TOTAL air when you breathe in as much as possible.", rat: "Total Lung Capacity (TLC) = air at maximum inspiration." },
-            { q: "21. The right mainstem bronchus is shorter, wider, and more vertical. What does this make it prone to?", opts: ["A. Pneumothorax", "B. Aspiration", "C. Atelectasis", "D. Emphysema"], ans: 1, hint: "When food/secretions go down wrong pipe...", rat: "Right bronchus anatomy makes it the most common site for aspiration." },
-            { q: "22. Which O2 delivery device provides the MOST PRECISE concentration?", opts: ["A. Nasal cannula", "B. Simple mask", "C. Non-rebreather", "D. Venturi mask"], ans: 3, hint: "Used for COPD patients who need exact FiO2.", rat: "Venturi mask delivers MOST PRECISE O2 concentration; ideal for COPD." },
-            { q: "23. Continuous, musical sounds heard during expiration indicate:", opts: ["A. Crackles", "B. Wheezes", "C. Stridor", "D. Rhonchi"], ans: 1, hint: "Think asthma, narrowed airways...", rat: "Wheezes are continuous, musical sounds from narrowed airways." },
-            { q: "24. How many lobes does the LEFT lung have?", opts: ["A. 1", "B. 2", "C. 3", "D. 4"], ans: 1, hint: "Left has less room because of the heart.", rat: "Left lung = 2 lobes (heart takes up space with cardiac notch)." },
-            { q: "25. A metered-dose inhaler delivers:", opts: ["A. Continuous medication flow", "B. Controlled dose with each compression", "C. Breath-activated powder", "D. Nebulized particles"], ans: 1, hint: "MDI = Metered (measured) DOSE...", rat: "MDI delivers a controlled dose of medication with each compression of the canister." },
-            { q: "26. Stridor indicates:", opts: ["A. Lower airway obstruction", "B. Fluid in alveoli", "C. Upper airway obstruction - EMERGENCY", "D. Pleural effusion"], ans: 2, hint: "High-pitched, inspiratory, URGENT!", rat: "Stridor = UPPER airway obstruction - this is an EMERGENCY!" },
-            { q: "27. A non-rebreather mask delivers what FiO2 range?", opts: ["A. 24-44%", "B. 40-60%", "C. 80-95%", "D. 100%"], ans: 2, hint: "HIGHEST O2 without intubation.", rat: "Non-rebreather delivers 80-95% FiO2 - highest without intubation." },
-            { q: "28. Oxygen safety precautions include all EXCEPT:", opts: ["A. No smoking signs", "B. Avoid synthetic fabrics", "C. Apply petroleum-based products", "D. Check electrical equipment"], ans: 2, hint: "Oils ignite spontaneously with O2!", rat: "AVOID oils/petroleum near oxygen - they ignite spontaneously!" },
-            { q: "29. Which breathing technique is BEST for COPD patients?", opts: ["A. Pursed-lip breathing", "B. Rapid shallow breathing", "C. Breath holding", "D. Hyperventilation"], ans: 0, hint: "Prolongs exhalation, improves air trapping.", rat: "Pursed-lip breathing prolongs exhalation and improves air trapping - excellent for COPD." },
-            { q: "30. What does surfactant do?", opts: ["A. Increases mucus production", "B. Prevents alveolar collapse", "C. Conducts nerve impulses", "D. Filters air particles"], ans: 1, hint: "Premature babies lack this and develop RDS.", rat: "Surfactant reduces surface tension and PREVENTS alveolar collapse." },
-            { q: "31. How many lobes does the RIGHT lung have?", opts: ["A. 1", "B. 2", "C. 3", "D. 4"], ans: 2, hint: "Right has more room (no heart).", rat: "Right lung = 3 lobes (upper, middle, lower). More space available." },
-            { q: "32. The process of oxygenated blood passing through body tissues is called:", opts: ["A. Ventilation", "B. Respiration", "C. Perfusion", "D. Diffusion"], ans: 2, hint: "Blood delivering O2 to cells...", rat: "Perfusion = oxygenated blood passing through body TISSUES." },
-            { q: "33. Which breath sound is low-pitched, soft, and heard over most of the lung fields?", opts: ["A. Bronchial", "B. Vesicular", "C. Bronchovesicular", "D. Wheezes"], ans: 1, hint: "Normal sound over peripheral lungs...", rat: "Vesicular sounds are low-pitched, soft, and heard over most of the lung fields." },
-            { q: "34. A patient using accessory muscles (neck muscles) to breathe is showing signs of:", opts: ["A. Normal breathing", "B. Respiratory distress", "C. Sleep", "D. Relaxation"], ans: 1, hint: "Normally we only use diaphragm and intercostals...", rat: "Using accessory muscles (SCM, scalenes) indicates RESPIRATORY DISTRESS - a red flag!" },
-            { q: "35. Incomplete lung expansion or collapse of alveoli is called:", opts: ["A. Pneumonia", "B. Emphysema", "C. Atelectasis", "D. Bronchitis"], ans: 2, hint: "Think collapsed alveoli post-surgery...", rat: "Atelectasis = incomplete lung expansion or collapse of alveoli. Prevents gas diffusion." },
-            { q: "36. The minimum flow rate for a simple face mask is:", opts: ["A. 1 L/min", "B. 3 L/min", "C. 5 L/min", "D. 10 L/min"], ans: 2, hint: "Need enough flow to prevent CO2 rebreathing...", rat: "Simple mask requires minimum 5 L/min to prevent CO2 rebreathing." },
-            { q: "37. Incentive spirometry is used primarily to:", opts: ["A. Deliver medications", "B. Prevent atelectasis", "C. Measure oxygen saturation", "D. Remove secretions"], ans: 1, hint: "Encourages deep breathing post-surgery...", rat: "Incentive spirometry PREVENTS ATELECTASIS by encouraging deep sustained inhalation." },
-            { q: "38. Which is the primary cause of COPD?", opts: ["A. Allergies", "B. Smoking", "C. Genetics", "D. Infections"], ans: 1, hint: "Leading preventable cause...", rat: "Smoking is the PRIMARY cause of COPD." },
+            { q: "2. During a code blue, the charge nurse takes complete control, giving direct orders without discussion. Which leadership style is the nurse demonstrating?", opts: ["A. Democratic - encouraging team input", "B. Laissez-faire - allowing team independence", "C. Autocratic - assuming control over decisions", "D. Servant - focusing on team needs"], ans: 2, hint: "In emergencies, one person must take control and make rapid decisions. The key phrase is 'assumes control over decisions.'", rat: "Autocratic leadership is when the leader assumes CONTROL over decisions and activities. This is appropriate in crisis situations requiring quick action.", loc: "Ch 10: Leadership Styles → Autocratic" },
+            
+            { q: "3. Two nurses are arguing about patient assignments. The nurse manager tells both nurses they are valuable team members and praises their dedication. Which conflict resolution approach is being used?", opts: ["A. Avoiding - withdrawing from the conflict", "B. Competing - forcing a solution", "C. Smoothing - complimenting parties to reduce tension", "D. Collaborating - working toward a win-win"], ans: 2, hint: "The manager is using COMPLIMENTS ('valuable,' 'praises dedication') to calm the situation. This is not solving the underlying problem.", rat: "Smoothing involves complimenting all parties to prevent emotional outbursts and temporarily calm tensions. It focuses on agreement rather than addressing the root conflict.", loc: "Ch 10: Conflict Resolution Strategies → Smoothing" },
+            
+            { q: "4. A hospital is implementing a new electronic charting system. Staff initially resist but eventually see the need for change. According to Lewin's theory, recognizing the need for change occurs during which stage?", opts: ["A. Unfreezing - recognizing need for change", "B. Moving - implementing the change", "C. Refreezing - making change permanent", "D. Evaluating - assessing outcomes"], ans: 0, hint: "Think of an ice cube: first you must MELT the old form before reshaping it. Recognition that change is needed = melting the old ways.", rat: "Unfreezing is when the need for change is RECOGNIZED. Old behaviors begin to 'melt' as people accept that current practices must change.", loc: "Ch 10: Lewin's Change Theory → Unfreezing" },
+            
+            { q: "5. The RN asks the UAP to obtain vital signs on a stable post-operative patient. The RN is accountable for ensuring the task is completed correctly. This describes which Right of Delegation?", opts: ["A. Right Task", "B. Right Circumstance", "C. Right Person", "D. Right Supervision"], ans: 3, hint: "The RN must follow up and verify completion. The 5 Rights are: Task, Circumstance, Person, Direction/Communication, and SUPERVISION.", rat: "Right Supervision means the RN must monitor, follow up, and evaluate the delegated task. The RN remains accountable for patient outcomes.", loc: "Ch 10: Delegation → 5 Rights of Delegation" },
+            
+            { q: "6. Which task can the RN legally delegate to unlicensed assistive personnel (UAP)?", opts: ["A. Initial patient assessment upon admission", "B. Measuring and recording intake and output", "C. Developing the nursing care plan", "D. Teaching a patient about new medications"], ans: 1, hint: "RN CANNOT delegate: Assessment, Diagnosis, Care planning, Teaching, Evaluation, or anything requiring nursing judgment. What's left is data collection.", rat: "UAPs can perform routine data collection like I&O, vital signs, and basic care. RNs cannot delegate assessment, teaching, planning, evaluation, or nursing judgment tasks.", loc: "Ch 10: Delegation → What CAN vs CANNOT Delegate" },
+            
+            { q: "7. A nurse manager gives specific direction to staff and provides rewards when goals are met, while also implementing consequences for not meeting standards. This describes which leadership style?", opts: ["A. Transformational leadership", "B. Transactional leadership", "C. Servant leadership", "D. Laissez-faire leadership"], ans: 1, hint: "This style is like a TRANSACTION or exchange: you do X, you get Y reward. Based on rewards AND punishments.", rat: "Transactional leadership is based on exchanges - rewards for meeting goals and consequences for not meeting standards. It's effective for routine tasks and policy adherence.", loc: "Ch 10: Leadership Styles → Transactional" },
+            
+            { q: "8. When delegating patient care, the RN must consider all of the following EXCEPT:", opts: ["A. Stability of the patient's condition", "B. Complexity of the task", "C. The UAP's years of employment", "D. Potential for patient harm"], ans: 2, hint: "Consider: Stability, Complexity, Potential for harm, Predictability, Overall context. Seniority doesn't determine competence.", rat: "Delegation considerations include: Stability, Complexity, Potential for harm, Predictability of outcome, and Overall context. Years of employment alone doesn't ensure competence for specific tasks.", loc: "Ch 10: Delegation → Considerations When Delegating" },
+            
+            { q: "9. After implementing a new fall prevention protocol, the nurse manager monitors compliance over several months until it becomes standard practice. In Lewin's theory, this represents:", opts: ["A. Unfreezing", "B. Moving", "C. Refreezing", "D. Planning"], ans: 2, hint: "The change has been implemented and is now becoming the 'new normal' - like water freezing into a new ice cube shape.", rat: "Refreezing occurs when the change becomes OPERATIONAL and integrated into daily practice. The new behavior becomes the standard - 'just how we do things now.'", loc: "Ch 10: Lewin's Change Theory → Refreezing" },
+            
+            { q: "10. A leader who focuses primarily on developing staff members' potential and giving away power to help others succeed is demonstrating:", opts: ["A. Autocratic leadership", "B. Transformational leadership", "C. Servant leadership", "D. Transactional leadership"], ans: 2, hint: "This leader puts OTHERS first and focuses on developing THEIR greatness. The leader serves the team.", rat: "Servant leadership focuses on SERVING others first, developing others' greatness, and giving away power. The leader acts as a mentor and facilitator.", loc: "Ch 10: Leadership Styles → Servant" },
+            
+            { q: "11. The charge nurse holds a formal leadership position on the unit. This is an example of:", opts: ["A. Implied power from personal characteristics", "B. Explicit power from a designated position", "C. Referent power from relationships", "D. Expert power from knowledge"], ans: 1, hint: "The key is 'formal position' - the power comes from the JOB TITLE, not personality.", rat: "Explicit power comes from a formal POSITION or TITLE. The charge nurse has authority because of their designated role, not their personality.", loc: "Ch 10: Leadership vs. Management → Types of Power" },
+            
+            { q: "12. A new graduate nurse is assigned to a unit where the experienced nurses make all decisions independently with minimal guidance from leadership. The new nurse feels lost without direction. This leadership style is:", opts: ["A. Autocratic", "B. Democratic", "C. Laissez-faire", "D. Transformational"], ans: 2, hint: "Laissez-faire means 'let it be' in French - hands-off. Works for experienced staff but leaves new nurses without guidance.", rat: "Laissez-faire leadership involves relinquishing power to the group. It works with experienced, self-directed teams but provides poor direction for new staff.", loc: "Ch 10: Leadership Styles → Laissez-faire" },
+            
+            { q: "13. Which action by the RN demonstrates proper delegation?", opts: ["A. Asking UAP to assess a patient's pain level", "B. Having UAP collect vital signs and report abnormals", "C. Delegating patient teaching about wound care to UAP", "D. Asking UAP to evaluate effectiveness of pain medication"], ans: 1, hint: "Collecting data (vitals) and reporting to RN = OK. Assessment, teaching, and evaluation require nursing judgment = NOT OK.", rat: "Collecting vital signs and reporting abnormals is appropriate delegation. Assessment, teaching, and evaluation require RN judgment and cannot be delegated.", loc: "Ch 10: Delegation → What CAN vs CANNOT Delegate" },
+            
+            { q: "14. The 5 Rights of Delegation include all of the following EXCEPT:", opts: ["A. Right Task", "B. Right Circumstance", "C. Right Documentation", "D. Right Supervision"], ans: 2, hint: "The 5 Rights are: Task, Circumstance, Person, Direction/Communication, Supervision. Documentation is important but not one of the 5 Rights.", rat: "The 5 Rights of Delegation are: Right Task, Right Circumstance, Right Person, Right Direction/Communication, and Right Supervision.", loc: "Ch 10: Delegation → 5 Rights of Delegation" },
+            
+            { q: "15. When there is a safety risk requiring immediate policy enforcement, which conflict resolution strategy is most appropriate?", opts: ["A. Avoiding - stepping back from the conflict", "B. Accommodating - yielding to others", "C. Competing - enforcing the required action", "D. Compromising - finding middle ground"], ans: 2, hint: "When safety is at stake (infection control, code situations), someone must WIN and enforce the policy. No time for compromise.", rat: "Competing (WIN-LOSE) is necessary when safety is at risk. Critical policies must be enforced even if others disagree.", loc: "Ch 10: Conflict Resolution Strategies → Competing" },
+            
+            // CHAPTER 40: OXYGENATION & A&P (Questions 16-38)
+            { q: "16. A nurse is teaching about respiratory anatomy. Which structure is the site where oxygen and carbon dioxide are exchanged between air and blood?", opts: ["A. Trachea", "B. Bronchioles", "C. Alveoli", "D. Pleural space"], ans: 2, hint: "These are tiny air sacs (~300 million) with single-cell-layer walls surrounded by capillaries. They produce surfactant.", rat: "Alveoli are the site of GAS EXCHANGE. Their thin walls (single cell layer) allow oxygen and CO2 to diffuse between air and blood in surrounding capillaries.", loc: "Ch 40: Lungs & Alveoli → Alveoli" },
+            
+            { q: "17. The nurse is reviewing respiratory terminology. Which definition correctly describes PERFUSION?", opts: ["A. Movement of air into and out of the lungs", "B. Gas exchange between alveoli and capillaries", "C. Passage of oxygenated blood through body tissues", "D. The rate and depth of breathing"], ans: 2, hint: "VRP: Ventilation = air movement, Respiration = gas exchange, Perfusion = blood through TISSUES delivering O2 to cells.", rat: "Perfusion is oxygenated capillary blood passing through body TISSUES. Ventilation is air movement; respiration is gas exchange at the alveoli.", loc: "Ch 40: Ventilation vs. Respiration vs. Perfusion" },
+            
+            { q: "18. A patient aspirates food. Based on anatomy, the nurse knows the aspirated material most likely entered which structure?", opts: ["A. Left mainstem bronchus", "B. Right mainstem bronchus", "C. Esophagus", "D. Left lung lower lobe"], ans: 1, hint: "The RIGHT bronchus is shorter, wider, and more VERTICAL than the left - gravity pulls aspirated material to the right.", rat: "The RIGHT mainstem bronchus is shorter, wider, and more vertical than the left, making it the most common site for aspiration. Foreign objects 'fall' into the right side.", loc: "Ch 40: Lower Airway → Mainstem Bronchi" },
+            
+            { q: "19. The nurse auscultates continuous, high-pitched, musical sounds during expiration. The nurse documents these as:", opts: ["A. Crackles - indicating fluid in airways", "B. Wheezes - indicating narrowed airways", "C. Stridor - indicating upper airway obstruction", "D. Rhonchi - indicating secretions in large airways"], ans: 1, hint: "CONTINUOUS + MUSICAL + EXPIRATION = think asthma, constricted airways. Stridor is inspiratory and an emergency.", rat: "Wheezes are CONTINUOUS, MUSICAL sounds heard during expiration as air passes through airways narrowed by swelling, secretions, or bronchoconstriction (asthma, COPD).", loc: "Ch 40: Breath Sounds → Abnormal (Adventitious)" },
+            
+            { q: "20. A nurse hears a high-pitched, harsh inspiratory sound over a patient's trachea. This finding requires:", opts: ["A. Documentation and continued monitoring", "B. Encouraging coughing and deep breathing", "C. Immediate intervention - this is an emergency", "D. Repositioning and reassessment in 30 minutes"], ans: 2, hint: "STRIDOR = UPPER airway obstruction. This is a medical EMERGENCY requiring immediate action.", rat: "Stridor is a high-pitched, harsh INSPIRATORY sound indicating UPPER airway obstruction. This is an EMERGENCY requiring immediate intervention.", loc: "Ch 40: Breath Sounds → Stridor" },
+            
+            { q: "21. When teaching about lung anatomy, the nurse explains that the left lung has fewer lobes than the right because:", opts: ["A. The left lung is older developmentally", "B. The heart occupies space on the left side", "C. The diaphragm is higher on the left", "D. The left bronchus is longer"], ans: 1, hint: "LEFT = 2 lobes, RIGHT = 3 lobes. The HEART takes up space on the left side (cardiac notch).", rat: "The LEFT lung has only 2 lobes (vs 3 on right) because the HEART occupies space on the left side, creating the cardiac notch.", loc: "Ch 40: Lungs & Alveoli → Lung Lobes" },
+            
+            { q: "22. A premature infant is at risk for respiratory distress syndrome (RDS) primarily due to insufficient production of:", opts: ["A. Mucus in the airways", "B. Surfactant in the alveoli", "C. Cilia in the bronchi", "D. Hemoglobin in the blood"], ans: 1, hint: "Surfactant reduces surface tension and prevents alveolar collapse. Premature babies haven't produced enough yet.", rat: "SURFACTANT reduces surface tension in alveoli and prevents their collapse. Premature infants lack adequate surfactant production, leading to RDS.", loc: "Ch 40: Lungs & Alveoli → Surfactant" },
+            
+            { q: "23. A patient with COPD requires precise oxygen delivery. Which device should the nurse select?", opts: ["A. Nasal cannula at 2 L/min", "B. Simple face mask at 6 L/min", "C. Non-rebreather mask at 15 L/min", "D. Venturi mask at prescribed percentage"], ans: 3, hint: "COPD patients need PRECISE FiO2 control. Which device delivers the MOST PRECISE concentration?", rat: "The Venturi mask delivers the MOST PRECISE oxygen concentration and is ideal for COPD patients who need carefully controlled FiO2.", loc: "Ch 40: Oxygen Delivery Systems → Venturi Mask" },
+            
+            { q: "24. The nurse is caring for a patient on oxygen therapy. Which action would be unsafe?", opts: ["A. Posting 'No Smoking' signs in the room", "B. Applying petroleum-based lip balm to dry lips", "C. Checking electrical equipment is grounded", "D. Using cotton blankets instead of synthetic"], ans: 1, hint: "OILS and petroleum products can ignite spontaneously in oxygen-enriched environments. This is a major fire hazard!", rat: "Petroleum-based products (oils, lip balm) can IGNITE SPONTANEOUSLY in oxygen-enriched environments. Use water-based products instead.", loc: "Ch 40: Oxygen Delivery Systems → Oxygen Safety Precautions" },
+            
+            { q: "25. A patient needs the highest concentration of oxygen without intubation. Which device delivers 80-95% FiO2?", opts: ["A. Nasal cannula", "B. Simple face mask", "C. Non-rebreather mask", "D. Venturi mask"], ans: 2, hint: "Non-rebreather has a reservoir bag and one-way valves. It delivers the HIGHEST concentration short of intubation.", rat: "The Non-rebreather mask delivers 80-95% FiO2, the HIGHEST concentration without intubation. It has a reservoir bag and prevents rebreathing of exhaled air.", loc: "Ch 40: Oxygen Delivery Systems → Non-rebreather" },
+            
+            { q: "26. The nurse is assessing pulmonary function test results. Which value represents the total amount of air in the lungs after maximum inspiration?", opts: ["A. Tidal Volume (TV)", "B. Residual Volume (RV)", "C. Vital Capacity (VC)", "D. Total Lung Capacity (TLC)"], ans: 3, hint: "TOTAL lung capacity = all the air in your lungs when you breathe in as much as physically possible.", rat: "Total Lung Capacity (TLC) is the amount of air in the lungs at MAXIMUM INSPIRATION - the largest volume the lungs can hold.", loc: "Ch 40: Pulmonary Function Tests → TLC" },
+            
+            { q: "27. When teaching a patient to use a metered-dose inhaler (MDI), the nurse explains that this device:", opts: ["A. Requires fast, forceful inhalation", "B. Delivers a controlled dose with each compression", "C. Is breath-activated and needs no coordination", "D. Must be connected to an oxygen source"], ans: 1, hint: "MDI = Metered (measured) Dose Inhaler. Each compression delivers a specific, CONTROLLED dose.", rat: "A metered-dose inhaler delivers a CONTROLLED DOSE of medication with each compression of the canister. Use slow, deep inspiration and consider a spacer.", loc: "Ch 40: Inhaled Medications → MDI" },
+            
+            { q: "28. A patient with COPD asks which breathing technique will help the most. The nurse recommends:", opts: ["A. Rapid shallow breathing to conserve energy", "B. Pursed-lip breathing to prolong exhalation", "C. Breath-holding to increase oxygen absorption", "D. Chest breathing using accessory muscles"], ans: 1, hint: "COPD patients have trouble exhaling (air trapping). Pursed lips create back pressure to keep airways open longer.", rat: "Pursed-lip breathing PROLONGS EXHALATION, reduces air trapping, and keeps airways open longer. It's excellent for COPD patients.", loc: "Ch 40: Inhaled Medications & Breathing Techniques → Pursed-Lip" },
+            
+            { q: "29. The nurse observes a patient using neck muscles (sternocleidomastoid) to breathe. This finding indicates:", opts: ["A. Normal breathing pattern during exercise", "B. Respiratory distress requiring intervention", "C. Effective deep breathing technique", "D. Adequate oxygenation status"], ans: 1, hint: "Normal breathing uses diaphragm and intercostals. Using ACCESSORY muscles (neck, shoulders) = working hard to breathe = DISTRESS.", rat: "Using accessory muscles (SCM, scalenes) indicates RESPIRATORY DISTRESS. Normal breathing uses only the diaphragm and intercostal muscles.", loc: "Ch 40: Factors Affecting Cardiopulmonary Function" },
+            
+            { q: "30. Post-operative patients are encouraged to use incentive spirometry primarily to prevent:", opts: ["A. Pneumonia from bacterial infection", "B. Atelectasis from alveolar collapse", "C. Pulmonary embolism from blood clots", "D. Pleural effusion from fluid accumulation"], ans: 1, hint: "Incentive spirometry encourages DEEP breathing to expand alveoli. It prevents collapse (atelectasis) from shallow post-op breathing.", rat: "Incentive spirometry PREVENTS ATELECTASIS by encouraging sustained deep inhalation, which expands alveoli and prevents post-operative collapse.", loc: "Ch 40: Inhaled Medications & Breathing Techniques → Incentive Spirometry" },
+            
+            { q: "31. The primary function of the upper airway structures (nose, pharynx, larynx) is to:", opts: ["A. Exchange oxygen and carbon dioxide", "B. Produce surfactant for the lungs", "C. Warm, filter, and humidify inspired air", "D. Regulate the rate of breathing"], ans: 2, hint: "Before air reaches the delicate alveoli, it must be prepared: warmed to body temp, filtered of particles, and humidified.", rat: "The upper airway WARMS, FILTERS, and HUMIDIFIES inspired air before it reaches the lower respiratory tract and alveoli.", loc: "Ch 40: Upper Airway Anatomy" },
+            
+            { q: "32. The nurse is teaching about oxygen transport. What percentage of oxygen is carried bound to hemoglobin?", opts: ["A. 3%", "B. 50%", "C. 75%", "D. 97%"], ans: 3, hint: "Almost all O2 binds to hemoglobin as oxyhemoglobin. Only 3% dissolves in plasma. This is why anemia causes hypoxia.", rat: "97% of oxygen is carried bound to hemoglobin as oxyhemoglobin. Only 3% is dissolved in plasma. Low hemoglobin = poor oxygen delivery.", loc: "Ch 40: A&P Deep Dive → Gas Exchange" },
+            
+            { q: "33. A simple face mask requires a minimum flow rate of 5 L/min to:", opts: ["A. Deliver adequate humidity", "B. Prevent rebreathing of exhaled CO2", "C. Maintain proper mask seal", "D. Provide maximum oxygen concentration"], ans: 1, hint: "Without enough flow, exhaled CO2 accumulates in the mask. You'd rebreathe your own carbon dioxide.", rat: "Simple face mask requires MINIMUM 5 L/min to flush out exhaled CO2 and prevent rebreathing. Lower flows allow CO2 accumulation.", loc: "Ch 40: Oxygen Delivery Systems → Simple Mask" },
+            
+            { q: "34. Which structure prevents food from entering the trachea during swallowing?", opts: ["A. Uvula", "B. Epiglottis", "C. Vocal cords", "D. Soft palate"], ans: 1, hint: "This flap-like structure covers the opening to the trachea (larynx) during swallowing to prevent ASPIRATION.", rat: "The EPIGLOTTIS is a flap that covers the larynx during swallowing to PREVENT ASPIRATION of food and liquid into the airway.", loc: "Ch 40: Upper Airway Anatomy → Epiglottis" },
+            
+            { q: "35. During inspiration, the diaphragm:", opts: ["A. Relaxes and moves upward", "B. Contracts and moves downward", "C. Remains stationary", "D. Moves laterally"], ans: 1, hint: "Inspiration is ACTIVE - requires muscle contraction. The diaphragm contracts and DESCENDS (flattens), creating negative pressure.", rat: "During inspiration, the diaphragm CONTRACTS and moves DOWNWARD (flattens), lengthening the thoracic cavity and decreasing intrapulmonic pressure to draw air in.", loc: "Ch 40: Process of Ventilation" },
+            
+            { q: "36. Incomplete expansion or collapse of alveoli is termed:", opts: ["A. Emphysema", "B. Pneumothorax", "C. Atelectasis", "D. Pneumonia"], ans: 2, hint: "Think: collapsed alveoli that aren't expanding properly. Common after surgery due to shallow breathing.", rat: "ATELECTASIS is incomplete lung expansion or collapse of alveoli. It prevents proper gas diffusion and is common post-operatively.", loc: "Ch 40: Alterations in Respiratory Function → Atelectasis" },
+            
+            { q: "37. Normal vesicular breath sounds are described as:", opts: ["A. High-pitched, loud, heard over trachea", "B. Low-pitched, soft, heard over peripheral lung fields", "C. Medium-pitched, heard over upper chest only", "D. Harsh, tubular, heard between scapulae"], ans: 1, hint: "VESICULAR = normal sounds over most of the lungs (periphery). Low-pitched, soft, rustling quality.", rat: "Vesicular breath sounds are LOW-PITCHED, SOFT, and heard over MOST of the lung fields (peripheral). They're the normal breath sounds.", loc: "Ch 40: Breath Sounds → Normal" },
+            
+            { q: "38. Smoking is the primary cause of which respiratory condition?", opts: ["A. Asthma", "B. Pneumonia", "C. COPD", "D. Tuberculosis"], ans: 2, hint: "This disease includes emphysema and chronic bronchitis. Smoking damages airways and alveoli over time.", rat: "SMOKING is the PRIMARY cause of COPD (Chronic Obstructive Pulmonary Disease), which includes emphysema and chronic bronchitis.", loc: "Ch 40: Alterations in Respiratory Function → COPD" },
             
             // CHAPTER 42: SELF-CONCEPT (Questions 39-50)
-            { q: "39. Which term describes a person's need to reach one's potential by pursuing a career in medicine?", opts: ["A. Self-esteem", "B. Self-concept", "C. Self-actualization", "D. Self-knowledge"], ans: 2, hint: "Maslow's highest level...", rat: "Self-actualization = reaching one's POTENTIAL through full development." },
-            { q: "40. People are born with a self-concept. True or False?", opts: ["A. True", "B. False"], ans: 1, hint: "Think about infant development stages.", rat: "FALSE! People are NOT born with self-concept; it develops over time." },
-            { q: "41. A nurse asks: 'How important is it that your work has value to others?' Which aspect of self-esteem is being assessed?", opts: ["A. Significance", "B. Competence", "C. Virtue", "D. Power"], ans: 1, hint: "Think about ability to perform your job/role.", rat: "Competence = ability to perform job/role in life. Work having value = being capable." },
-            { q: "42. Which is NOT part of Coopersmith's 4 Bases of Self-Esteem?", opts: ["A. Significance", "B. Competence", "C. Self-actualization", "D. Power"], ans: 2, hint: "SCVP - Significance, Competence, Virtue, Power", rat: "Self-actualization is Maslow's concept, not Coopersmith's 4 bases (SCVP)." },
-            { q: "43. The ideal self constitutes the self one wants to be. True or False?", opts: ["A. True", "B. False"], ans: 0, hint: "Ideal = what you aspire to...", rat: "TRUE! The ideal self is who you WANT to be." },
-            { q: "44. Shame is associated with:", opts: ["A. Positive self-evaluation", "B. Behaviors incongruent with ideal self", "C. Low global self-worth", "D. High competence"], ans: 2, hint: "Shame = 'I AM bad' not just 'I did bad'", rat: "Shame is associated with low GLOBAL self-worth. More damaging than guilt." },
-            { q: "45. Which self-evaluation feeling is based on behaviors incongruent with the ideal self?", opts: ["A. Pride", "B. Guilt", "C. Shame", "D. Joy"], ans: 1, hint: "'I DID something bad' vs 'I AM bad'", rat: "Guilt = behaviors incongruent with IDEAL self. 'I did something bad.'" },
-            { q: "46. Which stage of self-concept development occurs at 18 months?", opts: ["A. Self-awareness", "B. Self-recognition", "C. Self-definition", "D. Self-concept"], ans: 1, hint: "When children recognize themselves in mirrors.", rat: "Self-recognition at 18 months - children recognize themselves in mirrors." },
-            { q: "47. A false self may develop when individuals respond to:", opts: ["A. Their own inner needs", "B. The needs and ambitions of significant people", "C. Cultural competence", "D. Self-actualization"], ans: 1, hint: "Responding to others instead of yourself...", rat: "False self develops when responding to needs/ambitions of OTHERS (like parents) instead of own." },
-            { q: "48. 'Who am I?' represents which dimension of self-concept?", opts: ["A. Self-knowledge", "B. Self-expectation", "C. Self-evaluation", "D. Self-esteem"], ans: 0, hint: "The foundation - beliefs, traits, values, roles...", rat: "Self-knowledge = 'Who am I?' - personal beliefs, traits, values, strengths, roles." },
-            { q: "49. Feeling loved and cared about relates to which of Coopersmith's bases?", opts: ["A. Competence", "B. Virtue", "C. Significance", "D. Power"], ans: 2, hint: "Feeling that you MATTER to others...", rat: "Significance = feeling loved, cared about, that you MATTER to others." },
-            { q: "50. A diabetic patient feels bad after eating sugary foods. This is an example of:", opts: ["A. Pride", "B. Guilt", "C. Shame", "D. Power"], ans: 1, hint: "Behavior went against their values/ideal self...", rat: "Guilt = behavior incongruent with ideal self. The patient acted against their health values." }
+            { q: "39. A patient states, 'I want to become a nurse practitioner someday.' This statement reflects which dimension of self-concept?", opts: ["A. Self-knowledge - who am I", "B. Self-expectation - who do I want to be", "C. Self-evaluation - how well do I like myself", "D. Self-actualization - reaching my potential"], ans: 1, hint: "Self-EXPECTATION = goals, aspirations, who you WANT to be. The key phrase is 'I want to become.'", rat: "Self-expectation is 'Who do I WANT to be?' It reflects personal goals, aspirations, and standards one sets for oneself.", loc: "Ch 42: Dimensions of Self-Concept → Self-Expectation" },
+            
+            { q: "40. According to Maslow, pursuing nursing to reach one's full potential represents:", opts: ["A. Safety needs", "B. Belonging needs", "C. Esteem needs", "D. Self-actualization"], ans: 3, hint: "The HIGHEST level of Maslow's hierarchy - reaching your FULL POTENTIAL through unique capability development.", rat: "Self-actualization is the need to reach one's POTENTIAL through full development of unique capabilities. It's Maslow's highest level.", loc: "Ch 42: Self-Actualization" },
+            
+            { q: "41. The nurse asks a patient: 'How important is it that your work has value to others?' This question assesses which of Coopersmith's bases?", opts: ["A. Significance - feeling you matter", "B. Competence - ability to perform effectively", "C. Virtue - adherence to moral standards", "D. Power - control over one's life"], ans: 1, hint: "Coopersmith's SCVP: This question asks about COMPETENCE - the ability to perform your job/role successfully and feel capable.", rat: "COMPETENCE refers to feeling capable and effective in performing tasks and roles. Questions about work having value assess one's sense of competence.", loc: "Ch 42: Coopersmith's 4 Bases → Competence" },
+            
+            { q: "42. A patient who has been hospitalized for weeks states, 'I have no control over anything anymore.' Which of Coopersmith's bases is most affected?", opts: ["A. Significance", "B. Competence", "C. Virtue", "D. Power"], ans: 3, hint: "POWER in Coopersmith's model = sense of CONTROL over one's own life. Hospitalization often strips this away.", rat: "POWER refers to the sense of control people have over their own lives. Hospitalization often strips patients of control and autonomy.", loc: "Ch 42: Coopersmith's 4 Bases → Power" },
+            
+            { q: "43. A diabetic patient says, 'I feel terrible that I ate cake at the party.' This self-evaluation feeling is best described as:", opts: ["A. Pride - positive self-evaluation", "B. Guilt - behavior inconsistent with ideal self", "C. Shame - low global self-worth", "D. Anxiety - fear of consequences"], ans: 1, hint: "GUILT = 'I DID something bad' (specific behavior). SHAME = 'I AM bad' (global self-worth). The patient is upset about a BEHAVIOR.", rat: "GUILT is based on behaviors incongruent with the IDEAL SELF. The patient feels bad about a specific action (eating cake) that conflicts with their values.", loc: "Ch 42: Three Self-Evaluation Feelings → Guilt" },
+            
+            { q: "44. A patient who recently became disabled says, 'I'm worthless and a burden to everyone.' This represents:", opts: ["A. Guilt about specific actions", "B. Shame with low global self-worth", "C. Healthy grief response", "D. Normal adjustment to change"], ans: 1, hint: "SHAME = 'I AM bad/worthless' as a person (global). GUILT = 'I DID something bad' (specific). This patient is judging their WHOLE self.", rat: "SHAME is associated with low GLOBAL self-worth - feeling worthless as a person. It's more damaging than guilt, which is about specific behaviors.", loc: "Ch 42: Three Self-Evaluation Feelings → Shame" },
+            
+            { q: "45. At what age does a child typically recognize themselves in a mirror?", opts: ["A. At birth", "B. 18 months", "C. 3 years", "D. 6-7 years"], ans: 1, hint: "Self-RECOGNITION (recognizing yourself in mirror/photos) develops around 18 months. Self-awareness starts in infancy.", rat: "Self-recognition occurs around 18 MONTHS when children can recognize themselves in mirrors and photos. It follows self-awareness in infancy.", loc: "Ch 42: Formation of Self-Concept → Stages" },
+            
+            { q: "46. The nurse understands that people are born with a self-concept. This statement is:", opts: ["A. True - self-concept is innate", "B. False - self-concept develops over time", "C. True - genetics determine self-concept", "D. False - self-concept develops only in adolescence"], ans: 1, hint: "Self-concept is NOT innate. It develops gradually through life experiences, relationships, and social interactions.", rat: "FALSE - People are NOT born with a self-concept. It develops GRADUALLY over a lifetime through experiences, relationships, and feedback from others.", loc: "Ch 42: Formation of Self-Concept" },
+            
+            { q: "47. A patient always prioritizes others' expectations over personal desires, even when unhealthy for them. This may indicate development of a:", opts: ["A. Strong self-concept", "B. False self", "C. Positive self-esteem", "D. Healthy ideal self"], ans: 1, hint: "When you consistently respond to OTHERS' needs/ambitions instead of your own, you develop a FALSE self, not your true identity.", rat: "A FALSE SELF develops when individuals respond to the needs and ambitions of significant others (like parents) instead of their own authentic needs.", loc: "Ch 42: Formation of Self-Concept → False Self" },
+            
+            { q: "48. 'The self one wants to be' defines which concept?", opts: ["A. Self-concept", "B. Self-esteem", "C. Ideal self", "D. Self-actualization"], ans: 2, hint: "IDEAL = what you aspire to, who you WANT to be. It's your aspirational self-image.", rat: "The IDEAL SELF is the self one WANTS to be - personal aspirations and goals for who you want to become.", loc: "Ch 42: Self-Actualization → Ideal Self" },
+            
+            { q: "49. The nurse is helping a patient identify personal strengths. Which nursing action best supports self-concept?", opts: ["A. Pointing out all the things the patient cannot do", "B. Encouraging the patient to identify positive abilities", "C. Comparing the patient to others who are doing better", "D. Avoiding discussion of the patient's condition"], ans: 1, hint: "To support self-concept: identify STRENGTHS, replace negative self-talk, reinforce positives, foster self-determination.", rat: "Encouraging patients to IDENTIFY PERSONAL STRENGTHS supports self-concept. Replace negative self-talk with balanced thinking and reinforce observed strengths.", loc: "Ch 42: Nursing Strategies → Identify Personal Strengths" },
+            
+            { q: "50. Which of Coopersmith's bases relates to adhering to moral and ethical standards?", opts: ["A. Significance", "B. Competence", "C. Virtue", "D. Power"], ans: 2, hint: "SCVP: Significance = feeling loved, Competence = capability, VIRTUE = moral/ethical adherence, Power = control.", rat: "VIRTUE refers to adherence to moral and ethical standards. Patients with addiction or lifestyle-related illness may feel they've failed morally.", loc: "Ch 42: Coopersmith's 4 Bases → Virtue" }
         ];
 
         let currentFilter = 'all';
@@ -1576,7 +1680,8 @@
                 feedback.innerHTML = '<strong>✅ Correct!</strong> ' + q.rat;
             } else {
                 feedback.className = 'quiz-feedback show incorrect-fb';
-                feedback.innerHTML = '<strong>❌ Incorrect.</strong> ' + q.rat;
+                feedback.innerHTML = '<strong>❌ Incorrect.</strong> ' + q.rat + 
+                    '<div class="find-in-guide"><strong>📍 Find this in:</strong> ' + q.loc + '</div>';
             }
             
             updateQuizStats();
@@ -1694,7 +1799,21 @@
             renderFlashcards();
             renderQuiz();
             loadProgress();
+            
+            // Back to Top button visibility
+            window.addEventListener('scroll', function() {
+                const btn = document.getElementById('backToTop');
+                if (window.scrollY > 300) {
+                    btn.classList.add('show');
+                } else {
+                    btn.classList.remove('show');
+                }
+            });
         });
+        
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     </script>
 </body>
 </html>
