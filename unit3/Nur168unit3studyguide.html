@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUR168 Unit 3 - Urinary, Sensory, Stress & Grief</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #a8d5ba 0%, #7fb992 100%);
+            min-height: 100vh;
+            color: #2d2d3a;
+            line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(45, 106, 79, 0.3);
+        }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); color: white; }
+        .header .subtitle { font-size: 1.2em; opacity: 0.9; color: white; }
+        .header .features { font-size: 0.95em; margin-top: 10px; color: rgba(255,255,255,0.85); }
+
+        .progress-container {
+            background: rgba(255,255,255,0.85);
+            border-radius: 15px; padding: 20px; margin-bottom: 30px;
+        }
+        .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; }
+        .progress-bar { height: 25px; background: rgba(0,0,0,0.1); border-radius: 15px; overflow: hidden; }
+        .progress-fill {
+            height: 100%; background: linear-gradient(90deg, #2d6a4f, #40916c);
+            border-radius: 15px; transition: width 0.5s ease;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; color: white;
+        }
+
+        .nav-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; justify-content: center; }
+        .nav-tab {
+            padding: 15px 25px; background: rgba(255,255,255,0.8);
+            border: 2px solid transparent; border-radius: 50px;
+            cursor: pointer; transition: all 0.3s ease;
+            font-size: 1em; color: #2d2d3a; font-weight: 600;
+        }
+        .nav-tab:hover { background: rgba(255,255,255,0.95); transform: translateY(-3px); }
+        .nav-tab.active { background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%); color: white; }
+        .nav-tab.ch38 { border-left: 4px solid #f59e0b; }
+        .nav-tab.ch45 { border-left: 4px solid #8b5cf6; }
+        .nav-tab.ch43 { border-left: 4px solid #ef4444; }
+        .nav-tab.ch44 { border-left: 4px solid #3b82f6; }
+        .nav-tab.vocab { border-left: 4px solid #ec4899; }
+        .nav-tab.quiz { border-left: 4px solid #22c55e; }
+
+        .content-section { display: none; }
+        .content-section.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .chapter-card {
+            background: rgba(255,255,255,0.85);
+            border-radius: 20px; padding: 25px; margin-bottom: 20px;
+            border-left: 5px solid;
+        }
+        .ch38-card { border-left-color: #f59e0b; }
+        .ch45-card { border-left-color: #8b5cf6; }
+        .ch43-card { border-left-color: #ef4444; }
+        .ch44-card { border-left-color: #3b82f6; }
+        .chapter-card h2 { font-size: 1.5em; margin-bottom: 10px; }
+
+        .topic-box {
+            background: rgba(255,255,255,0.8);
+            border-radius: 15px; padding: 20px; margin-bottom: 15px;
+            cursor: pointer; transition: all 0.3s ease;
+        }
+        .topic-box:hover { background: rgba(255,255,255,0.95); transform: translateX(5px); }
+        .topic-header { display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 1.1em; }
+        .topic-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+        .topic-box.expanded .topic-content { max-height: none; margin-top: 15px; overflow: visible; }
+        .expand-icon { font-size: 1.5em; transition: transform 0.3s ease; }
+        .topic-box.expanded .expand-icon { transform: rotate(45deg); }
+        .topic-check { width: 18px; height: 18px; margin-right: 8px; accent-color: #22c55e; }
+
+        .key-point { background: rgba(255,255,255,0.6); border-radius: 10px; padding: 15px; margin: 10px 0; border-left: 4px solid; }
+        .key-point.important { border-left-color: #ff6b6b; background: rgba(255,107,107,0.15); }
+        .key-point.tip { border-left-color: #22c55e; background: rgba(34,197,94,0.15); }
+        .key-point.definition { border-left-color: #00d4ff; background: rgba(0,212,255,0.12); }
+        .key-point.safety { border-left-color: #f59e0b; background: rgba(245,158,11,0.15); }
+        .key-point-label { font-weight: bold; font-size: 0.85em; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+
+        .content-list { list-style: none; padding-left: 0; }
+        .content-list li { padding: 8px 0 8px 25px; position: relative; }
+        .content-list li::before { content: '→'; position: absolute; left: 0; color: #2d6a4f; font-weight: bold; }
+
+        .mnemonic-box {
+            background: linear-gradient(135deg, rgba(45, 106, 79, 0.2), rgba(64, 145, 108, 0.2));
+            border-radius: 15px; padding: 20px; margin: 15px 0;
+            text-align: center; border: 2px solid rgba(45, 106, 79, 0.3);
+        }
+        .mnemonic-box h4 { color: #2d6a4f; margin-bottom: 10px; font-size: 1.2em; }
+        .mnemonic-letters { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 15px; }
+        .mnemonic-letter-hover { position: relative; display: inline-block; cursor: pointer; }
+        .mnemonic-letter-hover .letter-circle {
+            display: flex; align-items: center; justify-content: center;
+            width: 55px; height: 55px;
+            background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%);
+            border-radius: 50%; color: white; font-weight: bold; font-size: 1.3em;
+            transition: all 0.3s ease;
+        }
+        .mnemonic-letter-hover:hover .letter-circle { transform: scale(1.15); box-shadow: 0 6px 25px rgba(45, 106, 79, 0.5); }
+        .letter-title { font-size: 0.7em; color: #2d6a4f; margin-top: 5px; font-weight: 600; }
+        .mnemonic-tooltip {
+            visibility: hidden; opacity: 0;
+            position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+            background: linear-gradient(135deg, #1b4332, #2d6a4f);
+            border: 2px solid #40916c; border-radius: 12px; padding: 15px;
+            width: 250px; z-index: 100; transition: all 0.3s ease;
+            text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.4); color: white;
+        }
+        .mnemonic-letter-hover:hover .mnemonic-tooltip { visibility: visible; opacity: 1; bottom: calc(100% + 10px); }
+        .tooltip-title { color: #95d5b2; font-weight: bold; margin-bottom: 8px; font-size: 1.1em; }
+        .tooltip-example { color: #74c69d; font-size: 0.9em; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.2); }
+
+        .comparison-table {
+            width: 100%; border-collapse: separate; border-spacing: 0;
+            margin: 15px 0; border-radius: 15px; overflow: hidden;
+        }
+        .comparison-table th { background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%); padding: 15px; text-align: left; color: #fff; }
+        .comparison-table td { padding: 12px 15px; background: rgba(255,255,255,0.8); border-bottom: 1px solid rgba(0,0,0,0.1); }
+        .comparison-table tr:last-child td { border-bottom: none; }
+        .comparison-table tr:hover td { background: rgba(255,255,255,0.95); }
+
+        .sticky-note {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            color: #92400e; padding: 20px; border-radius: 5px;
+            transform: rotate(-1deg); box-shadow: 5px 5px 15px rgba(0,0,0,0.2); margin: 20px 0;
+        }
+        .sticky-note h4 { border-bottom: 2px dashed rgba(0,0,0,0.2); padding-bottom: 10px; margin-bottom: 10px; color: #b45309; }
+
+        .quick-ref-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 20px 0; }
+        .quick-ref-card { background: rgba(255,255,255,0.85); border-radius: 15px; padding: 20px; border-top: 4px solid; }
+        .quick-ref-card.blue { border-top-color: #3b82f6; }
+        .quick-ref-card.green { border-top-color: #22c55e; }
+        .quick-ref-card.red { border-top-color: #ef4444; }
+        .quick-ref-card.purple { border-top-color: #8b5cf6; }
+        .quick-ref-card.yellow { border-top-color: #f59e0b; }
+        .quick-ref-card h4 { margin-bottom: 12px; font-size: 1.1em; }
+
+        .quiz-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 15px; margin-bottom: 20px; }
+        .quiz-stat { background: rgba(255,255,255,0.85); padding: 15px; border-radius: 12px; text-align: center; }
+        .quiz-stat-value { font-size: 1.8em; font-weight: bold; }
+        .quiz-stat-label { font-size: 0.85em; color: #666; margin-top: 5px; }
+        .quiz-stat.correct .quiz-stat-value { color: #22c55e; }
+        .quiz-stat.incorrect .quiz-stat-value { color: #ef4444; }
+        .quiz-stat.score .quiz-stat-value { color: #8b5cf6; }
+
+        .quiz-question { background: rgba(255,255,255,0.85); border-radius: 15px; padding: 25px; margin-bottom: 20px; }
+        .quiz-question h3 { margin-bottom: 15px; font-size: 1.1em; line-height: 1.5; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option {
+            padding: 15px 20px; background: rgba(255,255,255,0.9);
+            border: 2px solid rgba(0,0,0,0.1); border-radius: 12px;
+            cursor: pointer; transition: all 0.3s ease;
+        }
+        .quiz-option:hover { background: #f3f4f6; border-color: #2d6a4f; }
+        .quiz-option.selected { border-color: #2d6a4f; background: rgba(45, 106, 79, 0.1); }
+        .quiz-option.correct { border-color: #22c55e; background: rgba(34,197,94,0.15); }
+        .quiz-option.incorrect { border-color: #ef4444; background: rgba(239,68,68,0.15); }
+        .quiz-option.disabled { pointer-events: none; opacity: 0.8; }
+        .quiz-feedback { margin-top: 15px; padding: 20px; border-radius: 12px; display: none; line-height: 1.7; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct-fb { background: linear-gradient(135deg, #065f46, #064e3b); border-left: 5px solid #10b981; color: #d1fae5; }
+        .quiz-feedback.incorrect-fb { background: linear-gradient(135deg, #7f1d1d, #991b1b); border-left: 5px solid #f87171; color: #fee2e2; }
+        .quiz-feedback strong { color: #fbbf24; }
+        .quiz-btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+        .quiz-btn {
+            padding: 12px 25px; border: none; border-radius: 25px;
+            cursor: pointer; font-size: 0.95em; font-weight: 600; transition: all 0.3s ease;
+        }
+        .quiz-btn.primary { background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%); color: white; }
+        .quiz-btn.hint { background: #f59e0b; color: white; }
+        .quiz-btn:hover { transform: scale(1.05); }
+        .hint-text { background: rgba(245,158,11,0.15); border: 2px solid #f59e0b; border-radius: 10px; padding: 12px; margin-top: 10px; display: none; }
+        .hint-text.show { display: block; }
+
+        .find-in-guide {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            border: 2px solid #60a5fa;
+            border-radius: 10px;
+            padding: 12px 15px;
+            margin-top: 12px;
+            color: white;
+        }
+        .find-in-guide strong { color: #fde68a; }
+
+        .flashcard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .flashcard-container { perspective: 1000px; }
+        .flashcard { width: 100%; min-height: 180px; position: relative; transform-style: preserve-3d; transition: transform 0.6s; cursor: pointer; }
+        .flashcard.flipped { transform: rotateY(180deg); }
+        .flashcard-front, .flashcard-back {
+            position: absolute; width: 100%; min-height: 180px; backface-visibility: hidden;
+            border-radius: 15px; padding: 25px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+        }
+        .flashcard-front { background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%); color: white; }
+        .flashcard-back { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); transform: rotateY(180deg); color: white; }
+        .flashcard-term { font-size: 1.3em; font-weight: bold; margin-bottom: 8px; }
+        .flashcard-chapter { font-size: 0.85em; opacity: 0.8; }
+        .flashcard-definition { font-size: 1.1em; line-height: 1.5; }
+
+        .filter-btns { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+        .filter-btn { padding: 10px 20px; border: 2px solid #2d6a4f; background: transparent; border-radius: 25px; cursor: pointer; font-weight: 600; color: #2d6a4f; transition: all 0.3s ease; }
+        .filter-btn:hover, .filter-btn.active { background: #2d6a4f; color: white; }
+
+        .reset-btn { padding: 10px 20px; background: rgba(239,68,68,0.15); border: 2px solid #ef4444; border-radius: 10px; color: #ef4444; cursor: pointer; font-weight: 600; transition: all 0.3s ease; }
+        .reset-btn:hover { background: #ef4444; color: white; }
+
+        .wrapup { background: linear-gradient(135deg, rgba(45, 106, 79, 0.15), rgba(64, 145, 108, 0.15)); border: 2px solid rgba(45, 106, 79, 0.4); border-radius: 20px; padding: 25px; margin-top: 25px; }
+        .wrapup h3 { color: #2d6a4f; margin-bottom: 15px; }
+        .wrapup-box { background: rgba(255,255,255,0.75); border-radius: 12px; padding: 18px; margin-bottom: 15px; }
+        .wrapup-box h4 { color: #1b4332; margin-bottom: 12px; }
+        .wrapup-box ul { list-style: none; padding: 0; }
+        .wrapup-box li { padding: 6px 0 6px 22px; position: relative; }
+        .wrapup-box li::before { content: '✓'; position: absolute; left: 0; color: #22c55e; font-weight: bold; }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5em;
+            box-shadow: 0 4px 20px rgba(45, 106, 79, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: none;
+        }
+        .back-to-top:hover { transform: scale(1.1); }
+        .back-to-top.show { display: flex; align-items: center; justify-content: center; }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8em; }
+            .nav-tabs { flex-direction: column; }
+            .nav-tab { width: 100%; text-align: center; }
+            .mnemonic-tooltip { width: 200px; font-size: 0.85em; }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+
+    <div class="container">
+        <div class="header">
+            <h1>📚 NUR168 Unit 3 Study Guide</h1>
+            <p class="subtitle">Chapters 38, 43, 44 & 45: Urinary, Stress, Grief & Sensory</p>
+            <p class="features">✨ ADHD-Friendly • Focus Summary Aligned • 90 NCLEX Questions • Progress Tracking ✨</p>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-header">
+                <span><strong>📊 Study Progress</strong></span>
+                <button class="reset-btn" onclick="resetProgress()">🔄 Reset All</button>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%">0%</div>
+            </div>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab ch38 active" onclick="showSection('ch38')">🚽 Ch 38: Urinary</button>
+            <button class="nav-tab ch45" onclick="showSection('ch45')">👁️ Ch 45: Sensory</button>
+            <button class="nav-tab ch43" onclick="showSection('ch43')">😰 Ch 43: Stress</button>
+            <button class="nav-tab ch44" onclick="showSection('ch44')">💔 Ch 44: Grief & Dying</button>
+            <button class="nav-tab vocab" onclick="showSection('vocab')">📖 Flashcards</button>
+            <button class="nav-tab quiz" onclick="showSection('quiz')">✏️ Quiz (90 Qs)</button>
+        </div>
+
+        <!-- ===================== CHAPTER 38: URINARY ELIMINATION ===================== -->
+        <div id="ch38" class="content-section active">
+            <div class="chapter-card ch38-card">
+                <h2>🚽 Chapter 38: Urinary Elimination</h2>
+                <p>Master kidney function, urinary terminology, catheters, and diagnostic tests</p>
+            </div>
+
+            <!-- Kidney Function -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 🫘 Kidneys and Ureters</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Kidney Functions</div>
+                        <ul class="content-list">
+                            <li><strong>Maintain composition and volume</strong> of body fluids</li>
+                            <li><strong>Filter and excrete</strong> blood constituents not needed; retain those that are needed</li>
+                            <li><strong>Excrete waste product</strong> (urine)</li>
+                            <li><strong>Nephrons</strong> maintain and regulate fluid balance through selective reabsorption and secretion</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ Hypervolemia Signs - HIGH YIELD!</div>
+                        <p>A patient with <strong>hypervolemia (fluid overload)</strong> can present with:</p>
+                        <ul class="content-list">
+                            <li>Edema</li>
+                            <li>High blood pressure</li>
+                            <li>Distended neck veins (JVD)</li>
+                            <li>Shortness of breath or discomfort</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Urinary Terminology -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 📝 Urinary Terminology - MUST KNOW! 🎯</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <table class="comparison-table">
+                        <tr><th>Term</th><th>Definition</th></tr>
+                        <tr><td><strong>Dysuria</strong></td><td>Painful or difficult urination</td></tr>
+                        <tr><td><strong>Glycosuria</strong></td><td>Sugar (glucose) in the urine</td></tr>
+                        <tr><td><strong>Pyuria</strong></td><td>Pus in the urine</td></tr>
+                        <tr><td><strong>Anuria</strong></td><td>Complete ABSENCE of urine output (&lt;50mL/24hr) - renal failure</td></tr>
+                        <tr><td><strong>Oliguria</strong></td><td>DECREASED urine output</td></tr>
+                        <tr><td><strong>Hematuria</strong></td><td>BLOOD in the urine</td></tr>
+                        <tr><td><strong>Nocturia</strong></td><td>Frequent urination at NIGHT</td></tr>
+                        <tr><td><strong>Enuresis</strong></td><td>Involuntary urination (bedwetting)</td></tr>
+                    </table>
+
+                    <div class="sticky-note">
+                        <h4>💡 Memory Trick!</h4>
+                        <p><strong>AN-uria = NO urine</strong> (AN = without)<br>
+                        <strong>OLIG-uria = LITTLE urine</strong> (Oligo = few/little)<br>
+                        <strong>DYS-uria = BAD/painful urination</strong> (Dys = difficult)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Micturition -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 🔄 Act of Urination (Micturition/Voiding)</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Process of Emptying the Bladder</div>
+                        <ol class="content-list">
+                            <li><strong>Detrusor muscle</strong> of bladder contracts</li>
+                            <li><strong>Internal sphincter</strong> relaxes, urine enters posterior urethra</li>
+                            <li>Muscles of <strong>perineum and external sphincter</strong> relax</li>
+                            <li>Muscle of <strong>abdominal wall</strong> contracts slightly</li>
+                            <li><strong>Diaphragm lowers</strong>, micturition occurs</li>
+                        </ol>
+                    </div>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">💡 Key Anatomy</div>
+                        <p><strong>Detrusor muscle</strong> = The smooth muscle of the bladder wall that contracts during urination</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UTI Risk Factors -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 🦠 Patients at Risk for UTIs - HIGH YIELD! 🎯</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ UTI Risk Factors</div>
+                        <ul class="content-list">
+                            <li><strong>Sexually active people with female genitalia</strong> - female should void AFTER sexual intercourse</li>
+                            <li>People who use <strong>diaphragms</strong> for contraception</li>
+                            <li><strong>Postmenopausal</strong> people</li>
+                            <li>People with <strong>indwelling urinary catheter</strong> in place</li>
+                            <li>People with <strong>diabetes mellitus</strong></li>
+                            <li><strong>Older adults</strong> - decreased bladder contractility leads to retention and stasis</li>
+                        </ul>
+                    </div>
+
+                    <div class="sticky-note">
+                        <h4>💡 Teaching Point!</h4>
+                        <p><strong>Females should void AFTER sexual intercourse</strong> to flush bacteria from the urethra and prevent UTIs!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Catheter Types -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 🔧 Types of Urinary Catheters - HIGH YIELD! 🎯</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <table class="comparison-table">
+                        <tr><th>Type</th><th>Description</th><th>Uses</th></tr>
+                        <tr><td><strong>Intermittent (Straight)</strong></td><td>Temporary insertion, removed after drainage</td><td>Urine specimen, acute retention relief, neurogenic bladder self-cath</td></tr>
+                        <tr><td><strong>Indwelling (Foley)</strong></td><td>Balloon holds catheter in bladder, drains continuously</td><td>ICU monitoring, post-op, severe incontinence, end-of-life comfort</td></tr>
+                        <tr><td><strong>Suprapubic</strong></td><td>Surgically placed through abdomen into bladder</td><td>Urethral trauma/stricture, long-term drainage, spinal cord injury</td></tr>
+                    </table>
+
+                    <div class="key-point safety">
+                        <div class="key-point-label">🔶 Catheter Insertion Tips!</div>
+                        <ul class="content-list">
+                            <li>Select appropriate <strong>size for patient population</strong> (peds vs adult) - larger catheters can cause urethral injury</li>
+                            <li>Use <strong>STERILE technique</strong> for Foley insertion</li>
+                            <li>If catheter becomes contaminated, <strong>throw it out and start with sterile one</strong></li>
+                            <li><strong>Female tip:</strong> If you think catheter was placed in vaginal opening, LEAVE it there and insert NEW sterile catheter</li>
+                            <li>Always <strong>see urine flow BEFORE balloon inflation</strong></li>
+                            <li>If patient has <strong>pain during balloon inflation</strong> → DEFLATE, advance catheter further</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lab/Diagnostics -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 🧪 Lab/Diagnostics - HIGH YIELD! 🎯</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ 24-Hour Urine Collection</div>
+                        <p>Key instruction: Patient must <strong>empty bladder completely upon awakening and DISCARD this urine</strong>. This is the START date and time. Then collect ALL urine for 24 hours.</p>
+                    </div>
+
+                    <table class="comparison-table">
+                        <tr><th>Test</th><th>What It Measures</th></tr>
+                        <tr><td><strong>Urine pH</strong></td><td>Acidity/alkalinity - abnormal can indicate kidney stones, UTI, metabolic disorders</td></tr>
+                        <tr><td><strong>Specific Gravity</strong></td><td>How well kidneys balance water and remove waste - identifies dehydration, kidney problems, diabetes insipidus</td></tr>
+                        <tr><td><strong>Creatinine</strong></td><td>Assesses KIDNEY FUNCTION</td></tr>
+                    </table>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">💡 Specimen Collection</div>
+                        <p>Urine specimen from patient with indwelling catheter should be obtained from the <strong>CATHETER ITSELF</strong>, NOT the collection bag!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Incontinence Types -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 💧 Types of Urinary Incontinence</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <table class="comparison-table">
+                        <tr><th>Type</th><th>Description</th></tr>
+                        <tr><td><strong>Stress</strong></td><td>Loss with ↑ intra-abdominal pressure (cough, sneeze, laugh)</td></tr>
+                        <tr><td><strong>Urge</strong></td><td>Strong sudden urge, can't make it to bathroom</td></tr>
+                        <tr><td><strong>Overflow</strong></td><td>Overdistention of bladder, continuous dribbling</td></tr>
+                        <tr><td><strong>Functional</strong></td><td>Caused by factors OUTSIDE urinary tract (mobility, cognition)</td></tr>
+                        <tr><td><strong>Reflex</strong></td><td>Bladder empties without sensation of need (spinal cord injury)</td></tr>
+                        <tr><td><strong>Total</strong></td><td>Continuous, unpredictable loss</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Wrap-up -->
+            <div class="wrapup">
+                <h3>✅ Chapter 38 Wrap-Up</h3>
+                <div class="wrapup-box">
+                    <h4>📝 Must-Know Points</h4>
+                    <ul>
+                        <li>Anuria = NO urine (&lt;50mL/24hr); Oliguria = decreased output</li>
+                        <li>Females should void AFTER intercourse to prevent UTIs</li>
+                        <li>Catheter contaminated? Throw it out, start with NEW sterile one</li>
+                        <li>Female insertion tip: leave vaginal catheter in, insert new one correctly</li>
+                        <li>See urine flow BEFORE inflating Foley balloon</li>
+                        <li>24-hour urine: DISCARD first morning void, then collect all for 24 hours</li>
+                        <li>Get specimen from CATHETER, not collection bag</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== CHAPTER 45: SENSORY FUNCTIONING ===================== -->
+        <div id="ch45" class="content-section">
+            <div class="chapter-card ch45-card">
+                <h2>👁️ Chapter 45: Sensory Functioning</h2>
+                <p>Master senses, sensory alterations, and care for impaired patients</p>
+            </div>
+
+            <!-- Senses -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 👀 Senses Involved in Sensory Reception</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <table class="comparison-table">
+                        <tr><th>Sense</th><th>Type</th></tr>
+                        <tr><td><strong>Visual</strong></td><td>Vision (sight)</td></tr>
+                        <tr><td><strong>Auditory</strong></td><td>Hearing (sound)</td></tr>
+                        <tr><td><strong>Olfactory</strong></td><td>Smell</td></tr>
+                        <tr><td><strong>Gustatory</strong></td><td>Taste</td></tr>
+                        <tr><td><strong>Tactile</strong></td><td>Touch</td></tr>
+                        <tr><td><strong>Stereognosis</strong></td><td>Perception of solidity/texture of objects</td></tr>
+                        <tr><td><strong>Kinesthetic/Visceral</strong></td><td>Basic internal orienting systems</td></tr>
+                        <tr><td><strong>Proprioception</strong></td><td>Body position awareness</td></tr>
+                    </table>
+
+                    <div class="key-point tip">
+                        <div class="key-point-label">💡 Test Question Pattern</div>
+                        <p><strong>Q:</strong> Providing a soft, textured blanket stimulates which sense?</p>
+                        <p><strong>A:</strong> <u>Stereognosis</u> - perceives size, shape, and TEXTURE of objects</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sensory Alterations -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> ⚠️ Factors Contributing to Sensory Alteration - HIGH YIELD! 🎯</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <table class="comparison-table">
+                        <tr><th>Alteration</th><th>Definition</th><th>At-Risk Patients</th></tr>
+                        <tr><td><strong>Sensory Overload</strong></td><td>TOO MUCH sensory input for brain to process</td><td>ICU patients, surgery, unfamiliar environments, chronic pain</td></tr>
+                        <tr><td><strong>Sensory Deprivation</strong></td><td>TOO LITTLE stimulation</td><td>Isolation, visually/hearing impaired, cannot interpret stimuli</td></tr>
+                        <tr><td><strong>Sensory Deficits</strong></td><td>Impairments in SPECIFIC senses</td><td>Occupational risk (factory workers, airline workers - hearing)</td></tr>
+                        <tr><td><strong>Sensory Poverty</strong></td><td>Decreased sensory experience</td><td>Overreliance on technology</td></tr>
+                    </table>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ Know the Difference!</div>
+                        <p><strong>Overload</strong> = TOO MUCH (ICU, monitors, alarms, bright lights)<br>
+                        <strong>Deprivation</strong> = TOO LITTLE (isolation room, sensory impairment)</p>
+                    </div>
+
+                    <div class="sticky-note">
+                        <h4>💡 Test Question Pattern!</h4>
+                        <p><strong>Q:</strong> A patient with AIDS in isolation is at risk for which sensory alteration?</p>
+                        <p><strong>A:</strong> Sensory DEPRIVATION (decreased/monotonous stimuli)</p>
+                        <p><strong>Q:</strong> An ICU patient with multiple monitors is at risk for?</p>
+                        <p><strong>A:</strong> Sensory OVERLOAD (excessive stimuli)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Caring for Impaired Patients -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 🩺 Caring for Visually/Hearing Impaired Patients - HIGH YIELD! 🎯</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point safety">
+                        <div class="key-point-label">🔶 #1 PRIORITY = SAFETY!</div>
+                        <p>The highest priority when caring for sensory-impaired patients is <strong>SAFETY!</strong></p>
+                    </div>
+
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card purple">
+                            <h4>👁️ Visually Impaired</h4>
+                            <ul class="content-list">
+                                <li><strong>Acknowledge your presence</strong> in the room</li>
+                                <li><strong>Speak in normal tone</strong> of voice</li>
+                                <li><strong>Explain BEFORE touching</strong></li>
+                                <li>Keep <strong>call light within reach</strong></li>
+                                <li><strong>Orient to sounds</strong> and furniture arrangement</li>
+                                <li><strong>Clear pathways</strong></li>
+                                <li><strong>Assist with ambulation</strong></li>
+                                <li><strong>Indicate when leaving</strong> the room</li>
+                            </ul>
+                        </div>
+                        <div class="quick-ref-card blue">
+                            <h4>👂 Hearing Impaired</h4>
+                            <ul class="content-list">
+                                <li><strong>Orient to your presence BEFORE speaking</strong></li>
+                                <li><strong>Decrease background noise</strong></li>
+                                <li>Check <strong>hearing aids</strong></li>
+                                <li><strong>Position so light is on YOUR face</strong></li>
+                                <li><strong>Face patient directly</strong> when talking</li>
+                                <li>Use <strong>pantomime or sign language</strong></li>
+                                <li><strong>Don't chew gum</strong> or cover mouth</li>
+                                <li>Write ideas if needed</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ EXACT Test Language!</div>
+                        <p><strong>Q:</strong> Which measure is appropriate when caring for a hearing-impaired patient?</p>
+                        <p><strong>A:</strong> <u>Position yourself so light is on YOUR face</u> - allows patient to see your lips and expressions!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Confused/Unconscious Patients -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 🧠 Communicating with Confused/Unconscious Patients</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card yellow">
+                            <h4>😵 Confused Patients</h4>
+                            <ul class="content-list">
+                                <li>Use <strong>frequent face-to-face contact</strong></li>
+                                <li>Speak <strong>calmly, simply, directly</strong></li>
+                                <li><strong>Orient and reorient</strong> to environment</li>
+                                <li>Orient to <strong>time, place, person</strong></li>
+                                <li><strong>Reinforce reality</strong> if delusional</li>
+                                <li>Emphasize <strong>strengths over weaknesses</strong></li>
+                            </ul>
+                        </div>
+                        <div class="quick-ref-card red">
+                            <h4>😴 Unconscious Patients</h4>
+                            <ul class="content-list">
+                                <li><strong>HEARING is the LAST sense lost!</strong></li>
+                                <li>Be careful what you say in patient's presence</li>
+                                <li><strong>ASSUME patient CAN hear you</strong></li>
+                                <li>Speak in <strong>NORMAL tone</strong> (not loud)</li>
+                                <li><strong>Speak BEFORE touching</strong></li>
+                                <li>Keep environmental noise LOW</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sticky-note">
+                        <h4>💡 Critical Point!</h4>
+                        <p><strong>HEARING is the LAST sense to be lost!</strong> Always assume unconscious patients can hear you. Speak in a NORMAL tone (not loud), and explain before touching.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wrap-up -->
+            <div class="wrapup">
+                <h3>✅ Chapter 45 Wrap-Up</h3>
+                <div class="wrapup-box">
+                    <h4>📝 Must-Know Points</h4>
+                    <ul>
+                        <li>Sensory Overload = TOO MUCH (ICU); Deprivation = TOO LITTLE (isolation)</li>
+                        <li>Stereognosis = perceiving texture/shape of objects</li>
+                        <li>#1 Priority for sensory-impaired patients = SAFETY</li>
+                        <li>Hearing impaired: position so LIGHT is on YOUR face</li>
+                        <li>HEARING is the LAST sense lost - assume unconscious patients can hear</li>
+                        <li>Speak in NORMAL tone to unconscious patients</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== CHAPTER 43: STRESS AND ADAPTATION ===================== -->
+        <div id="ch43" class="content-section">
+            <div class="chapter-card ch43-card">
+                <h2>😰 Chapter 43: Stress and Adaptation</h2>
+                <p>Master stress responses, GAS, LAS, and coping mechanisms</p>
+            </div>
+
+            <!-- Definitions -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 📝 Stress and Adaptation Terms</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <table class="comparison-table">
+                        <tr><th>Term</th><th>Definition</th></tr>
+                        <tr><td><strong>Stress</strong></td><td>A response to changes in the normal balanced state</td></tr>
+                        <tr><td><strong>Physiologic Stressors</strong></td><td>Originate from PHYSICAL functioning of the body (chemicals, infection, hypoxia)</td></tr>
+                        <tr><td><strong>Psychosocial Stressors</strong></td><td>Originate in relationships, responsibilities, interactions with society</td></tr>
+                        <tr><td><strong>Adaptation</strong></td><td>Body's ability to adjust and manage stressors to maintain homeostasis</td></tr>
+                        <tr><td><strong>Anxiety</strong></td><td>Response to unknown or perceived threat - fear, apprehension, tension</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- LAS and GAS -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 🧬 LAS and GAS - SUPER HIGH YIELD! 🎯🎯🎯</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card yellow">
+                            <h4>🎯 Local Adaptation Syndrome (LAS)</h4>
+                            <p><strong>Involves ONLY ONE specific body part</strong></p>
+                            <ul class="content-list">
+                                <li><strong>Reflex pain response</strong> - touch something hot, snatch hand back</li>
+                                <li><strong>Inflammatory response</strong></li>
+                            </ul>
+                            <p style="margin-top: 10px; color: #92400e;"><em>Short-term, localized, focused on immediate protection</em></p>
+                        </div>
+                        <div class="quick-ref-card red">
+                            <h4>🌐 General Adaptation Syndrome (GAS)</h4>
+                            <p><strong>Biochemical model - WHOLE BODY response</strong></p>
+                            <p style="margin-top: 10px;"><em>Selye's 3 stages:</em></p>
+                        </div>
+                    </div>
+
+                    <div class="mnemonic-box">
+                        <h4>🧠 GAS - Three Stages (Selye)</h4>
+                        <div class="mnemonic-letters">
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">A</div>
+                                <div class="letter-title">Alarm</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Alarm Reaction</div>
+                                    Fight-or-flight response activated. Hormones rise, body prepares to react.
+                                    <div class="tooltip-example">Heart rate ↑, BP ↑, pupils dilate</div>
+                                </div>
+                            </div>
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">R</div>
+                                <div class="letter-title">Resistance</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Stage of Resistance</div>
+                                    Body attempts to ADAPT. Vital signs and hormones stabilize. Body tries to restore balance.
+                                    <div class="tooltip-example">If coping succeeds → homeostasis restored</div>
+                                </div>
+                            </div>
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">E</div>
+                                <div class="letter-title">Exhaustion</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Stage of Exhaustion</div>
+                                    Energy reserves DEPLETED. Defenses break down. NO defense against distress.
+                                    <div class="tooltip-example">Fatigue, illness, depression, immune dysfunction, collapse</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p style="color: #2d6a4f; margin-top: 15px; font-weight: 600;">"Alarm → Resistance → Exhaustion"</p>
+                    </div>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ Know the Difference!</div>
+                        <p><strong>LAS</strong> = LOCAL, one body part (touching hot stove, inflammation)<br>
+                        <strong>GAS</strong> = GENERAL, whole body biochemical response (Alarm → Resistance → Exhaustion)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sources of Stress -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 📊 Sources of Stress</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <table class="comparison-table">
+                        <tr><th>Type</th><th>Definition</th><th>Examples</th></tr>
+                        <tr><td><strong>Developmental Stress</strong></td><td>Occurs as person progresses through stages of growth</td><td>Teens forming identity, adults balancing careers, older adults coping with loss</td></tr>
+                        <tr><td><strong>Situational Stress</strong></td><td>Does NOT occur in predictable patterns</td><td>Illness, injury, marriage, divorce, loss, new job, role change</td></tr>
+                    </table>
+
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Ineffective Individual Coping</div>
+                        <p>Inability to manage or respond effectively to stressors, leading to emotional distress. Often arises from fear of chronic illness, life transitions, or lack of social support.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stress Management -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 🧘 Stress Management Techniques - HIGH YIELD! 🎯</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <table class="comparison-table">
+                        <tr><th>Technique</th><th>Description</th></tr>
+                        <tr><td><strong>Relaxation</strong></td><td>Decreases muscle tension and lowers heart rate</td></tr>
+                        <tr><td><strong>Mindfulness</strong></td><td>Encourages PRESENT-MOMENT awareness</td></tr>
+                        <tr><td><strong>Anticipatory Guidance</strong></td><td>PREPARES individuals for upcoming stressors by providing information and expectations</td></tr>
+                        <tr><td><strong>Guided Imagery</strong></td><td>Uses VISUALIZATION to calm the mind - creates mental image, concentrates on it</td></tr>
+                        <tr><td><strong>Crisis Intervention</strong></td><td>Short-term, structured approach for ACUTE situations</td></tr>
+                    </table>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ EXACT Test Language!</div>
+                        <p><strong>Q:</strong> A person creates a mental image, concentrates on it, and becomes less responsive to stimuli. This describes which technique?</p>
+                        <p><strong>A:</strong> <u>Guided Imagery</u> (NOT anticipatory guidance!)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wrap-up -->
+            <div class="wrapup">
+                <h3>✅ Chapter 43 Wrap-Up</h3>
+                <div class="wrapup-box">
+                    <h4>📝 Must-Know Points</h4>
+                    <ul>
+                        <li>LAS = LOCAL, one body part (reflex pain, inflammation)</li>
+                        <li>GAS = GENERAL, whole body (Alarm → Resistance → Exhaustion)</li>
+                        <li>Exhaustion stage = energy depleted, defenses break down</li>
+                        <li>Developmental stress = predictable life stages</li>
+                        <li>Situational stress = unpredictable (illness, divorce, job change)</li>
+                        <li>Guided Imagery = visualization, mental image</li>
+                        <li>Anticipatory Guidance = preparing for upcoming stressors</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== CHAPTER 44: LOSS, GRIEF, AND DYING ===================== -->
+        <div id="ch44" class="content-section">
+            <div class="chapter-card ch44-card">
+                <h2>💔 Chapter 44: Loss, Grief, and Dying</h2>
+                <p>Master grief stages, end-of-life care, and special orders</p>
+            </div>
+
+            <!-- Types of Loss -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 📉 Types of Loss</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <table class="comparison-table">
+                        <tr><th>Type</th><th>Definition</th><th>Example</th></tr>
+                        <tr><td><strong>Actual Loss</strong></td><td>Can be recognized by OTHERS</td><td>Death of a spouse</td></tr>
+                        <tr><td><strong>Perceived Loss</strong></td><td>Felt by person but INTANGIBLE to others</td><td>Loss of financial independence</td></tr>
+                        <tr><td><strong>Maturational Loss</strong></td><td>Result of natural developmental process</td><td>Children leaving home (empty nest)</td></tr>
+                        <tr><td><strong>Situational Loss</strong></td><td>Result of unpredictable event</td><td>Job loss, divorce</td></tr>
+                        <tr><td><strong>Anticipatory Loss</strong></td><td>Loss has NOT YET taken place</td><td>Terminal diagnosis</td></tr>
+                    </table>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ EXACT Test Question!</div>
+                        <p><strong>Q:</strong> An elderly person in a nursing home is remorseful about loss of financial independence. What type of loss?</p>
+                        <p><strong>A:</strong> <u>Perceived loss</u> - felt by person, but intangible to others</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grief Definitions -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 📝 Grief Terminology</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <table class="comparison-table">
+                        <tr><th>Term</th><th>Definition</th></tr>
+                        <tr><td><strong>Grief</strong></td><td>INTERNAL emotional reaction to loss</td></tr>
+                        <tr><td><strong>Bereavement</strong></td><td>State of grieving from loss of a loved one</td></tr>
+                        <tr><td><strong>Mourning</strong></td><td>ACTIONS and expressions of grief - symbols and ceremonies (OUTWARD expression)</td></tr>
+                        <tr><td><strong>Dysfunctional Grief</strong></td><td>Abnormal or distorted; unresolved or inhibited</td></tr>
+                    </table>
+
+                    <div class="sticky-note">
+                        <h4>💡 Memory Trick!</h4>
+                        <p><strong>Grief</strong> = INTERNAL (feelings inside)<br>
+                        <strong>Mourning</strong> = EXTERNAL (funeral, black clothes, rituals)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kubler-Ross -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 🌈 Kübler-Ross's 5 Stages of Grief - SUPER HIGH YIELD! 🎯🎯🎯</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="mnemonic-box">
+                        <h4>🧠 DABDA - Five Stages of Grief</h4>
+                        <div class="mnemonic-letters">
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">D</div>
+                                <div class="letter-title">Denial</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Denial & Isolation</div>
+                                    "This can't be happening." Refusal to accept reality.
+                                    <div class="tooltip-example">Patient says "The test must be wrong"</div>
+                                </div>
+                            </div>
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">A</div>
+                                <div class="letter-title">Anger</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Anger</div>
+                                    "Why me?" Anger directed at caregivers, family, or fate.
+                                    <div class="tooltip-example">Patient lashes out at nurse or family</div>
+                                </div>
+                            </div>
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">B</div>
+                                <div class="letter-title">Bargaining</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Bargaining</div>
+                                    "If only..." or "Maybe if we do this..." Negotiating for more time.
+                                    <div class="tooltip-example">"If I can just live to see my daughter's wedding..."</div>
+                                </div>
+                            </div>
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">D</div>
+                                <div class="letter-title">Depression</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Depression</div>
+                                    Sadness, withdrawal, hopelessness. Deep mourning.
+                                    <div class="tooltip-example">Patient becomes quiet, withdrawn</div>
+                                </div>
+                            </div>
+                            <div class="mnemonic-letter-hover">
+                                <div class="letter-circle">A</div>
+                                <div class="letter-title">Acceptance</div>
+                                <div class="mnemonic-tooltip">
+                                    <div class="tooltip-title">Acceptance</div>
+                                    NOT happiness, but PEACE and acknowledgment. Coming to terms.
+                                    <div class="tooltip-example">"I'm ready. I've had a good life."</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ Critical Points!</div>
+                        <ul class="content-list">
+                            <li>Stages are <strong>NOT linear</strong> - they can overlap</li>
+                            <li>Stages are <strong>individualized</strong> - people may cycle through multiple stages</li>
+                            <li>People may <strong>remain in one stage longer</strong> than another</li>
+                            <li>Grief varies from <strong>person to person</strong></li>
+                            <li>Nurses support each stage with <strong>nonjudgmental presence</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Signs of Impending Death -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 💀 Clinical Signs of Impending Death - HIGH YIELD! 🎯</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ Signs Death is Near</div>
+                        <ul class="content-list">
+                            <li>Difficulty <strong>talking or swallowing</strong></li>
+                            <li>Nausea, flatus, <strong>abdominal distention</strong></li>
+                            <li><strong>Urinary and/or bowel incontinence</strong> or constipation</li>
+                            <li>Loss of <strong>movement, sensation, and reflexes</strong></li>
+                            <li>Decreasing body temperature, <strong>cold or clammy skin</strong></li>
+                            <li><strong>Weak, slow, or irregular pulse</strong></li>
+                            <li><strong>Decreasing blood pressure</strong></li>
+                            <li>Noisy, irregular, or <strong>Cheyne-Stokes respirations</strong></li>
+                            <li><strong>Restlessness and/or agitation</strong></li>
+                            <li><strong>Cooling, mottling, and cyanosis</strong> of extremities</li>
+                        </ul>
+                    </div>
+
+                    <div class="sticky-note">
+                        <h4>💡 Cheyne-Stokes Respirations</h4>
+                        <p>Pattern of breathing with <strong>gradual increase, then decrease in depth</strong>, followed by a period of <strong>apnea (no breathing)</strong>. Common near death.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Special Orders -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 📋 Special Orders & End-of-Life Decisions</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <table class="comparison-table">
+                        <tr><th>Order/Document</th><th>Description</th></tr>
+                        <tr><td><strong>POLST</strong></td><td>Physician Order for Life-Sustaining Treatment form</td></tr>
+                        <tr><td><strong>DNR / Allow Natural Death</strong></td><td>Do-not-resuscitate or no-code orders</td></tr>
+                        <tr><td><strong>Comfort Measures Only</strong></td><td>Focuses STRICTLY on symptom management</td></tr>
+                        <tr><td><strong>Terminal Weaning</strong></td><td>GRADUAL withdrawal of ventilation</td></tr>
+                        <tr><td><strong>VSED</strong></td><td>Voluntary Stopping of Eating and Drinking</td></tr>
+                        <tr><td><strong>Palliative Sedation</strong></td><td>Sedation to relieve intractable symptoms</td></tr>
+                        <tr><td><strong>Living Will</strong></td><td>Document stating what treatments patient wants/doesn't want</td></tr>
+                        <tr><td><strong>Durable Power of Attorney</strong></td><td>Appoints an AGENT to make decisions if patient is incapacitated</td></tr>
+                    </table>
+
+                    <div class="key-point important">
+                        <div class="key-point-label">⚠️ EXACT Test Question!</div>
+                        <p><strong>Q:</strong> Which document appoints an agent to make decisions if the patient is incapacitated?</p>
+                        <p><strong>A:</strong> <u>Durable Power of Attorney</u> (NOT living will!)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Needs of Dying Patients -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 💜 Needs of Dying Patients</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div class="key-point definition">
+                        <div class="key-point-label">📌 Key Nursing Intervention</div>
+                        <p><strong>Provide opportunities for the patient to express feelings freely</strong> so that any concerns can be addressed.</p>
+                    </div>
+
+                    <div class="quick-ref-grid">
+                        <div class="quick-ref-card green">
+                            <h4>🏥 Physiologic Needs</h4>
+                            <ul class="content-list">
+                                <li>Hygiene</li>
+                                <li>Pain control</li>
+                                <li>Nutritional needs</li>
+                            </ul>
+                        </div>
+                        <div class="quick-ref-card purple">
+                            <h4>🧠 Psychological Needs</h4>
+                            <ul class="content-list">
+                                <li>Control over fear of the unknown</li>
+                                <li>Fear of pain and separation</li>
+                                <li>Loss of dignity and control</li>
+                                <li>Unfinished business</li>
+                            </ul>
+                        </div>
+                        <div class="quick-ref-card blue">
+                            <h4>🙏 Spiritual Needs</h4>
+                            <ul class="content-list">
+                                <li>Meaning and purpose</li>
+                                <li>Love and relatedness</li>
+                                <li>Forgiveness and hope</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wrap-up -->
+            <div class="wrapup">
+                <h3>✅ Chapter 44 Wrap-Up</h3>
+                <div class="wrapup-box">
+                    <h4>📝 Must-Know Points</h4>
+                    <ul>
+                        <li>Kübler-Ross: Denial → Anger → Bargaining → Depression → Acceptance (DABDA)</li>
+                        <li>Stages are NOT linear, individualized, can overlap</li>
+                        <li>Perceived loss = felt by person, intangible to others</li>
+                        <li>Grief = internal; Mourning = external (rituals)</li>
+                        <li>Durable Power of Attorney = appoints decision-maker</li>
+                        <li>Living Will = states treatment preferences</li>
+                        <li>Signs of impending death: Cheyne-Stokes, mottling, cold extremities, weak pulse</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== FLASHCARDS ===================== -->
+        <div id="vocab" class="content-section">
+            <div class="chapter-card" style="border-left-color: #ec4899;">
+                <h2>📖 Vocabulary Flashcards</h2>
+                <p>Click cards to flip! Master these key terms.</p>
+            </div>
+
+            <div class="filter-btns">
+                <button class="filter-btn active" onclick="filterCards('all')">All Terms</button>
+                <button class="filter-btn" onclick="filterCards('ch38')">Ch 38</button>
+                <button class="filter-btn" onclick="filterCards('ch45')">Ch 45</button>
+                <button class="filter-btn" onclick="filterCards('ch43')">Ch 43</button>
+                <button class="filter-btn" onclick="filterCards('ch44')">Ch 44</button>
+            </div>
+
+            <div class="flashcard-grid" id="flashcardGrid"></div>
+        </div>
+
+        <!-- ===================== QUIZ ===================== -->
+        <div id="quiz" class="content-section">
+            <div class="chapter-card" style="border-left-color: #22c55e;">
+                <h2>✏️ Practice Quiz - 90 NCLEX-Style Questions</h2>
+                <p>Test your knowledge with hints and rationales!</p>
+            </div>
+
+            <div class="quiz-stats">
+                <div class="quiz-stat"><div class="quiz-stat-value" id="answeredCount">0</div><div class="quiz-stat-label">Answered</div></div>
+                <div class="quiz-stat correct"><div class="quiz-stat-value" id="correctCount">0</div><div class="quiz-stat-label">Correct</div></div>
+                <div class="quiz-stat incorrect"><div class="quiz-stat-value" id="incorrectCount">0</div><div class="quiz-stat-label">Incorrect</div></div>
+                <div class="quiz-stat score"><div class="quiz-stat-value" id="scorePercent">0%</div><div class="quiz-stat-label">Score</div></div>
+            </div>
+
+            <div id="quizContainer"></div>
+
+            <div style="text-align: center; margin-top: 25px;">
+                <button class="quiz-btn primary" onclick="resetQuiz()">🔄 Reset Quiz</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // ==================== VOCABULARY DATA ====================
+        const vocabTerms = [
+            // Chapter 38
+            { term: "Dysuria", def: "Painful or difficult urination", ch: "ch38" },
+            { term: "Glycosuria", def: "Sugar (glucose) in the urine", ch: "ch38" },
+            { term: "Pyuria", def: "Pus in the urine", ch: "ch38" },
+            { term: "Anuria", def: "Complete ABSENCE of urine output (<50mL/24hr) - indicates renal failure", ch: "ch38" },
+            { term: "Oliguria", def: "DECREASED urine output", ch: "ch38" },
+            { term: "Hematuria", def: "Blood in the urine", ch: "ch38" },
+            { term: "Nocturia", def: "Frequent urination at NIGHT", ch: "ch38" },
+            { term: "Micturition", def: "The act of urination/voiding", ch: "ch38" },
+            { term: "Detrusor Muscle", def: "Smooth muscle of the bladder that contracts during urination", ch: "ch38" },
+            { term: "Intermittent Catheter", def: "Temporary insertion, removed after drainage (straight cath)", ch: "ch38" },
+            { term: "Indwelling Catheter", def: "Foley catheter with balloon, drains continuously", ch: "ch38" },
+            { term: "Suprapubic Catheter", def: "Surgically placed through abdomen into bladder", ch: "ch38" },
+            { term: "Specific Gravity", def: "Measures how well kidneys balance water and remove waste", ch: "ch38" },
+            // Chapter 45
+            { term: "Stereognosis", def: "Perception of solidity, shape, and texture of objects", ch: "ch45" },
+            { term: "Proprioception", def: "Body position awareness", ch: "ch45" },
+            { term: "Sensory Overload", def: "TOO MUCH sensory input for brain to process (ICU patients)", ch: "ch45" },
+            { term: "Sensory Deprivation", def: "TOO LITTLE sensory stimulation (isolation patients)", ch: "ch45" },
+            { term: "Sensory Deficits", def: "Impairments in specific senses (vision, hearing)", ch: "ch45" },
+            { term: "Sensoristasis", def: "Optimal arousal state - RAS monitors incoming stimuli", ch: "ch45" },
+            // Chapter 43
+            { term: "Stress", def: "Response to changes in the normal balanced state", ch: "ch43" },
+            { term: "Physiologic Stressors", def: "Originate from physical functioning (chemicals, infection, hypoxia)", ch: "ch43" },
+            { term: "Psychosocial Stressors", def: "Originate in relationships and interactions with society", ch: "ch43" },
+            { term: "Adaptation", def: "Body's ability to adjust to stressors and maintain homeostasis", ch: "ch43" },
+            { term: "LAS", def: "Local Adaptation Syndrome - involves only ONE specific body part", ch: "ch43" },
+            { term: "GAS", def: "General Adaptation Syndrome - whole body response (Alarm→Resistance→Exhaustion)", ch: "ch43" },
+            { term: "Alarm Reaction", def: "GAS Stage 1: Fight-or-flight activated, hormones rise", ch: "ch43" },
+            { term: "Stage of Resistance", def: "GAS Stage 2: Body attempts to adapt, vital signs stabilize", ch: "ch43" },
+            { term: "Stage of Exhaustion", def: "GAS Stage 3: Energy depleted, defenses break down", ch: "ch43" },
+            { term: "Guided Imagery", def: "Uses visualization to calm - person creates mental image and concentrates on it", ch: "ch43" },
+            { term: "Anticipatory Guidance", def: "Prepares for upcoming stressors by providing information and expectations", ch: "ch43" },
+            // Chapter 44
+            { term: "Grief", def: "INTERNAL emotional reaction to loss", ch: "ch44" },
+            { term: "Mourning", def: "EXTERNAL actions and expressions of grief (rituals, ceremonies)", ch: "ch44" },
+            { term: "Bereavement", def: "State of grieving from loss of a loved one", ch: "ch44" },
+            { term: "Actual Loss", def: "Loss that can be recognized by others", ch: "ch44" },
+            { term: "Perceived Loss", def: "Loss felt by person but intangible to others", ch: "ch44" },
+            { term: "Anticipatory Loss", def: "Loss that has not yet taken place", ch: "ch44" },
+            { term: "DNR", def: "Do-Not-Resuscitate order - allow natural death", ch: "ch44" },
+            { term: "POLST", def: "Physician Order for Life-Sustaining Treatment form", ch: "ch44" },
+            { term: "Living Will", def: "Document stating what treatments patient wants or doesn't want", ch: "ch44" },
+            { term: "Durable Power of Attorney", def: "Appoints an AGENT to make decisions if patient is incapacitated", ch: "ch44" },
+            { term: "Cheyne-Stokes", def: "Breathing pattern with gradual increase/decrease in depth, then apnea", ch: "ch44" }
+        ];
+
+        // ==================== QUIZ DATA - 50 NCLEX-STYLE QUESTIONS ====================
+        const quizQuestions = [
+            // CHAPTER 38: URINARY (Questions 1-13)
+            { q: "1. A patient's 24-hour urine output is less than 50 mL. The nurse recognizes this as:", opts: ["A. Dysuria", "B. Oliguria", "C. Anuria", "D. Pyuria"], ans: 2, hint: "Less than 50mL/24hr is essentially NO urine output. AN- means without.", rat: "Anuria is complete absence of urine output (<50mL/24hr), associated with renal failure. Oliguria is decreased output but not absent.", loc: "Ch 38: Urinary Terminology" },
+            
+            { q: "2. A nurse is teaching a sexually active female patient about UTI prevention. Which instruction is most important?", opts: ["A. Limit fluid intake to reduce urination", "B. Void immediately after sexual intercourse", "C. Use diaphragms for contraception", "D. Take daily prophylactic antibiotics"], ans: 1, hint: "Voiding flushes bacteria from the urethra before they can ascend to the bladder.", rat: "Females should void AFTER sexual intercourse to flush bacteria from the urethra, reducing UTI risk.", loc: "Ch 38: Patients at Risk for UTIs" },
+            
+            { q: "3. During Foley catheter insertion, the patient reports pain when the nurse begins to inflate the balloon. The nurse should:", opts: ["A. Continue inflation slowly", "B. Remove the catheter completely", "C. Deflate the balloon and advance the catheter", "D. Ignore the pain and proceed"], ans: 2, hint: "Pain during balloon inflation suggests the balloon may not be fully in the bladder.", rat: "If patient has pain during balloon inflation, DEFLATE the balloon and ADVANCE the catheter further to ensure it's in the bladder.", loc: "Ch 38: Catheter Considerations" },
+            
+            { q: "4. When inserting a Foley catheter in a female patient, the nurse accidentally inserts it into the vaginal opening. The nurse should:", opts: ["A. Remove it and insert a new sterile catheter", "B. Leave it in place and insert a new sterile catheter", "C. Rinse it off and reinsert it", "D. Advance it further"], ans: 1, hint: "Leaving the incorrectly placed catheter in place helps identify the vaginal opening while inserting correctly.", rat: "LEAVE the vaginal catheter in place and insert a NEW sterile catheter into the urethral meatus. Then remove the vaginal one.", loc: "Ch 38: Catheter Considerations" },
+            
+            { q: "5. A nurse needs to collect a urine specimen from a patient with an indwelling catheter. The specimen should be obtained from:", opts: ["A. The collection bag", "B. The catheter tubing port", "C. Disconnecting the drainage system", "D. A bedpan"], ans: 1, hint: "The collection bag contains old urine that may be contaminated. Fresh specimen comes from the catheter.", rat: "Urine specimens from indwelling catheters should be obtained from the CATHETER ITSELF (sampling port), NOT the collection bag.", loc: "Ch 38: Lab/Diagnostics" },
+            
+            { q: "6. A patient is starting a 24-hour urine collection at 0600. The nurse instructs the patient to:", opts: ["A. Save the first morning void as the start of the collection", "B. Discard the first morning void and begin collecting after", "C. Start collecting urine at midnight", "D. Collect only every other void"], ans: 1, hint: "The first void is eliminated, then ALL subsequent urine for 24 hours is collected.", rat: "For 24-hour urine collection, patient should empty bladder completely upon awakening and DISCARD this urine. This marks the START time.", loc: "Ch 38: Lab/Diagnostics" },
+            
+            { q: "7. A patient with hypervolemia would most likely present with:", opts: ["A. Flat neck veins and dry mucous membranes", "B. Distended neck veins and shortness of breath", "C. Decreased blood pressure and tachycardia", "D. Weight loss and poor skin turgor"], ans: 1, hint: "Hypervolemia = FLUID OVERLOAD. Think of where excess fluid would show up.", rat: "Hypervolemia (fluid overload) presents with: edema, HIGH blood pressure, distended neck veins (JVD), shortness of breath.", loc: "Ch 38: Kidneys and Ureters" },
+            
+            { q: "8. Which patient is at highest risk for developing a urinary tract infection?", opts: ["A. A young male athlete", "B. A patient with an indwelling catheter", "C. A patient drinking 2L of water daily", "D. A patient who voids every 4 hours"], ans: 1, hint: "Catheters bypass normal defenses and provide a direct pathway for bacteria.", rat: "Patients with INDWELLING CATHETERS are at high risk for UTIs because the catheter provides a pathway for bacteria.", loc: "Ch 38: Patients at Risk for UTIs" },
+            
+            { q: "9. Which type of catheter is surgically placed through the abdomen into the bladder?", opts: ["A. Intermittent catheter", "B. Indwelling (Foley) catheter", "C. Suprapubic catheter", "D. Condom catheter"], ans: 2, hint: "Supra = above; pubic = pubic bone. It goes through the abdominal wall.", rat: "Suprapubic catheter is surgically placed through the ABDOMEN into the bladder, used for urethral trauma or long-term drainage.", loc: "Ch 38: Types of Urinary Catheters" },
+            
+            { q: "10. A patient reports burning and pain during urination. The nurse documents this as:", opts: ["A. Anuria", "B. Dysuria", "C. Hematuria", "D. Pyuria"], ans: 1, hint: "DYS- means difficult or painful.", rat: "DYSURIA is painful or difficult urination. Dys- = difficult, painful.", loc: "Ch 38: Urinary Terminology" },
+            
+            { q: "11. The nurse is selecting a Foley catheter size. Using a catheter that is too large may cause:", opts: ["A. Frequent urination", "B. Urethral injury", "C. Urinary retention", "D. Bladder spasms"], ans: 1, hint: "A catheter too large for the urethra can cause trauma during insertion.", rat: "Larger catheters can cause URETHRAL INJURY. Select appropriate size for patient population (pediatric vs adult).", loc: "Ch 38: Catheter Considerations" },
+            
+            { q: "12. Which lab test is used to assess kidney function?", opts: ["A. Urine pH", "B. Specific gravity", "C. Creatinine", "D. Urinalysis"], ans: 2, hint: "This test measures a waste product filtered by the kidneys.", rat: "CREATININE is checked to assess kidney function. Elevated creatinine indicates impaired kidney function.", loc: "Ch 38: Lab/Diagnostics" },
+            
+            { q: "13. A patient experiences urine loss when coughing or sneezing. This is classified as:", opts: ["A. Urge incontinence", "B. Stress incontinence", "C. Overflow incontinence", "D. Functional incontinence"], ans: 1, hint: "Activities that increase intra-abdominal pressure trigger this type.", rat: "STRESS incontinence is involuntary loss of urine with increased intra-abdominal pressure (cough, sneeze, laugh).", loc: "Ch 38: Types of Urinary Incontinence" },
+            
+            // CHAPTER 45: SENSORY (Questions 14-24)
+            { q: "14. A patient in the ICU with multiple monitors and alarms is at risk for:", opts: ["A. Sensory deprivation", "B. Sensory overload", "C. Sensory deficits", "D. Sensory poverty"], ans: 1, hint: "The ICU has constant noise, lights, and stimulation - TOO MUCH input.", rat: "SENSORY OVERLOAD occurs when there is too much sensory input. ICU patients with monitors, alarms, and constant activity are at high risk.", loc: "Ch 45: Factors Contributing to Sensory Alteration" },
+            
+            { q: "15. A patient with AIDS in isolation is at risk for:", opts: ["A. Sensory overload", "B. Sensory deprivation", "C. Sensory deficits", "D. Proprioception loss"], ans: 1, hint: "Isolation means decreased contact and stimulation - TOO LITTLE input.", rat: "SENSORY DEPRIVATION occurs with too little stimulation. Patients in isolation receive decreased or monotonous stimuli.", loc: "Ch 45: Factors Contributing to Sensory Alteration" },
+            
+            { q: "16. The nurse provides a soft, textured blanket to stimulate which sense?", opts: ["A. Tactile", "B. Proprioception", "C. Stereognosis", "D. Kinesthetic"], ans: 2, hint: "This sense perceives the SIZE, SHAPE, and TEXTURE of objects.", rat: "STEREOGNOSIS is the perception of solidity, shape, and TEXTURE of objects. A textured blanket stimulates this sense.", loc: "Ch 45: Senses Involved in Sensory Reception" },
+            
+            { q: "17. When caring for a hearing-impaired patient, the nurse should:", opts: ["A. Speak loudly into the patient's ear", "B. Decrease background noise before speaking", "C. Stand behind the patient when talking", "D. Avoid using gestures"], ans: 1, hint: "Background noise competes with your voice and makes hearing harder.", rat: "DECREASE BACKGROUND NOISE before speaking to hearing-impaired patients. Also face them directly and position light on your face.", loc: "Ch 45: Caring for Hearing-Impaired Patients" },
+            
+            { q: "18. What is the highest priority when caring for a visually impaired patient?", opts: ["A. Providing entertainment", "B. Ensuring safety", "C. Encouraging independence", "D. Limiting visitors"], ans: 1, hint: "Visual impairment creates risk for falls and injuries.", rat: "SAFETY is the highest priority when caring for visually or hearing-impaired patients. Clear pathways and orient to environment.", loc: "Ch 45: Caring for Visually/Hearing Impaired Patients" },
+            
+            { q: "19. Before touching a visually impaired patient, the nurse should:", opts: ["A. Touch them gently without warning", "B. Explain the reason for touching first", "C. Turn on bright lights", "D. Wait for them to initiate contact"], ans: 1, hint: "The patient cannot see you approaching, so verbal warning prevents startling them.", rat: "EXPLAIN the reason for touching BEFORE doing so. The patient cannot see you and may be startled by unexpected touch.", loc: "Ch 45: Caring for Visually Impaired Patients" },
+            
+            { q: "20. When communicating with an unconscious patient, the nurse should:", opts: ["A. Speak loudly to ensure they hear", "B. Speak in a normal tone and assume they can hear", "C. Avoid talking since they cannot respond", "D. Only speak when family is present"], ans: 1, hint: "HEARING is the LAST sense to be lost. Always assume the patient can hear.", rat: "HEARING is the LAST sense lost. Speak in a NORMAL tone (not loud) and ASSUME the patient can hear you.", loc: "Ch 45: Communicating with Unconscious Patients" },
+            
+            { q: "21. Which measure is appropriate when caring for a hearing-impaired patient?", opts: ["A. Stand with light behind you", "B. Position yourself so light is on your face", "C. Turn away while speaking", "D. Cover your mouth when talking"], ans: 1, hint: "The patient needs to see your LIPS and facial expressions to understand you.", rat: "Position yourself so LIGHT IS ON YOUR FACE, allowing the patient to see your lips and expressions for lip reading.", loc: "Ch 45: Caring for Hearing-Impaired Patients" },
+            
+            { q: "22. A factory worker with occupational hearing loss has which type of sensory alteration?", opts: ["A. Sensory overload", "B. Sensory deprivation", "C. Sensory deficit", "D. Sensory poverty"], ans: 2, hint: "This is an impairment in a SPECIFIC sense (hearing) from occupational exposure.", rat: "SENSORY DEFICIT is impairment in a specific sense. Occupational hearing loss from factory work is a sensory deficit.", loc: "Ch 45: Factors Contributing to Sensory Alteration" },
+            
+            { q: "23. When leaving a visually impaired patient's room, the nurse should:", opts: ["A. Leave quietly to avoid disturbing them", "B. Indicate when leaving the room", "C. Turn off all lights", "D. Close the door loudly so they know"], ans: 1, hint: "The patient cannot see you leave, so verbal notification prevents confusion.", rat: "INDICATE when leaving the room. The patient cannot see you leave and may think you're still there.", loc: "Ch 45: Caring for Visually Impaired Patients" },
+            
+            { q: "24. For a confused patient, the nurse should:", opts: ["A. Speak rapidly to provide more information", "B. Avoid reorientation to prevent frustration", "C. Speak calmly, simply, and directly", "D. Use complex medical terminology"], ans: 2, hint: "Simple, direct communication is easier for confused patients to process.", rat: "Speak CALMLY, SIMPLY, and DIRECTLY to confused patients. Orient and reorient to time, place, and person.", loc: "Ch 45: Communicating with Confused Patients" },
+            
+            // CHAPTER 43: STRESS (Questions 25-36)
+            { q: "25. A person touches a hot stove and immediately pulls their hand away. This is an example of:", opts: ["A. General Adaptation Syndrome", "B. Local Adaptation Syndrome", "C. Psychosocial stress", "D. Developmental stress"], ans: 1, hint: "This is a reflex response involving only ONE body part (the hand).", rat: "LOCAL Adaptation Syndrome (LAS) involves only ONE specific body part. The reflex pain response is an example of LAS.", loc: "Ch 43: LAS and GAS" },
+            
+            { q: "26. In the General Adaptation Syndrome, the fight-or-flight response occurs during which stage?", opts: ["A. Alarm reaction", "B. Stage of resistance", "C. Stage of exhaustion", "D. Recovery stage"], ans: 0, hint: "This is the first response when a stressor is perceived - body prepares to react.", rat: "ALARM REACTION is when fight-or-flight is activated. Heart rate and BP increase, hormones rise, body prepares to react.", loc: "Ch 43: LAS and GAS → GAS Stages" },
+            
+            { q: "27. A patient who has been under chronic stress for months now shows fatigue, illness, and immune dysfunction. This indicates which GAS stage?", opts: ["A. Alarm reaction", "B. Stage of resistance", "C. Stage of exhaustion", "D. Adaptation stage"], ans: 2, hint: "The body's defenses have been depleted after prolonged stress.", rat: "STAGE OF EXHAUSTION occurs when energy reserves are depleted. Defenses break down - fatigue, illness, depression, immune dysfunction.", loc: "Ch 43: LAS and GAS → Stage of Exhaustion" },
+            
+            { q: "28. A person creates a mental image, concentrates on it, and becomes less responsive to stimuli. This technique is:", opts: ["A. Relaxation", "B. Anticipatory guidance", "C. Guided imagery", "D. Mindfulness"], ans: 2, hint: "The key words are 'mental image' and 'concentrates on the image.'", rat: "GUIDED IMAGERY uses visualization - person creates a mental image, concentrates on it, and becomes less responsive to external stimuli.", loc: "Ch 43: Stress Management Techniques" },
+            
+            { q: "29. Preparing a patient for an upcoming surgery by explaining what to expect is an example of:", opts: ["A. Crisis intervention", "B. Guided imagery", "C. Anticipatory guidance", "D. Relaxation therapy"], ans: 2, hint: "You are preparing them in ADVANCE by providing information about what's coming.", rat: "ANTICIPATORY GUIDANCE prepares individuals for upcoming stressors by providing information and expectations beforehand.", loc: "Ch 43: Stress Management Techniques" },
+            
+            { q: "30. Stress related to a marriage or divorce is classified as:", opts: ["A. Developmental stress", "B. Situational stress", "C. Physiologic stress", "D. Chronic stress"], ans: 1, hint: "Marriage and divorce are unpredictable life events, not part of normal development.", rat: "SITUATIONAL stress does not occur in predictable patterns - includes illness, marriage, divorce, job loss, role changes.", loc: "Ch 43: Sources of Stress" },
+            
+            { q: "31. Which is an example of physiologic stress?", opts: ["A. Job loss", "B. Divorce", "C. Hypoxia", "D. Role change"], ans: 2, hint: "Physiologic stressors originate from PHYSICAL functioning of the body.", rat: "PHYSIOLOGIC stressors originate from physical functioning - includes chemical agents, infection, HYPOXIA, nutritional imbalances.", loc: "Ch 43: Stress and Adaptation Terms" },
+            
+            { q: "32. The inflammatory response is an example of:", opts: ["A. General Adaptation Syndrome", "B. Local Adaptation Syndrome", "C. Psychosocial stress", "D. Developmental stress"], ans: 1, hint: "Inflammation is localized to a specific area of the body.", rat: "LAS involves only one body part. The INFLAMMATORY RESPONSE is a type of Local Adaptation Syndrome.", loc: "Ch 43: LAS and GAS" },
+            
+            { q: "33. During the stage of resistance in GAS, the body:", opts: ["A. Activates fight-or-flight response", "B. Attempts to adapt and restore balance", "C. Experiences complete exhaustion", "D. Gives up all defense mechanisms"], ans: 1, hint: "This is the middle stage where the body tries to stabilize and cope.", rat: "STAGE OF RESISTANCE - body attempts to ADAPT. Vital signs stabilize, hormone levels normalize, body tries to restore balance.", loc: "Ch 43: LAS and GAS → Stage of Resistance" },
+            
+            { q: "34. Stress that occurs as a person progresses through normal life stages is called:", opts: ["A. Situational stress", "B. Developmental stress", "C. Acute stress", "D. Physiologic stress"], ans: 1, hint: "Think of stress from growing up, aging, and normal life transitions.", rat: "DEVELOPMENTAL stress occurs as person progresses through stages of growth - teens forming identity, adults balancing careers, etc.", loc: "Ch 43: Sources of Stress" },
+            
+            { q: "35. A technique that encourages present-moment awareness to reduce stress is:", opts: ["A. Guided imagery", "B. Crisis intervention", "C. Mindfulness", "D. Anticipatory guidance"], ans: 2, hint: "Being fully present in the current moment, not worrying about past or future.", rat: "MINDFULNESS encourages PRESENT-MOMENT awareness to reduce stress and anxiety.", loc: "Ch 43: Stress Management Techniques" },
+            
+            { q: "36. Which is a short-term, structured approach used in acute stress situations?", opts: ["A. Mindfulness", "B. Guided imagery", "C. Relaxation", "D. Crisis intervention"], ans: 3, hint: "This is specifically designed for immediate, acute crisis situations.", rat: "CRISIS INTERVENTION is a short-term, structured approach used in ACUTE situations to provide immediate support.", loc: "Ch 43: Stress Management Techniques" },
+            
+            // CHAPTER 44: GRIEF (Questions 37-50)
+            { q: "37. An elderly patient in a nursing home expresses sadness about losing financial independence. This is an example of:", opts: ["A. Actual loss", "B. Perceived loss", "C. Anticipatory loss", "D. Maturational loss"], ans: 1, hint: "Loss of financial independence is felt by the person but not visible to others.", rat: "PERCEIVED LOSS is felt by the person but intangible to others. Loss of financial independence cannot be seen by others.", loc: "Ch 44: Types of Loss" },
+            
+            { q: "38. According to Kübler-Ross, which stage is characterized by 'If only...' or 'Maybe if we do this...'?", opts: ["A. Denial", "B. Anger", "C. Bargaining", "D. Depression"], ans: 2, hint: "The person is trying to negotiate or make deals for more time.", rat: "BARGAINING stage involves 'If only...' statements - trying to negotiate for more time or a different outcome.", loc: "Ch 44: Kübler-Ross's 5 Stages of Grief" },
+            
+            { q: "39. The external actions and expressions of grief, such as funeral rituals, are called:", opts: ["A. Grief", "B. Bereavement", "C. Mourning", "D. Anticipatory loss"], ans: 2, hint: "This is the OUTWARD expression with symbols and ceremonies.", rat: "MOURNING is the external actions and expressions of grief - symbols, ceremonies, rituals. Grief is the INTERNAL reaction.", loc: "Ch 44: Grief Terminology" },
+            
+            { q: "40. Which document appoints an agent to make healthcare decisions if the patient becomes incapacitated?", opts: ["A. Living will", "B. POLST form", "C. Durable power of attorney", "D. DNR order"], ans: 2, hint: "This document names a specific PERSON to make decisions on behalf of the patient.", rat: "DURABLE POWER OF ATTORNEY appoints an AGENT to make decisions if the patient is incapacitated. Living will states preferences but doesn't name an agent.", loc: "Ch 44: Special Orders" },
+            
+            { q: "41. A patient with terminal cancer says, 'The doctors must have made a mistake with my diagnosis.' This represents which stage of grief?", opts: ["A. Denial", "B. Anger", "C. Bargaining", "D. Acceptance"], ans: 0, hint: "The patient is refusing to accept the reality of the diagnosis.", rat: "DENIAL stage - 'This can't be happening.' The patient refuses to acknowledge the diagnosis is correct.", loc: "Ch 44: Kübler-Ross's 5 Stages of Grief" },
+            
+            { q: "42. Clinical signs of impending death include all EXCEPT:", opts: ["A. Cheyne-Stokes respirations", "B. Mottling of extremities", "C. Increased blood pressure", "D. Weak, irregular pulse"], ans: 2, hint: "Blood pressure typically does the opposite as death approaches.", rat: "DECREASING blood pressure is a sign of impending death, not increased BP. Other signs include Cheyne-Stokes breathing, mottling, weak pulse.", loc: "Ch 44: Clinical Signs of Impending Death" },
+            
+            { q: "43. A dying patient asks, 'What will happen to my family after I'm gone?' The nurse should:", opts: ["A. Change the subject to distract them", "B. Provide opportunities for the patient to express feelings", "C. Tell them not to worry about it", "D. Immediately call the chaplain"], ans: 1, hint: "The patient needs to express concerns and have them addressed.", rat: "PROVIDE OPPORTUNITIES for patients to EXPRESS FEELINGS FREELY so concerns can be addressed. This is a key nursing intervention.", loc: "Ch 44: Needs of Dying Patients" },
+            
+            { q: "44. Noisy, irregular respirations with periods of no breathing near death are called:", opts: ["A. Kussmaul respirations", "B. Cheyne-Stokes respirations", "C. Biot's respirations", "D. Eupnea"], ans: 1, hint: "This pattern has gradual increase/decrease in depth followed by apnea (no breathing).", rat: "CHEYNE-STOKES respirations show gradual increase then decrease in depth, followed by periods of apnea. Common near death.", loc: "Ch 44: Clinical Signs of Impending Death" },
+            
+            { q: "45. In Kübler-Ross's stages, acceptance is best described as:", opts: ["A. Happiness about dying", "B. Peace and acknowledgment", "C. Giving up hope", "D. Returning to denial"], ans: 1, hint: "Acceptance is NOT happiness - it's coming to terms with reality.", rat: "ACCEPTANCE is not happiness but PEACE and acknowledgment. The person has come to terms with the situation.", loc: "Ch 44: Kübler-Ross's 5 Stages of Grief" },
+            
+            { q: "46. The Kübler-Ross grief stages:", opts: ["A. Must occur in exact order", "B. Are the same for everyone", "C. May overlap and are individualized", "D. Always end in acceptance"], ans: 2, hint: "Grief is highly individual - people don't follow a rigid pattern.", rat: "Stages are NOT linear, may OVERLAP, are INDIVIDUALIZED. People may cycle through stages or stay in one longer than another.", loc: "Ch 44: Kübler-Ross's 5 Stages of Grief" },
+            
+            { q: "47. A patient with a terminal illness asks to stop eating and drinking. This is known as:", opts: ["A. Terminal weaning", "B. Palliative sedation", "C. VSED", "D. Passive euthanasia"], ans: 2, hint: "VSED stands for Voluntary Stopping of Eating and Drinking.", rat: "VSED (Voluntary Stopping of Eating and Drinking) is when a patient voluntarily chooses to stop eating and drinking.", loc: "Ch 44: Special Orders" },
+            
+            { q: "48. A patient directs anger about their terminal diagnosis at the nursing staff. The nurse understands this represents which grief stage?", opts: ["A. Denial", "B. Anger", "C. Bargaining", "D. Depression"], ans: 1, hint: "Anger may be directed at caregivers, family, or fate.", rat: "ANGER stage - anger may be directed at caregivers, family, or fate. 'Why me?' Nurses should not take this personally.", loc: "Ch 44: Kübler-Ross's 5 Stages of Grief" },
+            
+            { q: "49. Gradual withdrawal of ventilation in a terminal patient is called:", opts: ["A. VSED", "B. Terminal weaning", "C. Palliative sedation", "D. Active euthanasia"], ans: 1, hint: "WEANING means gradually removing - in this case, from the ventilator.", rat: "TERMINAL WEANING involves gradual withdrawal of ventilation for terminal patients.", loc: "Ch 44: Special Orders" },
+            
+            { q: "50. Loss that has not yet occurred but is expected is called:", opts: ["A. Perceived loss", "B. Actual loss", "C. Anticipatory loss", "D. Situational loss"], ans: 2, hint: "The person is grieving for a loss that hasn't happened yet but will.", rat: "ANTICIPATORY LOSS is when the loss has not yet taken place but is expected (e.g., terminal diagnosis).", loc: "Ch 44: Types of Loss" },
+            
+            // ==================== ADDITIONAL SCENARIO-BASED QUESTIONS ====================
+            
+            // URINARY SCENARIOS (51-60)
+            { q: "51. A 72-year-old female patient is admitted with confusion and fever. The nurse notes cloudy, foul-smelling urine in the collection bag. Which assessment finding would the nurse expect?", opts: ["A. Glycosuria", "B. Pyuria", "C. Oliguria", "D. Anuria"], ans: 1, hint: "Cloudy, foul-smelling urine with fever suggests infection. What would be in the urine?", rat: "PYURIA (pus in urine) is expected with UTI. Cloudy, foul-smelling urine plus fever and confusion (especially in elderly) are classic UTI signs.", loc: "Ch 38: Urinary Terminology" },
+            
+            { q: "52. A nurse is caring for a post-operative patient who has not voided in 8 hours. The patient reports lower abdominal discomfort and the nurse palpates a firm, distended bladder. The priority nursing action is to:", opts: ["A. Encourage the patient to drink more fluids", "B. Notify the healthcare provider for catheterization order", "C. Apply a warm compress to the abdomen", "D. Wait another 4 hours and reassess"], ans: 1, hint: "The patient has urinary retention. What intervention addresses this immediately?", rat: "Urinary RETENTION requires intervention. Notify provider for catheterization order to relieve the distended bladder and prevent complications.", loc: "Ch 38: Nursing Interventions" },
+            
+            { q: "53. A patient with a new Foley catheter calls the nurse and states, 'I feel like I have to urinate constantly.' The nurse's best response is:", opts: ["A. 'The catheter must be blocked, let me check it.'", "B. 'This sensation is normal and should decrease over time.'", "C. 'I'll remove the catheter since it's causing discomfort.'", "D. 'You shouldn't feel anything with a catheter in place.'"], ans: 1, hint: "The catheter balloon presses against the bladder wall, causing a sensation of fullness.", rat: "The sensation of needing to urinate is NORMAL with a new catheter due to balloon pressure. This typically decreases as the patient adjusts.", loc: "Ch 38: Catheter Considerations" },
+            
+            { q: "54. A diabetic patient's urinalysis reveals the presence of glucose. The nurse documents this finding as:", opts: ["A. Hematuria", "B. Pyuria", "C. Glycosuria", "D. Proteinuria"], ans: 2, hint: "Glyco- refers to glucose/sugar.", rat: "GLYCOSURIA is glucose (sugar) in the urine. This is common in uncontrolled diabetes when blood glucose exceeds the renal threshold.", loc: "Ch 38: Urinary Terminology" },
+            
+            { q: "55. A patient with heart failure is being monitored for fluid status. The nurse notes the patient has gained 3 pounds overnight, has pitting edema in the ankles, and is short of breath. These findings indicate:", opts: ["A. Dehydration", "B. Hypovolemia", "C. Hypervolemia", "D. Renal failure"], ans: 2, hint: "Weight gain + edema + SOB = fluid overload.", rat: "HYPERVOLEMIA (fluid overload) presents with rapid weight gain, edema, shortness of breath, and distended neck veins.", loc: "Ch 38: Kidneys and Ureters" },
+            
+            { q: "56. A nurse is teaching a patient about a scheduled 24-hour urine collection that will start tomorrow at 0700. Which statement by the patient indicates understanding?", opts: ["A. 'I will save my first morning urine at 7 AM to start the test.'", "B. 'I will urinate at 7 AM, discard it, then save all urine until 7 AM the next day.'", "C. 'I will start saving urine at midnight tonight.'", "D. 'I only need to save urine when I feel the urge to go.'"], ans: 1, hint: "The first void marks the START time but is discarded, then all subsequent urine is saved.", rat: "Correct technique: void at start time and DISCARD, then collect ALL urine for next 24 hours until the same time next day.", loc: "Ch 38: Lab/Diagnostics" },
+            
+            { q: "57. An 80-year-old patient with dementia is unable to get to the bathroom in time and frequently has wet clothing. This type of incontinence is classified as:", opts: ["A. Stress incontinence", "B. Urge incontinence", "C. Functional incontinence", "D. Overflow incontinence"], ans: 2, hint: "The problem is outside the urinary tract - it's a cognitive/mobility issue.", rat: "FUNCTIONAL incontinence is caused by factors OUTSIDE the urinary tract, such as cognitive impairment or mobility issues preventing timely toileting.", loc: "Ch 38: Types of Urinary Incontinence" },
+            
+            { q: "58. A patient with a spinal cord injury voids without any sensation of bladder fullness. The nurse recognizes this as:", opts: ["A. Stress incontinence", "B. Urge incontinence", "C. Reflex incontinence", "D. Total incontinence"], ans: 2, hint: "Spinal cord injury disrupts the nerve signals - bladder empties automatically without sensation.", rat: "REFLEX incontinence occurs when the bladder empties without sensation of need to void, common in spinal cord injuries.", loc: "Ch 38: Types of Urinary Incontinence" },
+            
+            { q: "59. During morning rounds, the nurse finds a patient's Foley catheter drainage bag on the bed above the level of the bladder. The nurse should:", opts: ["A. Document the finding and continue rounds", "B. Immediately lower the bag below bladder level", "C. Clamp the tubing until the bag can be emptied", "D. Remove the catheter"], ans: 1, hint: "If the bag is above the bladder, urine can flow back into the bladder causing infection.", rat: "Drainage bag must ALWAYS be below bladder level to prevent backflow and infection. Lower it immediately.", loc: "Ch 38: Nursing Interventions" },
+            
+            { q: "60. A newly admitted patient with kidney disease has a creatinine level of 4.2 mg/dL (normal 0.7-1.3). The nurse understands this indicates:", opts: ["A. Normal kidney function", "B. Impaired kidney function", "C. Urinary tract infection", "D. Dehydration"], ans: 1, hint: "Creatinine is a waste product filtered by the kidneys. High levels mean the kidneys aren't filtering well.", rat: "Elevated CREATININE indicates IMPAIRED KIDNEY FUNCTION. Creatinine is a waste product that accumulates when kidneys cannot filter properly.", loc: "Ch 38: Lab/Diagnostics" },
+            
+            // SENSORY SCENARIOS (61-70)
+            { q: "61. A nurse enters the room of a visually impaired patient. Which action should the nurse take FIRST?", opts: ["A. Turn on the overhead lights", "B. Touch the patient's arm to get attention", "C. Announce presence and identify self", "D. Begin the physical assessment"], ans: 2, hint: "The patient cannot see you enter. How do you let them know you're there?", rat: "FIRST announce your presence and identify yourself. The patient cannot see you and may be startled by unexpected touch or voice.", loc: "Ch 45: Caring for Visually Impaired Patients" },
+            
+            { q: "62. A patient who works at an airport has been diagnosed with hearing loss. The nurse identifies this as:", opts: ["A. Sensory overload from the work environment", "B. Sensory deprivation from isolation", "C. Sensory deficit from occupational exposure", "D. Sensory poverty from technology"], ans: 2, hint: "The hearing loss is an impairment in a specific sense caused by work exposure.", rat: "SENSORY DEFICIT is impairment in a specific sense. Airport workers are at occupational risk for hearing loss from constant loud noise.", loc: "Ch 45: Factors Contributing to Sensory Alteration" },
+            
+            { q: "63. A patient in a private room on contact isolation has been alone for most of the day with minimal stimulation. The nurse recognizes this patient is at risk for:", opts: ["A. Sensory overload", "B. Sensory deprivation", "C. Sensory deficit", "D. Proprioception loss"], ans: 1, hint: "Isolation + minimal stimulation = too LITTLE sensory input.", rat: "SENSORY DEPRIVATION occurs with too little stimulation. Isolation patients receive decreased, monotonous stimuli.", loc: "Ch 45: Factors Contributing to Sensory Alteration" },
+            
+            { q: "64. A nurse is preparing to give discharge instructions to a hearing-impaired patient. Which action is most appropriate?", opts: ["A. Stand behind the patient and speak loudly", "B. Face the patient with light on the nurse's face", "C. Write everything down without verbal explanation", "D. Have a family member relay all information"], ans: 1, hint: "The patient may lip-read. They need to see your face clearly.", rat: "FACE the patient directly with LIGHT ON YOUR FACE so they can see your lips and facial expressions for lip reading.", loc: "Ch 45: Caring for Hearing-Impaired Patients" },
+            
+            { q: "65. A nurse is caring for an unconscious patient. The patient's family asks if the patient can hear them. The nurse's best response is:", opts: ["A. 'No, unconscious patients cannot hear anything.'", "B. 'Hearing is often the last sense to be lost, so assume your loved one can hear you.'", "C. 'Only speak if you see eye movement.'", "D. 'You should wait until the patient wakes up to talk to them.'"], ans: 1, hint: "HEARING is the LAST sense lost. Always assume they can hear.", rat: "HEARING is often the LAST sense to be lost. Always assume unconscious patients CAN hear and encourage family to speak to them.", loc: "Ch 45: Communicating with Unconscious Patients" },
+            
+            { q: "66. A long-term care resident who has been bedridden reports feeling 'unsteady' and unsure of where their body is in space. This indicates a problem with:", opts: ["A. Visual perception", "B. Proprioception", "C. Stereognosis", "D. Gustatory function"], ans: 1, hint: "Knowing where your body is in space relates to body position awareness.", rat: "PROPRIOCEPTION is awareness of body position in space. Bedridden patients may have decreased proprioception from immobility.", loc: "Ch 45: Senses Involved in Sensory Reception" },
+            
+            { q: "67. A confused patient keeps asking what day it is and where they are. The nurse should:", opts: ["A. Avoid answering to prevent further confusion", "B. Provide orientation cues and reorient as needed", "C. Tell the patient to figure it out themselves", "D. Sedate the patient to reduce anxiety"], ans: 1, hint: "Confused patients need frequent reorientation to time, place, and person.", rat: "ORIENT and REORIENT confused patients to time, place, and person. Use calendars, clocks, and verbal cues.", loc: "Ch 45: Communicating with Confused Patients" },
+            
+            { q: "68. Before performing a dressing change on an unconscious patient, the nurse should:", opts: ["A. Proceed quietly to avoid disturbing the patient", "B. Speak to the patient and explain what will happen", "C. Only explain if family is present", "D. Wait until the patient regains consciousness"], ans: 1, hint: "Assume the patient can hear. Explain before any procedure.", rat: "SPEAK to unconscious patients BEFORE touching and explain procedures. Assume they can hear you (hearing is last sense lost).", loc: "Ch 45: Communicating with Unconscious Patients" },
+            
+            { q: "69. A patient recovering from surgery is experiencing constant noise from monitors, IV pumps, and overhead paging. The nurse recognizes this patient is at risk for:", opts: ["A. Sensory deprivation", "B. Sensory overload", "C. Sensory deficit", "D. Sensory poverty"], ans: 1, hint: "Too much noise and stimulation = the brain can't process it all.", rat: "SENSORY OVERLOAD occurs with excessive stimulation. Post-surgical patients with multiple devices and constant activity are at high risk.", loc: "Ch 45: Factors Contributing to Sensory Alteration" },
+            
+            { q: "70. A nurse is leaving the room of a visually impaired patient. What should the nurse do?", opts: ["A. Leave quietly to avoid disturbing the patient", "B. Turn off the lights before leaving", "C. Inform the patient that you are leaving", "D. Close the door loudly so they know you left"], ans: 2, hint: "The patient cannot see you leave. They need to know you're gone.", rat: "INFORM the patient when you are leaving the room. They cannot see you leave and may think you're still there.", loc: "Ch 45: Caring for Visually Impaired Patients" },
+            
+            // STRESS SCENARIOS (71-80)
+            { q: "71. A patient recently diagnosed with diabetes is overwhelmed and says, 'I don't know how I'll manage all these changes.' The nurse recognizes this as:", opts: ["A. Developmental stress", "B. Situational stress", "C. Physiologic stress", "D. Chronic stress"], ans: 1, hint: "This is an unexpected life event, not a predictable stage of development.", rat: "SITUATIONAL stress does not occur in predictable patterns - includes illness diagnosis, job loss, or major life changes.", loc: "Ch 43: Sources of Stress" },
+            
+            { q: "72. A pre-operative patient is anxious about tomorrow's surgery. The nurse explains the surgical procedure, what to expect during recovery, and answers all questions. This intervention is:", opts: ["A. Crisis intervention", "B. Guided imagery", "C. Anticipatory guidance", "D. Relaxation therapy"], ans: 2, hint: "The nurse is PREPARING the patient in ADVANCE for an upcoming stressor.", rat: "ANTICIPATORY GUIDANCE prepares patients for upcoming stressors by providing information, expectations, and answering questions.", loc: "Ch 43: Stress Management Techniques" },
+            
+            { q: "73. A patient who has been caring for her ill mother for 2 years now reports constant fatigue, frequent colds, and feelings of hopelessness. According to GAS, this patient is in the:", opts: ["A. Alarm stage", "B. Resistance stage", "C. Exhaustion stage", "D. Recovery stage"], ans: 2, hint: "After prolonged stress, the body's defenses break down.", rat: "EXHAUSTION STAGE occurs when energy reserves are depleted from chronic stress. Signs include fatigue, illness, depression, immune dysfunction.", loc: "Ch 43: LAS and GAS → Stage of Exhaustion" },
+            
+            { q: "74. A nurse instructs a patient with chronic pain to 'imagine yourself on a peaceful beach, feeling the warm sand and hearing gentle waves.' This technique is:", opts: ["A. Relaxation", "B. Guided imagery", "C. Mindfulness", "D. Anticipatory guidance"], ans: 1, hint: "The patient is creating a MENTAL IMAGE and concentrating on it.", rat: "GUIDED IMAGERY uses visualization - creating a mental image (peaceful beach) and concentrating on it to reduce stress and pain.", loc: "Ch 43: Stress Management Techniques" },
+            
+            { q: "75. A teenager is stressed about identity, peer relationships, and future career choices. The nurse recognizes this as:", opts: ["A. Situational stress", "B. Developmental stress", "C. Acute stress", "D. Physiologic stress"], ans: 1, hint: "These are normal stressors related to the adolescent stage of development.", rat: "DEVELOPMENTAL stress occurs as person progresses through growth stages. Teen identity formation is a normal developmental stressor.", loc: "Ch 43: Sources of Stress" },
+            
+            { q: "76. A patient accidentally touches a hot pan and immediately jerks their hand away. The nurse recognizes this as an example of:", opts: ["A. General Adaptation Syndrome", "B. Local Adaptation Syndrome", "C. Psychological stress response", "D. Fight-or-flight response"], ans: 1, hint: "This is a localized, immediate reflex involving just the hand.", rat: "LOCAL Adaptation Syndrome (LAS) involves only one body part. The reflex pain response (jerking hand from heat) is a type of LAS.", loc: "Ch 43: LAS and GAS" },
+            
+            { q: "77. A patient with newly diagnosed cancer is experiencing rapid heart rate, elevated blood pressure, and sweating while meeting with the oncologist. According to GAS, the patient is in the:", opts: ["A. Alarm reaction", "B. Stage of resistance", "C. Stage of exhaustion", "D. Recovery phase"], ans: 0, hint: "This is the initial fight-or-flight response to a stressor.", rat: "ALARM REACTION activates fight-or-flight. Symptoms include increased HR, elevated BP, sweating as body prepares to react.", loc: "Ch 43: LAS and GAS → Alarm Reaction" },
+            
+            { q: "78. A patient asks the nurse about ways to cope with daily work stress. Which suggestion promotes present-moment awareness?", opts: ["A. 'Picture yourself in a relaxing place.'", "B. 'Practice being fully present in the current moment.'", "C. 'Prepare for stressful meetings in advance.'", "D. 'Use progressive muscle relaxation.'"], ans: 1, hint: "Being fully present in the NOW, not thinking about past or future.", rat: "MINDFULNESS encourages PRESENT-MOMENT awareness - focusing on the here and now rather than worrying about past or future.", loc: "Ch 43: Stress Management Techniques" },
+            
+            { q: "79. A patient in the emergency department following a car accident is crying, shaking, and unable to focus. The nurse provides immediate support and helps the patient problem-solve. This is:", opts: ["A. Guided imagery", "B. Anticipatory guidance", "C. Crisis intervention", "D. Mindfulness training"], ans: 2, hint: "This is a short-term, structured approach for an ACUTE situation.", rat: "CRISIS INTERVENTION is short-term, structured support used in ACUTE situations like trauma, accidents, or sudden loss.", loc: "Ch 43: Stress Management Techniques" },
+            
+            { q: "80. A wound on a patient's leg becomes red, warm, and swollen. The nurse identifies this as:", opts: ["A. General Adaptation Syndrome", "B. Local Adaptation Syndrome", "C. Psychosocial stress response", "D. Stage of exhaustion"], ans: 1, hint: "This is a localized inflammatory response in one body area.", rat: "LOCAL Adaptation Syndrome (LAS) includes the inflammatory response - a localized reaction in one specific body area.", loc: "Ch 43: LAS and GAS" },
+            
+            // GRIEF SCENARIOS (81-90)
+            { q: "81. A patient with terminal lung cancer tells the nurse, 'If I could just live until my grandson's graduation, I would do anything.' This statement reflects which stage of grief?", opts: ["A. Denial", "B. Anger", "C. Bargaining", "D. Depression"], ans: 2, hint: "The patient is trying to make a deal or negotiate for more time.", rat: "BARGAINING involves 'If only...' or 'If I could just...' statements - negotiating for more time or a different outcome.", loc: "Ch 44: Kübler-Ross's 5 Stages of Grief" },
+            
+            { q: "82. A patient's wife has been at the bedside for 3 days as her husband approaches death. She notices his skin is becoming mottled and his breathing has become irregular with periods of no breathing. The nurse explains these are:", opts: ["A. Signs of improvement", "B. Side effects of medications", "C. Signs of impending death", "D. Signs of infection"], ans: 2, hint: "Mottling and Cheyne-Stokes breathing are classic signs near end of life.", rat: "MOTTLING of skin and CHEYNE-STOKES respirations (irregular with apnea periods) are clinical signs of IMPENDING DEATH.", loc: "Ch 44: Clinical Signs of Impending Death" },
+            
+            { q: "83. A patient recently lost her job of 20 years. Although her friends try to reassure her that she'll find another job, she feels a deep sense of loss about her professional identity. This is an example of:", opts: ["A. Actual loss", "B. Perceived loss", "C. Anticipatory loss", "D. Maturational loss"], ans: 1, hint: "The loss of professional identity is felt deeply by her but intangible to others.", rat: "PERCEIVED LOSS is felt by the person but intangible to others. Loss of professional identity and self-worth are perceived losses.", loc: "Ch 44: Types of Loss" },
+            
+            { q: "84. A dying patient becomes withdrawn, cries frequently, and has stopped participating in activities. The nurse recognizes this as which stage of grief?", opts: ["A. Denial", "B. Anger", "C. Bargaining", "D. Depression"], ans: 3, hint: "Withdrawal, crying, and disengagement suggest deep sadness.", rat: "DEPRESSION stage involves sadness, withdrawal, and hopelessness. The patient is mourning their impending death.", loc: "Ch 44: Kübler-Ross's 5 Stages of Grief" },
+            
+            { q: "85. A family is meeting with the palliative care team. They want to ensure their mother's wishes are followed if she becomes unable to make decisions. The team recommends completing a:", opts: ["A. Living will only", "B. DNR order only", "C. Durable power of attorney for healthcare", "D. POLST form only"], ans: 2, hint: "They need to designate someone to MAKE DECISIONS on her behalf.", rat: "DURABLE POWER OF ATTORNEY FOR HEALTHCARE appoints an agent to make decisions if the patient becomes incapacitated.", loc: "Ch 44: Special Orders" },
+            
+            { q: "86. A hospice nurse is caring for a patient whose extremities are becoming cool and cyanotic. The patient's blood pressure is 70/40 and pulse is weak and thready. The nurse should:", opts: ["A. Call a code blue immediately", "B. Provide comfort measures and support the family", "C. Start IV fluids to increase blood pressure", "D. Transfer the patient to the ICU"], ans: 1, hint: "This is a hospice patient - the focus is on comfort, not aggressive treatment.", rat: "For hospice patients, these are expected signs of approaching death. Focus on COMFORT MEASURES and family support.", loc: "Ch 44: Clinical Signs of Impending Death" },
+            
+            { q: "87. A patient with ALS has decided to stop using the ventilator. The healthcare team will gradually decrease ventilator support over the next several hours. This is called:", opts: ["A. VSED", "B. Active euthanasia", "C. Terminal weaning", "D. Palliative sedation"], ans: 2, hint: "WEANING = gradually withdrawing something - in this case, the ventilator.", rat: "TERMINAL WEANING is the gradual withdrawal of ventilator support for terminal patients who choose to discontinue it.", loc: "Ch 44: Special Orders" },
+            
+            { q: "88. A newly widowed patient attends support groups and wears black clothing. The nurse understands these behaviors represent:", opts: ["A. Grief", "B. Mourning", "C. Bereavement", "D. Anticipatory loss"], ans: 1, hint: "These are OUTWARD expressions and actions of grief.", rat: "MOURNING is the external actions and expressions of grief - attending support groups, rituals, wearing black are mourning behaviors.", loc: "Ch 44: Grief Terminology" },
+            
+            { q: "89. A patient diagnosed with terminal pancreatic cancer says calmly, 'I've lived a good life. I'm ready to go.' This statement reflects which stage?", opts: ["A. Denial", "B. Depression", "C. Bargaining", "D. Acceptance"], ans: 3, hint: "The patient has come to terms with death and is at peace.", rat: "ACCEPTANCE is not happiness but PEACE and acknowledgment. The patient has come to terms with dying.", loc: "Ch 44: Kübler-Ross's 5 Stages of Grief" },
+            
+            { q: "90. A patient's family member says, 'Mom went through denial and anger, but now she seems to be bargaining. Does everyone go through these stages in order?' The nurse's best response is:", opts: ["A. 'Yes, everyone follows the exact same pattern.'", "B. 'The stages are not linear and may overlap; grief is individualized.'", "C. 'She should be in depression by now.'", "D. 'The stages only apply to patients, not family members.'"], ans: 1, hint: "Grief is highly individual - there is no set order.", rat: "Stages are NOT linear, may OVERLAP, and are INDIVIDUALIZED. People may cycle through stages or remain in one longer.", loc: "Ch 44: Kübler-Ross's 5 Stages of Grief" }
+        ];
+
+        let currentFilter = 'all';
+        let quizAnswers = {};
+
+        // ==================== FLASHCARD FUNCTIONS ====================
+        function renderFlashcards() {
+            const grid = document.getElementById('flashcardGrid');
+            const filtered = currentFilter === 'all' ? vocabTerms : vocabTerms.filter(t => t.ch === currentFilter);
+            
+            grid.innerHTML = filtered.map((t, i) => `
+                <div class="flashcard-container">
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-front">
+                            <div class="flashcard-term">${t.term}</div>
+                            <div class="flashcard-chapter">${t.ch.toUpperCase()}</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="flashcard-definition">${t.def}</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterCards(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            renderFlashcards();
+        }
+
+        // ==================== QUIZ FUNCTIONS ====================
+        function renderQuiz() {
+            const container = document.getElementById('quizContainer');
+            container.innerHTML = quizQuestions.map((q, i) => `
+                <div class="quiz-question" id="q${i}">
+                    <h3>${q.q}</h3>
+                    <div class="quiz-options">
+                        ${q.opts.map((opt, j) => `
+                            <div class="quiz-option" onclick="selectOption(${i}, ${j})">${opt}</div>
+                        `).join('')}
+                    </div>
+                    <div class="quiz-btns">
+                        <button class="quiz-btn hint" onclick="showHint(${i})">💡 Hint</button>
+                        <button class="quiz-btn primary" onclick="checkAnswer(${i})">Check Answer</button>
+                    </div>
+                    <div class="hint-text" id="hint${i}">${q.hint}</div>
+                    <div class="quiz-feedback" id="feedback${i}"></div>
+                </div>
+            `).join('');
+        }
+
+        function selectOption(qNum, optNum) {
+            const question = document.getElementById('q' + qNum);
+            question.querySelectorAll('.quiz-option').forEach((opt, i) => {
+                opt.classList.remove('selected');
+                if (i === optNum) opt.classList.add('selected');
+            });
+        }
+
+        function showHint(qNum) {
+            document.getElementById('hint' + qNum).classList.toggle('show');
+        }
+
+        function checkAnswer(qNum) {
+            if (quizAnswers[qNum] !== undefined) return;
+            
+            const question = document.getElementById('q' + qNum);
+            const selected = question.querySelector('.quiz-option.selected');
+            const feedback = document.getElementById('feedback' + qNum);
+            const q = quizQuestions[qNum];
+            
+            if (!selected) {
+                feedback.className = 'quiz-feedback show incorrect-fb';
+                feedback.innerHTML = '<strong>Please select an answer first!</strong>';
+                return;
+            }
+            
+            const selectedIdx = Array.from(question.querySelectorAll('.quiz-option')).indexOf(selected);
+            quizAnswers[qNum] = selectedIdx;
+            
+            question.querySelectorAll('.quiz-option').forEach((opt, i) => {
+                opt.classList.add('disabled');
+                if (i === q.ans) opt.classList.add('correct');
+                else if (opt.classList.contains('selected')) opt.classList.add('incorrect');
+            });
+            
+            if (selectedIdx === q.ans) {
+                feedback.className = 'quiz-feedback show correct-fb';
+                feedback.innerHTML = '<strong>✅ Correct!</strong> ' + q.rat;
+            } else {
+                feedback.className = 'quiz-feedback show incorrect-fb';
+                feedback.innerHTML = '<strong>❌ Incorrect.</strong> ' + q.rat + 
+                    '<div class="find-in-guide"><strong>📍 Find this in:</strong> ' + q.loc + '</div>';
+            }
+            
+            updateQuizStats();
+            saveProgress();
+        }
+
+        function updateQuizStats() {
+            const answered = Object.keys(quizAnswers).length;
+            let correct = 0;
+            for (let q in quizAnswers) {
+                if (quizAnswers[q] === quizQuestions[q].ans) correct++;
+            }
+            const incorrect = answered - correct;
+            const pct = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+            
+            document.getElementById('answeredCount').textContent = answered;
+            document.getElementById('correctCount').textContent = correct;
+            document.getElementById('incorrectCount').textContent = incorrect;
+            document.getElementById('scorePercent').textContent = pct + '%';
+        }
+
+        function resetQuiz() {
+            if (confirm('Reset all quiz answers?')) {
+                quizAnswers = {};
+                renderQuiz();
+                updateQuizStats();
+                localStorage.removeItem('nur168u3_quiz');
+            }
+        }
+
+        // ==================== NAVIGATION & PROGRESS ====================
+        function showSection(sectionId) {
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function toggleTopic(el) {
+            if (event.target.type === 'checkbox') return;
+            el.classList.toggle('expanded');
+        }
+
+        function updateProgress() {
+            const total = document.querySelectorAll('.topic-check').length;
+            const checked = document.querySelectorAll('.topic-check:checked').length;
+            const pct = Math.round((checked / total) * 100);
+            const fill = document.getElementById('progressFill');
+            fill.style.width = pct + '%';
+            fill.textContent = pct + '%';
+            saveProgress();
+        }
+
+        function saveProgress() {
+            const checked = [];
+            document.querySelectorAll('.topic-check').forEach((cb, i) => {
+                if (cb.checked) checked.push(i);
+            });
+            localStorage.setItem('nur168u3_progress', JSON.stringify(checked));
+            localStorage.setItem('nur168u3_quiz', JSON.stringify(quizAnswers));
+        }
+
+        function loadProgress() {
+            const saved = localStorage.getItem('nur168u3_progress');
+            if (saved) {
+                const checked = JSON.parse(saved);
+                document.querySelectorAll('.topic-check').forEach((cb, i) => {
+                    if (checked.includes(i)) cb.checked = true;
+                });
+                updateProgress();
+            }
+            
+            const savedQuiz = localStorage.getItem('nur168u3_quiz');
+            if (savedQuiz) {
+                quizAnswers = JSON.parse(savedQuiz);
+                for (let qNum in quizAnswers) {
+                    const question = document.getElementById('q' + qNum);
+                    if (question) {
+                        const opts = question.querySelectorAll('.quiz-option');
+                        opts.forEach((opt, i) => {
+                            opt.classList.add('disabled');
+                            if (i === quizQuestions[qNum].ans) opt.classList.add('correct');
+                            if (i === quizAnswers[qNum] && i !== quizQuestions[qNum].ans) opt.classList.add('incorrect');
+                            if (i === quizAnswers[qNum]) opt.classList.add('selected');
+                        });
+                        const feedback = document.getElementById('feedback' + qNum);
+                        if (quizAnswers[qNum] === quizQuestions[qNum].ans) {
+                            feedback.className = 'quiz-feedback show correct-fb';
+                            feedback.innerHTML = '<strong>✅ Correct!</strong> ' + quizQuestions[qNum].rat;
+                        } else {
+                            feedback.className = 'quiz-feedback show incorrect-fb';
+                            feedback.innerHTML = '<strong>❌ Incorrect.</strong> ' + quizQuestions[qNum].rat +
+                                '<div class="find-in-guide"><strong>📍 Find this in:</strong> ' + quizQuestions[qNum].loc + '</div>';
+                        }
+                    }
+                }
+                updateQuizStats();
+            }
+        }
+
+        function resetProgress() {
+            if (confirm('Reset ALL study progress and quiz answers?')) {
+                document.querySelectorAll('.topic-check').forEach(cb => cb.checked = false);
+                quizAnswers = {};
+                localStorage.removeItem('nur168u3_progress');
+                localStorage.removeItem('nur168u3_quiz');
+                updateProgress();
+                renderQuiz();
+                updateQuizStats();
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ==================== INITIALIZE ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            renderFlashcards();
+            renderQuiz();
+            loadProgress();
+            
+            window.addEventListener('scroll', function() {
+                const btn = document.getElementById('backToTop');
+                if (window.scrollY > 300) {
+                    btn.classList.add('show');
+                } else {
+                    btn.classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
