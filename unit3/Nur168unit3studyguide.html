@@ -6,12 +6,14 @@
     <title>NUR168 Unit 3 - Urinary, Sensory, Stress & Grief</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { touch-action: manipulation; } /* Prevents double-tap zoom */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #a8d5ba 0%, #7fb992 100%);
             min-height: 100vh;
             color: #2d2d3a;
             line-height: 1.6;
+            -webkit-text-size-adjust: 100%; /* Prevents font scaling in landscape */
         }
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .header {
@@ -251,6 +253,484 @@
             .nav-tab { width: 100%; text-align: center; }
             .mnemonic-tooltip { width: 200px; font-size: 0.85em; }
         }
+
+        /* ==================== GAME STYLES ==================== */
+        .game-container {
+            background: rgba(255,255,255,0.9);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .game-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .game-header h3 {
+            font-size: 1.5em;
+            color: #2d6a4f;
+            margin-bottom: 10px;
+        }
+        .game-stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        .game-stat {
+            background: linear-gradient(135deg, #2d6a4f, #40916c);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+        }
+        .game-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+        .game-btn.primary { background: linear-gradient(135deg, #2d6a4f, #40916c); color: white; }
+        .game-btn.secondary { background: #f59e0b; color: white; }
+        .game-btn.danger { background: #ef4444; color: white; }
+        .game-btn:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .game-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        /* Matching Game */
+        .matching-game { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; }
+        .matching-column { flex: 1; min-width: 250px; max-width: 350px; }
+        .matching-column h4 { text-align: center; margin-bottom: 15px; color: #2d6a4f; }
+        .matching-item {
+            background: linear-gradient(135deg, #2d6a4f, #40916c);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            cursor: grab;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 500;
+        }
+        .matching-item:hover { transform: scale(1.02); box-shadow: 0 5px 15px rgba(45,106,79,0.4); }
+        .matching-item.selected { box-shadow: 0 0 0 4px #f59e0b; }
+        .matching-item.correct { background: linear-gradient(135deg, #22c55e, #16a34a); }
+        .matching-item.incorrect { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .matching-target {
+            background: rgba(45,106,79,0.1);
+            border: 3px dashed #2d6a4f;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            min-height: 50px;
+            transition: all 0.3s ease;
+        }
+        .matching-target.highlight { background: rgba(245,158,11,0.2); border-color: #f59e0b; }
+        .matching-target.filled { background: rgba(34,197,94,0.15); border-style: solid; border-color: #22c55e; }
+
+        /* Speed Round */
+        .speed-card {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .speed-card:hover { transform: scale(1.02); }
+        .speed-card .term { font-size: 1.8em; font-weight: bold; margin-bottom: 20px; }
+        .speed-card .definition { font-size: 1.2em; opacity: 0; transition: opacity 0.3s ease; }
+        .speed-card.revealed .definition { opacity: 1; }
+        .speed-timer {
+            font-size: 3em;
+            font-weight: bold;
+            color: #8b5cf6;
+            margin: 20px 0;
+        }
+        .speed-timer.warning { color: #f59e0b; }
+        .speed-timer.danger { color: #ef4444; }
+
+        /* Millionaire Game */
+        .millionaire-container { text-align: center; }
+        .millionaire-question {
+            background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        .millionaire-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 20px; }
+        .millionaire-option {
+            background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+            border: 3px solid #4a90c2;
+            color: white;
+            padding: 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1em;
+        }
+        .millionaire-option:hover { background: linear-gradient(135deg, #2d5a87, #3d6a97); border-color: #f59e0b; }
+        .millionaire-option.selected { border-color: #f59e0b; background: linear-gradient(135deg, #4a6a87, #5a7a97); }
+        .millionaire-option.correct { background: linear-gradient(135deg, #22c55e, #16a34a); border-color: #22c55e; }
+        .millionaire-option.incorrect { background: linear-gradient(135deg, #ef4444, #dc2626); border-color: #ef4444; }
+        .millionaire-option.disabled { pointer-events: none; opacity: 0.5; }
+        .millionaire-prize-ladder {
+            background: rgba(30,58,95,0.1);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .prize-level {
+            padding: 8px 15px;
+            margin: 5px 0;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        .prize-level.current { background: #f59e0b; color: white; }
+        .prize-level.achieved { background: #22c55e; color: white; }
+        .prize-level.milestone { font-weight: bold; }
+        .lifelines { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
+        .lifeline {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5em;
+            transition: all 0.3s ease;
+        }
+        .lifeline:hover { transform: scale(1.1); }
+        .lifeline.used { background: #6b7280; opacity: 0.5; cursor: not-allowed; }
+
+        /* Scenario Sort Game */
+        .scenario-box {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .scenario-box:hover { transform: translateX(5px); }
+        .scenario-box.correct { background: linear-gradient(135deg, #22c55e, #16a34a); }
+        .scenario-box.incorrect { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .stage-drop-zones { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; }
+        .stage-zone {
+            background: rgba(59,130,246,0.1);
+            border: 3px dashed #3b82f6;
+            border-radius: 15px;
+            padding: 15px;
+            min-height: 100px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .stage-zone h5 { color: #3b82f6; margin-bottom: 10px; }
+        .stage-zone.highlight { background: rgba(245,158,11,0.2); border-color: #f59e0b; }
+
+        /* Jeopardy Game */
+        .jeopardy-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .jeopardy-category {
+            background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+            color: white;
+            padding: 15px 10px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 10px;
+            font-size: 0.9em;
+        }
+        .jeopardy-cell {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: #fbbf24;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .jeopardy-cell:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(37,99,235,0.5); }
+        .jeopardy-cell.used { background: #1e3a5f; color: #4a5568; cursor: not-allowed; }
+        .jeopardy-modal {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        .jeopardy-modal.show { display: flex; }
+        .jeopardy-modal-content {
+            background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+        }
+        .jeopardy-modal-content h3 { color: #fbbf24; margin-bottom: 20px; font-size: 1.5em; }
+        .jeopardy-modal-content p { font-size: 1.2em; margin-bottom: 25px; line-height: 1.6; }
+        .jeopardy-answer-input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #4a90c2;
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+        .jeopardy-score {
+            font-size: 2em;
+            color: #fbbf24;
+            margin: 20px 0;
+        }
+
+        /* ==================== MOBILE RESPONSIVE STYLES ==================== */
+        @media (max-width: 768px) {
+            /* General mobile adjustments */
+            .container { padding: 10px; }
+            .header h1 { font-size: 1.6em; }
+            .header .subtitle { font-size: 1em; }
+            .header .features { font-size: 0.85em; }
+            
+            .nav-tabs { gap: 8px; }
+            .nav-tab { 
+                padding: 12px 15px; 
+                font-size: 0.9em;
+                width: 100%;
+                text-align: center;
+            }
+            
+            /* Game container mobile */
+            .game-container { padding: 15px; margin: 15px 0; }
+            .game-header h3 { font-size: 1.3em; }
+            .game-stats { gap: 10px; }
+            .game-stat { padding: 8px 15px; font-size: 0.9em; }
+            .game-btn { 
+                padding: 14px 20px; 
+                font-size: 1em;
+                min-height: 48px; /* Touch-friendly */
+                margin: 8px 4px;
+            }
+            
+            /* Matching Game Mobile */
+            .matching-game { 
+                flex-direction: column; 
+                gap: 20px;
+            }
+            .matching-column { 
+                min-width: 100%; 
+                max-width: 100%; 
+            }
+            .matching-item {
+                padding: 18px 15px;
+                font-size: 1em;
+                min-height: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .matching-target {
+                padding: 18px 15px;
+                font-size: 0.95em;
+                min-height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+            
+            /* Speed Round Mobile */
+            .speed-card {
+                padding: 25px 15px;
+                min-height: 180px;
+            }
+            .speed-card .term { font-size: 1.4em; }
+            .speed-card .definition { font-size: 1.1em; }
+            .speed-timer { font-size: 2.5em; }
+            
+            /* Millionaire Mobile */
+            .millionaire-options { 
+                grid-template-columns: 1fr; 
+                gap: 10px;
+            }
+            .millionaire-option {
+                padding: 18px 15px;
+                font-size: 1em;
+                min-height: 55px;
+                border-radius: 15px;
+            }
+            .millionaire-question {
+                padding: 20px 15px;
+                font-size: 1.1em;
+            }
+            .lifelines { gap: 10px; }
+            .lifeline {
+                width: 55px;
+                height: 55px;
+                font-size: 1.3em;
+            }
+            .millionaire-prize-ladder {
+                padding: 10px;
+                font-size: 0.85em;
+            }
+            .prize-level { padding: 6px 10px; }
+            
+            /* Grief Sorting Mobile */
+            .scenario-box {
+                padding: 18px 15px;
+                font-size: 1em;
+                line-height: 1.5;
+            }
+            .stage-drop-zones {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            .stage-zone {
+                padding: 15px 10px;
+                min-height: 70px;
+            }
+            .stage-zone h5 { font-size: 0.95em; }
+            
+            /* Jeopardy Mobile */
+            .jeopardy-board { 
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            .jeopardy-category {
+                padding: 12px 8px;
+                font-size: 0.8em;
+            }
+            .jeopardy-cell {
+                padding: 18px 10px;
+                font-size: 1.2em;
+                min-height: 60px;
+            }
+            .jeopardy-score { font-size: 1.5em; }
+            .jeopardy-modal-content {
+                padding: 25px 15px;
+                width: 95%;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+            .jeopardy-modal-content h3 { font-size: 1.3em; }
+            .jeopardy-modal-content p { font-size: 1.05em; }
+            #jeopardyOptions {
+                grid-template-columns: 1fr;
+            }
+            #jeopardyOptions .millionaire-option {
+                padding: 16px 12px;
+                font-size: 0.95em;
+            }
+            
+            /* Mnemonic tooltips mobile - show on tap */
+            .mnemonic-tooltip { 
+                width: 200px; 
+                font-size: 0.85em;
+                padding: 12px;
+            }
+            .mnemonic-letter-hover .letter-circle {
+                width: 50px;
+                height: 50px;
+                font-size: 1.1em;
+            }
+            
+            /* Tables mobile */
+            .comparison-table { font-size: 0.9em; }
+            .comparison-table th, .comparison-table td { padding: 10px 8px; }
+            
+            /* Quick ref cards mobile */
+            .quick-ref-grid { gap: 15px; }
+            .quick-ref-card { padding: 15px; }
+        }
+        
+        /* Extra small screens (phones in portrait) */
+        @media (max-width: 480px) {
+            .header h1 { font-size: 1.4em; }
+            .nav-tab { padding: 10px 12px; font-size: 0.85em; }
+            
+            .game-header h3 { font-size: 1.15em; }
+            .game-stats { flex-direction: column; gap: 8px; }
+            
+            .matching-item, .matching-target { 
+                padding: 15px 12px; 
+                font-size: 0.95em; 
+            }
+            
+            .speed-card { padding: 20px 12px; min-height: 160px; }
+            .speed-card .term { font-size: 1.2em; }
+            .speed-card .definition { font-size: 1em; }
+            .speed-timer { font-size: 2em; }
+            
+            .stage-drop-zones { grid-template-columns: 1fr 1fr; }
+            .stage-zone { min-height: 60px; padding: 12px 8px; }
+            .stage-zone h5 { font-size: 0.85em; }
+            
+            .jeopardy-board { gap: 5px; }
+            .jeopardy-category { font-size: 0.7em; padding: 10px 5px; }
+            .jeopardy-cell { font-size: 1em; padding: 15px 8px; }
+            
+            .lifeline { width: 50px; height: 50px; font-size: 1.2em; }
+            
+            .millionaire-question { font-size: 1em; padding: 15px 12px; }
+            .millionaire-option { padding: 15px 12px; font-size: 0.95em; }
+        }
+        
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            /* Larger touch targets for touch devices */
+            .matching-item, .matching-target {
+                min-height: 55px;
+            }
+            .quiz-option {
+                min-height: 55px;
+                padding: 18px 15px;
+            }
+            .game-btn {
+                min-height: 50px;
+            }
+            .stage-zone {
+                min-height: 75px;
+            }
+            .jeopardy-cell {
+                min-height: 65px;
+            }
+            .millionaire-option {
+                min-height: 58px;
+            }
+            
+            /* Prevent text selection on game elements */
+            .matching-item, .matching-target, .speed-card, 
+            .millionaire-option, .scenario-box, .stage-zone,
+            .jeopardy-cell, .game-btn, .lifeline {
+                -webkit-user-select: none;
+                user-select: none;
+                -webkit-tap-highlight-color: transparent;
+            }
+        }
     </style>
 </head>
 <body>
@@ -260,7 +740,7 @@
         <div class="header">
             <h1>📚 NUR168 Unit 3 Study Guide</h1>
             <p class="subtitle">Chapters 38, 43, 44 & 45: Urinary, Stress, Grief & Sensory</p>
-            <p class="features">✨ ADHD-Friendly • Focus Summary Aligned • 90 NCLEX Questions • Progress Tracking ✨</p>
+            <p class="features">✨ ADHD-Friendly • 5 Learning Games • Final Cram Sheet • 90 NCLEX Questions ✨</p>
         </div>
 
         <div class="progress-container">
@@ -278,7 +758,9 @@
             <button class="nav-tab ch45" onclick="showSection('ch45')">👁️ Ch 45: Sensory</button>
             <button class="nav-tab ch43" onclick="showSection('ch43')">😰 Ch 43: Stress</button>
             <button class="nav-tab ch44" onclick="showSection('ch44')">💔 Ch 44: Grief & Dying</button>
+            <button class="nav-tab" style="border-left: 4px solid #f472b6;" onclick="showSection('cram')">🧠 Final Cram</button>
             <button class="nav-tab vocab" onclick="showSection('vocab')">📖 Flashcards</button>
+            <button class="nav-tab" style="border-left: 4px solid #fbbf24;" onclick="showSection('jeopardy')">🏆 Jeopardy</button>
             <button class="nav-tab quiz" onclick="showSection('quiz')">✏️ Quiz (90 Qs)</button>
         </div>
 
@@ -471,6 +953,31 @@
                 </div>
             </div>
 
+            <!-- MATCHING GAME -->
+            <div class="game-container">
+                <div class="game-header">
+                    <h3>🎮 Urinary Term Matching Game</h3>
+                    <p>Tap a term, then tap its matching definition!</p>
+                    <div class="game-stats">
+                        <span class="game-stat">Matched: <span id="matchScore">0</span>/12</span>
+                        <span class="game-stat">Attempts: <span id="matchAttempts">0</span></span>
+                    </div>
+                </div>
+                <div class="matching-game">
+                    <div class="matching-column">
+                        <h4>📝 Terms</h4>
+                        <div id="matchTerms"></div>
+                    </div>
+                    <div class="matching-column">
+                        <h4>📖 Definitions</h4>
+                        <div id="matchDefs"></div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="game-btn primary" onclick="resetMatchingGame()">🔄 Play Again</button>
+                </div>
+            </div>
+
             <!-- Wrap-up -->
             <div class="wrapup">
                 <h3>✅ Chapter 38 Wrap-Up</h3>
@@ -642,6 +1149,33 @@
                 </div>
             </div>
 
+            <!-- SPEED ROUND GAME -->
+            <div class="game-container">
+                <div class="game-header">
+                    <h3>⚡ Speed Round - Beat the Clock!</h3>
+                    <p>How many sensory concepts can you identify in 75 seconds? (15 cards)</p>
+                    <div class="game-stats">
+                        <span class="game-stat">Score: <span id="speedScore">0</span></span>
+                        <span class="game-stat">Cards Left: <span id="speedRemaining">15</span></span>
+                    </div>
+                </div>
+                <div class="speed-timer" id="speedTimer">75</div>
+                <div class="speed-card" id="speedCard" onclick="revealSpeedCard()" ontouchend="revealSpeedCard()">
+                    <div class="term" id="speedTerm">Tap START to begin!</div>
+                    <div class="definition" id="speedDef">Tap card to reveal answer</div>
+                </div>
+                <div style="text-align: center; margin-top: 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+                    <button class="game-btn primary" id="speedStartBtn" onclick="startSpeedRound()">▶️ START</button>
+                    <button class="game-btn secondary" id="speedKnewBtn" onclick="speedKnew()" disabled>✅ Knew It!</button>
+                    <button class="game-btn danger" id="speedDidntBtn" onclick="speedDidnt()" disabled>❌ Didn't Know</button>
+                </div>
+                <div id="speedResults" style="display: none; margin-top: 20px; text-align: center;">
+                    <h4>⏱️ Time's Up!</h4>
+                    <p>You got <strong id="speedFinalScore">0</strong> correct!</p>
+                    <button class="game-btn primary" onclick="resetSpeedRound()">🔄 Play Again</button>
+                </div>
+            </div>
+
             <!-- Wrap-up -->
             <div class="wrapup">
                 <h3>✅ Chapter 45 Wrap-Up</h3>
@@ -791,6 +1325,30 @@
                         <p><strong>Q:</strong> A person creates a mental image, concentrates on it, and becomes less responsive to stimuli. This describes which technique?</p>
                         <p><strong>A:</strong> <u>Guided Imagery</u> (NOT anticipatory guidance!)</p>
                     </div>
+                </div>
+            </div>
+
+            <!-- MILLIONAIRE GAME -->
+            <div class="game-container">
+                <div class="game-header">
+                    <h3>💰 Who Wants to Be a Nursing Scholar?</h3>
+                    <p>Answer 10 questions about stress to win! Use lifelines wisely.</p>
+                </div>
+                <div class="millionaire-container">
+                    <div class="millionaire-prize-ladder" id="prizeLadder"></div>
+                    <div class="lifelines">
+                        <button class="lifeline" id="lifeline5050" onclick="use5050()" title="50:50">½</button>
+                        <button class="lifeline" id="lifelineHint" onclick="useHint()" title="Hint">💡</button>
+                        <button class="lifeline" id="lifelineSkip" onclick="useSkip()" title="Skip">⏭️</button>
+                    </div>
+                    <div class="millionaire-question" id="millionaireQ">Click START to play!</div>
+                    <div class="millionaire-options" id="millionaireOpts"></div>
+                    <div id="millionaireHint" style="display: none; background: #fef3c7; color: #92400e; padding: 15px; border-radius: 10px; margin-bottom: 15px;"></div>
+                    <div style="text-align: center;">
+                        <button class="game-btn primary" id="millionaireStartBtn" onclick="startMillionaire()">▶️ START GAME</button>
+                        <button class="game-btn secondary" id="millionaireNextBtn" onclick="nextMillionaireQ()" style="display: none;">Next Question →</button>
+                    </div>
+                    <div id="millionaireResult" style="display: none; margin-top: 20px;"></div>
                 </div>
             </div>
 
@@ -1036,6 +1594,33 @@
                 </div>
             </div>
 
+            <!-- GRIEF STAGES SORTING GAME -->
+            <div class="game-container">
+                <div class="game-header">
+                    <h3>🎯 Grief Stage Scenario Sort</h3>
+                    <p>Read each patient scenario and identify the Kübler-Ross stage!</p>
+                    <div class="game-stats">
+                        <span class="game-stat">Correct: <span id="griefScore">0</span>/12</span>
+                        <span class="game-stat">Current: <span id="griefCurrent">1</span>/12</span>
+                    </div>
+                </div>
+                <div id="griefScenario" class="scenario-box">
+                    Click START to begin!
+                </div>
+                <div class="stage-drop-zones" id="stageZones">
+                    <div class="stage-zone" onclick="selectGriefStage('denial')"><h5>😶 Denial</h5></div>
+                    <div class="stage-zone" onclick="selectGriefStage('anger')"><h5>😠 Anger</h5></div>
+                    <div class="stage-zone" onclick="selectGriefStage('bargaining')"><h5>🙏 Bargaining</h5></div>
+                    <div class="stage-zone" onclick="selectGriefStage('depression')"><h5>😢 Depression</h5></div>
+                    <div class="stage-zone" onclick="selectGriefStage('acceptance')"><h5>😌 Acceptance</h5></div>
+                </div>
+                <div id="griefFeedback" style="display: none; margin-top: 15px; padding: 15px; border-radius: 10px;"></div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="game-btn primary" id="griefStartBtn" onclick="startGriefGame()">▶️ START</button>
+                    <button class="game-btn secondary" id="griefNextBtn" onclick="nextGriefScenario()" style="display: none;">Next Scenario →</button>
+                </div>
+            </div>
+
             <!-- Wrap-up -->
             <div class="wrapup">
                 <h3>✅ Chapter 44 Wrap-Up</h3>
@@ -1051,6 +1636,267 @@
                         <li>Signs of impending death: Cheyne-Stokes, mottling, cold extremities, weak pulse</li>
                     </ul>
                 </div>
+            </div>
+        </div>
+
+        <!-- ===================== FINAL CRAM - TEACH A 5TH GRADER ===================== -->
+        <div id="cram" class="content-section">
+            <div class="chapter-card" style="border-left-color: #f472b6; background: linear-gradient(135deg, #fdf2f8, #fce7f3);">
+                <h2>🧠 Final Cram - The "Explain Like I'm 10" Edition</h2>
+                <p>Everything simplified with analogies, pictures in your mind, and easy memory tricks!</p>
+            </div>
+
+            <!-- URINARY SIMPLE -->
+            <div class="game-container" style="background: linear-gradient(135deg, #fef3c7, #fde68a); border-left: 5px solid #f59e0b;">
+                <h3 style="color: #92400e;">🚽 URINARY - The Body's Sewage System</h3>
+                
+                <div class="key-point" style="background: white; border-left-color: #f59e0b;">
+                    <div class="key-point-label">🏠 THE BIG PICTURE</div>
+                    <p><strong>Think of your body like a house:</strong></p>
+                    <ul class="content-list">
+                        <li><strong>Kidneys</strong> = The water filter under your sink (cleans the water/blood)</li>
+                        <li><strong>Ureters</strong> = The pipes carrying filtered water to storage</li>
+                        <li><strong>Bladder</strong> = The holding tank (like a water balloon)</li>
+                        <li><strong>Urethra</strong> = The drain pipe to outside</li>
+                    </ul>
+                </div>
+
+                <div class="key-point" style="background: white; border-left-color: #ef4444;">
+                    <div class="key-point-label">🔤 PEE WORDS - SUPER SIMPLE</div>
+                    <table class="comparison-table">
+                        <tr><th>Word</th><th>Easy Way to Remember</th></tr>
+                        <tr><td><strong>Anuria</strong></td><td>🚫 <strong>A = ABSENT</strong> = NO pee at all (toilet stays dry)</td></tr>
+                        <tr><td><strong>Oliguria</strong></td><td>📉 <strong>O = Only a little</strong> = Just a tiny bit of pee</td></tr>
+                        <tr><td><strong>Dysuria</strong></td><td>😣 <strong>Dys = Difficult</strong> = Hurts to pee (ouch!)</td></tr>
+                        <tr><td><strong>Pyuria</strong></td><td>🦠 <strong>Py = Pus</strong> = Yucky infection stuff in pee</td></tr>
+                        <tr><td><strong>Hematuria</strong></td><td>🩸 <strong>Hema = Blood</strong> = Red blood in pee</td></tr>
+                        <tr><td><strong>Glycosuria</strong></td><td>🍬 <strong>Glyco = Sugar</strong> = Sweet stuff in pee (diabetes)</td></tr>
+                        <tr><td><strong>Nocturia</strong></td><td>🌙 <strong>Noct = Night</strong> = Waking up to pee at night</td></tr>
+                    </table>
+                </div>
+
+                <div class="sticky-note">
+                    <h4>⭐ THE 4 GOLDEN RULES OF CATHETERS</h4>
+                    <p>1️⃣ <strong>Oops, wrong hole?</strong> → LEAVE IT, get a NEW clean one<br>
+                    2️⃣ <strong>See pee BEFORE</strong> you blow up the balloon<br>
+                    3️⃣ <strong>Bag goes DOWN</strong> (below the bladder) - gravity is your friend!<br>
+                    4️⃣ <strong>Get pee samples from the TUBE</strong>, not the bag (bag pee is old and gross)</p>
+                </div>
+
+                <div class="key-point" style="background: white; border-left-color: #22c55e;">
+                    <div class="key-point-label">💡 UTI PREVENTION - ONE SENTENCE</div>
+                    <p style="font-size: 1.2em; text-align: center;"><strong>"Ladies: PEE AFTER SEX!"</strong> 🚽<br>
+                    <span style="font-size: 0.9em;">(Flushes out bacteria before they cause trouble)</span></p>
+                </div>
+
+                <div class="key-point" style="background: white; border-left-color: #8b5cf6;">
+                    <div class="key-point-label">📋 24-HOUR URINE COLLECTION</div>
+                    <p><strong>Morning pee?</strong> FLUSH IT! 🚽 That's your START time.<br>
+                    Then save EVERY SINGLE DROP for 24 hours.<br>
+                    <em>Think: "First one's free, then save them all!"</em></p>
+                </div>
+            </div>
+
+            <!-- SENSORY SIMPLE -->
+            <div class="game-container" style="background: linear-gradient(135deg, #ede9fe, #ddd6fe); border-left: 5px solid #8b5cf6;">
+                <h3 style="color: #5b21b6;">👁️ SENSORY - Your Brain's Information Desk</h3>
+                
+                <div class="key-point" style="background: white; border-left-color: #8b5cf6;">
+                    <div class="key-point-label">🎯 THE TWO OPPOSITES</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div style="background: #fef2f2; padding: 15px; border-radius: 10px; text-align: center;">
+                            <h4 style="color: #dc2626;">📢 OVERLOAD</h4>
+                            <p><strong>TOO MUCH!</strong></p>
+                            <p>Like being at a loud concert with flashing lights while people yell at you</p>
+                            <p><em>Think: ICU with all those beeping machines</em></p>
+                        </div>
+                        <div style="background: #eff6ff; padding: 15px; border-radius: 10px; text-align: center;">
+                            <h4 style="color: #2563eb;">🔇 DEPRIVATION</h4>
+                            <p><strong>TOO LITTLE!</strong></p>
+                            <p>Like being in a dark, quiet room alone for days</p>
+                            <p><em>Think: Isolation room, all alone</em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sticky-note">
+                    <h4>⭐ CAN'T SEE PATIENT - DO THESE THINGS:</h4>
+                    <p>1️⃣ <strong>"Hey, it's Nurse Des!"</strong> (Say who you are)<br>
+                    2️⃣ <strong>"I'm going to touch your arm now"</strong> (Warn before touching)<br>
+                    3️⃣ <strong>Move stuff out of the way</strong> (Clear paths = no tripping)<br>
+                    4️⃣ <strong>"I'm leaving now!"</strong> (Tell them when you go)</p>
+                </div>
+
+                <div class="sticky-note">
+                    <h4>⭐ CAN'T HEAR PATIENT - DO THESE THINGS:</h4>
+                    <p>1️⃣ <strong>Stand so LIGHT is on YOUR face</strong> (They need to see your lips!)<br>
+                    2️⃣ <strong>Turn off the TV first</strong> (Kill background noise)<br>
+                    3️⃣ <strong>Face them directly</strong> (No talking to the wall)<br>
+                    4️⃣ <strong>Don't cover your mouth</strong> (Lip reading needs visible lips!)</p>
+                </div>
+
+                <div class="key-point" style="background: linear-gradient(135deg, #fef2f2, #fee2e2); border-left-color: #ef4444;">
+                    <div class="key-point-label">🚨 THE #1 RULE YOU MUST REMEMBER</div>
+                    <p style="font-size: 1.3em; text-align: center; font-weight: bold;">
+                        "HEARING is the LAST to GO!" 👂<br>
+                        <span style="font-size: 0.9em; font-weight: normal;">Even if someone looks unconscious - ASSUME THEY CAN HEAR YOU!<br>
+                        Talk normally. Don't say anything rude. They're listening!</span>
+                    </p>
+                </div>
+
+                <div class="key-point" style="background: white; border-left-color: #22c55e;">
+                    <div class="key-point-label">🧸 STEREOGNOSIS - The Weird Word</div>
+                    <p><strong>Close your eyes. Someone hands you a teddy bear.</strong><br>
+                    Can you tell it's soft? Fuzzy? Bear-shaped?<br>
+                    <strong>That's stereognosis!</strong> = Knowing what something IS just by touching it<br>
+                    <em>(Test question: "Soft blanket stimulates which sense?" = STEREOGNOSIS!)</em></p>
+                </div>
+            </div>
+
+            <!-- STRESS SIMPLE -->
+            <div class="game-container" style="background: linear-gradient(135deg, #fee2e2, #fecaca); border-left: 5px solid #ef4444;">
+                <h3 style="color: #991b1b;">😰 STRESS - Your Body's Alarm System</h3>
+                
+                <div class="key-point" style="background: white; border-left-color: #ef4444;">
+                    <div class="key-point-label">🎯 LAS vs GAS - THE EASY WAY</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div style="background: #fef3c7; padding: 15px; border-radius: 10px; text-align: center;">
+                            <h4 style="color: #92400e;">🎯 LAS = LOCAL</h4>
+                            <p><strong>Just ONE spot</strong></p>
+                            <p>Touch hot stove → JUST your hand reacts (yank it back!)</p>
+                            <p>Cut your finger → JUST that spot swells up</p>
+                            <p><em>"L = Little area"</em></p>
+                        </div>
+                        <div style="background: #dbeafe; padding: 15px; border-radius: 10px; text-align: center;">
+                            <h4 style="color: #1e40af;">🌍 GAS = GENERAL</h4>
+                            <p><strong>Your WHOLE body</strong></p>
+                            <p>Big test tomorrow → heart races, palms sweat, can't sleep</p>
+                            <p>Your ENTIRE body freaks out</p>
+                            <p><em>"G = Giant (whole body)"</em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mnemonic-box" style="background: linear-gradient(135deg, #fef2f2, #fee2e2);">
+                    <h4 style="color: #991b1b;">🚨 GAS = The 3 Stages (Like a Phone Battery!)</h4>
+                    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 15px;">
+                        <div style="background: white; padding: 15px; border-radius: 10px; text-align: center; min-width: 140px;">
+                            <div style="font-size: 2em;">🔋</div>
+                            <h5 style="color: #dc2626;">1. ALARM</h5>
+                            <p style="font-size: 0.85em;">"DANGER!"<br>Fight or flight kicks in<br>Heart races, ready to run</p>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 10px; text-align: center; min-width: 140px;">
+                            <div style="font-size: 2em;">🔋</div>
+                            <h5 style="color: #f59e0b;">2. RESISTANCE</h5>
+                            <p style="font-size: 0.85em;">"I got this..."<br>Body tries to cope<br>Things stabilize a bit</p>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 10px; text-align: center; min-width: 140px;">
+                            <div style="font-size: 2em;">🪫</div>
+                            <h5 style="color: #6b7280;">3. EXHAUSTION</h5>
+                            <p style="font-size: 0.85em;">"I'm done..."<br>Battery dead<br>Get sick, crash</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="key-point" style="background: white; border-left-color: #22c55e;">
+                    <div class="key-point-label">💆 STRESS HELPERS - DON'T MIX THESE UP!</div>
+                    <table class="comparison-table">
+                        <tr><th>Technique</th><th>What It Means</th><th>Memory Trick</th></tr>
+                        <tr><td><strong>Guided Imagery</strong></td><td>Picture a beach in your mind 🏖️</td><td><strong>IMAGINE</strong> = Imagery</td></tr>
+                        <tr><td><strong>Anticipatory Guidance</strong></td><td>Teacher explains the test BEFORE you take it</td><td><strong>ANTICIPATE</strong> = Prepare ahead</td></tr>
+                        <tr><td><strong>Mindfulness</strong></td><td>Focus on RIGHT NOW, not tomorrow's worries</td><td><strong>MIND on NOW</strong></td></tr>
+                        <tr><td><strong>Crisis Intervention</strong></td><td>Help RIGHT NOW for something BAD that just happened</td><td><strong>CRISIS</strong> = Emergency help</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- GRIEF SIMPLE -->
+            <div class="game-container" style="background: linear-gradient(135deg, #dbeafe, #bfdbfe); border-left: 5px solid #3b82f6;">
+                <h3 style="color: #1e40af;">💔 GRIEF - The 5 Feelings When Something Terrible Happens</h3>
+                
+                <div class="mnemonic-box" style="background: linear-gradient(135deg, #eff6ff, #dbeafe);">
+                    <h4 style="color: #1e40af;">🎭 DABDA - Remember with "Don't Accept Bad Days Always"</h4>
+                    <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
+                        <div style="background: #fef2f2; padding: 12px; border-radius: 10px; text-align: center; min-width: 100px;">
+                            <div style="font-size: 1.5em;">😶</div>
+                            <h5 style="color: #dc2626;">D - Denial</h5>
+                            <p style="font-size: 0.8em;">"No way!"<br>"Not me!"</p>
+                        </div>
+                        <div style="background: #fef3c7; padding: 12px; border-radius: 10px; text-align: center; min-width: 100px;">
+                            <div style="font-size: 1.5em;">😠</div>
+                            <h5 style="color: #d97706;">A - Anger</h5>
+                            <p style="font-size: 0.8em;">"Why ME?!"<br>"Not fair!"</p>
+                        </div>
+                        <div style="background: #f3e8ff; padding: 12px; border-radius: 10px; text-align: center; min-width: 100px;">
+                            <div style="font-size: 1.5em;">🙏</div>
+                            <h5 style="color: #7c3aed;">B - Bargaining</h5>
+                            <p style="font-size: 0.8em;">"If only..."<br>"I'll do anything"</p>
+                        </div>
+                        <div style="background: #e0e7ff; padding: 12px; border-radius: 10px; text-align: center; min-width: 100px;">
+                            <div style="font-size: 1.5em;">😢</div>
+                            <h5 style="color: #4338ca;">D - Depression</h5>
+                            <p style="font-size: 0.8em;">"So sad..."<br>"What's the point"</p>
+                        </div>
+                        <div style="background: #dcfce7; padding: 12px; border-radius: 10px; text-align: center; min-width: 100px;">
+                            <div style="font-size: 1.5em;">😌</div>
+                            <h5 style="color: #16a34a;">A - Acceptance</h5>
+                            <p style="font-size: 0.8em;">"I'm at peace"<br>"I'm ready"</p>
+                        </div>
+                    </div>
+                    <p style="margin-top: 15px; color: #1e40af;"><strong>⚠️ IMPORTANT:</strong> People DON'T go in order! They can skip around, go back, or stay stuck. Everyone's different!</p>
+                </div>
+
+                <div class="key-point" style="background: white; border-left-color: #ef4444;">
+                    <div class="key-point-label">📝 THE PAPER QUESTION - DON'T GET TRICKED!</div>
+                    <table class="comparison-table">
+                        <tr><th>Document</th><th>What It Does</th><th>Memory Trick</th></tr>
+                        <tr><td><strong>Living Will</strong></td><td>Says what treatments you WANT or DON'T want</td><td>YOUR WISHES written down</td></tr>
+                        <tr><td><strong>Durable Power of Attorney</strong></td><td>Names a PERSON to decide FOR you</td><td>Picks your DECISION BUDDY</td></tr>
+                    </table>
+                    <p style="margin-top: 10px; background: #fef3c7; padding: 10px; border-radius: 8px;">
+                        <strong>Test Trick:</strong> "Who makes decisions?" = Durable POA (it picks a PERSON)<br>
+                        "What do you want done?" = Living Will (it lists your WISHES)
+                    </p>
+                </div>
+
+                <div class="key-point" style="background: white; border-left-color: #8b5cf6;">
+                    <div class="key-point-label">☠️ SIGNS SOMEONE IS DYING - THE SAD BUT IMPORTANT LIST</div>
+                    <p>Think of the body slowly shutting down like a computer turning off:</p>
+                    <ul class="content-list">
+                        <li><strong>Breathing gets weird</strong> - Cheyne-Stokes = breaths get big, then small, then STOP, then start again</li>
+                        <li><strong>Skin changes</strong> - Gets cold, clammy, and MOTTLED (blotchy purple patches)</li>
+                        <li><strong>Heart slows down</strong> - Weak, slow pulse; blood pressure drops</li>
+                        <li><strong>Body stops working</strong> - Can't swallow, may lose bladder/bowel control</li>
+                    </ul>
+                </div>
+
+                <div class="sticky-note">
+                    <h4>⭐ GRIEF vs MOURNING - 2-Second Answer</h4>
+                    <p><strong>GRIEF</strong> = How you FEEL inside (sad, angry, hurt) 💔<br>
+                    <strong>MOURNING</strong> = What you DO outside (funeral, wearing black, crying publicly) 🖤</p>
+                </div>
+            </div>
+
+            <!-- FINAL RAPID FIRE -->
+            <div class="game-container" style="background: linear-gradient(135deg, #22c55e, #16a34a); color: white;">
+                <h3>🔥 RAPID FIRE - 15 Things You MUST Know Walking Into That Exam</h3>
+                <ol style="font-size: 1.05em; line-height: 2;">
+                    <li><strong>Anuria</strong> = NO pee; <strong>Oliguria</strong> = LITTLE pee</li>
+                    <li><strong>Females PEE AFTER SEX</strong> to prevent UTIs</li>
+                    <li>Catheter in wrong hole? <strong>LEAVE IT, get new one</strong></li>
+                    <li>See <strong>PEE BEFORE inflating balloon</strong></li>
+                    <li>24-hour urine: <strong>FLUSH first morning pee</strong>, save the rest</li>
+                    <li>Get urine sample from <strong>CATHETER, not bag</strong></li>
+                    <li><strong>Overload</strong> = ICU (too much); <strong>Deprivation</strong> = Isolation (too little)</li>
+                    <li>Hearing impaired: <strong>Light on YOUR face</strong></li>
+                    <li><strong>HEARING = LAST sense lost</strong> (they can hear you!)</li>
+                    <li><strong>LAS</strong> = Local (one spot); <strong>GAS</strong> = General (whole body)</li>
+                    <li>GAS stages: <strong>Alarm → Resistance → Exhaustion</strong></li>
+                    <li><strong>Guided Imagery</strong> = picture a beach; <strong>Anticipatory Guidance</strong> = prepare before</li>
+                    <li>Grief stages: <strong>DABDA</strong> (Denial, Anger, Bargaining, Depression, Acceptance)</li>
+                    <li>Stages are <strong>NOT in order</strong> - everyone's different!</li>
+                    <li><strong>Durable POA</strong> = picks a person; <strong>Living Will</strong> = lists your wishes</li>
+                </ol>
             </div>
         </div>
 
@@ -1070,6 +1916,66 @@
             </div>
 
             <div class="flashcard-grid" id="flashcardGrid"></div>
+        </div>
+
+        <!-- ===================== JEOPARDY ===================== -->
+        <div id="jeopardy" class="content-section">
+            <div class="chapter-card" style="border-left-color: #fbbf24;">
+                <h2>🏆 Unit 3 Jeopardy - All Chapters!</h2>
+                <p>Test everything you've learned! Pick a category and point value.</p>
+            </div>
+
+            <div class="game-container" style="background: linear-gradient(135deg, #1e3a5f, #2d5a87);">
+                <div class="jeopardy-score">Score: $<span id="jeopardyScore">0</span></div>
+                
+                <div class="jeopardy-board" id="jeopardyBoard">
+                    <!-- Categories -->
+                    <div class="jeopardy-category">🚽 Urinary</div>
+                    <div class="jeopardy-category">👁️ Sensory</div>
+                    <div class="jeopardy-category">😰 Stress</div>
+                    <div class="jeopardy-category">💔 Grief</div>
+                    <!-- $100 row -->
+                    <div class="jeopardy-cell" onclick="showJeopardyQ('urinary', 100, this)">$100</div>
+                    <div class="jeopardy-cell" onclick="showJeopardyQ('sensory', 100, this)">$100</div>
+                    <div class="jeopardy-cell" onclick="showJeopardyQ('stress', 100, this)">$100</div>
+                    <div class="jeopardy-cell" onclick="showJeopardyQ('grief', 100, this)">$100</div>
+                    <!-- $200 row -->
+                    <div class="jeopardy-cell" onclick="showJeopardyQ('urinary', 200, this)">$200</div>
+                    <div class="jeopardy-cell" onclick="showJeopardyQ('sensory', 200, this)">$200</div>
+                    <div class="jeopardy-cell" onclick="showJeopardyQ('stress', 200, this)">$200</div>
+                    <div class="jeopardy-cell" onclick="showJeopardyQ('grief', 200, this)">$200</div>
+                    <!-- $300 row -->
+                    <div class="jeopardy-cell" onclick="showJeopardyQ('urinary', 300, this)">$300</div>
+                    <div class="jeopardy-cell" onclick="showJeopardyQ('sensory', 300, this)">$300</div>
+                    <div class="jeopardy-cell" onclick="showJeopardyQ('stress', 300, this)">$300</div>
+                    <div class="jeopardy-cell" onclick="showJeopardyQ('grief', 300, this)">$300</div>
+                    <!-- $400 row -->
+                    <div class="jeopardy-cell" onclick="showJeopardyQ('urinary', 400, this)">$400</div>
+                    <div class="jeopardy-cell" onclick="showJeopardyQ('sensory', 400, this)">$400</div>
+                    <div class="jeopardy-cell" onclick="showJeopardyQ('stress', 400, this)">$400</div>
+                    <div class="jeopardy-cell" onclick="showJeopardyQ('grief', 400, this)">$400</div>
+                    <!-- $500 row -->
+                    <div class="jeopardy-cell" onclick="showJeopardyQ('urinary', 500, this)">$500</div>
+                    <div class="jeopardy-cell" onclick="showJeopardyQ('sensory', 500, this)">$500</div>
+                    <div class="jeopardy-cell" onclick="showJeopardyQ('stress', 500, this)">$500</div>
+                    <div class="jeopardy-cell" onclick="showJeopardyQ('grief', 500, this)">$500</div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="game-btn danger" onclick="resetJeopardy()">🔄 Reset Game</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Jeopardy Modal -->
+        <div class="jeopardy-modal" id="jeopardyModal">
+            <div class="jeopardy-modal-content">
+                <h3>$<span id="jeopardyValue">100</span></h3>
+                <p id="jeopardyQuestion">Question goes here</p>
+                <div class="millionaire-options" id="jeopardyOptions"></div>
+                <div id="jeopardyFeedback" style="display: none; margin-top: 15px; padding: 15px; border-radius: 10px;"></div>
+                <button class="game-btn primary" id="jeopardyCloseBtn" onclick="closeJeopardyModal()" style="display: none;">Continue</button>
+            </div>
         </div>
 
         <!-- ===================== QUIZ ===================== -->
@@ -1547,11 +2453,606 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // ==================== MATCHING GAME (Chapter 38) ====================
+        const matchingData = [
+            { term: "Anuria", def: "Urine output <50mL in 24 hours (renal failure)" },
+            { term: "Oliguria", def: "Decreased but present urine output" },
+            { term: "Dysuria", def: "Burning or pain during urination" },
+            { term: "Pyuria", def: "White blood cells/pus in urine (infection)" },
+            { term: "Hematuria", def: "Red blood cells present in urine" },
+            { term: "Glycosuria", def: "Glucose spilling into urine (diabetes)" },
+            { term: "Nocturia", def: "Waking multiple times at night to void" },
+            { term: "Creatinine", def: "Waste product measuring kidney filtration" },
+            { term: "Stress Incontinence", def: "Leakage with coughing, sneezing, laughing" },
+            { term: "Urge Incontinence", def: "Sudden strong urge, can't reach toilet in time" },
+            { term: "Functional Incontinence", def: "Physical/cognitive barrier prevents toileting" },
+            { term: "Specific Gravity", def: "Measures urine concentration (hydration status)" }
+        ];
+        
+        let selectedTerm = null;
+        let matchedPairs = 0;
+        let matchAttempts = 0;
+
+        function initMatchingGame() {
+            const termsDiv = document.getElementById('matchTerms');
+            const defsDiv = document.getElementById('matchDefs');
+            if (!termsDiv || !defsDiv) return;
+            
+            // Shuffle arrays independently
+            const shuffledTerms = [...matchingData].sort(() => Math.random() - 0.5);
+            const shuffledDefs = [...matchingData].sort(() => Math.random() - 0.5);
+            
+            termsDiv.innerHTML = shuffledTerms.map((item, i) => 
+                `<div class="matching-item" data-term="${item.term}" onclick="selectMatchTerm(this)">${item.term}</div>`
+            ).join('');
+            
+            defsDiv.innerHTML = shuffledDefs.map((item, i) => 
+                `<div class="matching-target" data-term="${item.term}" onclick="selectMatchDef(this)">${item.def}</div>`
+            ).join('');
+            
+            matchedPairs = 0;
+            matchAttempts = 0;
+            selectedTerm = null;
+            updateMatchScore();
+        }
+
+        function selectMatchTerm(el) {
+            if (el.classList.contains('correct')) return;
+            document.querySelectorAll('#matchTerms .matching-item').forEach(item => item.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedTerm = el.dataset.term;
+        }
+
+        function selectMatchDef(el) {
+            if (!selectedTerm || el.classList.contains('filled')) return;
+            
+            matchAttempts++;
+            const defTerm = el.dataset.term;
+            const termEl = document.querySelector(`#matchTerms .matching-item[data-term="${selectedTerm}"]`);
+            
+            if (selectedTerm === defTerm) {
+                // Correct match!
+                termEl.classList.remove('selected');
+                termEl.classList.add('correct');
+                el.classList.add('filled');
+                el.innerHTML = `<strong>${selectedTerm}</strong>: ${el.textContent}`;
+                matchedPairs++;
+                
+                if (matchedPairs === matchingData.length) {
+                    setTimeout(() => alert(`🎉 Congratulations! You matched all ${matchingData.length} terms in ${matchAttempts} attempts!`), 300);
+                }
+            } else {
+                // Incorrect match
+                termEl.classList.add('incorrect');
+                el.style.background = 'rgba(239,68,68,0.2)';
+                setTimeout(() => {
+                    termEl.classList.remove('incorrect', 'selected');
+                    el.style.background = '';
+                }, 800);
+            }
+            
+            selectedTerm = null;
+            updateMatchScore();
+        }
+
+        function updateMatchScore() {
+            const scoreEl = document.getElementById('matchScore');
+            const attemptsEl = document.getElementById('matchAttempts');
+            if (scoreEl) scoreEl.textContent = matchedPairs;
+            if (attemptsEl) attemptsEl.textContent = matchAttempts;
+        }
+
+        function resetMatchingGame() {
+            initMatchingGame();
+        }
+
+        // ==================== SPEED ROUND (Chapter 45) ====================
+        const speedData = [
+            { term: "Stereognosis", def: "Identifying objects by touch - size, shape, texture (soft blanket example)" },
+            { term: "Proprioception", def: "Knowing where your body is in space without looking" },
+            { term: "Sensory Overload", def: "ICU patient with monitors, alarms, bright lights = TOO MUCH input" },
+            { term: "Sensory Deprivation", def: "Isolation room patient with minimal contact = TOO LITTLE input" },
+            { term: "Sensory Deficit", def: "Factory worker's hearing loss = impairment in ONE specific sense" },
+            { term: "Light on YOUR Face", def: "Position for hearing-impaired so they can lip-read" },
+            { term: "Hearing = LAST Sense Lost", def: "Always assume unconscious patients can hear you" },
+            { term: "Announce Before Entering", def: "First action when entering visually impaired patient's room" },
+            { term: "Explain Before Touching", def: "Required before any procedure on visually impaired patient" },
+            { term: "Clear Pathways", def: "Safety measure for visually impaired - prevent falls" },
+            { term: "Normal Tone of Voice", def: "How to speak to unconscious patients (NOT loud)" },
+            { term: "Decrease Background Noise", def: "Do this BEFORE speaking to hearing-impaired patient" },
+            { term: "Indicate When Leaving", def: "Tell visually impaired patient you're exiting the room" },
+            { term: "Orient to Environment", def: "Describe room layout, furniture arrangement to visually impaired" },
+            { term: "SAFETY = #1 Priority", def: "Most important concern for ALL sensory-impaired patients" }
+        ];
+
+        let speedCards = [];
+        let speedIndex = 0;
+        let speedCorrect = 0;
+        let speedTimer = null;
+        let speedTimeLeft = 75;
+        let speedRevealed = false;
+        let speedGameActive = false;
+
+        function startSpeedRound() {
+            speedCards = [...speedData].sort(() => Math.random() - 0.5);
+            speedIndex = 0;
+            speedCorrect = 0;
+            speedTimeLeft = 75;
+            speedRevealed = false;
+            speedGameActive = true;
+            
+            document.getElementById('speedStartBtn').disabled = true;
+            document.getElementById('speedKnewBtn').disabled = false;
+            document.getElementById('speedDidntBtn').disabled = false;
+            document.getElementById('speedResults').style.display = 'none';
+            document.getElementById('speedCard').classList.remove('revealed');
+            
+            showSpeedCard();
+            updateSpeedStats();
+            
+            speedTimer = setInterval(() => {
+                speedTimeLeft--;
+                updateSpeedTimer();
+                if (speedTimeLeft <= 0) {
+                    endSpeedRound();
+                }
+            }, 1000);
+        }
+
+        function showSpeedCard() {
+            if (speedIndex >= speedCards.length) {
+                endSpeedRound();
+                return;
+            }
+            const card = speedCards[speedIndex];
+            document.getElementById('speedTerm').textContent = card.term;
+            document.getElementById('speedDef').textContent = card.def;
+            document.getElementById('speedCard').classList.remove('revealed');
+            speedRevealed = false;
+        }
+
+        function revealSpeedCard() {
+            if (!speedGameActive) return;
+            document.getElementById('speedCard').classList.add('revealed');
+            speedRevealed = true;
+        }
+
+        function speedKnew() {
+            if (!speedRevealed || !speedGameActive) {
+                revealSpeedCard();
+                return;
+            }
+            speedCorrect++;
+            speedIndex++;
+            updateSpeedStats();
+            showSpeedCard();
+        }
+
+        function speedDidnt() {
+            if (!speedRevealed || !speedGameActive) {
+                revealSpeedCard();
+                return;
+            }
+            speedIndex++;
+            updateSpeedStats();
+            showSpeedCard();
+        }
+
+        function updateSpeedTimer() {
+            const timerEl = document.getElementById('speedTimer');
+            timerEl.textContent = speedTimeLeft;
+            timerEl.className = 'speed-timer';
+            if (speedTimeLeft <= 10) timerEl.classList.add('danger');
+            else if (speedTimeLeft <= 20) timerEl.classList.add('warning');
+        }
+
+        function updateSpeedStats() {
+            document.getElementById('speedScore').textContent = speedCorrect;
+            document.getElementById('speedRemaining').textContent = Math.max(0, speedCards.length - speedIndex);
+        }
+
+        function endSpeedRound() {
+            clearInterval(speedTimer);
+            speedGameActive = false;
+            document.getElementById('speedStartBtn').disabled = false;
+            document.getElementById('speedKnewBtn').disabled = true;
+            document.getElementById('speedDidntBtn').disabled = true;
+            document.getElementById('speedFinalScore').textContent = speedCorrect;
+            document.getElementById('speedResults').style.display = 'block';
+            document.getElementById('speedTerm').textContent = 'Game Over!';
+            document.getElementById('speedDef').textContent = `You got ${speedCorrect} out of ${speedCards.length} correct!`;
+            document.getElementById('speedCard').classList.add('revealed');
+        }
+
+        function resetSpeedRound() {
+            clearInterval(speedTimer);
+            speedGameActive = false;
+            document.getElementById('speedTimer').textContent = '75';
+            document.getElementById('speedTimer').className = 'speed-timer';
+            document.getElementById('speedTerm').textContent = 'Tap START to begin!';
+            document.getElementById('speedDef').textContent = 'Tap card to reveal answer';
+            document.getElementById('speedCard').classList.remove('revealed');
+            document.getElementById('speedStartBtn').disabled = false;
+            document.getElementById('speedKnewBtn').disabled = true;
+            document.getElementById('speedDidntBtn').disabled = true;
+            document.getElementById('speedResults').style.display = 'none';
+            document.getElementById('speedScore').textContent = '0';
+            document.getElementById('speedRemaining').textContent = '15';
+        }
+
+        // ==================== MILLIONAIRE GAME (Chapter 43) ====================
+        const millionaireQuestions = [
+            // Easy ($100-$500)
+            { q: "A patient touches a hot stove and jerks their hand back instantly. This localized response is:", opts: ["General Adaptation Syndrome", "Local Adaptation Syndrome", "Psychosocial response", "Developmental stress"], ans: 1, hint: "It only affects ONE body part - the hand" },
+            { q: "A pre-op patient has elevated heart rate, BP, and is sweating before surgery. This represents which GAS stage?", opts: ["Resistance", "Exhaustion", "Alarm", "Adaptation"], ans: 2, hint: "Fight-or-flight just kicked in" },
+            { q: "The nurse instructs a patient to 'picture yourself on a warm beach, feeling the sand.' This technique is:", opts: ["Anticipatory guidance", "Guided imagery", "Mindfulness", "Progressive relaxation"], ans: 1, hint: "The patient is creating a mental IMAGE" },
+            // Medium ($1,000-$4,000)
+            { q: "A caregiver for 3 years reports constant fatigue, frequent infections, and feels hopeless. According to GAS, she is in:", opts: ["Alarm stage", "Resistance stage", "Exhaustion stage", "Recovery stage"], ans: 2, hint: "Her body's defenses have broken down from chronic stress" },
+            { q: "The nurse explains the surgical procedure, recovery expectations, and answers questions the night before surgery. This is:", opts: ["Guided imagery", "Anticipatory guidance", "Crisis intervention", "Relaxation therapy"], ans: 1, hint: "Preparing someone BEFORE the stressor occurs" },
+            { q: "A wound becomes red, warm, swollen, and painful. This inflammatory response is an example of:", opts: ["GAS", "LAS", "Psychosocial stress", "Exhaustion"], ans: 1, hint: "Inflammation is LOCAL to that body area" },
+            // Hard ($8,000-$32,000)
+            { q: "A patient in the ER after a car accident is crying, shaking, and can't focus. The nurse provides immediate support. This intervention is:", opts: ["Guided imagery", "Mindfulness training", "Crisis intervention", "Anticipatory guidance"], ans: 2, hint: "This is an ACUTE crisis situation requiring immediate structured support" },
+            { q: "A college student stressed about exams, relationships, and choosing a major is experiencing:", opts: ["Situational stress", "Developmental stress", "Physiologic stress", "Acute stress"], ans: 1, hint: "These are normal stressors of the young adult developmental stage" },
+            // Very Hard ($64,000-$125,000)
+            { q: "During GAS, the body attempts to adapt and vital signs stabilize. If coping succeeds, homeostasis is restored. This describes:", opts: ["Alarm reaction", "Stage of resistance", "Stage of exhaustion", "Fight-or-flight response"], ans: 1, hint: "The body is RESISTING and trying to adapt" },
+            { q: "A patient says 'I keep thinking about what COULD go wrong tomorrow.' The nurse teaches focusing on the present moment only. This technique is:", opts: ["Guided imagery", "Anticipatory guidance", "Mindfulness", "Crisis intervention"], ans: 2, hint: "PRESENT-moment awareness, not future worries" }
+        ];
+
+        const prizeLadder = [100, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 125000];
+        let millionaireLevel = 0;
+        let millionaireActive = false;
+        let lifelines = { fifty: true, hint: true, skip: true };
+        let currentMillionaireQ = null;
+
+        function initPrizeLadder() {
+            const ladder = document.getElementById('prizeLadder');
+            if (!ladder) return;
+            ladder.innerHTML = prizeLadder.map((prize, i) => {
+                const milestone = (i === 2 || i === 7) ? 'milestone' : '';
+                return `<div class="prize-level ${milestone}" id="prize${i}">$${prize.toLocaleString()}</div>`;
+            }).reverse().join('');
+        }
+
+        function startMillionaire() {
+            millionaireLevel = 0;
+            millionaireActive = true;
+            lifelines = { fifty: true, hint: true, skip: true };
+            document.getElementById('lifeline5050').classList.remove('used');
+            document.getElementById('lifelineHint').classList.remove('used');
+            document.getElementById('lifelineSkip').classList.remove('used');
+            document.getElementById('millionaireStartBtn').style.display = 'none';
+            document.getElementById('millionaireResult').style.display = 'none';
+            document.getElementById('millionaireHint').style.display = 'none';
+            initPrizeLadder();
+            showMillionaireQuestion();
+        }
+
+        function showMillionaireQuestion() {
+            if (millionaireLevel >= millionaireQuestions.length) {
+                winMillionaire();
+                return;
+            }
+            
+            currentMillionaireQ = millionaireQuestions[millionaireLevel];
+            document.getElementById('millionaireQ').textContent = currentMillionaireQ.q;
+            document.getElementById('millionaireHint').style.display = 'none';
+            
+            const optsDiv = document.getElementById('millionaireOpts');
+            optsDiv.innerHTML = currentMillionaireQ.opts.map((opt, i) => 
+                `<div class="millionaire-option" onclick="selectMillionaireAnswer(${i}, this)">${String.fromCharCode(65+i)}. ${opt}</div>`
+            ).join('');
+            
+            document.getElementById('millionaireNextBtn').style.display = 'none';
+            updatePrizeLadder();
+        }
+
+        function updatePrizeLadder() {
+            document.querySelectorAll('.prize-level').forEach((el, i) => {
+                el.classList.remove('current', 'achieved');
+            });
+            const currentIndex = prizeLadder.length - 1 - millionaireLevel;
+            for (let i = prizeLadder.length - 1; i > currentIndex; i--) {
+                document.getElementById(`prize${prizeLadder.length - 1 - i}`)?.classList.add('achieved');
+            }
+            document.getElementById(`prize${currentIndex}`)?.classList.add('current');
+        }
+
+        function selectMillionaireAnswer(idx, el) {
+            if (!millionaireActive) return;
+            
+            document.querySelectorAll('.millionaire-option').forEach(opt => {
+                opt.classList.add('disabled');
+            });
+            
+            el.classList.add('selected');
+            
+            setTimeout(() => {
+                if (idx === currentMillionaireQ.ans) {
+                    el.classList.add('correct');
+                    millionaireLevel++;
+                    if (millionaireLevel >= millionaireQuestions.length) {
+                        winMillionaire();
+                    } else {
+                        document.getElementById('millionaireNextBtn').style.display = 'inline-block';
+                    }
+                } else {
+                    el.classList.add('incorrect');
+                    document.querySelectorAll('.millionaire-option')[currentMillionaireQ.ans].classList.add('correct');
+                    loseMillionaire();
+                }
+            }, 1000);
+        }
+
+        function nextMillionaireQ() {
+            showMillionaireQuestion();
+        }
+
+        function use5050() {
+            if (!lifelines.fifty || !millionaireActive) return;
+            lifelines.fifty = false;
+            document.getElementById('lifeline5050').classList.add('used');
+            
+            const opts = document.querySelectorAll('.millionaire-option');
+            let removed = 0;
+            const indices = [0, 1, 2, 3].filter(i => i !== currentMillionaireQ.ans).sort(() => Math.random() - 0.5);
+            
+            indices.slice(0, 2).forEach(i => {
+                opts[i].classList.add('disabled');
+                opts[i].style.opacity = '0.3';
+            });
+        }
+
+        function useHint() {
+            if (!lifelines.hint || !millionaireActive) return;
+            lifelines.hint = false;
+            document.getElementById('lifelineHint').classList.add('used');
+            document.getElementById('millionaireHint').textContent = '💡 Hint: ' + currentMillionaireQ.hint;
+            document.getElementById('millionaireHint').style.display = 'block';
+        }
+
+        function useSkip() {
+            if (!lifelines.skip || !millionaireActive) return;
+            lifelines.skip = false;
+            document.getElementById('lifelineSkip').classList.add('used');
+            millionaireLevel++;
+            if (millionaireLevel >= millionaireQuestions.length) {
+                winMillionaire();
+            } else {
+                showMillionaireQuestion();
+            }
+        }
+
+        function winMillionaire() {
+            millionaireActive = false;
+            const result = document.getElementById('millionaireResult');
+            result.innerHTML = `<div style="background: linear-gradient(135deg, #22c55e, #16a34a); color: white; padding: 25px; border-radius: 15px;">
+                <h3>🎉 CONGRATULATIONS!</h3>
+                <p>You won <strong>$${prizeLadder[prizeLadder.length-1].toLocaleString()}</strong>!</p>
+                <p>You're a Stress & Adaptation expert!</p>
+                <button class="game-btn primary" onclick="startMillionaire()">Play Again</button>
+            </div>`;
+            result.style.display = 'block';
+        }
+
+        function loseMillionaire() {
+            millionaireActive = false;
+            let winnings = 0;
+            if (millionaireLevel >= 8) winnings = prizeLadder[7];
+            else if (millionaireLevel >= 3) winnings = prizeLadder[2];
+            
+            const result = document.getElementById('millionaireResult');
+            result.innerHTML = `<div style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; padding: 25px; border-radius: 15px;">
+                <h3>Game Over!</h3>
+                <p>You walk away with <strong>$${winnings.toLocaleString()}</strong></p>
+                <p>Safe havens: $1,000 (Q3) and $32,000 (Q8)</p>
+                <button class="game-btn primary" onclick="startMillionaire()">Try Again</button>
+            </div>`;
+            result.style.display = 'block';
+        }
+
+        // ==================== GRIEF STAGE SORTING (Chapter 44) ====================
+        const griefScenarios = [
+            { scenario: "A patient diagnosed with terminal cancer says, 'The lab must have mixed up my results. There's no way I have cancer. Run the tests again.'", stage: "denial", rationale: "Patient is refusing to accept the diagnosis - classic denial response." },
+            { scenario: "A patient throws their meal tray across the room and yells at the nurse, 'Why is this happening to ME? I've always been healthy!'", stage: "anger", rationale: "Patient is directing anger at caregivers. Anger stage - 'Why me?' is the classic response." },
+            { scenario: "A patient with end-stage renal disease says, 'If I can just live to see my grandson graduate next month, I'll do anything. I'll follow every restriction.'", stage: "bargaining", rationale: "Patient is trying to negotiate for more time - making deals with 'If I can just...' statements." },
+            { scenario: "A patient becomes withdrawn, stops eating, cries frequently, and tells the nurse, 'What's the point anymore? Just leave me alone.'", stage: "depression", rationale: "Patient shows classic depression signs - withdrawal, hopelessness, loss of interest." },
+            { scenario: "A patient with terminal illness says calmly, 'I've had a good life. I've made peace with my family. I'm ready for whatever comes.'", stage: "acceptance", rationale: "Patient has come to terms with death - demonstrates peace and acknowledgment, not happiness." },
+            { scenario: "A patient keeps requesting different specialists and says, 'I want to go to Mayo Clinic. These doctors here clearly made a mistake.'", stage: "denial", rationale: "Seeking multiple opinions and questioning competence can be denial - refusing to accept the diagnosis." },
+            { scenario: "A patient says, 'Maybe if I had quit smoking years ago like my wife wanted, this wouldn't have happened. If only I had listened.'", stage: "bargaining", rationale: "Looking backward with 'if only' and 'maybe if' reflects bargaining - trying to undo the past." },
+            { scenario: "A patient with ALS tells their spouse, 'I've updated my will. The life insurance documents are in the safe. I want you to be prepared.'", stage: "acceptance", rationale: "Patient is making practical preparations and ensuring family is ready - acceptance of reality." },
+            { scenario: "A patient refuses to discuss their prognosis and changes the subject every time the doctor tries to talk about treatment options.", stage: "denial", rationale: "Avoidance and refusing to engage with reality is a form of denial." },
+            { scenario: "A dying patient yells at their spouse, 'You never really cared about me! Where were you when I needed you?' despite loving support.", stage: "anger", rationale: "Anger may be displaced onto loved ones. Caregivers shouldn't take this personally - it's part of grieving." },
+            { scenario: "A patient stares out the window for hours, shows no interest in visitors, and says quietly, 'I'm so tired of fighting.'", stage: "depression", rationale: "Withdrawal, fatigue, and loss of will to fight indicate depression stage." },
+            { scenario: "A patient says, 'God, if you heal me, I promise I'll go to church every Sunday and volunteer at the homeless shelter.'", stage: "bargaining", rationale: "Making promises or deals with a higher power is classic bargaining behavior." }
+        ];
+
+        let griefIndex = 0;
+        let griefScore = 0;
+        let griefAnswered = false;
+
+        function startGriefGame() {
+            griefIndex = 0;
+            griefScore = 0;
+            griefAnswered = false;
+            document.getElementById('griefStartBtn').style.display = 'none';
+            document.getElementById('griefNextBtn').style.display = 'none';
+            document.getElementById('griefFeedback').style.display = 'none';
+            showGriefScenario();
+        }
+
+        function showGriefScenario() {
+            if (griefIndex >= griefScenarios.length) {
+                endGriefGame();
+                return;
+            }
+            
+            const scenario = griefScenarios[griefIndex];
+            document.getElementById('griefScenario').textContent = scenario.scenario;
+            document.getElementById('griefScenario').className = 'scenario-box';
+            document.getElementById('griefCurrent').textContent = griefIndex + 1;
+            document.getElementById('griefScore').textContent = griefScore;
+            document.getElementById('griefFeedback').style.display = 'none';
+            document.getElementById('griefNextBtn').style.display = 'none';
+            griefAnswered = false;
+            
+            document.querySelectorAll('.stage-zone').forEach(zone => {
+                zone.classList.remove('highlight');
+            });
+        }
+
+        function selectGriefStage(stage) {
+            if (griefAnswered) return;
+            griefAnswered = true;
+            
+            const scenario = griefScenarios[griefIndex];
+            const feedback = document.getElementById('griefFeedback');
+            const scenarioBox = document.getElementById('griefScenario');
+            
+            if (stage === scenario.stage) {
+                griefScore++;
+                scenarioBox.classList.add('correct');
+                feedback.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+                feedback.style.color = 'white';
+                feedback.innerHTML = `<strong>✅ Correct!</strong> ${scenario.rationale}`;
+            } else {
+                scenarioBox.classList.add('incorrect');
+                feedback.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
+                feedback.style.color = 'white';
+                feedback.innerHTML = `<strong>❌ Incorrect.</strong> The correct answer is <strong>${scenario.stage.toUpperCase()}</strong>. ${scenario.rationale}`;
+            }
+            
+            feedback.style.display = 'block';
+            document.getElementById('griefScore').textContent = griefScore;
+            document.getElementById('griefNextBtn').style.display = 'inline-block';
+        }
+
+        function nextGriefScenario() {
+            griefIndex++;
+            showGriefScenario();
+        }
+
+        function endGriefGame() {
+            const scenarioBox = document.getElementById('griefScenario');
+            scenarioBox.className = 'scenario-box';
+            scenarioBox.innerHTML = `<h3>🎉 Game Complete!</h3><p>You got <strong>${griefScore}</strong> out of <strong>${griefScenarios.length}</strong> correct!</p>
+                <p style="margin-top: 15px;">${griefScore >= 7 ? "Excellent! You really know the grief stages!" : griefScore >= 5 ? "Good job! Keep reviewing the stages." : "Keep studying - remember DABDA!"}</p>`;
+            document.getElementById('griefFeedback').style.display = 'none';
+            document.getElementById('griefNextBtn').style.display = 'none';
+            document.getElementById('griefStartBtn').style.display = 'inline-block';
+            document.getElementById('griefStartBtn').textContent = '🔄 Play Again';
+        }
+
+        // ==================== JEOPARDY GAME ====================
+        const jeopardyQuestions = {
+            urinary: {
+                100: { q: "Complete absence of urine output (<50mL/24hr)", opts: ["Oliguria", "Anuria", "Dysuria", "Pyuria"], ans: 1 },
+                200: { q: "Females should do this AFTER sexual intercourse to prevent UTIs", opts: ["Shower", "Void", "Douche", "Rest"], ans: 1 },
+                300: { q: "If a Foley is accidentally placed in the vagina, the nurse should:", opts: ["Remove and reinsert", "Leave it and insert new sterile one", "Advance it further", "Rinse and reinsert"], ans: 1 },
+                400: { q: "For a 24-hour urine collection, the first morning void should be:", opts: ["Saved as the start", "Discarded", "Tested separately", "Refrigerated"], ans: 1 },
+                500: { q: "A urine specimen from an indwelling catheter should be obtained from:", opts: ["Collection bag", "Catheter tubing port", "Bedpan", "New catheter"], ans: 1 }
+            },
+            sensory: {
+                100: { q: "Perception of size, shape, and texture of objects is called:", opts: ["Tactile", "Proprioception", "Stereognosis", "Kinesthetic"], ans: 2 },
+                200: { q: "ICU patients with constant monitors and alarms are at risk for:", opts: ["Sensory deprivation", "Sensory overload", "Sensory deficit", "Sensoristasis"], ans: 1 },
+                300: { q: "When caring for hearing-impaired patients, position yourself so:", opts: ["Light is behind you", "Light is on YOUR face", "Room is dark", "You're behind them"], ans: 1 },
+                400: { q: "This is the LAST sense to be lost in unconscious patients:", opts: ["Vision", "Touch", "Smell", "Hearing"], ans: 3 },
+                500: { q: "The #1 PRIORITY when caring for sensory-impaired patients is:", opts: ["Independence", "Comfort", "Safety", "Communication"], ans: 2 }
+            },
+            stress: {
+                100: { q: "LAS stands for:", opts: ["Large Adaptation Syndrome", "Local Adaptation Syndrome", "Late Adaptation Syndrome", "Lasting Adaptation Syndrome"], ans: 1 },
+                200: { q: "The fight-or-flight response occurs during which GAS stage?", opts: ["Resistance", "Exhaustion", "Alarm", "Recovery"], ans: 2 },
+                300: { q: "Creating a mental image to calm the mind is called:", opts: ["Anticipatory guidance", "Guided imagery", "Mindfulness", "Relaxation"], ans: 1 },
+                400: { q: "Energy depleted, defenses break down - this is the stage of:", opts: ["Alarm", "Resistance", "Exhaustion", "Adaptation"], ans: 2 },
+                500: { q: "Preparing a patient for surgery by explaining what to expect is:", opts: ["Guided imagery", "Anticipatory guidance", "Crisis intervention", "Mindfulness"], ans: 1 }
+            },
+            grief: {
+                100: { q: "'This can't be happening' represents which stage?", opts: ["Anger", "Bargaining", "Denial", "Depression"], ans: 2 },
+                200: { q: "Loss felt by person but intangible to others is:", opts: ["Actual loss", "Perceived loss", "Anticipatory loss", "Physical loss"], ans: 1 },
+                300: { q: "Which document appoints an agent to make healthcare decisions?", opts: ["Living will", "DNR order", "Durable power of attorney", "POLST"], ans: 2 },
+                400: { q: "The Kübler-Ross grief stages are:", opts: ["Linear and predictable", "The same for everyone", "Not linear, individualized", "Only for terminal patients"], ans: 2 },
+                500: { q: "Cheyne-Stokes respirations near death are characterized by:", opts: ["Rapid shallow breaths", "Gradual increase/decrease with apnea periods", "Deep regular breaths", "Wheezing sounds"], ans: 1 }
+            }
+        };
+
+        let jeopardyScore = 0;
+        let currentJeopardyCell = null;
+        let currentJeopardyValue = 0;
+
+        function showJeopardyQ(category, value, cell) {
+            if (cell.classList.contains('used')) return;
+            
+            currentJeopardyCell = cell;
+            currentJeopardyValue = value;
+            const q = jeopardyQuestions[category][value];
+            
+            document.getElementById('jeopardyValue').textContent = value;
+            document.getElementById('jeopardyQuestion').textContent = q.q;
+            document.getElementById('jeopardyFeedback').style.display = 'none';
+            document.getElementById('jeopardyCloseBtn').style.display = 'none';
+            
+            const optsDiv = document.getElementById('jeopardyOptions');
+            optsDiv.innerHTML = q.opts.map((opt, i) => 
+                `<div class="millionaire-option" onclick="selectJeopardyAnswer(${i}, ${q.ans}, this)">${opt}</div>`
+            ).join('');
+            
+            document.getElementById('jeopardyModal').classList.add('show');
+        }
+
+        function selectJeopardyAnswer(selected, correct, el) {
+            document.querySelectorAll('#jeopardyOptions .millionaire-option').forEach(opt => {
+                opt.classList.add('disabled');
+            });
+            
+            el.classList.add('selected');
+            const feedback = document.getElementById('jeopardyFeedback');
+            
+            setTimeout(() => {
+                if (selected === correct) {
+                    el.classList.add('correct');
+                    jeopardyScore += currentJeopardyValue;
+                    feedback.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+                    feedback.innerHTML = `<strong>✅ Correct!</strong> +$${currentJeopardyValue}`;
+                } else {
+                    el.classList.add('incorrect');
+                    document.querySelectorAll('#jeopardyOptions .millionaire-option')[correct].classList.add('correct');
+                    jeopardyScore -= currentJeopardyValue;
+                    feedback.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
+                    feedback.innerHTML = `<strong>❌ Incorrect!</strong> -$${currentJeopardyValue}`;
+                }
+                feedback.style.display = 'block';
+                feedback.style.color = 'white';
+                feedback.style.padding = '15px';
+                feedback.style.borderRadius = '10px';
+                document.getElementById('jeopardyScore').textContent = jeopardyScore;
+                document.getElementById('jeopardyCloseBtn').style.display = 'inline-block';
+            }, 800);
+        }
+
+        function closeJeopardyModal() {
+            document.getElementById('jeopardyModal').classList.remove('show');
+            currentJeopardyCell.classList.add('used');
+            currentJeopardyCell.textContent = '';
+        }
+
+        function resetJeopardy() {
+            jeopardyScore = 0;
+            document.getElementById('jeopardyScore').textContent = '0';
+            document.querySelectorAll('.jeopardy-cell').forEach(cell => {
+                cell.classList.remove('used');
+                const value = cell.onclick.toString().match(/\d+/g);
+                if (value && value[1]) cell.textContent = '$' + value[1];
+            });
+        }
+
         // ==================== INITIALIZE ====================
         document.addEventListener('DOMContentLoaded', function() {
             renderFlashcards();
             renderQuiz();
             loadProgress();
+            
+            // Initialize games
+            initMatchingGame();
+            initPrizeLadder();
             
             window.addEventListener('scroll', function() {
                 const btn = document.getElementById('backToTop');
