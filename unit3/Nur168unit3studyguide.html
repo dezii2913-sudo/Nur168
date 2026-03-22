@@ -508,6 +508,16 @@
             margin: 20px 0;
         }
 
+        /* Extra Quiz Styles */
+        .extra-quiz-opt:hover {
+            background: #e5e7eb !important;
+            border-color: #22c55e !important;
+            transform: translateX(5px);
+        }
+        .extra-quiz-item {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
         /* ==================== MOBILE RESPONSIVE STYLES ==================== */
         @media (max-width: 768px) {
             /* General mobile adjustments */
@@ -950,6 +960,170 @@
                         <tr><td><strong>Reflex</strong></td><td>Bladder empties without sensation of need (spinal cord injury)</td></tr>
                         <tr><td><strong>Total</strong></td><td>Continuous, unpredictable loss</td></tr>
                     </table>
+                </div>
+            </div>
+
+            <!-- CONCEPT MAP -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 🗺️ Urinary System Concept Map - COMPLETE OVERVIEW</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <!-- Anatomy Section -->
+                    <div class="key-point" style="border-left-color: #8b5cf6; background: rgba(139,92,246,0.1);">
+                        <div class="key-point-label" style="color: #8b5cf6;">🟣 1. ANATOMY - Urinary System Components</div>
+                        <div class="quick-ref-grid">
+                            <div class="quick-ref-card purple">
+                                <h4>Main Structures</h4>
+                                <ul class="content-list">
+                                    <li><strong>Kidneys (2)</strong> - Located retroperitoneal</li>
+                                    <li><strong>Ureters (2)</strong> - Carry urine to bladder</li>
+                                    <li><strong>Bladder</strong> - Stores urine</li>
+                                    <li><strong>Urethra</strong> - Exits body</li>
+                                </ul>
+                            </div>
+                            <div class="quick-ref-card purple">
+                                <h4>Kidney Detail: Nephron</h4>
+                                <ul class="content-list">
+                                    <li><strong>Functional unit</strong> of the kidney</li>
+                                    <li><strong>Glomerulus</strong> → filters blood</li>
+                                    <li><strong>Tubules</strong> → reabsorption & secretion</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Physiology Section -->
+                    <div class="key-point" style="border-left-color: #3b82f6; background: rgba(59,130,246,0.1);">
+                        <div class="key-point-label" style="color: #3b82f6;">🔵 2. PHYSIOLOGY - Urine Formation (3 Steps)</div>
+                        <table class="comparison-table">
+                            <tr><th>Step</th><th>Location</th><th>What Happens</th></tr>
+                            <tr><td><strong>1. Filtration</strong></td><td>Glomerulus</td><td>Blood → Filtrate (water, waste, small molecules pass through)</td></tr>
+                            <tr><td><strong>2. Reabsorption</strong></td><td>Tubules</td><td>Water, glucose, electrolytes RETURN to blood (good stuff saved)</td></tr>
+                            <tr><td><strong>3. Secretion</strong></td><td>Tubules</td><td>Waste products ADDED to filtrate (bad stuff dumped)</td></tr>
+                        </table>
+                    </div>
+
+                    <!-- Functions Section -->
+                    <div class="key-point" style="border-left-color: #22c55e; background: rgba(34,197,94,0.1);">
+                        <div class="key-point-label" style="color: #22c55e;">🟢 3. FUNCTIONS of Urinary System</div>
+                        <div class="quick-ref-grid">
+                            <div class="quick-ref-card green">
+                                <h4>Waste Removal</h4>
+                                <ul class="content-list">
+                                    <li>Removes <strong>urea</strong></li>
+                                    <li>Removes <strong>creatinine</strong></li>
+                                </ul>
+                            </div>
+                            <div class="quick-ref-card green">
+                                <h4>Regulation</h4>
+                                <ul class="content-list">
+                                    <li><strong>Fluid balance</strong></li>
+                                    <li><strong>Electrolytes</strong> (Na⁺, K⁺)</li>
+                                    <li><strong>Acid-base balance</strong> (pH)</li>
+                                </ul>
+                            </div>
+                            <div class="quick-ref-card green">
+                                <h4>Hormone Production</h4>
+                                <ul class="content-list">
+                                    <li><strong>Erythropoietin</strong> (RBC production)</li>
+                                    <li><strong>Renin</strong> (BP control)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Micturition Section -->
+                    <div class="key-point" style="border-left-color: #eab308; background: rgba(234,179,8,0.1);">
+                        <div class="key-point-label" style="color: #ca8a04;">🟡 4. URINATION (Micturition)</div>
+                        <p><strong>Controlled by:</strong> Brain + spinal cord, voluntary & involuntary muscles</p>
+                        <div class="sticky-note" style="margin-top: 10px;">
+                            <h4>⭐ NORMAL FINDINGS - MUST KNOW!</h4>
+                            <p><strong>Minimum Output:</strong> ≥30 mL/hr (less = notify provider!)<br>
+                            <strong>Daily Output:</strong> ~1200–1500 mL</p>
+                        </div>
+                    </div>
+
+                    <!-- Assessment Section -->
+                    <div class="key-point" style="border-left-color: #ef4444; background: rgba(239,68,68,0.1);">
+                        <div class="key-point-label" style="color: #ef4444;">🔴 5. ASSESSMENT</div>
+                        <div class="quick-ref-grid">
+                            <div class="quick-ref-card red">
+                                <h4>Subjective (Patient Reports)</h4>
+                                <ul class="content-list">
+                                    <li>Pain (dysuria)</li>
+                                    <li>Frequency, urgency</li>
+                                    <li>Incontinence</li>
+                                </ul>
+                            </div>
+                            <div class="quick-ref-card red">
+                                <h4>Objective (Nurse Observes)</h4>
+                                <ul class="content-list">
+                                    <li>Urine color, clarity, odor</li>
+                                    <li>Output measurement</li>
+                                    <li>Bladder distention</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Common Problems Section -->
+                    <div class="key-point" style="border-left-color: #f97316; background: rgba(249,115,22,0.1);">
+                        <div class="key-point-label" style="color: #ea580c;">🟠 6. COMMON PROBLEMS</div>
+                        <table class="comparison-table">
+                            <tr><th>Problem</th><th>Description</th><th>Causes/Signs</th></tr>
+                            <tr><td><strong>🚨 Urinary Retention</strong></td><td>Unable to empty bladder</td><td>Anesthesia, obstruction, distended bladder</td></tr>
+                            <tr><td><strong>🚨 Stress Incontinence</strong></td><td>Leakage with ↑ pressure</td><td>Laughing, coughing, sneezing</td></tr>
+                            <tr><td><strong>🚨 Urge Incontinence</strong></td><td>Sudden urge to void</td><td>Overactive bladder</td></tr>
+                            <tr><td><strong>🚨 Overflow Incontinence</strong></td><td>Bladder overfills</td><td>Continuous dribbling</td></tr>
+                            <tr><td><strong>🚨 Functional Incontinence</strong></td><td>Can't reach toilet</td><td>Mobility/cognitive issues</td></tr>
+                            <tr><td><strong>🚨 UTI</strong></td><td>Urinary tract infection</td><td>Burning, frequency, cloudy urine</td></tr>
+                        </table>
+                    </div>
+
+                    <!-- Nursing Interventions Section -->
+                    <div class="key-point" style="border-left-color: #78716c; background: rgba(120,113,108,0.1);">
+                        <div class="key-point-label" style="color: #57534e;">🟤 7. NURSING INTERVENTIONS</div>
+                        <ul class="content-list">
+                            <li><strong>Monitor I&O</strong> (Intake & Output)</li>
+                            <li><strong>Encourage fluids</strong> (if not contraindicated)</li>
+                            <li><strong>Maintain hygiene</strong> (wipe front to back)</li>
+                            <li><strong>Catheter care</strong> (prevent infection, maintain closed system)</li>
+                            <li><strong>Bladder training</strong> (for incontinence)</li>
+                        </ul>
+                    </div>
+
+                    <!-- Diagnostics Section -->
+                    <div class="key-point" style="border-left-color: #1f2937; background: rgba(31,41,55,0.1);">
+                        <div class="key-point-label" style="color: #1f2937;">⚫ 8. DIAGNOSTICS</div>
+                        <table class="comparison-table">
+                            <tr><th>Test</th><th>Purpose</th></tr>
+                            <tr><td><strong>Urinalysis (UA)</strong></td><td>Evaluates urine characteristics, detects infection, blood, glucose</td></tr>
+                            <tr><td><strong>Culture & Sensitivity</strong></td><td>Identifies specific bacteria and effective antibiotics</td></tr>
+                            <tr><td><strong>BUN & Creatinine</strong></td><td>Evaluates KIDNEY FUNCTION</td></tr>
+                            <tr><td><strong>Bladder Scan</strong></td><td>Detects urinary RETENTION (measures residual urine)</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADDITIONAL NCLEX QUESTIONS -->
+            <div class="topic-box" onclick="toggleTopic(this)">
+                <div class="topic-header">
+                    <span><input type="checkbox" class="topic-check" onclick="event.stopPropagation(); updateProgress()"> 📝 25 Extra NCLEX Practice Questions - Urinary</span>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="topic-content">
+                    <div style="background: #fef3c7; padding: 15px; border-radius: 10px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <div>
+                            <strong>📊 Score: <span id="extraQuizScore">0</span>/25</strong> | 
+                            <span id="extraQuizAnswered">0</span> answered
+                        </div>
+                        <button class="game-btn primary" onclick="resetExtraQuiz()" style="padding: 8px 15px; font-size: 0.9em;">🔄 Reset Quiz</button>
+                    </div>
+
+                    <div id="extraQuizContainer"></div>
                 </div>
             </div>
 
@@ -2453,6 +2627,118 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // ==================== EXTRA URINARY QUIZ (25 Questions) ====================
+        const extraQuizQuestions = [
+            { q: "A nurse notes a urine output of 20 mL/hr. What is the priority action?", opts: ["Document findings", "Encourage fluids", "Notify provider", "Reassess in 1 hour"], ans: 2, rationale: "Output <30 mL/hr indicates possible kidney impairment. This is URGENT!" },
+            { q: "Which structure is responsible for filtration?", opts: ["Loop of Henle", "Glomerulus", "Ureter", "Bladder"], ans: 1, rationale: "Filtration occurs in the glomerulus (first step of urine formation)." },
+            { q: "Cloudy, foul-smelling urine suggests:", opts: ["Dehydration", "UTI", "Diabetes", "Normal finding"], ans: 1, rationale: "Cloudy + foul odor = classic signs of urinary tract infection." },
+            { q: "Which patient is at highest risk for UTI?", opts: ["Young male", "Female with catheter", "Athlete", "Child"], ans: 1, rationale: "Catheters increase infection risk; females have shorter urethras." },
+            { q: "Normal urine color is:", opts: ["Dark brown", "Pale yellow", "Red", "Green"], ans: 1, rationale: "Pale/straw yellow indicates normal hydration." },
+            { q: "Which indicates urinary retention?", opts: ["Frequent voiding", "Distended bladder", "Clear urine", "Increased output"], ans: 1, rationale: "Retention = unable to empty → bladder fills and distends." },
+            { q: "Best way to prevent catheter-associated UTI (CAUTI)?", opts: ["Irrigation daily", "Maintain closed system", "Disconnect tubing", "Clamp catheter"], ans: 1, rationale: "Never break the closed drainage system; bacteria can enter!" },
+            { q: "Which lab evaluates kidney function?", opts: ["Hemoglobin", "BUN & Creatinine", "Platelets", "Glucose"], ans: 1, rationale: "These are waste products filtered by kidneys; elevated = impaired function." },
+            { q: "A patient reports burning with urination. This is:", opts: ["Hematuria", "Dysuria", "Polyuria", "Nocturia"], ans: 1, rationale: "Dys = difficult/painful. Burning = painful urination." },
+            { q: "What is normal daily urine output?", opts: ["200 mL", "500 mL", "1200–1500 mL", "3000 mL"], ans: 2, rationale: "Normal daily output; minimum 30 mL/hr." },
+            { q: "Which electrolyte is regulated by kidneys?", opts: ["Calcium", "Sodium", "Iron", "Magnesium"], ans: 1, rationale: "Kidneys regulate Na⁺ and K⁺ (and fluid balance, acid-base)." },
+            { q: "Urge incontinence is:", opts: ["Leakage with cough", "Sudden urge to void", "Inability to reach toilet", "Bladder overfill"], ans: 1, rationale: "Urge = overactive bladder, sudden strong urge, can't make it in time." },
+            { q: "Which is priority for a patient with UTI?", opts: ["Bed rest", "Increase fluids", "Restrict sodium", "NPO"], ans: 1, rationale: "Fluids help flush bacteria from the urinary tract." },
+            { q: "Which is expected with dehydration?", opts: ["Clear urine", "Dark urine", "Increased output", "Odorless urine"], ans: 1, rationale: "Concentrated urine = dark amber color (body conserving water)." },
+            { q: "Bladder scan is used to:", opts: ["Measure urine pH", "Detect retention", "Check infection", "Measure protein"], ans: 1, rationale: "Bladder scan measures post-void residual to detect retention." },
+            { q: "Which is a function of kidneys?", opts: ["Oxygen transport", "Hormone production", "Digestion", "Insulin release"], ans: 1, rationale: "Kidneys produce erythropoietin (RBCs) and renin (BP control)." },
+            { q: "Which indicates infection?", opts: ["Straw-colored urine", "Clear urine", "WBC in urine", "Low output"], ans: 2, rationale: "White blood cells in urine = pyuria = infection." },
+            { q: "What should nurse monitor in kidney patients?", opts: ["Heart rate only", "Intake & Output", "Vision", "Hearing"], ans: 1, rationale: "I&O monitoring is essential for kidney function assessment." },
+            { q: "Which is priority teaching for UTI prevention?", opts: ["Drink less fluids", "Wipe front to back", "Hold urine", "Avoid hygiene"], ans: 1, rationale: "Prevents bacteria from rectal area reaching urethra." },
+            { q: "Which part stores urine?", opts: ["Kidney", "Ureter", "Bladder", "Nephron"], ans: 2, rationale: "Bladder = storage tank for urine." },
+            { q: "Which indicates hematuria?", opts: ["Protein in urine", "Blood in urine", "Glucose in urine", "Ketones"], ans: 1, rationale: "Hema = blood. Hematuria = blood in urine." },
+            { q: "Which is expected finding in UTI?", opts: ["Bradycardia", "Fever", "Hypoglycemia", "Dry skin"], ans: 1, rationale: "Infection causes inflammatory response → fever." },
+            { q: "Which is correct about ureters?", opts: ["Store urine", "Filter blood", "Carry urine to bladder", "Produce hormones"], ans: 2, rationale: "Ureters = tubes connecting kidneys to bladder." },
+            { q: "A patient has leakage when laughing. This is:", opts: ["Urge", "Stress", "Overflow", "Functional"], ans: 1, rationale: "Stress incontinence = leakage with ↑ intra-abdominal pressure (laugh, cough, sneeze)." },
+            { q: "Which is most important nursing action for urinary patients?", opts: ["Ignore output", "Monitor urine output", "Limit fluids", "Delay care"], ans: 1, rationale: "Output monitoring is essential to assess kidney function and fluid balance." }
+        ];
+
+        let extraQuizScore = 0;
+        let extraQuizAnswered = 0;
+        let extraQuizState = {};
+
+        function renderExtraQuiz() {
+            const container = document.getElementById('extraQuizContainer');
+            if (!container) return;
+            
+            container.innerHTML = extraQuizQuestions.map((q, i) => `
+                <div class="extra-quiz-item" id="extraQ${i}" style="background: white; border-radius: 12px; padding: 15px; margin-bottom: 15px; border-left: 4px solid #22c55e;">
+                    <p style="font-weight: bold; margin-bottom: 12px;">${i + 1}. ${q.q}</p>
+                    <div class="extra-quiz-options" style="display: grid; gap: 8px;">
+                        ${q.opts.map((opt, j) => `
+                            <div class="extra-quiz-opt" id="extraQ${i}opt${j}" onclick="selectExtraAnswer(${i}, ${j})" 
+                                style="padding: 12px 15px; background: #f3f4f6; border-radius: 8px; cursor: pointer; transition: all 0.2s; border: 2px solid transparent;">
+                                <strong>${String.fromCharCode(65 + j)}.</strong> ${opt}
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div id="extraFeedback${i}" style="display: none; margin-top: 12px; padding: 12px; border-radius: 8px;"></div>
+                </div>
+            `).join('');
+        }
+
+        function selectExtraAnswer(qIndex, optIndex) {
+            if (extraQuizState[qIndex] !== undefined) return; // Already answered
+            
+            extraQuizState[qIndex] = optIndex;
+            extraQuizAnswered++;
+            
+            const q = extraQuizQuestions[qIndex];
+            const isCorrect = optIndex === q.ans;
+            
+            if (isCorrect) extraQuizScore++;
+            
+            // Style selected option
+            const selectedOpt = document.getElementById(`extraQ${qIndex}opt${optIndex}`);
+            const correctOpt = document.getElementById(`extraQ${qIndex}opt${q.ans}`);
+            const feedback = document.getElementById(`extraFeedback${qIndex}`);
+            const questionBox = document.getElementById(`extraQ${qIndex}`);
+            
+            // Disable all options
+            q.opts.forEach((_, j) => {
+                const opt = document.getElementById(`extraQ${qIndex}opt${j}`);
+                opt.style.cursor = 'default';
+                opt.onclick = null;
+            });
+            
+            if (isCorrect) {
+                selectedOpt.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+                selectedOpt.style.color = 'white';
+                selectedOpt.style.border = '2px solid #16a34a';
+                feedback.style.background = '#dcfce7';
+                feedback.style.color = '#166534';
+                feedback.innerHTML = '<strong>✅ Correct!</strong> ' + q.rationale;
+            } else {
+                selectedOpt.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
+                selectedOpt.style.color = 'white';
+                selectedOpt.style.border = '2px solid #dc2626';
+                correctOpt.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+                correctOpt.style.color = 'white';
+                correctOpt.style.border = '2px solid #16a34a';
+                feedback.style.background = '#fee2e2';
+                feedback.style.color = '#991b1b';
+                feedback.innerHTML = '<strong>❌ Incorrect.</strong> The correct answer is <strong>' + String.fromCharCode(65 + q.ans) + '</strong>. ' + q.rationale;
+            }
+            
+            feedback.style.display = 'block';
+            
+            // Update score display
+            document.getElementById('extraQuizScore').textContent = extraQuizScore;
+            document.getElementById('extraQuizAnswered').textContent = extraQuizAnswered;
+        }
+
+        function resetExtraQuiz() {
+            extraQuizScore = 0;
+            extraQuizAnswered = 0;
+            extraQuizState = {};
+            document.getElementById('extraQuizScore').textContent = '0';
+            document.getElementById('extraQuizAnswered').textContent = '0';
+            renderExtraQuiz();
+        }
+
         // ==================== MATCHING GAME (Chapter 38) ====================
         const matchingData = [
             { term: "Anuria", def: "Urine output <50mL in 24 hours (renal failure)" },
@@ -3053,6 +3339,7 @@
             // Initialize games
             initMatchingGame();
             initPrizeLadder();
+            renderExtraQuiz();
             
             window.addEventListener('scroll', function() {
                 const btn = document.getElementById('backToTop');
