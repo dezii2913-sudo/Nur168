@@ -1115,15 +1115,15 @@
                     <span class="expand-icon">+</span>
                 </div>
                 <div class="topic-content">
-                    <div style="background: #fef3c7; padding: 15px; border-radius: 10px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <div style="background: #fef3c7; padding: 15px; border-radius: 10px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;" onclick="event.stopPropagation()">
                         <div>
                             <strong>📊 Score: <span id="extraQuizScore">0</span>/25</strong> | 
                             <span id="extraQuizAnswered">0</span> answered
                         </div>
-                        <button class="game-btn primary" onclick="resetExtraQuiz()" style="padding: 8px 15px; font-size: 0.9em;">🔄 Reset Quiz</button>
+                        <button class="game-btn primary" onclick="event.stopPropagation(); resetExtraQuiz()" style="padding: 8px 15px; font-size: 0.9em;">🔄 Reset Quiz</button>
                     </div>
 
-                    <div id="extraQuizContainer"></div>
+                    <div id="extraQuizContainer" onclick="event.stopPropagation()"></div>
                 </div>
             </div>
 
@@ -2669,7 +2669,7 @@
                     <p style="font-weight: bold; margin-bottom: 12px;">${i + 1}. ${q.q}</p>
                     <div class="extra-quiz-options" style="display: grid; gap: 8px;">
                         ${q.opts.map((opt, j) => `
-                            <div class="extra-quiz-opt" id="extraQ${i}opt${j}" onclick="selectExtraAnswer(${i}, ${j})" 
+                            <div class="extra-quiz-opt" id="extraQ${i}opt${j}" onclick="event.stopPropagation(); selectExtraAnswer(${i}, ${j})" 
                                 style="padding: 12px 15px; background: #f3f4f6; border-radius: 8px; cursor: pointer; transition: all 0.2s; border: 2px solid transparent;">
                                 <strong>${String.fromCharCode(65 + j)}.</strong> ${opt}
                             </div>
