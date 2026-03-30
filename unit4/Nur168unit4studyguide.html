@@ -2124,20 +2124,20 @@
             <!-- SPIRITUAL NEED SORTER GAME Ch 47 -->
             <div class="game-container">
                 <div class="game-header">
-                    <h3>🌟 Spiritual Need Sorter</h3>
-                    <p>Read the patient statement and identify which spiritual need it reflects!</p>
+                    <h3>🌟 Spiritual Need Sorter - Advanced</h3>
+                    <p>These are nuanced! Read carefully and identify the PRIMARY spiritual need.</p>
                     <div class="game-stats">
-                        <span class="game-stat">Score: <span id="spiritScore">0</span>/10</span>
-                        <span class="game-stat">Current: <span id="spiritCurrent">1</span>/10</span>
+                        <span class="game-stat">Score: <span id="spiritScore">0</span>/12</span>
+                        <span class="game-stat">Current: <span id="spiritCurrent">1</span>/12</span>
                     </div>
                 </div>
                 <div id="spiritQuote" class="scenario-box" style="font-style: italic; font-size: 1.1em;">
-                    Click START to hear patient statements!
+                    Click START for challenging patient scenarios!
                 </div>
                 <div class="stage-drop-zones" id="spiritChoices" style="display: none;">
                     <div class="stage-zone" onclick="selectSpiritNeed('meaning')">
                         <h5>🎯 Meaning & Purpose</h5>
-                        <p style="font-size:0.8em;">"Why am I here?"</p>
+                        <p style="font-size:0.8em;">Identity, legacy, "why"</p>
                     </div>
                     <div class="stage-zone" onclick="selectSpiritNeed('love')">
                         <h5>💕 Love & Relatedness</h5>
@@ -2158,15 +2158,15 @@
             <!-- HOPE ASSESSMENT PRACTICE -->
             <div class="game-container">
                 <div class="game-header">
-                    <h3>📋 HOPE Assessment Practice</h3>
-                    <p>Match each assessment question to the correct HOPE letter!</p>
+                    <h3>📋 HOPE Assessment - Advanced</h3>
+                    <p>Which letter does each assessment question fall under? Think carefully!</p>
                     <div class="game-stats">
-                        <span class="game-stat">Matched: <span id="hopeScore">0</span>/4</span>
+                        <span class="game-stat">Score: <span id="hopeScore">0</span>/8</span>
                     </div>
                 </div>
                 <div id="hopeQuestions" style="margin-bottom: 20px;"></div>
                 <div class="stage-drop-zones" id="hopeLetters">
-                    <div class="stage-zone" onclick="selectHOPE('H')"><h5>H</h5><p style="font-size:0.8em;">Hope Sources</p></div>
+                    <div class="stage-zone" onclick="selectHOPE('H')"><h5>H</h5><p style="font-size:0.8em;">Hope & Strength</p></div>
                     <div class="stage-zone" onclick="selectHOPE('O')"><h5>O</h5><p style="font-size:0.8em;">Organized Religion</p></div>
                     <div class="stage-zone" onclick="selectHOPE('P')"><h5>P</h5><p style="font-size:0.8em;">Personal Practices</p></div>
                     <div class="stage-zone" onclick="selectHOPE('E')"><h5>E</h5><p style="font-size:0.8em;">Effects on Care</p></div>
@@ -2847,22 +2847,36 @@
             { ph: "7.28", co2: "58", hco3: "25", ans: "resp_acid", hint: "pH is LOW, CO₂ is HIGH. Use ROME - Respiratory Opposite!", rationale: "pH ↓ with CO₂ ↑ = Respiratory Acidosis (COPD, sedation, hypoventilation)" },
             { ph: "7.52", co2: "28", hco3: "24", ans: "resp_alk", hint: "pH is HIGH, CO₂ is LOW. Patient is hyperventilating!", rationale: "pH ↑ with CO₂ ↓ = Respiratory Alkalosis (anxiety, fever, hyperventilation)" },
             { ph: "7.30", co2: "40", hco3: "18", ans: "met_acid", hint: "pH is LOW, HCO₃ is LOW. ROME - Metabolic Equal!", rationale: "pH ↓ with HCO₃ ↓ = Metabolic Acidosis (DKA, diarrhea, renal failure)" },
+            { ph: "7.28", co2: "58", hco3: "24", ans: "resp_acid", hint: "CO₂ up, HCO₃ normal - no compensation yet!", rationale: "Uncompensated Respiratory Acidosis - kidneys haven't had time to retain HCO₃" },
             { ph: "7.48", co2: "42", hco3: "30", ans: "met_alk", hint: "pH is HIGH, HCO₃ is HIGH. Lost acid somewhere!", rationale: "pH ↑ with HCO₃ ↑ = Metabolic Alkalosis (vomiting, NG suction)" },
             { ph: "7.25", co2: "65", hco3: "27", ans: "resp_acid", hint: "CO₂ is way up! Lungs aren't ventilating.", rationale: "pH ↓ with CO₂ ↑ = Respiratory Acidosis. HCO₃ slightly elevated shows beginning compensation." },
             { ph: "7.55", co2: "25", hco3: "23", ans: "resp_alk", hint: "Blowing off too much CO₂!", rationale: "pH ↑ with CO₂ ↓ = Respiratory Alkalosis from hyperventilation" },
             { ph: "7.32", co2: "38", hco3: "16", ans: "met_acid", hint: "HCO₃ is very low - lost base or gained acid.", rationale: "pH ↓ with HCO₃ ↓ = Metabolic Acidosis (think DKA or severe diarrhea)" },
             { ph: "7.50", co2: "44", hco3: "32", ans: "met_alk", hint: "HCO₃ is high - patient vomiting?", rationale: "pH ↑ with HCO₃ ↑ = Metabolic Alkalosis from losing stomach acid" },
             { ph: "7.22", co2: "70", hco3: "28", ans: "resp_acid", hint: "Very high CO₂ = severe respiratory problem!", rationale: "pH ↓ with CO₂ ↑↑ = Severe Respiratory Acidosis (respiratory failure)" },
-            { ph: "7.35", co2: "42", hco3: "20", ans: "met_acid", hint: "pH at low end of normal, HCO₃ low - compensating acidosis.", rationale: "Compensated Metabolic Acidosis - pH normalized but HCO₃ still low" }
+            { ph: "7.38", co2: "30", hco3: "18", ans: "met_acid_comp", hint: "pH near normal but BOTH CO₂ and HCO₃ are low!", rationale: "Compensated Metabolic Acidosis - lungs blowing off CO₂ to raise pH. Primary problem = low HCO₃" },
+            { ph: "7.40", co2: "50", hco3: "30", ans: "resp_acid_comp", hint: "pH normal but BOTH CO₂ and HCO₃ are high!", rationale: "Compensated Respiratory Acidosis - kidneys retained HCO₃. Primary problem = high CO₂" },
+            { ph: "7.42", co2: "28", hco3: "18", ans: "resp_alk_comp", hint: "pH near normal but BOTH values are low!", rationale: "Compensated Respiratory Alkalosis - kidneys excreted HCO₃. Primary = low CO₂" },
+            { ph: "7.44", co2: "48", hco3: "32", ans: "met_alk_comp", hint: "pH near normal but BOTH values are high!", rationale: "Compensated Metabolic Alkalosis - lungs retained CO₂. Primary = high HCO₃" },
+            { ph: "7.18", co2: "26", hco3: "10", ans: "met_acid", hint: "CRITICAL pH! Very low HCO₃, lungs trying to compensate.", rationale: "Severe Metabolic Acidosis with respiratory compensation (DKA crisis). Life-threatening!" },
+            { ph: "7.60", co2: "20", hco3: "22", ans: "resp_alk", hint: "Dangerously high pH from severe hyperventilation!", rationale: "Severe Respiratory Alkalosis - patient may be panicking or have PE. HCO₃ not changed yet." },
+            { ph: "7.35", co2: "55", hco3: "30", ans: "resp_acid_comp", hint: "pH at low-normal, high CO₂ matched by high HCO₃", rationale: "Fully Compensated Respiratory Acidosis - COPD patient. Kidneys have adjusted." },
+            { ph: "7.30", co2: "50", hco3: "24", ans: "resp_acid", hint: "pH low, CO₂ high, HCO₃ still normal - acute!", rationale: "Acute Respiratory Acidosis - sudden onset (drug overdose, airway obstruction)" }
         ];
 
         let abgIndex = 0;
         let abgScore = 0;
         let abgAnswered = false;
+        let abgTimer = null;
+        let abgTimeLeft = 0;
+        let abgStreak = 0;
 
         function startABGGame() {
+            // Shuffle the scenarios
+            abgScenarios.sort(() => Math.random() - 0.5);
             abgIndex = 0;
             abgScore = 0;
+            abgStreak = 0;
             abgAnswered = false;
             document.getElementById('abgStartBtn').style.display = 'none';
             document.getElementById('abgChoices').style.display = 'grid';
@@ -2871,36 +2885,83 @@
         }
 
         function showABG() {
-            if (abgIndex >= abgScenarios.length) {
+            if (abgIndex >= 15) { // Show 15 questions per game
                 endABGGame();
                 return;
             }
-            const abg = abgScenarios[abgIndex];
-            document.getElementById('abgValues').innerHTML = `pH: <span style="color: ${parseFloat(abg.ph) < 7.35 ? '#ef4444' : parseFloat(abg.ph) > 7.45 ? '#22c55e' : '#fbbf24'}">${abg.ph}</span> | CO₂: <span style="color: ${parseInt(abg.co2) > 45 ? '#ef4444' : parseInt(abg.co2) < 35 ? '#22c55e' : '#fbbf24'}">${abg.co2}</span> | HCO₃: <span style="color: ${parseInt(abg.hco3) < 22 ? '#ef4444' : parseInt(abg.hco3) > 26 ? '#22c55e' : '#fbbf24'}">${abg.hco3}</span>`;
-            document.getElementById('abgHint').textContent = '💡 ' + abg.hint;
+            const abg = abgScenarios[abgIndex % abgScenarios.length];
+            
+            // Color code values: red if abnormal low-acid side, green if abnormal high-alk side
+            const phColor = parseFloat(abg.ph) < 7.35 ? '#ef4444' : parseFloat(abg.ph) > 7.45 ? '#22c55e' : '#fbbf24';
+            const co2Color = parseInt(abg.co2) > 45 ? '#ef4444' : parseInt(abg.co2) < 35 ? '#22c55e' : '#fbbf24';
+            const hco3Color = parseInt(abg.hco3) < 22 ? '#ef4444' : parseInt(abg.hco3) > 26 ? '#22c55e' : '#fbbf24';
+            
+            document.getElementById('abgValues').innerHTML = `
+                <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+                    <div><span style="opacity: 0.7;">pH</span><br><span style="color: ${phColor}; font-size: 1.4em;">${abg.ph}</span></div>
+                    <div><span style="opacity: 0.7;">CO₂</span><br><span style="color: ${co2Color}; font-size: 1.4em;">${abg.co2}</span></div>
+                    <div><span style="opacity: 0.7;">HCO₃</span><br><span style="color: ${hco3Color}; font-size: 1.4em;">${abg.hco3}</span></div>
+                </div>
+            `;
+            
+            // Timer bar
+            document.getElementById('abgHint').innerHTML = `<div id="abgTimerBar" style="background: rgba(255,255,255,0.3); height: 8px; border-radius: 4px; margin-bottom: 10px;"><div id="abgTimerFill" style="background: #fbbf24; height: 100%; border-radius: 4px; width: 100%; transition: width 0.1s linear;"></div></div><span style="opacity: 0.8;">🔥 Streak: ${abgStreak}</span>`;
+            
             document.getElementById('abgCurrent').textContent = abgIndex + 1;
             document.getElementById('abgScore').textContent = abgScore;
             document.getElementById('abgFeedback').style.display = 'none';
             document.getElementById('abgNextBtn').style.display = 'none';
             abgAnswered = false;
-            document.querySelectorAll('#abgChoices .stage-zone').forEach(z => z.classList.remove('highlight'));
+            document.querySelectorAll('#abgChoices .stage-zone').forEach(z => {
+                z.classList.remove('highlight');
+                z.style.opacity = '1';
+                z.style.pointerEvents = 'auto';
+            });
+            
+            // Start 15-second timer
+            abgTimeLeft = 150;
+            clearInterval(abgTimer);
+            abgTimer = setInterval(() => {
+                abgTimeLeft--;
+                const pct = (abgTimeLeft / 150) * 100;
+                const fill = document.getElementById('abgTimerFill');
+                if (fill) {
+                    fill.style.width = pct + '%';
+                    fill.style.background = pct < 30 ? '#ef4444' : pct < 60 ? '#f59e0b' : '#fbbf24';
+                }
+                if (abgTimeLeft <= 0 && !abgAnswered) {
+                    selectABG('timeout');
+                }
+            }, 100);
         }
 
         function selectABG(answer) {
             if (abgAnswered) return;
             abgAnswered = true;
-            const abg = abgScenarios[abgIndex];
+            clearInterval(abgTimer);
+            const abg = abgScenarios[abgIndex % abgScenarios.length];
             const feedback = document.getElementById('abgFeedback');
             
-            if (answer === abg.ans) {
+            // Check if answer matches (handle compensated variants)
+            const isCorrect = answer === abg.ans || 
+                (answer === 'resp_acid' && abg.ans === 'resp_acid_comp') ||
+                (answer === 'resp_alk' && abg.ans === 'resp_alk_comp') ||
+                (answer === 'met_acid' && abg.ans === 'met_acid_comp') ||
+                (answer === 'met_alk' && abg.ans === 'met_alk_comp');
+            
+            if (isCorrect) {
                 abgScore++;
+                abgStreak++;
+                const bonus = abgStreak >= 3 ? ' 🔥 STREAK BONUS!' : '';
                 feedback.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
                 feedback.style.color = 'white';
-                feedback.innerHTML = `<strong>✅ Correct!</strong> ${abg.rationale}`;
+                feedback.innerHTML = `<strong>✅ Correct!${bonus}</strong><br>${abg.rationale}`;
             } else {
+                abgStreak = 0;
+                const timeoutMsg = answer === 'timeout' ? "⏱️ Time's up! " : "";
                 feedback.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
                 feedback.style.color = 'white';
-                feedback.innerHTML = `<strong>❌ Incorrect.</strong> ${abg.rationale}`;
+                feedback.innerHTML = `<strong>❌ ${timeoutMsg}Incorrect.</strong><br>${abg.rationale}`;
             }
             feedback.style.display = 'block';
             document.getElementById('abgScore').textContent = abgScore;
@@ -2913,9 +2974,16 @@
         }
 
         function endABGGame() {
-            const pct = Math.round((abgScore / abgScenarios.length) * 100);
-            document.getElementById('abgValues').innerHTML = `🎉 Game Complete! Score: ${abgScore}/${abgScenarios.length} (${pct}%)`;
-            document.getElementById('abgHint').textContent = pct >= 80 ? '⭐ Excellent ABG interpretation skills!' : 'Keep practicing with ROME!';
+            clearInterval(abgTimer);
+            const pct = Math.round((abgScore / 15) * 100);
+            let msg = '';
+            if (pct >= 90) msg = '🏆 ABG MASTER! You really know your ROME!';
+            else if (pct >= 70) msg = '⭐ Great job! Keep practicing compensation patterns.';
+            else if (pct >= 50) msg = '📚 Good effort! Review ROME and compensation.';
+            else msg = '💪 Keep studying! Focus on pH direction first, then find the cause.';
+            
+            document.getElementById('abgValues').innerHTML = `🎉 Score: ${abgScore}/15 (${pct}%)<br><span style="font-size: 0.6em;">${msg}</span>`;
+            document.getElementById('abgHint').textContent = '';
             document.getElementById('abgChoices').style.display = 'none';
             document.getElementById('abgStartBtn').style.display = 'inline-block';
             document.getElementById('abgStartBtn').textContent = '🔄 Play Again';
@@ -2923,8 +2991,10 @@
         }
 
         function resetABGGame() {
+            clearInterval(abgTimer);
             abgIndex = 0;
             abgScore = 0;
+            abgStreak = 0;
             document.getElementById('abgValues').textContent = 'Click START to begin!';
             document.getElementById('abgHint').textContent = '';
             document.getElementById('abgChoices').style.display = 'none';
@@ -2935,14 +3005,20 @@
             document.getElementById('abgCurrent').textContent = '1';
         }
 
-        // ==================== IV SOLUTION GAME (Chapter 41) ====================
+        // ==================== IV SOLUTION GAME (Chapter 41) - HARDER ====================
         const ivScenarios = [
-            { scenario: "Post-op patient with BP 85/50, HR 120, poor skin turgor. Needs volume replacement.", ans: "isotonic", rationale: "Hypovolemia needs isotonic (0.9% NS) to replace volume without shifting fluid into cells." },
-            { scenario: "Patient with severe hyponatremia (Na⁺ 118). Need to pull water out of cells.", ans: "hypertonic", rationale: "Hypertonic (3% saline) pulls water FROM cells to increase serum sodium. Monitor closely for fluid overload!" },
-            { scenario: "Patient with cellular dehydration but adequate vascular volume.", ans: "hypotonic", rationale: "Hypotonic (0.45% NS) pushes water INTO cells to rehydrate them." },
-            { scenario: "Trauma patient with massive blood loss needs rapid fluid resuscitation.", ans: "isotonic", rationale: "Isotonic (LR or 0.9% NS) stays in vascular space to restore volume quickly." },
-            { scenario: "Patient with increased ICP from head injury. Need to decrease brain swelling.", ans: "hypertonic", rationale: "Hypertonic solutions pull water OUT of brain cells to reduce cerebral edema." },
-            { scenario: "Patient receiving blood transfusion needs compatible IV solution.", ans: "isotonic", rationale: "Only 0.9% NS (isotonic) is compatible with blood! Never use dextrose or LR." }
+            { scenario: "72 y/o post-op with BP 82/50, HR 124, capillary refill 4 sec, BUN 32. What IV solution?", ans: "isotonic", rationale: "Classic hypovolemic shock - needs isotonic (0.9% NS or LR) to rapidly expand intravascular volume." },
+            { scenario: "ICU patient: Na⁺ 118, confused, having seizures. Which solution pulls water from brain cells?", ans: "hypertonic", rationale: "Severe hyponatremia with neuro symptoms needs 3% saline (hypertonic) to pull water from cells and raise Na⁺. Give SLOWLY!" },
+            { scenario: "DKA patient with blood glucose 450, being treated. Glucose now 250. What maintenance fluid?", ans: "hypotonic", rationale: "Once glucose <250 in DKA, switch to hypotonic with dextrose (D5 0.45% NS) to prevent hypoglycemia while cells rehydrate." },
+            { scenario: "Trauma patient lost 1.5L blood. Awaiting type & cross. Need rapid volume expansion NOW.", ans: "isotonic", rationale: "Massive hemorrhage = isotonic crystalloids (NS or LR) for volume. LR preferred (closer to plasma). Blood when available." },
+            { scenario: "Patient with SIADH (Na⁺ 125) - water overload. Which solution?", ans: "hypertonic", rationale: "SIADH = dilutional hyponatremia. Small volumes of hypertonic 3% saline may be used. Main treatment is fluid RESTRICTION." },
+            { scenario: "Patient NPO for surgery, needs maintenance fluids. Normal labs, adequate volume status.", ans: "hypotonic", rationale: "Maintenance fluids for NPO patients: hypotonic (D5 0.45% NS) provides free water for cellular hydration plus some Na⁺." },
+            { scenario: "Head injury patient with ICP 28 mmHg, needs to reduce cerebral edema urgently.", ans: "hypertonic", rationale: "Elevated ICP: hypertonic saline (3% or 23.4%) creates osmotic gradient pulling water from brain tissue. First-line for herniation!" },
+            { scenario: "Blood transfusion about to start. Which IV solution is the ONLY compatible option?", ans: "isotonic", rationale: "ONLY 0.9% NS (isotonic) with blood! LR causes clotting (calcium), dextrose causes hemolysis. This is non-negotiable!" },
+            { scenario: "Burns patient, first 24 hrs, Parkland formula. Massive fluid resuscitation needed.", ans: "isotonic", rationale: "Burn resuscitation (Parkland): LR (isotonic) 4mL x kg x %TBSA. Half in first 8 hours. NS is alternative." },
+            { scenario: "Elderly patient with mild dehydration, heart failure history. Need gentle rehydration.", ans: "hypotonic", rationale: "CHF + dehydration = careful! Hypotonic 0.45% NS given slowly prevents fluid overload while rehydrating cells." },
+            { scenario: "Post-craniotomy, goal is to keep patient slightly dry to prevent cerebral edema.", ans: "isotonic", rationale: "Neuro patients: isotonic NS preferred - doesn't add free water that could worsen cerebral edema. Avoid hypotonic!" },
+            { scenario: "Diabetic patient with HHS, serum osm 340, Na⁺ 152. Initial fluid choice?", ans: "isotonic", rationale: "HHS paradox: despite HIGH Na⁺, start with isotonic NS! Patient is severely volume depleted. Hypotonic later when stable." }
         ];
 
         let ivIndex = 0;
@@ -3117,18 +3193,23 @@
             });
         }
 
-        // ==================== SPIRITUAL NEED SORTER (Chapter 47) ====================
+        // ==================== SPIRITUAL NEED SORTER (Chapter 47) - HARDER VERSION ====================
         const spiritQuotes = [
-            { quote: "Why is this happening to me? What's the point of all this suffering?", ans: "meaning", rationale: "Searching for meaning and purpose in suffering is the first spiritual need." },
-            { quote: "I feel so alone. No one understands what I'm going through.", ans: "love", rationale: "Need for love and relatedness - connection to others." },
-            { quote: "I treated my sister so badly. I need to make things right before I die.", ans: "forgiveness", rationale: "Need for forgiveness - reconciliation and peace with others." },
-            { quote: "What happens after I die? Does my life even matter?", ans: "meaning", rationale: "Questions about life's meaning and what comes after reflect the need for meaning/purpose." },
-            { quote: "I feel guilty about the choices I made. Can I ever be forgiven?", ans: "forgiveness", rationale: "Guilt and seeking forgiveness reflect the third spiritual need." },
-            { quote: "I just want my family to be here with me. I need them close.", ans: "love", rationale: "Wanting family and connection reflects love and relatedness needs." },
-            { quote: "My whole life I worked so hard. Was any of it worth it?", ans: "meaning", rationale: "Questioning life's worth reflects the need for meaning and purpose." },
-            { quote: "I hurt so many people. How do I make peace with that?", ans: "forgiveness", rationale: "Making peace with past actions is the need for forgiveness." },
-            { quote: "I've been so lonely since my spouse died. No one calls anymore.", ans: "love", rationale: "Loneliness and isolation reflect the need for love and relatedness." },
-            { quote: "I want to leave something behind. I want my life to have mattered.", ans: "meaning", rationale: "Legacy and mattering reflect the need for meaning and purpose." }
+            { quote: "I've been a nurse for 35 years. Now I'm the patient and I can't help anyone. What good am I?", ans: "meaning", rationale: "Loss of professional identity creates a crisis of meaning - 'Who am I if I can't do what defined me?'" },
+            { quote: "I feel so alone. No one understands what I'm going through.", ans: "love", rationale: "Direct expression of isolation - need for love and relatedness." },
+            { quote: "My daughter and I haven't spoken in 10 years. I said terrible things. What if I die before...", ans: "forgiveness", rationale: "Regret over broken relationship and desire for reconciliation before death = forgiveness." },
+            { quote: "The doctors say I'm getting better, but I keep wondering - is there something bigger waiting for me?", ans: "meaning", rationale: "Existential questioning about what comes next reflects the search for meaning beyond the physical." },
+            { quote: "I cheated on my wife 20 years ago. She never found out but I carry it every day.", ans: "forgiveness", rationale: "Guilt carried for years, even without others knowing, reflects deep need for forgiveness/absolution." },
+            { quote: "My church community used to visit every day. Now it's been two weeks. Did they forget me?", ans: "love", rationale: "Feeling abandoned by previously close community reflects disrupted love/relatedness." },
+            { quote: "I survived the war when my friends didn't. Every day I ask - why me? Why am I still here?", ans: "meaning", rationale: "Survivor's guilt is fundamentally a search for meaning - 'Why did I live when they died?'" },
+            { quote: "I was so hard on my kids. I pushed them away trying to make them strong. Now they're gone.", ans: "forgiveness", rationale: "Regret over parenting choices and broken family bonds = need for forgiveness." },
+            { quote: "I moved here for treatment. I don't know anyone. The walls feel like they're closing in.", ans: "love", rationale: "Geographic isolation from support network reflects acute need for love/relatedness." },
+            { quote: "I built that company from nothing. Now my name isn't even on the building anymore.", ans: "meaning", rationale: "Loss of legacy and contribution to something lasting reflects meaning/purpose needs." },
+            { quote: "I keep dreaming about my mother. She died angry at me. I never got to explain.", ans: "forgiveness", rationale: "Unresolved conflict with deceased loved one shows need for forgiveness, even posthumously." },
+            { quote: "My roommate has visitors all day. Mine stopped coming. Maybe I wasn't a good friend.", ans: "love", rationale: "Comparing visitor frequency and questioning past relationships = love/relatedness needs." },
+            { quote: "I spent 40 years in that factory. Same machine every day. Did any of it matter?", ans: "meaning", rationale: "Questioning a lifetime of work's significance reflects existential search for meaning." },
+            { quote: "I told my son I was disappointed in him. That was 5 years ago. Those were my last words to him.", ans: "forgiveness", rationale: "Final words being hurtful creates deep need for forgiveness and reconciliation." },
+            { quote: "Everyone keeps saying 'stay positive' but no one wants to actually SIT with me.", ans: "love", rationale: "Distinction between platitudes and presence - patient needs genuine connection/love." }
         ];
 
         let spiritIndex = 0;
@@ -3136,6 +3217,8 @@
         let spiritAnswered = false;
 
         function startSpiritGame() {
+            // Shuffle and take 12 questions
+            spiritQuotes.sort(() => Math.random() - 0.5);
             spiritIndex = 0;
             spiritScore = 0;
             spiritAnswered = false;
@@ -3146,12 +3229,12 @@
         }
 
         function showSpiritQuote() {
-            if (spiritIndex >= spiritQuotes.length) {
+            if (spiritIndex >= 12) {
                 endSpiritGame();
                 return;
             }
             const q = spiritQuotes[spiritIndex];
-            document.getElementById('spiritQuote').innerHTML = `"${q.quote}"`;
+            document.getElementById('spiritQuote').innerHTML = `<span style="font-size: 0.9em; opacity: 0.7; display: block; margin-bottom: 10px;">Patient says:</span>"${q.quote}"`;
             document.getElementById('spiritQuote').className = 'scenario-box';
             document.getElementById('spiritCurrent').textContent = spiritIndex + 1;
             document.getElementById('spiritScore').textContent = spiritScore;
@@ -3191,20 +3274,33 @@
         }
 
         function endSpiritGame() {
-            const pct = Math.round((spiritScore / spiritQuotes.length) * 100);
-            document.getElementById('spiritQuote').innerHTML = `🎉 Complete! Score: ${spiritScore}/${spiritQuotes.length} (${pct}%)<br><br>Remember the 3 Needs:<br>1. Meaning & Purpose<br>2. Love & Relatedness<br>3. Forgiveness`;
+            const pct = Math.round((spiritScore / 12) * 100);
+            let msg = '';
+            if (pct >= 90) msg = '🏆 Excellent spiritual assessment skills!';
+            else if (pct >= 70) msg = '⭐ Good work! These can be subtle.';
+            else msg = '📚 Keep practicing - look for the UNDERLYING need.';
+            
+            document.getElementById('spiritQuote').innerHTML = `🎉 Score: ${spiritScore}/12 (${pct}%)<br><span style="font-size: 0.9em;">${msg}</span><br><br><span style="font-size: 0.85em; font-style: normal;">Remember:<br>• <strong>Meaning</strong> = Why, purpose, legacy, identity<br>• <strong>Love</strong> = Connection, isolation, presence<br>• <strong>Forgiveness</strong> = Guilt, reconciliation, regret</span>`;
             document.getElementById('spiritChoices').style.display = 'none';
             document.getElementById('spiritStartBtn').style.display = 'inline-block';
             document.getElementById('spiritStartBtn').textContent = '🔄 Play Again';
             document.getElementById('spiritNextBtn').style.display = 'none';
         }
 
-        // ==================== HOPE ASSESSMENT GAME (Chapter 47) ====================
+        // ==================== HOPE ASSESSMENT GAME (Chapter 47) - HARDER ====================
         const hopeQuestions = [
-            { question: "What gives you strength during difficult times?", ans: "H", rationale: "H = Sources of HOPE and strength" },
-            { question: "Do you belong to a religious community?", ans: "O", rationale: "O = Organized religion" },
-            { question: "Do you have personal spiritual practices like meditation or prayer?", ans: "P", rationale: "P = Personal spirituality and practices" },
-            { question: "How do your beliefs affect your healthcare decisions?", ans: "E", rationale: "E = Effects on medical care" }
+            { question: "What gives you strength when times get really tough?", ans: "H", rationale: "H = Sources of HOPE, meaning, comfort, strength" },
+            { question: "Are you part of a religious or spiritual community?", ans: "O", rationale: "O = Organized religion - formal membership/affiliation" },
+            { question: "Do you have personal spiritual practices like meditation, prayer, or journaling?", ans: "P", rationale: "P = Personal spirituality and practices (can exist without organized religion)" },
+            { question: "How do your beliefs influence your healthcare decisions?", ans: "E", rationale: "E = Effects on medical care and end-of-life planning" },
+            { question: "What keeps you going when you feel like giving up?", ans: "H", rationale: "H = Hope sources - what sustains the patient emotionally/spiritually" },
+            { question: "Do you attend religious services or participate in a faith community?", ans: "O", rationale: "O = Organized religion - participation in structured religious activities" },
+            { question: "Is there anything you do privately that connects you to something bigger than yourself?", ans: "P", rationale: "P = Personal practices - may include nature, art, music, meditation" },
+            { question: "Are there any treatments you would refuse based on your beliefs?", ans: "E", rationale: "E = Effects on medical care - crucial for informed consent and planning" },
+            { question: "Who or what do you turn to when you need comfort?", ans: "H", rationale: "H = Sources of hope and support - could be people, faith, nature, etc." },
+            { question: "Would you like us to contact a chaplain or religious leader?", ans: "O", rationale: "O = Organized religion - connecting patient with formal spiritual support" },
+            { question: "How do you find peace when you're feeling anxious or stressed?", ans: "P", rationale: "P = Personal practices - individual coping mechanisms with spiritual component" },
+            { question: "Are there specific rituals or practices we should accommodate during your care?", ans: "E", rationale: "E = Effects on care - dietary restrictions, prayer times, death rituals" }
         ];
 
         let hopeIndex = 0;
@@ -3212,6 +3308,8 @@
         let hopeAnswered = false;
 
         function startHOPEGame() {
+            // Shuffle questions
+            hopeQuestions.sort(() => Math.random() - 0.5);
             hopeIndex = 0;
             hopeScore = 0;
             hopeAnswered = false;
@@ -3221,12 +3319,12 @@
         }
 
         function showHOPEQuestion() {
-            if (hopeIndex >= hopeQuestions.length) {
+            if (hopeIndex >= 8) { // Show 8 questions
                 endHOPEGame();
                 return;
             }
             const q = hopeQuestions[hopeIndex];
-            document.getElementById('hopeQuestions').innerHTML = `<div class="scenario-box" id="hopeCurrentQ">"${q.question}"</div>`;
+            document.getElementById('hopeQuestions').innerHTML = `<div class="scenario-box" id="hopeCurrentQ"><span style="opacity: 0.7; font-size: 0.9em; display: block; margin-bottom: 8px;">Question ${hopeIndex + 1}/8 - Which HOPE letter?</span>"${q.question}"</div>`;
             document.getElementById('hopeFeedback').style.display = 'none';
             document.getElementById('hopeNextBtn').style.display = 'none';
             document.getElementById('hopeScore').textContent = hopeScore;
@@ -3263,7 +3361,9 @@
         }
 
         function endHOPEGame() {
-            document.getElementById('hopeQuestions').innerHTML = `<div class="scenario-box" style="background: linear-gradient(135deg, #22c55e, #16a34a);">🎉 Complete! ${hopeScore}/4<br><br><strong>H</strong> = Hope sources<br><strong>O</strong> = Organized religion<br><strong>P</strong> = Personal practices<br><strong>E</strong> = Effects on care</div>`;
+            const pct = Math.round((hopeScore / 8) * 100);
+            let msg = pct >= 75 ? '🏆 Excellent!' : pct >= 50 ? '⭐ Good work!' : '📚 Keep practicing!';
+            document.getElementById('hopeQuestions').innerHTML = `<div class="scenario-box" style="background: linear-gradient(135deg, #22c55e, #16a34a);">🎉 Score: ${hopeScore}/8 (${pct}%) ${msg}<br><br><strong>H</strong> = Hope/strength sources<br><strong>O</strong> = Organized religion<br><strong>P</strong> = Personal practices<br><strong>E</strong> = Effects on care</div>`;
             document.getElementById('hopeStartBtn').style.display = 'inline-block';
             document.getElementById('hopeStartBtn').textContent = '🔄 Play Again';
             document.getElementById('hopeNextBtn').style.display = 'none';
